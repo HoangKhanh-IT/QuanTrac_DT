@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="302f8f71-fec8-47b9-b25f-0b621b3b6405" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +16,63 @@
     </execution>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/nguyenduclam" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="nguyenduclam" />
+                    <option name="lastUsedInstant" value="1596074468" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1596074467" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_categories_option.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
@@ -194,7 +249,7 @@
       <updated>1595993093401</updated>
       <workItem from="1595993098210" duration="5961000" />
       <workItem from="1596007671648" duration="15647000" />
-      <workItem from="1596072299865" duration="2077000" />
+      <workItem from="1596072299865" duration="2179000" />
     </task>
     <task id="LOCAL-00001" summary="travinhqt_laravel">
       <created>1596074300287</created>
@@ -203,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596074300287</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="travinhqt_laravel">
+      <created>1596074385581</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1596074385581</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,10 +284,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="123" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596024961673" />
-    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1596074299322">
+    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1596074384866">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596074299322" />
+    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596074384866" />
     <state x="446" y="279" width="474" height="281" key="ComposerInitDialogKey" timestamp="1595995771713">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -250,10 +312,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="517" y="288" key="NewPhpFileDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596008687230" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1596074304332">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1596074399949">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596074304332" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596074399949" />
     <state x="359" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1595993097227">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
