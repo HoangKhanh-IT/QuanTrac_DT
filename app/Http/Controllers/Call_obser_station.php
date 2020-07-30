@@ -35,34 +35,33 @@ class Call_obser_station extends Controller
                             (array_agg(distinct "obs_type"."name"))[1] "obstype_namefirst",
 							string_agg(distinct "obs_type"."name", \'; \') "obstype_namelist",
 							concat(\'[\', string_agg(distinct "obs"."detail", \', \'), \']\') "total_detail",
-							string_agg(distinct CAST ("obs"."day" + "obs"."time"  AS text), \', \') "total_day"
+							string_agg(distinct CAST ("obs"."day" + "obs"."time"  AS text), \', \') "total_day"';
 
-                        FROM "Observationstation" "station"
-                        LEFT JOIN "Category" "category" ON "category"."id" = "station"."categoryid"
-                        LEFT JOIN "Organization" "organization" ON "organization"."id" = "station"."organizationid"
-                        LEFT JOIN "Enterprise" "enterprise" ON "enterprise"."id" = "station"."enterpriseid"
-                        LEFT JOIN "Basin" "basin" ON "basin"."id" = "station"."basinid"
-                        LEFT JOIN "Location" "location" ON "location"."id" = "station"."locationid"
-                        LEFT JOIN "LocationType" "loctype" on "loctype"."id" = "location"."locationtypeid"
-                        LEFT JOIN "District" "district" ON "district"."id" = "station"."districtid"
-						LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station"."id"
-						LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
-						LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station"."id"
+        $querry_tramqt_select .= 'FROM "Observationstation" "station"
+                            LEFT JOIN "Category" "category" ON "category"."id" = "station"."categoryid"
+                            LEFT JOIN "Organization" "organization" ON "organization"."id" = "station"."organizationid"
+                            LEFT JOIN "Enterprise" "enterprise" ON "enterprise"."id" = "station"."enterpriseid"
+                            LEFT JOIN "Basin" "basin" ON "basin"."id" = "station"."basinid"
+                            LEFT JOIN "Location" "location" ON "location"."id" = "station"."locationid"
+                            LEFT JOIN "LocationType" "loctype" on "loctype"."id" = "location"."locationtypeid"
+                            LEFT JOIN "District" "district" ON "district"."id" = "station"."districtid"
+                            LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station"."id"
+                            LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
+                            LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station"."id"
 
-						WHERE "station"."id" IN (
-
-						SELECT "station_In"."id"
-                        FROM "Observationstation" "station_In"
-                        LEFT JOIN "Category" "category" ON "category"."id" = "station_In"."categoryid"
-                        LEFT JOIN "Organization" "organization" ON "organization"."id" = "station_In"."organizationid"
-                        LEFT JOIN "Enterprise" "enterprise" ON "enterprise"."id" = "station_In"."enterpriseid"
-                        LEFT JOIN "Basin" "basin" ON "basin"."id" = "station_In"."basinid"
-                        LEFT JOIN "Location" "location" ON "location"."id" = "station_In"."locationid"
-                        LEFT JOIN "LocationType" "loctype" on "loctype"."id" = "location"."locationtypeid"
-                        LEFT JOIN "District" "district" ON "district"."id" = "station_In"."districtid"
-			            LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station_In"."id"
-			            LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
-			            LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station_In"."id"';
+                            WHERE "station"."id" IN (
+                                SELECT "station_In"."id"
+                                FROM "Observationstation" "station_In"
+                                LEFT JOIN "Category" "category" ON "category"."id" = "station_In"."categoryid"
+                                LEFT JOIN "Organization" "organization" ON "organization"."id" = "station_In"."organizationid"
+                                LEFT JOIN "Enterprise" "enterprise" ON "enterprise"."id" = "station_In"."enterpriseid"
+                                LEFT JOIN "Basin" "basin" ON "basin"."id" = "station_In"."basinid"
+                                LEFT JOIN "Location" "location" ON "location"."id" = "station_In"."locationid"
+                                LEFT JOIN "LocationType" "loctype" on "loctype"."id" = "location"."locationtypeid"
+                                LEFT JOIN "District" "district" ON "district"."id" = "station_In"."districtid"
+                                LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station_In"."id"
+                                LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
+                                LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station_In"."id"';
 
         /*** Where Condition Data Loại hình ***/
         $querry_tramqt_where_loaihinh = ' WHERE ';

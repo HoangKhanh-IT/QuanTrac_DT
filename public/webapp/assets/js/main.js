@@ -219,6 +219,12 @@ $("#loaihinh_stat").change(function() {
     dom_standard_stat_option($("#loaihinh_stat").val())
 })
 
+/*** Onchange Option Stat Quy chuẩn ==> Reset input trạm quan trắc và thông số ***/
+$("#standardtype").change(function() {
+    $('#search_para').val('');
+    $('#search_quantrac').val('');
+})
+
 $("#search_stats_tramqt").click(function() {
     /*** Remove các thẻ <li> có chứa các input checkbox ***/
     $("#para_list").find('li').remove();
@@ -242,7 +248,7 @@ $("#search_stats_tramqt").click(function() {
         } else {
             url_list_stations = 'statStation?' + '%20loaihinh_stat=' + item_loaihinh_stat +
                 '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=' + item_quanhuyen_stat +
-                '&%20quychuan_stat=%27' + item_quychuan_stat;
+                '&%20quychuan_stat=' + item_quychuan_stat;
         }
 
         $(document).ready(function() {

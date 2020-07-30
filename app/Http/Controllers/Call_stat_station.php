@@ -16,68 +16,63 @@ class Call_stat_station extends Controller
         $quychuan = $_GET['quychuan_stat'];
 
         /*** Querry Thống kê quan trắc ***/
-        $querry_statistic_select_distinct = 'SELECT distinct 
+        $querry_statistic_select_distinct = 'SELECT distinct
                                 "stat_view"."id", "stat_view"."code", "stat_view"."name",
                                 "stat_view"."coordx", "stat_view"."coordy",
-                                "stat_view"."establishyear", "stat_view"."terminatedate", 
-                                "stat_view"."maintenance", "stat_view"."active", 
+                                "stat_view"."establishyear", "stat_view"."terminatedate",
+                                "stat_view"."maintenance", "stat_view"."active",
                                 "stat_view"."the_geom",
                                 "obs_type"."name" "obsTypeName",
                                 "obs_type"."id" "obsTypeID",
                                 "category"."name" "categoryName",
-                                "category"."id" "categoryID", 
-                                "organization"."name" "organizationName", 
-                                "enterprise"."name" "enterpriseName", 
-                                "basin"."name" "basinName", 
+                                "category"."id" "categoryID",
+                                "organization"."name" "organizationName",
+                                "enterprise"."name" "enterpriseName",
+                                "basin"."name" "basinName",
                                 "location"."name" "locationName",
                                 "location"."id" "locationID",
                                 "stat_view"."locationTypeName",
                                 "stat_view"."locationTypeID",
                                 "district"."name" "districtName",
                                 "district"."id" "districtID",
-                                "stat_view"."stdSymbol", 
+                                "stat_view"."stdSymbol",
                                 "stat_view"."stdName",
-                                "stat_view"."total_detail"
+                                "stat_view"."total_detail"';
 
-                                FROM (SELECT 
+        $querry_statistic_select_distinct.= 'FROM (SELECT
                                     "station"."id", "station"."code", "station"."name",
                                     "station"."coordx", "station"."coordy",
-                                    "station"."establishyear", "station"."terminatedate", 
-                                    "station"."maintenance", "station"."active", 
+                                    "station"."establishyear", "station"."terminatedate",
+                                    "station"."maintenance", "station"."active",
                                     "station"."the_geom",
                                     "obs_type"."name" "obsTypeName",
                                     "obs_type"."id" "obsTypeID",
                                     "category"."name" "categoryName",
                                     "category"."id" "categoryID",
-                                    "organization"."id" "organizationID", 
-                                    "organization"."name" "organizationName", 
-                                    "enterprise"."id" "enterpriseID", 
-                                    "enterprise"."name" "enterpriseName", 
-                                    "basin"."id" "basinID", 
-                                    "basin"."name" "basinName", 
+                                    "organization"."id" "organizationID",
+                                    "organization"."name" "organizationName",
+                                    "enterprise"."id" "enterpriseID",
+                                    "enterprise"."name" "enterpriseName",
+                                    "basin"."id" "basinID",
+                                    "basin"."name" "basinName",
                                     "location"."name" "locationName",
                                     "location"."id" "locationID",
                                     "loctype"."name" "locationTypeName",
                                     "loctype"."id" "locationTypeID",
                                     "district"."name" "districtName",
                                     "district"."id" "districtID",
-                                    /*** Alias của standard_view ***/
+                                    "standard_view"."standarparaID" "stdParaID",
                                     "standard_view"."standardSymbol" "stdSymbol",
                                     "standard_view"."standardName" "stdName",
-                                    concat(\'[\', string_agg(distinct "obs"."detail", \', \'), \']\') "total_detail"
-                                
-                                    FROM (/* SELECT "std_para"."id", "std_para"."standardid", 
-                                        "standard"."symbol" "standardSymbol", "standard"."name" "standardName", 
-                                        "obs"."stationid" 
+                                    concat(\'[\', string_agg(distinct "obs"."detail", \', \'), \']\') "total_detail"';
+
+        $querry_statistic_select_distinct.= 'FROM (
+                                        SELECT distinct "std_para"."id" "standarparaID", "std_para"."standardid",
+                                        "standard"."symbol" "standardSymbol", "standard"."name" "standardName",
+                                        "obs"."stationid"
                                         FROM "StandardParameter" "std_para"
-                                        LEFT JOIN "Standard" "standard" ON "standard"."id" = "std_para"."standardid" 
-                                        LEFT JOIN "Observation" "obs" ON "obs"."standardparameterid" = "std_para"."id" */
-                                        SELECT "obs"."stationid", 
-                                        "standard"."name" "standardName", "standard"."symbol" "standardSymbol", 
-                                        "std_para"."id", "std_para"."standardid"
-                                        FROM "Observation" "obs"
-                                        LEFT JOIN "StandardParameter" "std_para" ON "std_para"."id" = "obs"."standardparameterid"
-                                        LEFT JOIN "Standard" "standard" ON "std_para"."standardid" = "standard"."id"';
+                                        LEFT JOIN "Standard" "standard" ON "standard"."id" = "std_para"."standardid"
+                                        LEFT JOIN "Observation" "obs" ON "obs"."standardparameterid" = "std_para"."id"';
 
         /*** Where Condition Data Quy chuẩn ***/
         $querry_statistic_select_distinct.= 'where "standardid" ='.$quychuan.') as "standard_view"';
@@ -94,20 +89,22 @@ class Call_stat_station extends Controller
                                     LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station"."id"
                                     LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
                                     LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station"."id"
-                                    LEFT JOIN "Standard" "standard" ON "standard"."obstypeid" = "obs_station"."obstypesid" 
-                            
-                            
-                                    GROUP BY 
-                                        "station"."id", 
+                                    LEFT JOIN "Standard" "standard" ON "standard"."obstypeid" = "obs_station"."obstypesid"
+
+                                    WHERE "obs"."standardparameterid" = "standard_view"."standarparaID"
+                                    GROUP BY
+                                        "station"."id",
                                         "obs_type"."name", "obs_type"."id",
-                                        "category"."name", "category"."id", 
+                                        "category"."name", "category"."id",
                                         "location"."name", "location"."id",
                                         "loctype"."name", "loctype"."id",
                                         "district"."name", "district"."id",
                                         "organization"."name", "organization"."id",
-                                        "enterprise"."name", "enterprise"."id", 
+                                        "enterprise"."name", "enterprise"."id",
                                         "basin"."name", "basin"."id",
-                                        "standard_view"."standardSymbol", "standard_view"."standardName"
+                                        "standard_view"."standardSymbol",
+                                        "standard_view"."standardName",
+                                        "standard_view"."standarparaID"
                                     ORDER BY "station"."name" ASC) as "stat_view"
 
                             LEFT JOIN "Category" "category" ON "category"."id" = "stat_view"."categoryID"
