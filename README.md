@@ -1,4 +1,5 @@
 # PHP Laravel Quan Trắc Trà Vinh
+## ---- WEBAPP ----
 + Viết 1 Services đơn giản có trả về dữ liệu dạng JSON: https://www.youtube.com/watch?v=31DQQAWsAxE&list=RDCMUCvHX2bCZG2m9ddUhwxudKYA&start_radio=1&t=120
 + Dùng lệnh `php artisan make:controller 'tên file php cần tạo'` để tạo 1 file php
 + Sau đó thêm trong file `routes/web.php` các đường dẫn routes để chạy các file trên
@@ -63,3 +64,5 @@
 không cần chuyển sang dạng Array
 + Đẩy xong WebApp (done) ==> DOM chart trong thống kê không nhất thiết phải đầy đủ thông số và đầy đủ các trạm
 (do có thể không có dữ liệu của trạm đó với thông số tương ứng)
+
+## ---- ADMIN ----

@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*---- Route WebApp ----*/
+/***---------------- Routes WebApp ----------------***/
 Route::get('/webapp', function () {
     return view('webapp.webapp');
 });
@@ -50,5 +50,6 @@ Route::get('sampleStation', 'Call_data_sampleBTD@index');
 /***-- Nhóm Route phần DOM đánh giá chất lượng môi trường AQI/WQI --***/
 Route::get('WQI_AQI', 'Call_WQIAQI_result@index');
 
+/***---------------- Routes Admin ----------------***/
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
