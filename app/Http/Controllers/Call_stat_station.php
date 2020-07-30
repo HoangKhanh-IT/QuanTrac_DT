@@ -39,7 +39,7 @@ class Call_stat_station extends Controller
                                 "stat_view"."stdName",
                                 "stat_view"."total_detail"';
 
-        $querry_statistic_select_distinct.= 'FROM (SELECT
+        $querry_statistic_select_distinct .= 'FROM (SELECT
                                     "station"."id", "station"."code", "station"."name",
                                     "station"."coordx", "station"."coordy",
                                     "station"."establishyear", "station"."terminatedate",
@@ -66,7 +66,7 @@ class Call_stat_station extends Controller
                                     "standard_view"."standardName" "stdName",
                                     concat(\'[\', string_agg(distinct "obs"."detail", \', \'), \']\') "total_detail"';
 
-        $querry_statistic_select_distinct.= 'FROM (
+        $querry_statistic_select_distinct .= 'FROM (
                                         SELECT distinct "std_para"."id" "standarparaID", "std_para"."standardid",
                                         "standard"."symbol" "standardSymbol", "standard"."name" "standardName",
                                         "obs"."stationid"
@@ -75,9 +75,9 @@ class Call_stat_station extends Controller
                                         LEFT JOIN "Observation" "obs" ON "obs"."standardparameterid" = "std_para"."id"';
 
         /*** Where Condition Data Quy chuẩn ***/
-        $querry_statistic_select_distinct.= 'where "standardid" ='.$quychuan.') as "standard_view"';
+        $querry_statistic_select_distinct .= 'where "standardid" =' . $quychuan . ') as "standard_view"';
 
-        $querry_statistic_select_distinct.='
+        $querry_statistic_select_distinct .= '
                                     LEFT JOIN "Observationstation" "station" ON "standard_view"."stationid" = "station"."id"
                                     LEFT JOIN "Category" "category" ON "category"."id" = "station"."categoryid"
                                     LEFT JOIN "Organization" "organization" ON "organization"."id" = "station"."organizationid"
@@ -119,17 +119,26 @@ class Call_stat_station extends Controller
 
         /*** Where Condition Data Loại hình, Loại trạm và Quận huyện (trừ điều kiện $quanhuyen=1=1)  ***/
         if ($quanhuyen != '1=1') {
-            $querry_statistic_where = 'where "obs_type"."id" ='.$loaihinh.
-                'and "category"."id" ='.$loaitram.'and "district"."id" ='.$quanhuyen;
+            $querry_statistic_where = 'where "obs_type"."id" =' . $loaihinh .
+                'and "category"."id" =' . $loaitram . 'and "district"."id" =' . $quanhuyen;
         } else {
-            $querry_statistic_where = 'where "obs_type"."id" ='.$loaihinh.
-                'and "category"."id" ='.$loaitram;
+            $querry_statistic_where = 'where "obs_type"."id" =' . $loaihinh .
+                'and "category"."id" =' . $loaitram;
         }
 
-        $querry_statistic = $querry_statistic_select_distinct.$querry_statistic_where;
-        $result =  DB::select($querry_statistic);
+        $querry_statistic = $querry_statistic_select_distinct . $querry_statistic_where;
+        $result = DB::select($querry_statistic);
         $jsonData = json_encode($result);
         $original_data = json_decode($jsonData, true);
+
+        /*** Xử lý các chuỗi bị trùng ID
+        for ($i = 0; $i < count($original_data); $i++) {
+            print_r($original_data[$i]['id']);
+            if ($original_data[$i]['id'] == $original_data[$i + 1]['id']) {
+
+            }
+        } ***/
+
         $option = array();
         foreach ($original_data as $key => $value) {
             $option[] = array(
@@ -164,6 +173,6 @@ class Call_stat_station extends Controller
         );
 
         $final_data = json_encode($option_final);
-        return $final_data;
+        // return $final_data;
     }
 }
