@@ -65,4 +65,8 @@ không cần chuyển sang dạng Array
 + Đẩy xong WebApp (done) ==> DOM chart trong thống kê không nhất thiết phải đầy đủ thông số và đầy đủ các trạm
 (do có thể không có dữ liệu của trạm đó với thông số tương ứng)
 
+### Push code lên Github và Server Dev
++ Push code lên Github thiếu 1 số folder và file (`node_modules`, `vendor` và file `.env`)
++ Chuyển lên Server dev cần clone code từ github và đẩy các folder, files còn thiếu qua
+
 ## ---- ADMIN ----
