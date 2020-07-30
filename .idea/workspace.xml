@@ -13,6 +13,9 @@
       <executable path="composer" />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_categories_option.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/README.md" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
@@ -158,6 +161,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1fLMoF5hMflJE03ZAvtXjbxRVDC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -187,7 +191,7 @@
       <updated>1595993093401</updated>
       <workItem from="1595993098210" duration="5961000" />
       <workItem from="1596007671648" duration="15647000" />
-      <workItem from="1596072299865" duration="1692000" />
+      <workItem from="1596072299865" duration="1951000" />
     </task>
     <servers />
   </component>
