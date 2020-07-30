@@ -57,6 +57,7 @@
 
 ### Đẩy WebApp vào Project
 + Cần 1 file chứa các config đường dẫn trong các thư mục JS ==> Thêm config services ở ngoài thẻ `webapp.blade.php`
+==> Không thêm config, chỉ cần gọi đúng đường dẫn trong `routes` đã được khai báo là get được link services JSON
 + Project WebApp TraVinh_QuanTrac: https://github.com/nguyenduclam/TraVinh_QuanTrac
 + Do dữ liệu trong Laravel luôn trả về dạng JSON ==> không cần sử dụng hàm `pg_fetch_assoc`, 
 không cần chuyển sang dạng Array
