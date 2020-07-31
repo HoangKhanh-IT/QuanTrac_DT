@@ -71,14 +71,14 @@ function getData_sample_Bantudong() {
 
         /*** Nếu thời gian đi hoặc thời gian đến rỗng ***/
         if (fromDate_data == '') {
-            fromDate_data = '1900-01-01';
+            fromDate_data = '%271900-01-01';
         } else {
             var fromDate_data_split = fromDate_data.split("/");
             fromDate_data = "%27" + fromDate_data_split[2] + "/" + fromDate_data_split[1] + "/" + fromDate_data_split[0];
         }
 
         if (toDate_data == '') {
-            toDate_data = '2200-01-01';
+            toDate_data = '%272200-01-01';
         } else {
             var toDate_data_split = toDate_data.split("/");
             toDate_data = "%27" + toDate_data_split[2] + "/" + toDate_data_split[1] + "/" + toDate_data_split[0];

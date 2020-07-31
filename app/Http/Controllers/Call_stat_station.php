@@ -51,7 +51,7 @@ class Call_stat_station extends Controller
                                         LEFT JOIN "Standard" "standard" ON "standard"."id" = "std_para"."standardid"
                                         LEFT JOIN "Observation" "obs" ON "obs"."standardparameterid" = "std_para"."id"';
 
-        /*** Where Condition Data Quy chuẩn ***/
+        /*** Where Condition Data Quy chuẩn và Lọc các trạm null ***/
         $querry_statistic_select .= 'WHERE "standardid" =' .$quychuan.
             'AND "obs"."stationid" is not null) as "standard_view"';
 
@@ -68,6 +68,7 @@ class Call_stat_station extends Controller
                                     LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
                                     LEFT JOIN "Standard" "standard" ON "standard"."obstypeid" = "obs_station"."obstypesid"';
 
+        /*** Where Condition Quy chuẩn ***/
         $querry_statistic_where = 'WHERE "standard"."id" ='.$quychuan;
 
         /*** Where Condition Data Loại hình, Loại trạm và Quận huyện (trừ điều kiện $quanhuyen=1=1) ***/
