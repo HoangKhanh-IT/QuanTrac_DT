@@ -172,7 +172,8 @@ sẽ `push` vào 1 mảng mới (không push vào mảng cũ vì sẽ làm thay 
 + Thay đổi: dữ liệu được DOM theo thời gian hệ thống
 
 ### Xử lý DOM dữ liệu thống kê
-+ Không xử lý trung bình trong 1 giờ của trạm bán tự động
++ Sửa Services `call_stat_station.php` do gọi dữ liệu bị trùng lặp và sai các thông số (done)
++ Không xử lý trung bình trong 1 giờ của trạm bán tự động (pending)
 + Các thông số của các trạm quan trắc cần phải giống nhau
 + Get a list of checked checkboxes in a div using jQuery: 
 https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
