@@ -41,6 +41,9 @@ Route::get('statStation', 'Call_stat_station@index');
 Route::get('obstylesStat', 'Call_obstyles_stat_option@index');
 Route::get('standardStat', 'Call_standard@index');
 
+/***-- Nhóm Route phần DOM Upload Files --***/
+Route::post('importExcel', 'Call_ImportBTD@import');
+
 /***-- Nhóm Route phần DOM danh sách Vượt Ngưỡng --***/
 Route::get('thresholdStation', 'Call_threshold_station@index');
 

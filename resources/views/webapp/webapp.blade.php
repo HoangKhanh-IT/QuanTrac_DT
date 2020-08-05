@@ -343,7 +343,7 @@
                             <label class="nav-titles nav-titles-default">Chú thích bản đồ</label>
                         </div> -->
                         <div class="col-xs-6 col-md-6" style="margin-bottom: 10px">
-                            <button class="btn btn-info btn-block" id="" type="button" style="padding-left: 7%;">
+                            <button class="btn btn-info btn-block" id="upload-btn" type="button" style="padding-left: 7%;">
                                 <!-- <i class="icon-warning" style="font-size: 16px; margin-top: -1px"></i> -->
                                 <label style="font-size: 10pt">Upload File</label>
                             </button>
@@ -692,6 +692,64 @@
                         <!-- Dom data vượt ngưỡng -->
                         </tbody>
                     </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Upload File -->
+    <div class="modal fade" id="uploadFileModal" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-uploadFile">
+            <div class="modal-content" style="border-radius: 0">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title blue" style="font-weight: bold; text-transform: uppercase">
+                        <i class="blue" style="font-size: 16px; margin-top: -2px"></i> &nbsp;Upload File
+                    </h4>
+                </div>
+                <div class="modal-body modal-body-uploadFile">
+                    <form method="post" enctype="multipart/form-data"
+                          action="{{ url('importExcel') }}">
+                        {{ csrf_field() }}
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                                    <i class="icon-file-spreadsheet blue" style="font-size: 16px; margin-top: -2px"></i>
+                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Select File</span>
+                                </div>
+                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
+                                    <input type="file" name="select_file">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                                    <i class="icon-file-excel blue" style="font-size: 16px; margin-top: -2px"></i>
+                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Upload Files</span>
+                                </div>
+                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
+                                    <input type="submit" name="upload"
+                                           class="form-control" id="" value="Upload">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <!-- <table class="table table-striped table-hover table-bordered table-condensed table-responsive" id="table_sample">
+                        <thead>
+                            <tr class="bg-info" role="row" style="color: #000">
+                                <th scope="col" class="bg-info fixed_header">id</th>
+                                <th scope="col" class="bg-info fixed_header">Tên chỉ tiêu</th>
+                                <th scope="col" class="bg-info fixed_header">Mã trạm</th>
+                                <th scope="col" class="bg-info fixed_header">Ngày phân tích mẫu</th>
+                                <th scope="col" class="bg-info fixed_header">Vị trí lấy mẫu</th>
+                                <th scope="col" class="bg-info fixed_header">Thời tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table> -->
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>

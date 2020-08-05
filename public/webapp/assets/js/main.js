@@ -38,6 +38,13 @@ $("#login-btn").click(function() {
     return false;
 });
 
+/*---- Modal Upload Files ----*/
+$("#upload-btn").click(function() {
+    $("#uploadFileModal").modal("show");
+    $(".navbar-collapse.in").collapse("hide");
+    return false;
+});
+
 /*---- Modal Threshold ----*/
 $("#threshold-btn").click(function() {
     $("#thresholdModal").modal("show");
