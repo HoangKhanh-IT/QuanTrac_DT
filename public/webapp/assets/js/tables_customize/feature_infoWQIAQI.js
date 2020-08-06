@@ -87,7 +87,7 @@ function DOM_data_WQI_AQI(url_list) {
         if (data_DOM.length == 0) {
             tbody = '';
             tbody += '<tr>' +
-                '<td colspan="4" class="red" style="text-align:center">' +
+                '<td colspan="5" class="red" style="text-align:center">' +
                 '<b>Không có dữ liệu</b>' +
                 '</td>' +
                 '</tr>';
