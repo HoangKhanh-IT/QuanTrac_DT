@@ -1,11 +1,11 @@
 /*---- Hiển thị thông tin trạm quan trắc ----*/
 function Feature_info_modal(feat, layer) {
     /*** Kiểm tra trạm quan trắc có năm thành lập hay không ***/
-    var establishyear_qt = "";
-    if (feat.properties.establishyear != null) {
-        establishyear_qt = feat.properties.establishyear
+    var establishdate_qt = "";
+    if (feat.properties.establishdate != null) {
+        establishdate_qt = feat.properties.establishdate
     } else {
-        establishyear_qt = "Chưa cập nhật";
+        establishdate_qt = "Chưa cập nhật";
     }
 
     /*** Kiểm tra trạm quan trắc có tổ chức/doanh nghiệp hay không ***/
@@ -60,7 +60,7 @@ function Feature_info_modal(feat, layer) {
         "&nbsp;Tổ chức</th><td>" + organizationName_qt + "</td></tr>" +
         "<tr><th class='brown'><i class='icon-watch2' style='font-size: 14px; " +
         "margin-top: -2px; margin-left: 1px;'></i>" +
-        "&nbsp;Thành lập</th><td>" + establishyear_qt + "</td>" +
+        "&nbsp;Thành lập</th><td>" + establishdate_qt + "</td>" +
         "<th class='brown'><i class='icon-connection' style='font-size: 12px; margin-top: -2px'></i>" +
         active_qt +
         "<table>";

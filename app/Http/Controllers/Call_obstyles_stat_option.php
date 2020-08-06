@@ -15,7 +15,7 @@ class Call_obstyles_stat_option extends Controller
         ->orderBy('name')
         ->get()
         ->toArray();
-        
+
         $jsonData = json_encode($result);
         $original_data = json_decode($jsonData, true);
         $option = array();

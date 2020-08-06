@@ -19,12 +19,12 @@ class Call_data_sampleBTD extends Controller
         $toDate = date($_GET['toDate']);
 
         /*** Querry lựa chọn sample bán tự động ***/
-        $querry_select_sampleBTD = 'SELECT "Sample_BanTuDong".*, "Observation".detail
-                                    FROM "Sample_BanTuDong"
-                                    LEFT JOIN "Observation" ON "Observation".stationid = "Sample_BanTuDong".stationid
-                                    WHERE "Observation".day = "Sample_BanTuDong"."dateOfAnalysis"';
+        $querry_select_sampleBTD = 'SELECT "SampleBanTuDong".*, "Observation".detail
+                                    FROM "SampleBanTuDong"
+                                    LEFT JOIN "Observation" ON "Observation".stationid = "SampleBanTuDong".stationid
+                                    WHERE "Observation".day = "SampleBanTuDong"."dateOfAnalysis"';
 
-        $querry_select_sampleBTD.= ' AND "Sample_BanTuDong".stationid ='.$station_id;
+        $querry_select_sampleBTD.= ' AND "SampleBanTuDong".stationid ='.$station_id;
         if ($fromDate == '' && $toDate == '') {
             $querry_select_sampleBTD = $querry_select_sampleBTD.'ORDER BY "day" DESC';
         }

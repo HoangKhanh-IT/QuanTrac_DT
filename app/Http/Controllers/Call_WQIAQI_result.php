@@ -17,16 +17,16 @@ class Call_WQIAQI_result extends Controller
         $toDate_WA = date($_GET['toDate_WA']);
 
         /***  Querry Result WQI/AQI ***/
-        $querry_select = 'SELECT "station"."id", "station"."code", "station"."name", 
+        $querry_select = 'SELECT "station"."id", "station"."code", "station"."name",
                             "obs"."day", "obs"."value", "district"."name" "districtName",
                             "district"."id" "districtID",
-                            "quality"."id" "qualityID", "quality"."purpose" "qualityPurpose", 
+                            "quality"."id" "qualityID", "quality"."purpose" "qualityPurpose",
                             "quality"."colorcode" "qualityColorcode"
                             FROM "Observation" "obs"
                             LEFT JOIN "Observationstation" "station" ON "obs"."stationid" = "station"."id"
                             LEFT JOIN "Qualityindex" "quality" ON "obs"."qualityindexid" = "quality"."id"
                             LEFT JOIN "Category" "category" ON "category"."id" = "station"."categoryid"
-                            LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station"."id"
+                            LEFT JOIN "ObstypeStation" "obs_station" ON "obs_station"."stationid" = "station"."id"
                             LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
                             LEFT JOIN "District" "district" ON "district"."id" = "station"."districtid"
                             WHERE "obs"."qualityindexid" IS NOT NULL';
@@ -63,7 +63,7 @@ class Call_WQIAQI_result extends Controller
                 'qualityColorcode' => $value['qualityColorcode']
             );
         }
-    
+
         $final_data = json_encode($option);
         return $final_data;
     }

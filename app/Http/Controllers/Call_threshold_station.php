@@ -10,26 +10,26 @@ class Call_threshold_station extends Controller
     //
     function index()
     {
-        $result = DB::select('SELECT 
-                                "station"."id", "station"."name", 
+        $result = DB::select('SELECT
+                                "station"."id", "station"."name",
                                 "district"."name" "districtName",
                                 "district"."id" "districtID",
                                 "category"."name" "categoryName",
                                 "category"."id" "categoryID",
                                 /*** Ghép cột Name của bảng ObservationType cần có hàm distinct để trở nên duy nhất ***/
-                                string_agg(distinct "obs_type"."name", \'; \') "obstype_namelist", 
+                                string_agg(distinct "obs_type"."name", \'; \') "obstype_namelist",
                                 concat(\'[\', string_agg(distinct "obs"."detail", \', \'), \']\') "total_detail"
-                                                                    
+
                                 FROM "Observationstation" "station"
                                 LEFT JOIN "Category" "category" ON "category"."id" = "station"."categoryid"
                                 LEFT JOIN "District" "district" ON "district"."id" = "station"."districtid"
-                                LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station"."id"
+                                LEFT JOIN "ObstypeStation" "obs_station" ON "obs_station"."stationid" = "station"."id"
                                 LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
                                 LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station"."id"
-                                
+
                                 WHERE "category"."id" = \'1\' OR "category"."id" = \'3\'
-                                GROUP BY "station"."id", 
-                                "category"."name", "category"."id", 
+                                GROUP BY "station"."id",
+                                "category"."name", "category"."id",
                                 "district"."name", "district"."id"
                                 ORDER BY "station"."name" ASC');
         $jsonData = json_encode($result);

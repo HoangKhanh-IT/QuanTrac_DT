@@ -19,9 +19,8 @@ class Call_stat_station extends Controller
         $querry_statistic_select = 'SELECT
                                     "station"."id", "station"."code", "station"."name",
                                     "station"."coordx", "station"."coordy",
-                                    "station"."establishyear", "station"."terminatedate",
+                                    "station"."establishdate", "station"."terminatedate",
                                     "station"."maintenance", "station"."active",
-                                    "station"."the_geom",
                                     "obs_type"."name" "obsTypeName",
                                     "obs_type"."id" "obsTypeID",
                                     "category"."name" "categoryName",
@@ -64,7 +63,7 @@ class Call_stat_station extends Controller
                                     LEFT JOIN "Location" "location" ON "location"."id" = "station"."locationid"
                                     LEFT JOIN "LocationType" "loctype" on "loctype"."id" = "location"."locationtypeid"
                                     LEFT JOIN "District" "district" ON "district"."id" = "station"."districtid"
-                                    LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station"."id"
+                                    LEFT JOIN "ObstypeStation" "obs_station" ON "obs_station"."stationid" = "station"."id"
                                     LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
                                     LEFT JOIN "Standard" "standard" ON "standard"."obstypeid" = "obs_station"."obstypesid"';
 
@@ -120,7 +119,7 @@ class Call_stat_station extends Controller
                 'locationName' => $value['locationName'],
                 'locationTypeID' => $value['locationTypeID'],
                 'locationTypeName' => $value['locationTypeName'],
-                'establishyear' => $value['establishyear'],
+                'establishdate' => $value['establishdate'],
                 'terminatedate' => $value['terminatedate'],
                 'maintenance' => $value['maintenance'],
                 'active' => $value['active'],

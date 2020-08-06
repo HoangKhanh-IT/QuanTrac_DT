@@ -19,7 +19,7 @@ class Call_obser_station extends Controller
         $querry_tramqt_select = 'SELECT
                             "station"."id", "station"."code", "station"."name",
                             "station"."coordx", "station"."coordy",
-                            "station"."establishyear", "station"."terminatedate",
+                            "station"."establishdate", "station"."terminatedate",
                             "station"."maintenance", "station"."active",
                             "category"."name" "categoryName",
                             "category"."id" "categoryID",
@@ -45,7 +45,7 @@ class Call_obser_station extends Controller
                             LEFT JOIN "Location" "location" ON "location"."id" = "station"."locationid"
                             LEFT JOIN "LocationType" "loctype" on "loctype"."id" = "location"."locationtypeid"
                             LEFT JOIN "District" "district" ON "district"."id" = "station"."districtid"
-                            LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station"."id"
+                            LEFT JOIN "ObstypeStation" "obs_station" ON "obs_station"."stationid" = "station"."id"
                             LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
                             LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station"."id"
 
@@ -59,7 +59,7 @@ class Call_obser_station extends Controller
                                 LEFT JOIN "Location" "location" ON "location"."id" = "station_In"."locationid"
                                 LEFT JOIN "LocationType" "loctype" on "loctype"."id" = "location"."locationtypeid"
                                 LEFT JOIN "District" "district" ON "district"."id" = "station_In"."districtid"
-                                LEFT JOIN "Obstype_Station" "obs_station" ON "obs_station"."stationid" = "station_In"."id"
+                                LEFT JOIN "ObstypeStation" "obs_station" ON "obs_station"."stationid" = "station_In"."id"
                                 LEFT JOIN "ObservationType" "obs_type" ON "obs_type"."id" = "obs_station"."obstypesid"
                                 LEFT JOIN "Observation" "obs" ON "obs"."stationid" = "station_In"."id"';
 
@@ -132,7 +132,7 @@ class Call_obser_station extends Controller
                     'locationName' => $value['locationName'],
                     'locationTypeID' => $value['locationTypeID'],
                     'locationTypeName' => $value['locationTypeName'],
-                    'establishyear' => $value['establishyear'],
+                    'establishdate' => $value['establishdate'],
                     'terminatedate' => $value['terminatedate'],
                     'maintenance' => $value['maintenance'],
                     'active' => $value['active'],

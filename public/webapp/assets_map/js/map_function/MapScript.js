@@ -239,7 +239,7 @@ function Modal_Feature_Style(feat, latlng) {
         /*** Trạm quan trắc Không khí ***/
     } else if (feat.properties.obstype_namefirst == "Không khí" ||
         feat.properties.obstype_namefirst == "Không khí khu đô thị" ||
-        feat.properties.obstype_namefirst == "Khí thải khu công nghiệp, cụm công nghiệp" ||
+        feat.properties.obstype_namefirst == "Không khí thải khu công nghiệp, cụm công nghiệp" ||
         feat.properties.obstype_namefirst == "Không khí xung quanh") {
         var label_tram_khongkhi = '<p class="tram_khongkhi_label"><b>Trạm ' + feat.properties.name + '</b></p>';
         return L.marker(latlng, {

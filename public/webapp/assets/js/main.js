@@ -303,8 +303,8 @@ $("#search_stats_tramqt").click(function() {
                 $('#table_stat_stations tbody').on('click', 'tr', function() {
                     $(this).toggleClass('selected');
                     /*** Chặn chọn lớn hơn 5 trạm ***/
-                    if (table_stat_stations.rows('.selected').data().length > 3) {
-                        alert("Vui lòng chỉ chọn tối đa 3 trạm");
+                    if (table_stat_stations.rows('.selected').data().length > 5) {
+                        alert("Vui lòng chỉ chọn tối đa 5 trạm");
                         $(this).removeClass('selected');
                     }
                 });
