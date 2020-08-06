@@ -69,4 +69,7 @@ không cần chuyển sang dạng Array
 + Push code lên Github thiếu 1 số folder và file (`node_modules`, `vendor` và file `.env`)
 + Chuyển lên Server dev cần clone code từ github và đẩy các folder, files còn thiếu qua
 
+### Chỉnh sửa DB
++ Backup code mới, sửa 1 số tên bảng và các biến dữ liệu (done)
+
 ## ---- ADMIN ----

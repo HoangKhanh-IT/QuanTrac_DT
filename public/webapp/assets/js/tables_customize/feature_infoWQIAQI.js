@@ -101,7 +101,7 @@ function DOM_data_WQI_AQI(url_list) {
                 var date_DOM_WA = date_WA[2] + "/" + date_WA[1] + "/" + date_WA[0];
 
                 tbody += '<td>' + date_DOM_WA + '</td>';
-                tbody += '<td>' + data_DOM[i_data].value + '</td>';
+                tbody += '<td style="text-align: center">' + data_DOM[i_data].value + '</td>';
                 tbody += '<td style="border:none; background-color:' + data_DOM[i_data].qualityColorcode + '"></td>';
                 tbody += '<td>' + data_DOM[i_data].qualityPurpose + '</td>';
                 tbody += '</tr>';
