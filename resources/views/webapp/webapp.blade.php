@@ -712,7 +712,7 @@
                 </div>
                 <div class="modal-body modal-body-uploadFile">
                     <form method="post" enctype="multipart/form-data"
-                          action="{{ url('importExcel') }}">
+                          action="{{ url('/') }}">
                         {{ csrf_field() }}
                         <fieldset>
                             <div class="form-group">
@@ -721,7 +721,7 @@
                                     <span for="" class="black" style="margin-left: 1px">&nbsp;Select File</span>
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
-                                    <input type="file" name="select_file">
+                                    <input type="file" name="select_file" id="file">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -734,22 +734,9 @@
                                            class="form-control" id="" value="Upload">
                                 </div>
                             </div>
+                            <a href="{{ url('/public/webapp/assets/text/test.xlsx') }}">Download</a>
                         </fieldset>
                     </form>
-                    <!-- <table class="table table-striped table-hover table-bordered table-condensed table-responsive" id="table_sample">
-                        <thead>
-                            <tr class="bg-info" role="row" style="color: #000">
-                                <th scope="col" class="bg-info fixed_header">id</th>
-                                <th scope="col" class="bg-info fixed_header">Tên chỉ tiêu</th>
-                                <th scope="col" class="bg-info fixed_header">Mã trạm</th>
-                                <th scope="col" class="bg-info fixed_header">Ngày phân tích mẫu</th>
-                                <th scope="col" class="bg-info fixed_header">Vị trí lấy mẫu</th>
-                                <th scope="col" class="bg-info fixed_header">Thời tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table> -->
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
