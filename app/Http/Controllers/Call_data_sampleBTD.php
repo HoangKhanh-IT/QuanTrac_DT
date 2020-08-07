@@ -29,12 +29,11 @@ class Call_data_sampleBTD extends Controller
             $querry_select_sampleBTD = $querry_select_sampleBTD.'ORDER BY "day" DESC';
         }
         if ($fromDate != '' && $toDate != ''){
-            $querry_select_sampleBTD.= ' AND "dateOfSamping" between'.$fromDate.'AND'.$toDate.'ORDER BY "day" DESC';
+            $querry_select_sampleBTD.= ' AND "dateOfSampling" between '.$fromDate.' AND '.$toDate.' ORDER BY "day" DESC';
             /*** Đối với 1 số VPS không hỗ trợ xuất Date có dấu nháy nên phải truy vấn cộng dấu nháy ***/
-            /* $querry_option_sampleBTD.= ' AND "dateOfSamping" between '."'".$fromDate."'".' AND '."'".$toDate."'"; */
+            /* $querry_select_sampleBTD.= ' AND "dateOfSampling" between '."'".$fromDate."'".' AND '."'".$toDate."'"; */
         }
 
-        echo $querry_select_sampleBTD;
         $result =  DB::select($querry_select_sampleBTD);
         $jsonData = json_encode($result);
         $original_data = json_decode($jsonData, true);
@@ -44,7 +43,7 @@ class Call_data_sampleBTD extends Controller
                 'id' => $value['id'],
                 'symbol' => $value['symbol'],
                 'stationid' => $value['stationid'],
-                'time_dateOfSamping' => date("d-m-Y", strtotime($value['dateOfSamping'])).' '.$value['time'],
+                'time_dateOfSamping' => date("d-m-Y", strtotime($value['dateOfSampling'])).' '.$value['time'],
                 'dateOfAnalysis' => date("d-m-Y", strtotime($value['dateOfAnalysis'])),
                 'samplingLocations' => $value['samplingLocations'],
                 'weather' => $value['weather'],

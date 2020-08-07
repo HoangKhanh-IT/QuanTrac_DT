@@ -51,8 +51,8 @@ class Call_stat_station extends Controller
                                         LEFT JOIN "Observation" "obs" ON "obs"."standardparameterid" = "std_para"."id"';
 
         /*** Where Condition Data Quy chuẩn và Lọc các trạm null ***/
-        $querry_statistic_select .= 'WHERE "standardid" =' .$quychuan.
-            'AND "obs"."stationid" is not null) as "standard_view"';
+        $querry_statistic_select .= 'WHERE "standardid" = ' .$quychuan.
+            ' AND "obs"."stationid" is not null) as "standard_view"';
 
         $querry_statistic_select .= '
                                     LEFT JOIN "Observationstation" "station" ON "standard_view"."stationid" = "station"."id"
