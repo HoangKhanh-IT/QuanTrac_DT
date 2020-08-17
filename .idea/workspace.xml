@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="302f8f71-fec8-47b9-b25f-0b621b3b6405" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,6 +14,13 @@
     <execution>
       <executable path="composer" />
     </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -107,6 +113,7 @@
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_infoBTD.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_loctype_option.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_searches.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/export_infoToFile.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_stats.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_WQIAQI_result.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_renderChart.js" root0="SKIP_INSPECTION" />
@@ -281,6 +288,8 @@
       <workItem from="1596787196604" duration="4658000" />
       <workItem from="1597020394629" duration="655000" />
       <workItem from="1597218328002" duration="1124000" />
+      <workItem from="1597403930890" duration="93000" />
+      <workItem from="1597628687491" duration="9598000" />
     </task>
     <task id="LOCAL-00001" summary="travinhqt_laravel">
       <created>1596074300287</created>
@@ -387,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596794170532</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="travinhqt_laravel">
+      <created>1597403954408</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1597403954408</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -410,10 +426,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="123" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596024961673" />
-    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1596794169327">
+    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1597403953581">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596794169327" />
+    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1597403953581" />
     <state x="1658" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075688211" />
     <state x="446" y="279" width="474" height="281" key="ComposerInitDialogKey" timestamp="1595995771713">
       <screen x="0" y="0" width="1366" height="738" />
@@ -443,14 +459,14 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="517" y="288" key="NewPhpFileDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596008687230" />
-    <state x="184" y="11" key="SettingsEditor" timestamp="1597218339731">
+    <state x="184" y="11" key="SettingsEditor" timestamp="1597638388309">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1597218339731" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1596794176366">
+    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1597638388309" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1597403958862">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596794176366" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1597403958862" />
     <state x="1641" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075691920" />
     <state x="359" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1597403929500">
       <screen x="0" y="0" width="1366" height="738" />

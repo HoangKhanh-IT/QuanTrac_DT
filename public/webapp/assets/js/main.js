@@ -1,16 +1,16 @@
 var map, featureList;
 
-$(window).resize(function() {
+$(window).resize(function () {
     sizeLayerControl();
 });
 
-$(document).on("click", ".feature-row", function(e) {
+$(document).on("click", ".feature-row", function (e) {
     $(document).off("mouseout", ".feature-row", clearHighlight);
     sidebarClick(parseInt($(this).attr("id"), 10));
 });
 
 if (!("ontouchstart" in window)) {
-    $(document).on("mouseover", ".feature-row", function(e) {
+    $(document).on("mouseover", ".feature-row", function (e) {
         highlight.clearLayers().addLayer(L.circleMarker([$(this).attr("lat"),
             $(this).attr("lng")
         ], highlightStyle));
@@ -20,33 +20,33 @@ if (!("ontouchstart" in window)) {
 $(document).on("mouseout", ".feature-row", clearHighlight);
 
 /*---- Reset Input ----*/
-$(".reset_input").click(function() {
+$(".reset_input").click(function () {
     $("input[type=date]").val("")
 })
 
 /*---- Modal About Us ----*/
-$("#about-btn").click(function() {
+$("#about-btn").click(function () {
     $("#aboutModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
 
 /*---- Modal Login ----*/
-$("#login-btn").click(function() {
+$("#login-btn").click(function () {
     $("#loginModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
 
 /*---- Modal Upload Files ----*/
-$("#upload-btn").click(function() {
+$("#upload-btn").click(function () {
     $("#uploadFileModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
 
 /*---- Modal Threshold ----*/
-$("#threshold-btn").click(function() {
+$("#threshold-btn").click(function () {
     $("#thresholdModal").modal("show");
     getData_threshold_station();
 
@@ -60,7 +60,7 @@ $("#threshold-btn").click(function() {
 });
 
 /*---- Modal Sample ----*/
-$("#sample-btn").click(function() {
+$("#sample-btn").click(function () {
     $("#sampleModal").modal("show");
     getData_sample_Bantudong();
     $(".navbar-collapse.in").collapse("hide");
@@ -68,14 +68,14 @@ $("#sample-btn").click(function() {
 });
 
 /*---- Modal AQI/WQI ----*/
-$("#WQI_AQI_btn").click(function() {
+$("#WQI_AQI_btn").click(function () {
     $("#WQI_AQI_Modal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
 
 /*---- Modal Result AQI/WQI ----*/
-$("#WQI-AQI-result-btn").click(function() {
+$("#WQI-AQI-result-btn").click(function () {
     $("#re_WA_Modal").modal("show");
     $("#WQI_AQI_Modal").modal("hide");
 
@@ -84,7 +84,7 @@ $("#WQI-AQI-result-btn").click(function() {
 })
 
 /*---- Return Modal AQI/WQI ----*/
-$("#WQI-AQI-return").click(function() {
+$("#WQI-AQI-return").click(function () {
     $("#re_WA_Modal").modal("hide");
     $("#WQI_AQI_Modal").modal("show");
 
@@ -114,10 +114,10 @@ function formatDatetime() {
         },
         useCurrent: false /* Important! See issue #1075 */
     });
-    $("#FromDate_stat").on("dp.change", function(e) {
+    $("#FromDate_stat").on("dp.change", function (e) {
         $('#ToDate_stat').data("DateTimePicker").minDate(e.date);
     });
-    $("#ToDate_stat").on("dp.change", function(e) {
+    $("#ToDate_stat").on("dp.change", function (e) {
         $('#FromDate_stat').data("DateTimePicker").maxDate(e.date);
     });
 };
@@ -126,7 +126,7 @@ formatDatetime();
 /*** Collapse On/Off để mở Input "Thời gian hiển thị" (chỉ mở khi Option là "Tất cả giá trị") ***/
 var item_stat_display_time;
 item_stat_display_time = $("#statisticby").val();
-$('#statisticby').change(function() {
+$('#statisticby').change(function () {
     item_stat_display_time = $("#statisticby").val();
     if (item_stat_display_time != "all_stat") {
         $('.option_stat_display').addClass('in')
@@ -156,7 +156,7 @@ $('#statisticby').change(function() {
     }
 }) ***/
 
-$("#statistic-btn").click(function() {
+$("#statistic-btn").click(function () {
     /*** Reset các button ***/
     $('#loaihinh_stat').val('none');
     $('#loaitram_stat').val('1');
@@ -172,7 +172,7 @@ $("#statistic-btn").click(function() {
 });
 
 /*---- Quay trở lại Modal Statistic ----*/
-$("#return_modal_statistic").click(function() {
+$("#return_modal_statistic").click(function () {
     $("#statisticModal").modal("show");
     $("#statistic_resultModal").modal("hide");
     $(".navbar-collapse.in").collapse("hide");
@@ -185,7 +185,7 @@ var data_quantrac_selected = [];
 var checkboxed_para_arr = [];
 var checkboxed_paraName_arr = [];
 
-$("#statistic-result-btn").click(function() {
+$("#statistic-result-btn").click(function () {
     $("#statisticModal").modal("hide");
     /*** Xử lý JSON theo thông số ***/
     data_quantrac_selected = process_detail_parameter(data_quantrac_selected,
@@ -200,7 +200,7 @@ $("#statistic-result-btn").click(function() {
 
     /*** Onchange Type Chart ***/
     var item_stat_type = $("#filter_stat_typechart").val();
-    $("#filter_stat_typechart").change(function() {
+    $("#filter_stat_typechart").change(function () {
         $('#para_multiple').trigger("click");
         /*** Cần gán lại biến item_stat_type ***/
         item_stat_type = $("#filter_stat_typechart").val();
@@ -220,19 +220,19 @@ $("#statistic-result-btn").click(function() {
 
 /*---- Modal Search Stats Trạm ----*/
 /*** Onchange Option Stat Loại hình ==> Onchange Option Stat Quy chuẩn ***/
-$("#loaihinh_stat").change(function() {
+$("#loaihinh_stat").change(function () {
     var item_loaihinh_stat = $("#loaihinh_stat").val();
     $("#standardtype").find('option').remove();
     dom_standard_stat_option($("#loaihinh_stat").val())
 })
 
 /*** Onchange Option Stat Quy chuẩn ==> Reset input trạm quan trắc và thông số ***/
-$("#standardtype").change(function() {
+$("#standardtype").change(function () {
     $('#search_para').val('');
     $('#search_quantrac').val('');
 })
 
-$("#search_stats_tramqt").click(function() {
+$("#search_stats_tramqt").click(function () {
     /*** Remove các thẻ <li> có chứa các input checkbox ***/
     $("#para_list").find('li').remove();
     /*** Reset các Input ***/
@@ -258,7 +258,7 @@ $("#search_stats_tramqt").click(function() {
                 '&%20quychuan_stat=' + item_quychuan_stat;
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             if ($.fn.DataTable.isDataTable('#table_stat_stations')) {
                 $('#table_stat_stations').DataTable().ajax.url(url_list_stations).load();
             }
@@ -267,8 +267,8 @@ $("#search_stats_tramqt").click(function() {
                 var table_stat_stations = $('#table_stat_stations').DataTable({
                     ajax: url_list_stations,
                     columns: [
-                        { "data": "code" },
-                        { "data": "name" }
+                        {"data": "code"},
+                        {"data": "name"}
                     ],
                     order: [
                         [1, 'asc']
@@ -300,7 +300,7 @@ $("#search_stats_tramqt").click(function() {
                 table_stat_stations.buttons().container()
                     .appendTo('#table_stat_stations_wrapper .col-md-12:eq(0)');
 
-                $('#table_stat_stations tbody').on('click', 'tr', function() {
+                $('#table_stat_stations tbody').on('click', 'tr', function () {
                     $(this).toggleClass('selected');
                     /*** Chặn chọn lớn hơn 5 trạm ***/
                     if (table_stat_stations.rows('.selected').data().length > 5) {
@@ -310,7 +310,7 @@ $("#search_stats_tramqt").click(function() {
                 });
 
                 /*** Xử lý trong modal (phần Tìm trạm)***/
-                $('#station_multiple').click(function() {
+                $('#station_multiple').click(function () {
                     /*** Kiểm tra có hàng dữ liệu nào được chọn không ***/
                     if (table_stat_stations.rows('.selected').data().length == 0) {
                         data_quantrac_selected = [];
@@ -351,7 +351,7 @@ $("#search_stats_tramqt").click(function() {
 
                     if (data_quantrac_selected.length != 0) {
                         var spid_para_unit = []
-                            /*** Lấy danh sách checkbox cho Modal chọn thông số ***/
+                        /*** Lấy danh sách checkbox cho Modal chọn thông số ***/
                         for (var i_quantrac_select = 0; i_quantrac_select < data_quantrac_selected.length; i_quantrac_select++) {
                             var total_detail = data_quantrac_selected[i_quantrac_select].total_detail;
 
@@ -387,7 +387,7 @@ $("#search_stats_tramqt").click(function() {
                         }
                         /*** Tìm hợp lớn nhất của các thông số ***/
                         var spid_para_unit_unique = [];
-                        spid_para_unit.forEach(function(item) {
+                        spid_para_unit.forEach(function (item) {
                             var i = spid_para_unit_unique.findIndex(x => x.spidID == item.spidID);
                             if (i <= -1) {
                                 spid_para_unit_unique.push({
@@ -403,40 +403,77 @@ $("#search_stats_tramqt").click(function() {
                         for (var i_param_unique = 0; i_param_unique < spid_para_unit_unique.length; i_param_unique++) {
                             /*** DOM List checkbox Thông số ***/
                             if (spid_para_unit_unique[i_param_unique].unitName != '') {
-                                dom_input_checkbox_para += '<li>' +
-                                    '<div class="pretty p-svg p-curve">' +
-                                    '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
-                                    spid_para_unit_unique[i_param_unique].parameterName + "_" +
-                                    spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
-                                    '<div class="state p-success">' +
-                                    '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
-                                    '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
-                                    '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
-                                    '</svg>' +
-                                    '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                    ' (' + spid_para_unit_unique[i_param_unique].unitName + ') - ' +
-                                    '<b>' + spid_para_unit_unique[i_param_unique].purposeName + '</b>' +
-                                    '</label>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</li>' + '<br>';
+                                if (spid_para_unit_unique[i_param_unique].purposeName != '') {
+                                    dom_input_checkbox_para += '<li>' +
+                                        '<div class="pretty p-svg p-curve">' +
+                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                        '<div class="state p-success">' +
+                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                        '</svg>' +
+                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                        ' (' + spid_para_unit_unique[i_param_unique].unitName + ') - ' +
+                                        '<b style="word-break: break-word;">' + spid_para_unit_unique[i_param_unique].purposeName + '</b>' +
+                                        '</label>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</li>' + '<br>';
+                                } else {
+                                    dom_input_checkbox_para += '<li>' +
+                                        '<div class="pretty p-svg p-curve">' +
+                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                        '<div class="state p-success">' +
+                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                        '</svg>' +
+                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                        ' (' + spid_para_unit_unique[i_param_unique].unitName + ')' +
+                                        '</label>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</li>' + '<br>';
+                                }
                             } else {
-                                dom_input_checkbox_para += '<li>' +
-                                    '<div class="pretty p-svg p-curve">' +
-                                    '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
-                                    spid_para_unit_unique[i_param_unique].parameterName + "_" +
-                                    spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
-                                    '<div class="state p-success">' +
-                                    '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
-                                    '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
-                                    '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
-                                    '</svg>' +
-                                    '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                    ' - ' + '<b>' + spid_para_unit_unique[i_param_unique].purposeName + '</b>' +
-                                    '</label>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</li>' + '<br>';
+                                if (spid_para_unit_unique[i_param_unique].purposeName != '') {
+                                    dom_input_checkbox_para += '<li>' +
+                                        '<div class="pretty p-svg p-curve">' +
+                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                        '<div class="state p-success">' +
+                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                        '</svg>' +
+                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                        ' - ' + '<b style="word-break: break-word;">' + spid_para_unit_unique[i_param_unique].purposeName + '</b>' +
+                                        '</label>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</li>' + '<br>';
+                                } else {
+                                    dom_input_checkbox_para += '<li>' +
+                                        '<div class="pretty p-svg p-curve">' +
+                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                        '<div class="state p-success">' +
+                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                        '</svg>' +
+                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                        '</label>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</li>' + '<br>';
+                                }
                             }
                         }
                     }
@@ -444,11 +481,11 @@ $("#search_stats_tramqt").click(function() {
                     $('#para_tab').html(dom_input_checkbox_para);
 
                     /*** Checkbox All ***/
-                    $(".pretty #checked_all").click(function() {
+                    $(".pretty #checked_all").click(function () {
                         $(".pretty input[type=checkbox]").prop("checked", $(this).prop("checked"));
                     });
 
-                    $(".pretty input[type=checkbox]").click(function() {
+                    $(".pretty input[type=checkbox]").click(function () {
                         if (!$(this).prop("checked")) {
                             $("#checked_all").prop("checked", false);
                         }
@@ -456,7 +493,7 @@ $("#search_stats_tramqt").click(function() {
                 });
 
                 /*** Xử lý trong modal (phần Thông số) ***/
-                $('#para_multiple').click(function() {
+                $('#para_multiple').click(function () {
                     var para_selected = '';
                     var div_para = '';
                     /* var div_para = '<div class="form-group col-xs-3 col-md-3 option_stat_typechart">' +
@@ -468,11 +505,11 @@ $("#search_stats_tramqt").click(function() {
 
                     checkboxed_para_arr = [];
                     checkboxed_paraName_arr = [];
-                    $('#para_list input:checked').each(function() {
+                    $('#para_list input:checked').each(function () {
                         if ($(this).attr('id') != 'checked_all') {
                             checkboxed_para_arr.push($(this).attr('id'))
                             checkboxed_paraName_arr.push($(this).attr('name'))
-                                /*** DOM ở phần Input Para ***/
+                            /*** DOM ở phần Input Para ***/
                             var para_name = $(this).attr('name').split('_');
                             if (para_name[1] != '') {
                                 para_selected += para_name[0] + ' (' + para_name[1] + ')' + " ";
@@ -503,28 +540,28 @@ $("#search_stats_tramqt").click(function() {
 });
 
 /*---- Modal Search Checkbox Parameters ----*/
-$("#search_para").click(function() {
+$("#search_para").click(function () {
     $("#search_paraqtModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
 
-$("#list-btn").click(function() {
+$("#list-btn").click(function () {
     animateSidebar();
     return false;
 });
 
-$("#nav-btn").click(function() {
+$("#nav-btn").click(function () {
     $(".navbar-collapse").collapse("toggle");
     return false;
 });
 
-$("#sidebar-toggle-btn").click(function() {
+$("#sidebar-toggle-btn").click(function () {
     animateSidebar();
     return false;
 });
 
-$("#sidebar-hide-btn").click(function() {
+$("#sidebar-hide-btn").click(function () {
     animateSidebar();
     return false;
 });
@@ -532,7 +569,7 @@ $("#sidebar-hide-btn").click(function() {
 function animateSidebar() {
     $("#sidebar").animate({
         width: "toggle"
-    }, 350, function() {
+    }, 350, function () {
         map.invalidateSize();
     });
 }
@@ -546,32 +583,32 @@ function clearHighlight() {
 }
 
 /*---- Highlight search box text on click ----*/
-$("#searchbox").click(function() {
+$("#searchbox").click(function () {
     $(this).select();
 });
 
 /*---- Prevent hitting enter from refreshing the page ----*/
-$("#searchbox").keypress(function(e) {
+$("#searchbox").keypress(function (e) {
     if (e.which == 13) {
         e.preventDefault();
     }
 });
 
 /*---- Draggable Modal ----*/
-$(".modal-header").on("mousedown", function(mousedownEvt) {
+$(".modal-header").on("mousedown", function (mousedownEvt) {
     var $draggable = $(this);
     var x = mousedownEvt.pageX - $draggable.offset().left,
         y = mousedownEvt.pageY - $draggable.offset().top;
-    $("body").on("mousemove.draggable", function(mousemoveEvt) {
+    $("body").on("mousemove.draggable", function (mousemoveEvt) {
         $draggable.closest(".modal-dialog").offset({
             "left": mousemoveEvt.pageX - x,
             "top": mousemoveEvt.pageY - y
         });
     });
-    $("body").one("mouseup", function() {
+    $("body").one("mouseup", function () {
         $("body").off("mousemove.draggable");
     });
-    $draggable.closest(".modal").one("bs.modal.hide", function() {
+    $draggable.closest(".modal").one("bs.modal.hide", function () {
         $("body").off("mousemove.draggable");
     });
 });
@@ -582,7 +619,7 @@ $.ajax({
     url: "standardParam",
     async: false,
     dataType: 'json',
-    success: function(data) {
+    success: function (data) {
         total_std_param = data;
     }
 });

@@ -1261,7 +1261,11 @@
                 </div>
                 <div class="tab-content" id="statistic-result-TabsContent">
                     <div class="tab-pane fade active in" id="table_qt">
-                        <div class="form-group col-xs-12 col-md-12 table-scroll">
+                        <div class="form-group col-xs-12 col-md-12">
+                            <a href="#" id="exportExcel" class="btn btn-info" role="button">EXCEL</a>
+                            <a href="#" id="exportPDF" class="btn btn-info" role="button">PDF</a>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 table-scroll" id="tab_stat">
                             <table id="table_result_stat" class='table table-striped table-bordered table-condensed table-responsive'>
                                 <thead>
                                 <!-- DOM trạm và thuộc tính -->
@@ -1349,6 +1353,7 @@
     <script src="{{ asset('public/webapp/assets/js/option_customize/option_stats.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/option_customize/option_WQIAQI.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/option_customize/option_renderChart.js') }}"></script>
+    <script src="{{ asset('public/webapp/assets/js/tables_customize/export_infoToFile.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables_customize/feature_onChange.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables_customize/feature_infoBTD.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables_customize/feature_infoThreshold.js') }}"></script>

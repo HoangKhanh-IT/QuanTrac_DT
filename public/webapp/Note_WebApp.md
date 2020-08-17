@@ -193,6 +193,8 @@ https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-
 + Check all jquery: https://codepen.io/jackharner/pen/wZPeBw?editors=0010
 + Scroll ngang fixed left column: https://codepen.io/paulobrien/pen/LBrMxa?editors=0100
 + DOM onchange typechart ==> Lỗi khi thay đổi bằng 1 sự kiện khác (onchange select hoặc cancel rồi nhấn nút Thống kê lại) ==> DOM sai vị trí các thông số ==> thêm hàm `trigger()` gọi lại hàm xử lý cắt chuỗi JSON theo thông số và theo thời gian (done)
++ Convert HTML table to Excel file with JS: https://redstapler.co/convert-html-table-excel-file-javascript/
++ Convert HTML table to PDF file with JS: https://www.encodedna.com/javascript/convert-html-table-to-pdf-using-javascript-without-a-plugin.htm
 
 ### Tối ưu hóa đợt 1
 + Tìm các thư viện nặng nhưng không sử dụng đến để loại bỏ
