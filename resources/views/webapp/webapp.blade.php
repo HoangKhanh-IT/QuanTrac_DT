@@ -61,7 +61,7 @@
                 <img id="logo" src="{{ asset('public/webapp/assets/images/SoTNMT.png') }}" />
                 <div class="title">
                     <div id="titlefont1">SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG TỈNH TRÀ VINH</div>
-                    <div id="titlefont2">CHẤT LƯỢNG MÔI TRƯỜNG TRÀ VINH (THỬ NGHIỆM)</div>
+                    <div id="titlefont2">CHẤT LƯỢNG MÔI TRƯỜNG TỈNH TRÀ VINH (THỬ NGHIỆM)</div>
                 </div>
             </div>
             <div class="navbar-collapse collapse">
