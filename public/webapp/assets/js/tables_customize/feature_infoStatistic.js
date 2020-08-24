@@ -147,18 +147,7 @@ function result_chart_stats_stations(quantrac_selected, param_selected) {
     var arr_time_distinct = [];
     arr_time_distinct = create_distinct_timeArray(quantrac_selected)
 
-    /*** Tạo mảng DOM chart ***/
-    for (var j_distinct = 0; j_distinct < arr_time_distinct.length; j_distinct++) {
-        for (var i_domchart = 0; i_domchart < quantrac_selected.length; i_domchart++) {
-            k = quantrac_selected[i_domchart]['id_station'];
-
-            if (quantrac_selected[i_domchart].time == arr_time_distinct[j_distinct].time) {
-                arr_time_distinct[j_distinct][k] = quantrac_selected[i_domchart][param_selected];
-            }
-        }
-    }
-
-    /*** Tìm kiếm các phần tử chọn không có trong mảng
+    /*** Tìm kiếm các phần tử chọn không có trong mảng ***/
     var id_quantrac_selected = [];
     for (var j = 0; j < data_quantrac_selected.length; j++) {
         id_quantrac_selected.push(data_quantrac_selected[j].id);
@@ -171,7 +160,18 @@ function result_chart_stats_stations(quantrac_selected, param_selected) {
         for (var i_exprop = 0; i_exprop < arr_exprop.length; i_exprop++) {
             arr_time_distinct[i_checkID_chart][arr_exprop[i_exprop]] = null;
         }
-    } ***/
+    }
+
+    /*** Tạo mảng DOM chart ***/
+    for (var j_distinct = 0; j_distinct < arr_time_distinct.length; j_distinct++) {
+        for (var i_domchart = 0; i_domchart < quantrac_selected.length; i_domchart++) {
+            k = quantrac_selected[i_domchart]['id_station'];
+
+            if (quantrac_selected[i_domchart].time == arr_time_distinct[j_distinct].time) {
+                arr_time_distinct[j_distinct][k] = quantrac_selected[i_domchart][param_selected];
+            }
+        }
+    }
 
     return (arr_time_distinct);
 }
@@ -394,6 +394,7 @@ function render_stat_chart(typechart, data_quantrac_selected,
     var quantrac_selected = result_list_stations(data_quantrac_selected);
     for (var i = 0; i < checkboxed_para_arr.length; i++) {
         var data_stat_chart = result_chart_stats_stations(quantrac_selected, checkboxed_para_arr[i]);
+        console.log(data_stat_chart)
         var unit_chart;
         if (typechart == "filter_stat_column_chart") {
             unit_chart = checkboxed_paraName_arr[i].split('_');
