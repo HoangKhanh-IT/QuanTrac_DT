@@ -74,7 +74,7 @@ function choose_Time(time_option, val) {
     var floor_time = [];
     /*** Lấy dữ liệu khoảng giờ bắt đầu - kết thúc ***/
     $.ajax({
-        url: "assets/js/tables_customize/range_timeOption.json",
+        url: "public/webapp/assets/js/tables_customize/range_timeOption.json",
         async: false,
         dataType: 'json',
         success: function (time) {
