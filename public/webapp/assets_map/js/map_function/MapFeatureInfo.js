@@ -35,33 +35,43 @@ function Feature_info_modal(feat, layer) {
 
     /*** Thông tin trạm quan trắc ***/
     var content_info = "<table class='table table-striped table-bordered table-condensed table-responsive'>" +
-        "<tr><th class='blue'><i class='icon-home4' style='font-size: 14px; " +
+        "<tr><th class='blue'><i class='icon-home4' style='font-size: 14px; white-space: nowrap" +
         "margin-top: -2px; margin-left: 1px;'></i>" +
         "&nbsp;Tên trạm</th><td colspan='3' style='font-weight: bold; " +
-        "text-align: center'>Trạm " + feat.properties.name + "</td></tr>" +
-        "<tr>" +
-        "<tr><th class='brown'><i class='fa fa-building' style='font-size: 14px; " +
-        "margin-top: -2px; margin-left: 1px;'></i>" +
-        "&nbsp;Doanh nghiệp</th><td colspan='3' style='text-align: center'>" +
-        enterpriseName_qt + "</td></tr>" +
-        "<tr>" +
-        "<th class='brown'><i class='icon-lab' style='font-size: 16px; margin-top: -2px'></i>" +
+        "text-align: center'>Trạm " + feat.properties.name + "</td></tr>";
+
+    if (feat.properties.categoryID != 2 && feat.properties.categoryID != 4) {
+        content_info += "<tr><th class='brown'><i class='fa fa-building' style='font-size: 14px; white-space: nowrap" +
+            "margin-top: -2px; margin-left: 1px;'></i>" +
+            "&nbsp;Doanh nghiệp</th><td colspan='3' style='text-align: center'>" +
+            enterpriseName_qt + "</td></tr>"
+    }
+
+    content_info += "<th class='brown' style='white-space: nowrap'>" +
+        "<i class='icon-lab' style='font-size: 16px; margin-top: -2px'></i>" +
         "&nbsp;Loại hình</th><td>" + feat.properties.obstype_namelist + "</td>" +
-        "<th class='brown'><i class='icon-server' style='font-size: 16px; margin-top: -2px'></i>" +
+        "<th class='brown' style='white-space: nowrap'>" +
+        "<i class='icon-server' style='font-size: 16px; margin-top: -2px'></i>" +
         "&nbsp;Loại trạm</th><td>" + feat.properties.categoryName + "</td></tr>" +
-        "<tr><th class='brown'><i class='mdi mdi-location-enter' style='font-size: 16px; margin-top: -2px'></i>" +
+        "<tr><th class='brown' style='white-space: nowrap'>" +
+        "<i class='mdi mdi-location-enter' style='font-size: 16px; margin-top: -2px'></i>" +
         "&nbsp;Địa danh</th><td>" + feat.properties.locationName + "</td>" +
-        "<th class='brown'><i class='mdi mdi-map-legend' style='font-size: 16px; margin-top: -2px'></i>" +
+        "<th class='brown' style='white-space: nowrap'>" +
+        "<i class='mdi mdi-map-legend' style='font-size: 16px; margin-top: -2px'></i>" +
         "&nbsp;Loại địa danh</th><td>" + feat.properties.locationTypeName + "</td></tr>" +
-        "<tr><th class='brown'><i class='icon-location3' style='font-size: 16px; margin-top: -2px'></i>" +
+        "<tr><th class='brown' style='white-space: nowrap'>" +
+        "<i class='icon-location3' style='font-size: 16px; margin-top: -2px'></i>" +
         "&nbsp;Địa điểm</th><td>" + feat.properties.districtName + "</td>" +
-        "<th class='brown'><i class='icon-office' style='font-size: 14px; " +
+        "<th class='brown' style='white-space: nowrap'>" +
+        "<i class='icon-office' style='font-size: 14px; " +
         "margin-top: -2px; margin-left: 1px;'></i>" +
         "&nbsp;Tổ chức</th><td>" + organizationName_qt + "</td></tr>" +
-        "<tr><th class='brown'><i class='icon-watch2' style='font-size: 14px; " +
+        "<tr><th class='brown' style='white-space: nowrap'>" +
+        "<i class='icon-watch2' style='font-size: 14px; " +
         "margin-top: -2px; margin-left: 1px;'></i>" +
         "&nbsp;Thành lập</th><td>" + establishdate_qt + "</td>" +
-        "<th class='brown'><i class='icon-connection' style='font-size: 12px; margin-top: -2px'></i>" +
+        "<th class='brown' style='white-space: nowrap'>" +
+        "<i class='icon-connection' style='font-size: 12px; margin-top: -2px'></i>" +
         active_qt +
         "<table>";
 
@@ -69,7 +79,7 @@ function Feature_info_modal(feat, layer) {
         click: function (e) {
             if (feat.properties.categoryName == "Tự động"
                 || feat.properties.categoryName == "Doanh nghiệp") {
-                $(".feature-title").html("Trạm " +  feat.properties.name);
+                $(".feature-title").html("Trạm " + feat.properties.name);
                 $(".info_qt").html(content_info);
 
                 var detail_chart_1h, detail_chart_8h, detail_chart_24h;
@@ -167,7 +177,7 @@ function Feature_info_modal(feat, layer) {
             } else {
                 /*** Get Staion ID ***/
                 station_id = feat.properties.id;
-                $(".feature-title").html("Trạm " +  feat.properties.name);
+                $(".feature-title").html("Trạm " + feat.properties.name);
                 $(".info_qt").html(content_info);
 
                 $("#featureModal-btd").modal("show");

@@ -40,6 +40,11 @@ $("#login-btn").click(function () {
 
 /*---- Modal Upload Files ----*/
 $("#upload-btn").click(function () {
+    /*** Reset Upload files ***/
+    $(".success_upload").css("display", "none");
+    $(".upload-error").css("display", "none");
+    $("#excelfile").val('');
+
     $("#uploadFileModal").modal("show");
     $(".navbar-collapse.in").collapse("hide");
     return false;
@@ -173,6 +178,12 @@ $("#statistic-btn").click(function () {
 
 /*---- Quay trở lại Modal Statistic ----*/
 $("#return_modal_statistic").click(function () {
+    /*** Remove các thẻ <li> có chứa các input checkbox ***/
+    $("#para_list").find('li').remove();
+    /*** Reset các Input (để reset lại danh sách, phục vụ chức năng tính toán thống kê ***/
+    $('#search_para').val('');
+    $('#search_quantrac').val('');
+
     $("#statisticModal").modal("show");
     $("#statistic_resultModal").modal("hide");
     $(".navbar-collapse.in").collapse("hide");
@@ -191,10 +202,10 @@ $("#statistic-result-btn").click(function () {
     data_quantrac_selected = process_detail_parameter(data_quantrac_selected,
         checkboxed_para_arr)
 
-    /*** DOM result Chart Stat ***/
     /*** Dùng trigger() để load lại dữ liệu - tránh trường hợp thay đổi
      thứ tự thông số được chọn ***/
     $('#para_multiple').trigger("click");
+    /*** DOM result Chart Stat ***/
     render_stat_chart($("#filter_stat_typechart").val(), data_quantrac_selected,
         checkboxed_para_arr, checkboxed_paraName_arr);
 
@@ -302,9 +313,9 @@ $("#search_stats_tramqt").click(function () {
 
                 $('#table_stat_stations tbody').on('click', 'tr', function () {
                     $(this).toggleClass('selected');
-                    /*** Chặn chọn lớn hơn 5 trạm ***/
-                    if (table_stat_stations.rows('.selected').data().length > 5) {
-                        alert("Vui lòng chỉ chọn tối đa 5 trạm");
+                    /*** Chặn chọn lớn hơn 3 trạm ***/
+                    if (table_stat_stations.rows('.selected').data().length > 3) {
+                        alert("Vui lòng chỉ chọn tối đa 3 trạm");
                         $(this).removeClass('selected');
                     }
                 });
@@ -415,11 +426,11 @@ $("#search_stats_tramqt").click(function () {
                                         '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
                                         '</svg>' +
                                         '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                        ' (' + spid_para_unit_unique[i_param_unique].unitName + ') - ' +
-                                        '<b style="word-break: break-word;">' + spid_para_unit_unique[i_param_unique].purposeName + '</b>' +
+                                        ' (' + spid_para_unit_unique[i_param_unique].unitName + ')' +
                                         '</label>' +
                                         '</div>' +
                                         '</div>' +
+                                        '<b>(Mục đích: ' + spid_para_unit_unique[i_param_unique].purposeName + ')</b>' +
                                         '</li>' + '<br>';
                                 } else {
                                     dom_input_checkbox_para += '<li>' +
@@ -452,10 +463,10 @@ $("#search_stats_tramqt").click(function () {
                                         '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
                                         '</svg>' +
                                         '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                        ' - ' + '<b style="word-break: break-word;">' + spid_para_unit_unique[i_param_unique].purposeName + '</b>' +
                                         '</label>' +
                                         '</div>' +
                                         '</div>' +
+                                        '<b>(Mục đích: ' + spid_para_unit_unique[i_param_unique].purposeName + ' )</b>' +
                                         '</li>' + '<br>';
                                 } else {
                                     dom_input_checkbox_para += '<li>' +
@@ -623,6 +634,140 @@ $.ajax({
         total_std_param = data;
     }
 });
+
+/*---- Import Excel ----*/
+function ProcessExcel() {
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx)$/;
+    /* Checks whether the file is a valid excel file */
+    if (regex.test($("#excelfile").val().toLowerCase())) {
+        /* Checks whether the browser supports HTML5 */
+        if (typeof (FileReader) != "undefined") {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = new Uint8Array(e.target.result);
+                var workbook = XLSX.read(data, {
+                    type: 'array',
+                    cellDates: true,
+                    cellNF: false,
+                    cellText: false
+                });
+                /* Gets all the sheetnames of excel in to a variable */
+                var sheet_name_list = workbook.SheetNames;
+
+                /* Iterate through all sheets */
+                sheet_name_list.forEach(function (y) {
+                    /* Convert the cell value to Json */
+                    var exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y], {
+                        raw: false,
+                        range: 4,
+                        defval: "",
+                        dateNF: "YYYY-MM-DD"
+                    });
+
+                    $.post("app/Http/Controllers/Import_Excel.php", {
+                        importExcel: ProcessJSON(exceljson)
+                    }, function(){
+                        console.log("Import Excel Success");
+                        $(".upload-success").css("display", "block");
+                        $(".upload-error").css("display", "none");
+                        $("#success_upload").text("Chuyển dữ liệu thành công");
+                    });
+                });
+            }
+            /* If excel file is .xlsx extension than creates a Array Buffer from excel */
+            reader.readAsArrayBuffer($("#excelfile")[0].files[0]);
+        } else {
+            $(".upload-error").css("display", "block");
+            $(".upload-success").css("display", "none");
+            $("#error_upload").text("Trình duyệt không hỗ trợ HTML5");
+        }
+    } else {
+        $(".upload-error").css("display", "block");
+        $(".upload-success").css("display", "none");
+        $("#error_upload").text("Định dạng lỗi! Vui lòng chọn định dạng xlsx để upload");
+    }
+}
+
+function ProcessJSON(exceljson) {
+    var result = [];
+    var select_purpose = $('#purposeUpload').val();
+    var select_standard = $('#standardUpload').val();
+
+    for (var k = 0; k < exceljson.length; k++) {
+        var object_keys = Object.keys(exceljson[k]);
+
+        var detail = {};
+        var data_para = [];
+        for (var i = 0; i < object_keys.length; i++) {
+            for (var j = 0; j < total_std_param.length; j++) {
+                if (object_keys[i] == total_std_param[j].parameterCode &&
+                    total_std_param[j].purposeid == select_purpose &&
+                    total_std_param[j].standardID == select_standard) {
+                    var object_para = {}
+
+                    /*** Tạo Object Detail cho từng Para ***/
+                    object_para[total_std_param[j].id] = {};
+                    /*** Kiểm tra có value với thông số đó hay không, nếu không có thì để Null ***/
+                    if (isNaN(parseFloat(exceljson[k][object_keys[i]])) == false) {
+                        object_para[total_std_param[j].id].v = parseFloat(exceljson[k][object_keys[i]]);
+                        /*** Kiểm tra vượt ngưỡng ***/
+                        if (parseFloat(exceljson[k][object_keys[i]]) >= parseFloat(total_std_param[j].min_value) &&
+                            parseFloat(exceljson[k][object_keys[i]]) <= parseFloat(total_std_param[j].max_value)) {
+                            object_para[total_std_param[j].id].inlimit = "N"
+                        } else {
+                            object_para[total_std_param[j].id].inlimit = "Y"
+                        }
+                    } else {
+                        object_para[total_std_param[j].id].v = null;
+                        object_para[total_std_param[j].id].inlimit = "N"
+                    }
+
+                    data_para.push(JSON.stringify(object_para))
+                }
+            }
+        }
+
+        /*** Xử lý Time and Date ***/
+        var time = exceljson[k]['Time (Sample_BTD)'];
+        if (time == '') {
+            time = "00:00:00";
+        }
+
+        var date_sampling = exceljson[k]['dateOfSampling (Sample_BTD)'];
+        var string_date_sampling = date_sampling.split("-");
+        var date_sampling_format = string_date_sampling[2] + "/" +
+            string_date_sampling[1] + "/" + string_date_sampling[0]
+
+        var date_analysis = exceljson[k]['dateOfAnalysis (Sample_BTD)'];
+        var string_date_analysis = date_sampling.split("-");
+        var date_analysis_format = string_date_analysis[2] + "/" +
+            string_date_analysis[1] + "/" + string_date_analysis[0]
+
+        if (date_analysis == "") {
+            detail.time = time + ", " + date_sampling_format;
+        } else {
+            detail.time = time + ", " + date_analysis_format;
+        }
+
+        detail.data = data_para;
+
+        /*** Đẩy các Items ***/
+        result.push({
+            "code_station": exceljson[k]['Trạm quan trắc'],
+            "symbol": exceljson[k]['Trạm quan trắc'],
+            "time": time,
+            "dateOfSampling": exceljson[k]['dateOfSampling (Sample_BTD)'],
+            "dateOfAnalysis": exceljson[k]['dateOfAnalysis (Sample_BTD)'] == ""
+                ? exceljson[k]['dateOfSampling (Sample_BTD)'] : exceljson[k]['dateOfAnalysis (Sample_BTD)'],
+            "samplingLocations": exceljson[k]['samplingLocations (Sample_BTD)'],
+            "weather": exceljson[k]['Weather (Sample_BTD)'],
+            "idExcel": exceljson[k]['IdSTT'],
+            "detail_data": detail
+        })
+    }
+
+    return result
+}
 
 /*---- Datables Children DOM ----*/
 /*** `d` is the original data object for the row ***/

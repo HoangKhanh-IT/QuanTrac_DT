@@ -196,6 +196,19 @@ https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-
 + Convert HTML table to Excel file with JS: https://redstapler.co/convert-html-table-excel-file-javascript/
 + Convert HTML table to PDF file with JS: https://www.encodedna.com/javascript/convert-html-table-to-pdf-using-javascript-without-a-plugin.htm
 
+### Xử lý DOM dữ liệu thống kê (tìm Trung bình, Min, Max)
++ Luồng xử lý: Dựng hàm tính trung bình theo dạng gộp Object Key, tạo mảng Array Range time_end => Đối thời gian trong từng record
+từ "giờ" ra "phút" sau đó chia cho khoảng thời gian mà người dùng chọn
++ Hàm tính trung bình theo dạng gộp Object Key: https://stackoverflow.com/questions/59670493/javascript-how-to-average-json-array-based-on-specific-keys-fields
++ Hàm kiểm tra gộp theo Object Key: https://stackoverflow.com/questions/34523003/group-by-array-and-add-field-and-sub-array-in-main-array/34523275 (optional)
++ Config hàm gộp theo Object key để thành tạo thành mảng ==> Sau đó dùng vòng lặp trỏ vào mảng đó tìm Min và Max
+
+### Xử lý Import Excel Bán tự động
++ Sử dụng thư viện SheetJS: https://github.com/SheetJS/sheetjs
++ Format Date: https://lifesaver.codes/answer/format-date-question
++ Thêm `type="button"` để không refresh trang
++ Thay đổi định dạng từ Object JSON thành chuỗi để đưa vào DB không bị thay đổi nội dung
+
 ### Tối ưu hóa đợt 1
 + Tìm các thư viện nặng nhưng không sử dụng đến để loại bỏ
 + Tối ưu hóa thuật toán fitbounds (xem ở phần "Note xử lý onChange in map using Select Option/Checkbox Input")

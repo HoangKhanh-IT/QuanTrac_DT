@@ -73,7 +73,7 @@
                     </li>
                     <li>
                         <a data-target=".navbar-collapse.in" data-toggle="collapse" href="#" id="login-btn">
-                            <i class="fa fa-user blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Nguyễn Đức Lâm
+                            <i class="fa fa-user blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Admin
                         </a>
                     </li>
                 </ul>
@@ -700,51 +700,6 @@
         </div>
     </div>
 
-    <!-- Modal Upload File -->
-    <div class="modal fade" id="uploadFileModal" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-uploadFile">
-            <div class="modal-content" style="border-radius: 0">
-                <div class="modal-header">
-                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
-                    <h4 class="modal-title blue" style="font-weight: bold; text-transform: uppercase">
-                        <i class="blue" style="font-size: 16px; margin-top: -2px"></i> &nbsp;Upload File
-                    </h4>
-                </div>
-                <div class="modal-body modal-body-uploadFile">
-                    <form method="post" enctype="multipart/form-data"
-                          action="{{ url('/') }}">
-                        {{ csrf_field() }}
-                        <fieldset>
-                            <div class="form-group">
-                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
-                                    <i class="icon-file-spreadsheet blue" style="font-size: 16px; margin-top: -2px"></i>
-                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Select File</span>
-                                </div>
-                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
-                                    <input type="file" name="select_file" id="file">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
-                                    <i class="icon-file-excel blue" style="font-size: 16px; margin-top: -2px"></i>
-                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Upload Files</span>
-                                </div>
-                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
-                                    <input type="submit" name="upload"
-                                           class="form-control" id="" value="Upload">
-                                </div>
-                            </div>
-                            <a href="{{ url('/public/webapp/assets/text/test.xlsx') }}">Download</a>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal danh sách Vượt ngưỡng -->
     <div class="modal fade" id="thresholdModal" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-threshold">
@@ -913,6 +868,83 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal" type="button" id="WQI-AQI-return">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Upload File -->
+    <div class="modal fade" id="uploadFileModal" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-uploadFile">
+            <div class="modal-content" style="border-radius: 0">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title blue" style="font-weight: bold; text-transform: uppercase">
+                        <i class="blue" style="font-size: 16px; margin-top: -2px"></i> &nbsp;Chuyển dữ liệu bán tự động
+                    </h4>
+                </div>
+                <div class="modal-body modal-body-uploadFile">
+                    <form>
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                                    <i class="icon-yelp blue" style="font-size: 16px; margin-top: -2px"></i>
+                                    <span for="standardUpload" class="black" style="margin-left: 1px">&nbsp;Quy chuẩn</span>
+                                </div>
+                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
+                                    <select class="form-control" id="standardUpload">
+                                        <!-- DOM từ DB vào -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                                    <i class="icon-certificate blue" style="font-size: 16px; margin-top: -2px"></i>
+                                    <span for="purposeUpload" class="black" style="margin-left: 1px">&nbsp;Mục đích sử dụng</span>
+                                </div>
+                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
+                                    <select class="form-control" id="purposeUpload">
+                                        <!-- DOM từ DB vào -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                                    <i class="icon-file-spreadsheet blue" style="font-size: 16px; margin-top: -2px"></i>
+                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Select File</span>
+                                </div>
+                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
+                                    <input type="file" id="excelfile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                                    <i class="icon-file-excel blue" style="font-size: 16px; margin-top: -2px"></i>
+                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Upload Files</span>
+                                </div>
+                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
+                                    <button type="button" name="upload" onClick="ProcessExcel()"
+                                            class="form-control btn btn-info">Chuyển dữ liệu bán tự động</button>
+                                </div>
+                            </div>
+                            <!-- DOM kết quả thẻ div Search Error và Search Success -->
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-12 upload-error" style="text-align: center; display: none">
+                                    <i class="icon-alert" style="color: #FF0000; font-size: 16px; margin-top: -1px"></i>
+                                    <span id="error_upload" style="color: #FF0000"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-12 upload-success" style="text-align: center; display: none">
+                                    <i class="icon-check" style="color: #008000; font-size: 20px; margin-top: -1px"></i>
+                                    <span id="success_upload" style="color: #008000"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
                 </div>
             </div>
         </div>
@@ -1125,12 +1157,12 @@
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
                                     <select class="form-control" id="stat_time_display">
-                                        <option selected>15 phút</option>
-                                        <option>30 phút</option>
-                                        <option>1 giờ</option>
-                                        <option>8 giờ</option>
-                                        <option>12 giờ</option>
-                                        <option>24 giờ</option>
+                                        <option value="15" selected>15 phút</option>
+                                        <option value="30">30 phút</option>
+                                        <option value="60">1 giờ</option>
+                                        <option value="480">8 giờ</option>
+                                        <option value="720">12 giờ</option>
+                                        <option value="1440">24 giờ</option>
                                     </select>
                                 </div>
                             </div>
@@ -1345,6 +1377,9 @@
     <script src="{{ asset('public/webapp/vendor/chart/AmChart/lang/vi_VN.js') }}"></script>
     <script src="{{ asset('public/webapp/vendor/chart/AmChart/themes/animated.js') }}"></script>
 
+    <!-- Import Excel -->
+    <script src="{{ asset('public/webapp/assets/js/import_excel/xlsx.full.min.js') }}"></script>
+
     <!-- Main JS Custom -->
     <script src="{{ asset('public/webapp/assets/js/config.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/main.js') }}"></script>
@@ -1353,6 +1388,7 @@
     <script src="{{ asset('public/webapp/assets/js/option_customize/option_stats.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/option_customize/option_WQIAQI.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/option_customize/option_renderChart.js') }}"></script>
+    <script src="{{ asset('public/webapp/assets/js/option_customize/option_uploadFiles.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables_customize/export_infoToFile.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables_customize/feature_onChange.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables_customize/feature_infoBTD.js') }}"></script>

@@ -36,13 +36,14 @@ Route::get('obstyles', 'Call_obstyles_option@index');
 Route::get('loctypes', 'Call_loctype_option@index');
 Route::get('locations', 'Call_location_option@index');
 
-/***-- Nhóm Route phần DOM kết quả thống kê, Chart, Table và các option thống kê --***/
+/***-- Nhóm Route phần DOM kết quả thống kê, Chart, Table và các option thống kê, upload Excel --***/
 Route::get('statStation', 'Call_stat_station@index');
 Route::get('obstylesStat', 'Call_obstyles_stat_option@index');
 Route::get('standardStat', 'Call_standard@index');
+Route::get('purposeExcel', 'Call_purpose@index');
 
 /***-- Nhóm Route phần DOM Upload Files
-Route::post('/import', 'Call_ImportExcel@import'); --***/
+Route::get('importExcel', 'Call_import_excel@index'); --***/
 
 /***-- Nhóm Route phần DOM danh sách Vượt Ngưỡng --***/
 Route::get('thresholdStation', 'Call_threshold_station@index');

@@ -112,6 +112,7 @@ function render_linechart_quantrac(div_id, data_chart, name_title, key, data) {
 
 /*---- Group Chart của nhiều trạm quan trắc ----*/
 function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, key) {
+    am4core.options.onlyShowOnViewport = true;
     am4core.useTheme(am4themes_animated);
     am4core.ready(function () {
 
@@ -138,7 +139,9 @@ function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, 
         dateAxis.tooltipDateFormat = "HH:mm:ss, dd/MM/yyyy";
 
         var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis.title.text = "(" + unit + ")";
+        if (unit != "") {
+            valueAxis.title.text = "(" + unit + ")";
+        }
 
         function createSeries(field, name, color) {
             var series = chart.series.push(new am4charts.ColumnSeries());
@@ -204,6 +207,7 @@ function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, 
 }
 
 function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, key) {
+    am4core.options.onlyShowOnViewport = true;
     am4core.useTheme(am4themes_animated);
     am4core.ready(function () {
 
@@ -230,7 +234,9 @@ function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, ke
         dateAxis.tooltipDateFormat = "HH:mm:ss, dd/MM/yyyy";
 
         var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis.title.text = "(" + unit + ")";
+        if (unit != "") {
+            valueAxis.title.text = "(" + unit + ")";
+        }
 
         function createSeries(field, name, color, bullet) {
             var series = chart.series.push(new am4charts.LineSeries());

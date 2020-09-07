@@ -10,12 +10,13 @@ class Call_standard_param extends Controller
     //
     function index()
     {
-        $result = DB::select('SELECT "standParam".*, 
-                                "unit".name "UnitName", 
-                                "param".name "paramName", 
+        $result = DB::select('SELECT "standParam".*,
+                                "unit".name "UnitName",
+                                "param".name "paramName",
+                                "param".code "paramCode",
                                 "purpose".name "purposeName",
                                 "stand".name "standName"
-                                
+
                                 FROM "StandardParameter" "standParam"
                                 LEFT JOIN "Unit" "unit" ON "unit".id = "standParam"."unitid"
                                 LEFT JOIN "Purpose" "purpose" ON "purpose".id = "standParam"."purposeid"
@@ -27,17 +28,18 @@ class Call_standard_param extends Controller
         foreach ($original_data as $key => $value) {
             $option[] = array(
                 'id' => $value['id'],
-            'standardID' => $value['standardid'],
-            'standardName' => $value['standName'],
-            'parameterid' => $value['parameterid'],
-            'parameterName' => $value['paramName'],
-            'unitid' => $value['unitid'],
-            'unitName' => $value['UnitName'],
-            'purposeid' => $value['purposeid'],
-            'purposeName' => $value['purposeName'],
-            'min_value' => $value['minvalue'],
-            'max_value' => $value['maxvalue'],
-            'analysismethod' => $value['analysismethod']
+                'standardID' => $value['standardid'],
+                'standardName' => $value['standName'],
+                'parameterid' => $value['parameterid'],
+                'parameterCode' => $value['paramCode'],
+                'parameterName' => $value['paramName'],
+                'unitid' => $value['unitid'],
+                'unitName' => $value['UnitName'],
+                'purposeid' => $value['purposeid'],
+                'purposeName' => $value['purposeName'],
+                'min_value' => $value['minvalue'],
+                'max_value' => $value['maxvalue'],
+                'analysismethod' => $value['analysismethod']
         );
     }
 

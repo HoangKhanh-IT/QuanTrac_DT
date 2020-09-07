@@ -70,40 +70,225 @@ function convert_dateInput_to_dateJS(date, string_time) {
     return new Date(string_day[2] + "/" + string_day[1] + "/" + string_day[0] + string_time);
 }
 
+function choose_Time(time_option, val) {
+    var floor_time = [];
+    /*** Lấy dữ liệu khoảng giờ bắt đầu - kết thúc ***/
+    $.ajax({
+        url: "assets/js/tables_customize/range_timeOption.json",
+        async: false,
+        dataType: 'json',
+        success: function (time) {
+            floor_time.push({
+                "floor_start": time[time_option][val].start,
+                "floor_end": time[time_option][val].end
+            })
+        }
+    });
+
+    return floor_time;
+}
+
+function getAverages(array, groupKeys, averageKeys) {
+    var groups = {},
+        result = [];
+
+    array.forEach(o => {
+        var key = groupKeys.map(k => o[k]).join('|'),
+            group = groups[key];
+
+        if (!group) {
+            groups[key] = {count: 0, payload: {}};
+            group = groups[key];
+            averageKeys.forEach(k => group[k] = 0);
+            groupKeys.forEach(k => group.payload[k] = o[k]);
+            result.push(group.payload);
+        }
+        groups[key].count++;
+        averageKeys.forEach(k => group.payload[k] = (group[k] += o[k]) / group.count);
+    })
+    return result;
+}
+
+function getMinMax(array, groupKeys, maxminKeys) {
+    var groups = {},
+        result = [];
+
+    array.forEach(o => {
+        var key = groupKeys.map(k => o[k]).join('|'),
+            group = groups[key];
+
+        if (!group) {
+            groups[key] = {count: 0, payload: {}};
+            group = groups[key];
+            maxminKeys.forEach(k => group[k] = 0);
+            groupKeys.forEach(k => group.payload[k] = o[k]);
+            result.push(group.payload);
+        }
+        groups[key].count++;
+        maxminKeys.forEach(k => group.payload[k] = (group[k] += o[k] + ",").split(","));
+    })
+    return result;
+}
+
+/*---- Hàm gom các phần tử trong mảng theo Object key
+Object.defineProperty(Array.prototype, 'group', {
+    enumerable: false,
+    value: function (key) {
+        var map = {};
+        this.forEach(function (e) {
+            var k = key(e);
+            map[k] = map[k] || [];
+            map[k].push(e);
+        });
+        return Object.keys(map).map(function (k) {
+            return {key: k, data: map[k]};
+        });
+    }
+}); ----*/
+
 /*---- Trả danh sách thống kê các trạm quan trắc theo số thông số được check ----*/
 function result_list_stations(quantrac_selected) {
     var fromDate_stat = convert_dateInput_to_dateJS($("#FromDate_stat input").val(), " 00:00:00");
     var toDate_stat = convert_dateInput_to_dateJS($("#ToDate_stat input").val(), " 23:59:59");
-
     var new_quantrac_selected = quantrac_selected;
-    var new_quantrac_selected_detail = [];
 
-    for (var i = 0; i < new_quantrac_selected.length; i++) {
-        total_detail = new_quantrac_selected[i].total_detail;
-        for (var j = 0; j < total_detail.length; j++) {
-            /*** Thêm thông tin trạm ***/
-            total_detail[j]['id_station'] = quantrac_selected[i].id;
-            total_detail[j]['code_station'] = quantrac_selected[i].code;
-            total_detail[j]['name_station'] = quantrac_selected[i].name;
+    /*---- Xử lý JSON average, min, max ----*/
+    if ($("#statisticby").val() == "all_stat") {
+        var new_quantrac_selected_detail = [];
 
-            if (total_detail[j]['time_js'].getTime() >= fromDate_stat.getTime() &&
-                total_detail[j]['time_js'].getTime() <= toDate_stat.getTime()) {
-                new_quantrac_selected_detail.push(total_detail[j])
+        for (var i = 0; i < new_quantrac_selected.length; i++) {
+            total_detail = new_quantrac_selected[i].total_detail;
+            for (var j = 0; j < total_detail.length; j++) {
+                /*** Thêm thông tin trạm ***/
+                total_detail[j]['id_station'] = quantrac_selected[i].id;
+                total_detail[j]['code_station'] = quantrac_selected[i].code;
+                total_detail[j]['name_station'] = quantrac_selected[i].name;
+
+                if (total_detail[j]['time_js'].getTime() >= fromDate_stat.getTime() &&
+                    total_detail[j]['time_js'].getTime() <= toDate_stat.getTime()) {
+                    new_quantrac_selected_detail.push(total_detail[j])
+                }
             }
         }
+        sortResults(new_quantrac_selected_detail, 'time_js', true);
+        return new_quantrac_selected_detail;
+
+    } else {
+        /*** Tạo mảng kết quả cuối cùng ***/
+        var quantrac_haveStartEnd = [];
+
+        for (var i_aver = 0; i_aver < new_quantrac_selected.length; i_aver++) {
+            total_tb = new_quantrac_selected[i_aver].total_detail;
+            for (var j_aver = 0; j_aver < total_tb.length; j_aver++) {
+
+                if (total_tb[j_aver]['time_js'].getTime() >= fromDate_stat.getTime() &&
+                    total_tb[j_aver]['time_js'].getTime() <= toDate_stat.getTime()) {
+
+                    /*** Thêm thông tin trạm ***/
+                    total_tb[j_aver]['id_station'] = quantrac_selected[i_aver].id;
+                    total_tb[j_aver]['code_station'] = quantrac_selected[i_aver].code;
+                    total_tb[j_aver]['name_station'] = quantrac_selected[i_aver].name;
+
+                    var getHours = total_tb[j_aver]['time_js'].getHours();
+                    var getMinutes = total_tb[j_aver]['time_js'].getMinutes();
+
+                    /*** Tìm thứ tự khoảng thời gian ***/
+                    var rangeTime_index = Math.floor((getHours * 60 + getMinutes) /
+                        parseInt($('#stat_time_display').val()));
+
+                    /*---- Hours 1 giờ, 8 giờ, 12 giờ và 24 giờ ----*/
+                    var arr_floor_time = choose_Time($('#stat_time_display').val(), rangeTime_index);
+
+                    total_tb[j_aver]['time_start'] = arr_floor_time[0].floor_start +
+                        ", " + total_tb[j_aver]['time'].split(", ")[1]
+                    total_tb[j_aver]['time_end'] = arr_floor_time[0].floor_end +
+                        ", " + total_tb[j_aver]['time'].split(", ")[1]
+
+                    total_tb[j_aver]['time'] = total_tb[j_aver]['time_start'];
+
+                    /*** Chuyển Start Time sang time mặc định trong JS ***/
+                    var string_day = total_tb[j_aver]['time_start'].split(", ")[1].split("/");
+
+                    var data_day_time = new Date(string_day[2] + "/" +
+                        string_day[1] + "/" + string_day[0] +
+                        " " + arr_floor_time[0].floor_start);
+
+                    total_tb[j_aver]['time_js'] = data_day_time;
+
+                    quantrac_haveStartEnd.push(total_tb[j_aver]);
+                }
+            }
+        }
+
+        /*---- Tính trung bình ----*/
+        if ($("#statisticby").val() == "average_stat") {
+            result_average = [];
+            result_average = getAverages(quantrac_haveStartEnd,
+                ["time", "time_end", "time_js", "id_station", "name_station"],
+                checkboxed_para_arr)
+
+            sortResults(result_average, 'time_js', true);
+            return result_average;
+        }
+
+        /*---- Tìm Max ----*/
+        if ($("#statisticby").val() == "max_stat") {
+            result_max = [];
+            result_max = getMinMax(quantrac_haveStartEnd,
+                ["time", "time_end", "time_js", "id_station", "name_station"],
+                checkboxed_para_arr)
+
+            sortResults(result_max, 'time_js', true);
+
+            for (var i_max = 0; i_max < result_max.length; i_max++) {
+                for (var j_max = 0; j_max < checkboxed_para_arr.length; j_max++) {
+                    var maxArr = result_max[i_max][checkboxed_para_arr[j_max]];
+                    let max_val = -Infinity;
+                    maxArr.forEach(element => {
+                        if (parseFloat(element) > max_val)
+                            max_val = parseFloat(element)
+                    })
+                    result_max[i_max][checkboxed_para_arr[j_max]] = max_val;
+                }
+            }
+
+            return result_max;
+        }
+
+        /*---- Tìm Min----*/
+        if ($("#statisticby").val() == "min_stat") {
+            result_min = [];
+            result_min = getMinMax(quantrac_haveStartEnd,
+                ["time", "time_end", "time_js", "id_station", "name_station"],
+                checkboxed_para_arr)
+
+            sortResults(result_min, 'time_js', true);
+
+            for (var i_min = 0; i_min < result_min.length; i_min++) {
+                for (var j_min = 0; j_min < checkboxed_para_arr.length; j_min++) {
+                    var minArr = result_min[i_min][checkboxed_para_arr[j_min]];
+                    let min_val = Infinity;
+                    minArr.forEach(element => {
+                        if (parseFloat(element) < min_val)
+                            min_val = parseFloat(element)
+                    })
+                    result_min[i_min][checkboxed_para_arr[j_min]] = min_val;
+                }
+            }
+
+            return result_min;
+        }
     }
-    sortResults(new_quantrac_selected_detail, 'time_js', true);
-    return new_quantrac_selected_detail;
 }
 
 function compare_2array(arr1, arr2) {
     var diff = {};
-    diff.arr1 = arr1.filter(function(value) {
+    diff.arr1 = arr1.filter(function (value) {
         if (arr2.indexOf(value) === -1) {
             return value;
         }
     });
-    diff.arr2 = arr2.filter(function(value) {
+    diff.arr2 = arr2.filter(function (value) {
         if (arr1.indexOf(value) === -1) {
             return value;
         }
@@ -239,7 +424,7 @@ function process_stat_datatable(data_quantrac_selected, checkboxed_para_arr) {
         for (var k = 0; k < restruct_datatable.length; k++) {
             if (k + 1 < restruct_datatable.length) {
                 if (restruct_datatable[k].time == restruct_datatable[k + 1].time) {
-                    arr = {...arr, ...restruct_datatable[k + 1] };
+                    arr = {...arr, ...restruct_datatable[k + 1]};
                     if (Object.keys(arr).length == length_object_station) {
                         result_dom_datatable.push(arr);
                     }
@@ -268,7 +453,7 @@ function DOM_column_stat() {
         }
     }
 
-    arr_col = arr_col.filter(function(k_data) {
+    arr_col = arr_col.filter(function (k_data) {
         var key = k_data.data + '|' + k_data.mData;
         if (!this[key]) {
             this[key] = true;
@@ -278,7 +463,7 @@ function DOM_column_stat() {
 
     sortResults(arr_col, 'data', 'true');
     /*** Thêm cột dữ liệu thời gian ở trước data trả về ***/
-    arr_col.unshift({ "data": "time_js" })
+    arr_col.unshift({"data": "time_js"})
     return arr_col
 }
 
@@ -315,7 +500,7 @@ function render_stat_thead_datatable() {
                         checkboxed_para_arr[j_param] + '" scope="col" ' +
                         'class="bg-info fixed_header">' +
                         parameterName + '</th>'
-                        /* } */
+                    /* } */
 
                     theadarr.push('k1_' + data_quantrac_selected[i_param].id + "_" +
                         checkboxed_para_arr[j_param])
@@ -390,12 +575,13 @@ function render_stat_datatable(datatable_DOM, thead_table) {
 
 /*---- Render Onchange Stat TypeChart ----*/
 function render_stat_chart(typechart, data_quantrac_selected,
-    checkboxed_para_arr, checkboxed_paraName_arr) {
+                           checkboxed_para_arr, checkboxed_paraName_arr) {
     var quantrac_selected = result_list_stations(data_quantrac_selected);
+    var unit_chart;
+    var data_stat_chart
+
     for (var i = 0; i < checkboxed_para_arr.length; i++) {
-        var data_stat_chart = result_chart_stats_stations(quantrac_selected, checkboxed_para_arr[i]);
-        console.log(data_stat_chart)
-        var unit_chart;
+        data_stat_chart = result_chart_stats_stations(quantrac_selected, checkboxed_para_arr[i]);
         if (typechart == "filter_stat_column_chart") {
             unit_chart = checkboxed_paraName_arr[i].split('_');
             render_groupColumnchart_quantrac('chart_para_' + checkboxed_para_arr[i],
@@ -407,3 +593,4 @@ function render_stat_chart(typechart, data_quantrac_selected,
         }
     }
 }
+
