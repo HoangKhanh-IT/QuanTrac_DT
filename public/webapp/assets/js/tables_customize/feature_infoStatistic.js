@@ -537,7 +537,8 @@ function render_stat_datatable(datatable_DOM, thead_table) {
     }
     $('#table_result_stat tbody').html(tbody);
 
-    /* if ($.fn.DataTable.isDataTable('#table_result_stat')) {
+    /* Datatable
+    if ($.fn.DataTable.isDataTable('#table_result_stat')) {
         $('#table_result_stat').DataTable().destroy();
         $('#table_result_stat').empty();
     }

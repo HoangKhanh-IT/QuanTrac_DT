@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Menus;
+
+use Illuminate\Support\Facades\View;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +28,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $menus = Menus::whereNull('parent_id')->orderBy('oder', 'ASC')->get();
+
+        View::share('menus', $menus);
     }
 }
