@@ -787,6 +787,12 @@ input[type="checkbox"] {
     width: 900px
 }
 
+#tab_AQIWQI_stat {
+    padding: 0px;
+    overflow: auto;
+    height: 350px
+}
+
 #search_stats_tramqtModal {
     overflow: hidden;
 }

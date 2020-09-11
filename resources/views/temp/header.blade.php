@@ -1,22 +1,30 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-dark navbar-info">
-    <!-- Left navbar links -->
+<nav class="main-header navbar navbar-expand navbar-dark navbar-primary"
+     style="padding: 1.35rem 1.35rem">
+    <!-- Left navbar links
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-    </ul>
+    </ul> -->
     <ul class="navbar-nav ml-auto">
+        <li class="dropdown" style="padding-right: 20px">
+            <a href="http://10.151.46.88/travinhqt_laravel/webapp" class="" data-toggle="" aria-expanded="false">
+                <i class="fas fa-map fa-1x" style="color: white"></i>
+                <span style="color: white;" class="hidden-xs">
+                    <span class="mdi-format-float-center"> &nbsp;&nbsp;Bản đồ</span>
+                </span>
+            </a>
+        </li>
         <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user-circle fa-2x" style="color: white"></i>
+                <i class="fas fa-user fa-1x" style="color: white"></i>
                 <span style="color: white;" class="hidden-xs">
                     @if (auth()->guest())
-                    <span class="mdi-format-float-center">Admin</span>
+                    <span class="mdi-format-float-center"> &nbsp;&nbsp;Admin</span>
                     @else
                         <span class="mdi-format-float-center">{{ Auth::user()->username }}</span>
                     @endif
-
                 </span>
             </a>
             <ul class="dropdown-menu">
@@ -65,12 +73,12 @@
 <!-- /.navbar -->
 
 <script type="text/javascript">
- 
+
     function ChangeToSlug()
         {
             var slug;
-         
-            //Lấy text từ thẻ input title 
+
+            //Lấy text từ thẻ input title
             slug = document.getElementById("slug").value;
             slug = slug.toLowerCase();
             //Đổi ký tự có dấu thành không dấu
@@ -97,5 +105,5 @@
                 //In slug ra textbox có id “slug”
             document.getElementById('convert_slug').value = slug;
         }
-         
+
 </script>

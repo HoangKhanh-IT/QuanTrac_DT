@@ -3,7 +3,10 @@ function Feature_info_modal(feat, layer) {
     /*** Kiểm tra trạm quan trắc có năm thành lập hay không ***/
     var establishdate_qt = "";
     if (feat.properties.establishdate != null) {
-        establishdate_qt = feat.properties.establishdate
+        day = feat.properties.establishdate.split("-")[2]
+        month = feat.properties.establishdate.split("-")[1]
+        year = feat.properties.establishdate.split("-")[0]
+        establishdate_qt = day + "/" + month + "/" + year
     } else {
         establishdate_qt = "Chưa cập nhật";
     }

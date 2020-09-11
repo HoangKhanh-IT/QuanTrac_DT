@@ -24,6 +24,9 @@ function fnExcelReport(id_table) {
     else {
         $('#exportExcel').attr('href', data_type + ', ' + encodeURIComponent(tab_text));
         $('#exportExcel').attr('download', 'ketquathongke.xls');
+
+        $('#export_AQIWQI_Excel').attr('href', data_type + ', ' + encodeURIComponent(tab_text));
+        $('#export_AQIWQI_Excel').attr('download', 'ketquadanhgia_AQI_WQI.xls');
     }
 }
 
@@ -49,10 +52,20 @@ function fnPDFReport(id_table) {
     win.print();
 }
 
+/*** Xuất báo cáo cho thống kê quan trắc ***/
 $("#exportExcel").click(function () {
     fnExcelReport("table_result_stat")
 })
 
 $("#exportPDF").click(function () {
     fnPDFReport("tab_stat")
+})
+
+/*** Xuất báo cáo cho đánh giá WQI/AQI ***/
+$("#export_AQIWQI_Excel").click(function () {
+    fnExcelReport("table_re_WA")
+})
+
+$("#export_AQIWQI_PDF").click(function () {
+    fnPDFReport("tab_AQIWQI_stat")
 })

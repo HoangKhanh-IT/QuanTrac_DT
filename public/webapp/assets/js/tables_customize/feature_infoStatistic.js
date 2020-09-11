@@ -59,6 +59,7 @@ function process_detail_parameter(quantrac_selected, checkboxed_para) {
             }
         }
     }
+
     return quantrac_selected;
 }
 
@@ -99,12 +100,18 @@ function getAverages(array, groupKeys, averageKeys) {
         if (!group) {
             groups[key] = {count: 0, payload: {}};
             group = groups[key];
-            averageKeys.forEach(k => group[k] = 0);
+            averageKeys.forEach(k => group[k] = '');
             groupKeys.forEach(k => group.payload[k] = o[k]);
             result.push(group.payload);
         }
         groups[key].count++;
         averageKeys.forEach(k => group.payload[k] = (group[k] += o[k]) / group.count);
+        averageKeys.forEach(checkNaN);
+        function checkNaN(item, index) {
+           if (isNaN(group.payload[item]) == true) {
+               group.payload[item] = '';
+           }
+        }
     })
     return result;
 }
@@ -390,7 +397,7 @@ function result_datatable_stats_stations(quantrac_selected, param_selected) {
             k_type1 = 'k1_' + quantrac_selected[i_dom_datatable]['id_station'] + '_' + param_selected;
             k_type2 = 'k2_' + param_selected + '_' + quantrac_selected[i_dom_datatable]['id_station'];
 
-            if (quantrac_selected[i_dom_datatable].time == arr_time_distinct[j_distinct].time) {
+            if (quantrac_selected[i_dom_datatable].time === arr_time_distinct[j_distinct].time) {
                 arr_time_distinct[j_distinct][k_type1] = quantrac_selected[i_dom_datatable][param_selected];
                 arr_time_distinct[j_distinct][k_type2] = quantrac_selected[i_dom_datatable][param_selected];
             }

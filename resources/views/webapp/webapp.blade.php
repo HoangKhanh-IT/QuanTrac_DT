@@ -61,11 +61,16 @@
                 <img id="logo" src="{{ asset('public/webapp/assets/images/SoTNMT.png') }}" />
                 <div class="title">
                     <div id="titlefont1">SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG TỈNH TRÀ VINH</div>
-                    <div id="titlefont2">CHẤT LƯỢNG MÔI TRƯỜNG TỈNH TRÀ VINH (THỬ NGHIỆM)</div>
+                    <div id="titlefont2">CHẤT LƯỢNG MÔI TRƯỜNG TỈNH TRÀ VINH</div>
                 </div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" style="margin-top: 1.25%">
+                    <li>
+                        <a data-target=".navbar-collapse.in" data-toggle="collapse" href="master" id="admin-btn">
+                            <i class="icon-table2 blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Quản trị
+                        </a>
+                    </li>
                     <li>
                         <a data-target=".navbar-collapse.in" data-toggle="collapse" href="#" id="about-btn">
                             <i class="icon-accessibility blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Về chúng tôi
@@ -86,127 +91,8 @@
         <div id="sidebar">
             <div class="sidebar-wrapper">
                 <div class="panel panel-default" id="features">
-                    <!-- Lớp dữ liệu -->
-                    <div class="panel-heading panel-data-quantrac" data-toggle="collapse" href="#data_layer_tramqt" style="border-top: unset">
-                        <h3 class="panel-title blue">
-                            <i class="glyphicon glyphicon-list-alt" style="font-size: 16px; margin-top: -5px;"></i>&nbsp;&nbsp;&nbsp;Lớp dữ liệu trạm quan trắc
-                            <!-- <button class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn" type="button">
-                                <i class="fa fa-chevron-left blue" style="font-size: 16px; margin-top: -2px;"></i>
-                            </button> -->
-                            <!-- <button class="btn btn-xs btn-default btn-cus pull-right" type="button"
-                                    data-toggle="collapse" href="#data_layer_tramqt">
-                                <i class="fa fa-chevron-down blue" style="font-size: 16px; margin-top: -2px;"></i>
-                            </button> -->
-                        </h3>
-                    </div>
-                    <div class="panel-body collapse in" id="data_layer_tramqt">
-                        <!-- Trạm quan trắc -->
-                        <div class="row panel-map">
-                            <div class="col-xs-12 col-md-12">
-                                <i class="icon-map4" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                                <span class="panel-search">&nbsp;&nbsp;Chú thích loại hình trạm quan trắc</span>
-                            </div>
-                        </div>
-                        <div class="row toggle_cus">
-                            <!-- <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
-                                       data-style="ios" data-toggle="toggle" id="qt_dat_data" type="checkbox">
-                            </div> -->
-                            <div class="nav-titles-icon tramqt_dat_icon">
-                                <i class="icon-checkbox-unchecked2 legend-icon" style="margin-top: 1%"></i>
-                            </div>
-                            <label class="nav-titles tramqt_dat_label">Trạm quan trắc đất</label>
-                        </div>
-                        <div class="row toggle_cus">
-                            <!-- <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
-                                       data-style="ios" data-toggle="toggle" id="qt_khongkhi_data" type="checkbox">
-                            </div> -->
-                            <div class="nav-titles-icon tramqt_khongkhi_icon">
-                                <i class="glyphicon glyphicon-cloud legend-icon"></i>
-                            </div>
-                            <label class="nav-titles tramqt_khongkhi_label">Trạm quan trắc không khí</label>
-                        </div>
-                        <div class="row toggle_cus">
-                            <!-- <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
-                                       data-style="ios" data-toggle="toggle" id="qt_nuocmat_data" type="checkbox">
-                            </div> -->
-                            <div class="nav-titles-icon tramqt_nuocmat_icon">
-                                <i class="icon-wave2 legend-icon" style="margin-left: 19%"></i>
-                            </div>
-                            <label class="nav-titles tramqt_nuocmat_label">Trạm quan trắc nước mặt</label>
-                        </div>
-                        <div class="row toggle_cus">
-                            <!-- <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
-                                       data-style="ios" data-toggle="toggle" id="qt_nuocngam_data" type="checkbox">
-                            </div> -->
-                            <div class="nav-titles-icon tramqt_nuocngam_icon">
-                                <i class="icon-graph legend-icon"></i>
-                            </div>
-                            <label class="nav-titles tramqt_nuocngam_label">Trạm quan trắc nước ngầm</label>
-                        </div>
-                        <div class="row toggle_cus">
-                            <!-- <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
-                                       data-style="ios" data-toggle="toggle" id="qt_nuocthai_data" type="checkbox">
-                            </div> -->
-                            <div class="nav-titles-icon tramqt_nuocthai_icon">
-                                <i class="icon-alert legend-icon"></i>
-                            </div>
-                            <label class="nav-titles tramqt_nuocthai_label">Trạm quan trắc nước thải</label>
-                        </div>
-                        <div class="row toggle_cus">
-                            <!-- <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
-                                       data-style="ios" data-toggle="toggle" id="qt_nuocthai_data" type="checkbox">
-                            </div> -->
-                            <div class="nav-titles-icon tramqt_nuocbien_icon">
-                                <i class="icon-air legend-icon"></i>
-                            </div>
-                            <label class="nav-titles tramqt_nuocbien_label">Trạm quan trắc nước biển ven bờ</label>
-                        </div>
-                        <!-- Đơn vị hành chính
-                        <div class="row panel-map">
-                            <div class="col-xs-10 col-md-10">
-                                <i class="icon-bookmark" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                                <span class="panel-search">&nbsp;&nbsp;Đơn vị hành chính và quản lý nhãn</span>
-                            </div>
-                        </div>
-                        <div class="row toggle_cus">
-                            <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật"
-                                       data-style="ios" data-toggle="toggle" id="hanhchinh_data" type="checkbox">
-                            </div>
-                            <div class="nav-titles-icon hanhchinh_icon">
-                                <i class="icon-map5 legend-icon"></i>
-                            </div>
-                            <label class="nav-titles hanhchinh-label">Hành chính huyện/thành phố</label>
-                        </div>
-                        <div class="row toggle_cus">
-                            <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật"
-                                       data-style="ios" data-toggle="toggle" id="label_quantrac" type="checkbox">
-                            </div>
-                            <div class="nav-titles-icon default_icon">
-                                <i class="icon-info3 legend-icon"></i>
-                            </div>
-                            <label class="nav-titles nav-titles-default">Nhãn trạm quan trắc</label>
-                        </div>
-                        <div class="row toggle_cus">
-                            <div class="col-xs-6 col-md-6">
-                                <input checked data-off="Tắt" data-on="Bật"
-                                       data-style="ios" data-toggle="toggle" id="label_hanhchinh" type="checkbox">
-                            </div>
-                            <div class="nav-titles-icon default_icon">
-                                <i class="icon-info3 legend-icon"></i>
-                            </div>
-                            <label class="nav-titles nav-titles-default">Nhãn đơn vị hành chính</label>
-                        </div> -->
-                    </div>
                     <!-- Tìm kiếm dữ liệu -->
-                    <div class="panel-heading" data-toggle="collapse" href="#search_tramqt">
+                    <div class="panel-heading" data-toggle="collapse" href="#search_tramqt" style="border-top: unset">
                         <h3 class="panel-title blue">
                             <i class="icon-cog52" style="font-size: 16px; margin-top: -2px;"></i>&nbsp;&nbsp;&nbsp;Tìm kiếm dữ liệu
                         </h3>
@@ -215,7 +101,8 @@
                         <div class="panel">
                             <div class="col-xs-12 col-md-12" data-toggle="collapse" data-parent="#search_tramqt" aria-expanded="true" aria-controls="search_basic" href="#search_basic" id="search_basic_heading">
                                 <i class="fa fa-location-arrow" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                                <span class="panel-search">&nbsp;&nbsp;Tìm kiếm cơ bản</span>
+                                <span class="panel-search" style="font-weight: bold;">&nbsp;&nbsp;
+                                    Tìm kiếm cơ bản</span>
                                 <i class="glyphicon glyphicon-triangle-bottom" style="font-size: 13px; color: #999"></i>
                             </div>
                             <div class="collapse in" id="search_basic">
@@ -235,7 +122,8 @@
                         <div class="panel">
                             <div class="col-xs-8 col-md-8" data-toggle="collapse" data-parent="#search_tramqt" aria-expanded="false" aria-controls="search_advanced" href="#search_advanced" id="search_advanced_heading">
                                 <i class="mdi mdi-map-search" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                                <span class="panel-search">&nbsp;&nbsp;Tìm kiếm nâng cao</span>
+                                <span class="panel-search" style="font-weight: bold;">&nbsp;&nbsp;
+                                    Tìm kiếm nâng cao</span>
                                 <i class="glyphicon glyphicon-triangle-bottom" style="font-size: 13px; color: #999"></i>
                             </div>
                             <div class="collapse" id="search_advanced">
@@ -257,7 +145,7 @@
                                 </div>
                                 <div class="col-xs-12 col-md-12 search-advanced-titles">
                                     <i class="icon-location3 blue" style="font-size: 14px; margin-top: -2px"></i>
-                                    <span for="district" style="margin-left: 1px">&nbsp;Thành phố, Huyện, Thị xã</span>
+                                    <span for="district" style="margin-left: 1px">&nbsp;Huyện, Thị xã</span>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-12 search-advanced">
                                     <select class="form-control" id="district">
@@ -384,6 +272,125 @@
                             <span class="badge bg-info panel-version-style">1.0</span>
                         </div>
                     </div>
+                    <!-- Lớp dữ liệu -->
+                    <div class="panel-heading panel-data-quantrac" data-toggle="collapse" href="#data_layer_tramqt" >
+                        <h3 class="panel-title blue">
+                            <i class="glyphicon glyphicon-list-alt" style="font-size: 16px; margin-top: -5px;"></i>&nbsp;&nbsp;&nbsp;Lớp dữ liệu trạm quan trắc
+                            <!-- <button class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn" type="button">
+                                <i class="fa fa-chevron-left blue" style="font-size: 16px; margin-top: -2px;"></i>
+                            </button> -->
+                            <!-- <button class="btn btn-xs btn-default btn-cus pull-right" type="button"
+                                    data-toggle="collapse" href="#data_layer_tramqt">
+                                <i class="fa fa-chevron-down blue" style="font-size: 16px; margin-top: -2px;"></i>
+                            </button> -->
+                        </h3>
+                    </div>
+                    <div class="panel-body collapse in" id="data_layer_tramqt">
+                        <!-- Trạm quan trắc
+                        <div class="row panel-map">
+                            <div class="col-xs-12 col-md-12">
+                                <i class="icon-map4" style="font-size: 16px; margin-top: -2px; color: #999"></i>
+                                <span class="panel-search">&nbsp;&nbsp;Chú thích loại hình trạm quan trắc</span>
+                            </div>
+                        </div> -->
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_dat_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon tramqt_dat_icon">
+                                <i class="icon-checkbox-unchecked2 legend-icon" style="margin-top: 1%"></i>
+                            </div>
+                            <label class="nav-titles tramqt_dat_label">Trạm quan trắc đất</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_khongkhi_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon tramqt_khongkhi_icon">
+                                <i class="glyphicon glyphicon-cloud legend-icon"></i>
+                            </div>
+                            <label class="nav-titles tramqt_khongkhi_label">Trạm quan trắc không khí</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_nuocmat_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon tramqt_nuocmat_icon">
+                                <i class="icon-wave2 legend-icon" style="margin-left: 19%"></i>
+                            </div>
+                            <label class="nav-titles tramqt_nuocmat_label">Trạm quan trắc nước mặt</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_nuocngam_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon tramqt_nuocngam_icon">
+                                <i class="icon-graph legend-icon"></i>
+                            </div>
+                            <label class="nav-titles tramqt_nuocngam_label">Trạm quan trắc nước ngầm</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_nuocthai_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon tramqt_nuocthai_icon">
+                                <i class="icon-alert legend-icon"></i>
+                            </div>
+                            <label class="nav-titles tramqt_nuocthai_label">Trạm quan trắc nước thải</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_nuocthai_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon tramqt_nuocbien_icon">
+                                <i class="icon-air legend-icon"></i>
+                            </div>
+                            <label class="nav-titles tramqt_nuocbien_label">Trạm quan trắc nước biển ven bờ</label>
+                        </div>
+                        <!-- Đơn vị hành chính
+                        <div class="row panel-map">
+                            <div class="col-xs-10 col-md-10">
+                                <i class="icon-bookmark" style="font-size: 16px; margin-top: -2px; color: #999"></i>
+                                <span class="panel-search">&nbsp;&nbsp;Đơn vị hành chính và quản lý nhãn</span>
+                            </div>
+                        </div>
+                        <div class="row toggle_cus">
+                            <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật"
+                                       data-style="ios" data-toggle="toggle" id="hanhchinh_data" type="checkbox">
+                            </div>
+                            <div class="nav-titles-icon hanhchinh_icon">
+                                <i class="icon-map5 legend-icon"></i>
+                            </div>
+                            <label class="nav-titles hanhchinh-label">Hành chính huyện/thành phố</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật"
+                                       data-style="ios" data-toggle="toggle" id="label_quantrac" type="checkbox">
+                            </div>
+                            <div class="nav-titles-icon default_icon">
+                                <i class="icon-info3 legend-icon"></i>
+                            </div>
+                            <label class="nav-titles nav-titles-default">Nhãn trạm quan trắc</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật"
+                                       data-style="ios" data-toggle="toggle" id="label_hanhchinh" type="checkbox">
+                            </div>
+                            <div class="nav-titles-icon default_icon">
+                                <i class="icon-info3 legend-icon"></i>
+                            </div>
+                            <label class="nav-titles nav-titles-default">Nhãn đơn vị hành chính</label>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -440,11 +447,11 @@
                             </div>
                         </div>
                         <div class="tab-pane fade text-danger" id="developers">
-                            <p>Chi cục CNTT và dữ liệu Tài nguyên môi trường phía Nam</p>
-                            <p>(Cục CNTT và dữ liệu Tài nguyên môi trường - Bộ TN & MT)</p>
+                            <p>Trung tâm ứng dụng công nghệ thông tin phía Nam</p>
+                            <!-- <p>(Cục CNTT và dữ liệu Tài nguyên môi trường - Bộ TN & MT)</p> -->
                             <p>
                                 <i class="icon-location4 blue" style="font-size: 16px; margin-top: -2px"></i>
-                                <a href="'http://tiny.cc/2btqmz" target="_blank">
+                                <a href="http://tiny.cc/2btqmz" target="_blank">
                                     Số 36, Lý Văn Phức, P. Tân Định, Q. 1, TP. HCM
                                 </a>
                             </p>
@@ -771,7 +778,7 @@
                             <div class="form-group">
                                 <div class="col-xs-5 col-md-5 modal-advanced-titles">
                                     <i class="icon-location3 brown" style="font-size: 16px; margin-top: -2px"></i>
-                                    <span for="district_WA" class="black" style="margin-left: 1px">&nbsp;Quận/Huyện</span>
+                                    <span for="district_WA" class="black" style="margin-left: 1px">&nbsp;Huyện/Thị xã</span>
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
                                     <select class="form-control" id="district_WA">
@@ -829,6 +836,17 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                                    <i class="icon-list-numbered brown" style="font-size: 16px; margin-top: -2px"></i>
+                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Danh sách các trạm</span>
+                                </div>
+                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
+                                    <select class="form-control" id="">
+                                        <!-- DOM từ DB vào -->
+                                    </select>
+                                </div>
+                            </div>
                         </fieldset>
                     </form>
                 </div>
@@ -850,21 +868,27 @@
                         <i class="fa fa-envira brown" style="font-size: 16px; margin-top: -2px"></i> &nbsp;Đánh giá chất lượng môi trường
                     </h4>
                 </div>
-                <div class="modal-body modal-body-re-WA">
-                    <table class="table table-striped table-bordered table-condensed table-responsive" cellspacing="0" width="100%" id="table_re_WA">
-                        <thead>
-                        <tr class="bg-info" role="row" style="color: #000">
-                            <th scope="col" class="bg-info fixed_header">Tên trạm</th>
-                            <th scope="col" class="bg-info fixed_header">Ngày</th>
-                            <th scope="col" class="bg-info fixed_header">Giá trị</th>
-                            <th scope="col" class="bg-info fixed_header">Mức độ</th>
-                            <th scope="col" class="bg-info fixed_header">Mục đích</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- Dom data WQI/AQI -->
-                        </tbody>
-                    </table>
+                <div class="modal-body modal-body-re-WA" style="overflow: unset">
+                    <div class="form-group col-xs-12 col-md-12" style="padding: 0px">
+                        <a href="#" id="export_AQIWQI_Excel" class="btn btn-danger" role="button">EXCEL</a>
+                        <a href="#" id="export_AQIWQI_PDF" class="btn btn-danger" role="button">PDF</a>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-12" id="tab_AQIWQI_stat">
+                        <table class="table table-striped table-bordered table-condensed table-responsive" cellspacing="0" width="100%" id="table_re_WA">
+                            <thead>
+                                <tr class="bg-info" role="row" style="color: #000">
+                                    <th scope="col" class="bg-info fixed_header">Tên trạm</th>
+                                    <th scope="col" class="bg-info fixed_header">Ngày</th>
+                                    <th scope="col" class="bg-info fixed_header">Giá trị</th>
+                                    <th scope="col" class="bg-info fixed_header">Mức độ</th>
+                                    <th scope="col" class="bg-info fixed_header">Mục đích</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Dom data WQI/AQI -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal" type="button" id="WQI-AQI-return">Cancel</button>
@@ -911,7 +935,7 @@
                             <div class="form-group">
                                 <div class="col-xs-5 col-md-5 modal-advanced-titles">
                                     <i class="icon-file-spreadsheet blue" style="font-size: 16px; margin-top: -2px"></i>
-                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Select File</span>
+                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Chọn file</span>
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
                                     <input type="file" id="excelfile">
@@ -920,7 +944,9 @@
                             <div class="form-group">
                                 <div class="col-xs-5 col-md-5 modal-advanced-titles">
                                     <i class="icon-file-excel blue" style="font-size: 16px; margin-top: -2px"></i>
-                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Upload Files</span>
+                                    <span for="" class="black" style="margin-left: 1px">
+                                        <a href="public/webapp/assets/text/File_test_import.xlsx">&nbsp;File mẫu</a>
+                                    </span>
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
                                     <button type="button" name="upload" onClick="ProcessExcel()"
@@ -967,7 +993,7 @@
                                 <!-- <div class="col-xs-5 col-md-5 modal-advanced-titles">
                                     <i class="icon-file-stats2 green" style="font-size: 16px; margin-top: -2px"></i>
                                     <span for="loaihinh" class="black" style="margin-left: 1px">&nbsp;Tùy chọn hiển thị</span>
-                                </div> -->
+                                </div>
                                 <div class="col-xs-3 col-md-3 modal-advanced modal-display">
                                     <input checked data-off="<p></p>" data-on="<p></p>" data-size="mini" data-style="ios" data-toggle="toggle" id="report_stat" type="checkbox">
                                 </div>
@@ -979,7 +1005,7 @@
                                 </div>
                                 <div class="col-xs-3 col-md-3 modal-advanced modal-display" style="padding-top: 1px; margin-left: -5%;">
                                     <span style="white-space: nowrap">Biểu đồ</span>
-                                </div>
+                                </div> -->
                                 <!-- <div class="col-xs-2 col-md-2 modal-advanced modal-display">
                                     <input data-off="<p></p>" data-on="<p></p>" data-size="mini"
                                            data-style="ios" data-toggle="toggle" id="WQI_check" type="checkbox">
@@ -1042,7 +1068,7 @@
                             <div class="form-group">
                                 <div class="col-xs-5 col-md-5 modal-advanced-titles">
                                     <i class="icon-location3 green" style="font-size: 16px; margin-top: -2px"></i>
-                                    <span for="district_stat" class="black" style="margin-left: 1px">&nbsp;Quận/Huyện</span>
+                                    <span for="district_stat" class="black" style="margin-left: 1px">&nbsp;Huyện/Thị xã</span>
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
                                     <select class="form-control" id="district_stat">

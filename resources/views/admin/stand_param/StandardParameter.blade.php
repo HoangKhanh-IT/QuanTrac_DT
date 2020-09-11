@@ -5,6 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quan trắc Trà Vinh</title>
+    <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+
+    <!-- Favicon -->
+    <link href="{{ asset('public/webapp/assets/images/SoTNMT.ico') }}" rel="icon" type="image/x-icon" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -15,8 +23,13 @@
     <link rel="stylesheet" href=" {{ asset('public/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }} ">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('public/admin/dist/css/adminlte.min.css')}}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <!-- Google Font: Source Sans Pro
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -141,13 +154,13 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                     <a href="{{route('StandardParameter.edit',$StandardParameter->id)}}"
                                                                         class="btn btn-sm btn-warning">Sửa</a>
-                                                                 
+
                                                                     <form
                                                                         action="{{route('StandardParameter.delete',$StandardParameter->id)}}"
                                                                         method="post">
                                                                         <input type="hidden" name="_token"
                                                                             value="{{csrf_token()}}">
-                                                                      
+
                                                                         <button class="btn btn-sm btn-danger rounded-0">
                                                                             Xóa
                                                                         </button>

@@ -5,6 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quan trắc Trà Vinh</title>
+    <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+
+    <!-- Favicon -->
+    <link href="{{ asset('public/webapp/assets/images/SoTNMT.ico') }}" rel="icon" type="image/x-icon" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -15,8 +23,13 @@
     <link rel="stylesheet" href=" {{ asset('public/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }} ">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('public/admin/dist/css/adminlte.min.css')}}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <!-- Google Font: Source Sans Pro
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 
 </head>
 
@@ -73,7 +86,7 @@
                                                 <form method="get" action="{{ route('CatePosttk') }}">
                                                     @csrf
                                                     <div class="input-group input-group-addon" style="width: 250px;">
-                                                        <input type="text" name="search" class="form-control float-right" placeholder="Tên, keywords, slug">
+                                                        <input type="text" name="search" class="form-control float-right" placeholder="Tên, keywords">
 
                                                         <div class="input-group-append">
                                                             <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
@@ -111,7 +124,7 @@
                                                                     Hiển thị
                                                                 @else
                                                                      Ẩn
-                                                                @endif     
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 @foreach( $CategoryPosts as $CategoryPostparent )
@@ -125,7 +138,7 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                 <a href="{{route('CatePost.edit',$CategoryPost->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-                                                               
+
                                                                 <form
                                                                     action="{{route('CatePost.delete',$CategoryPost->id)}}"
                                                                     method="post">
@@ -178,7 +191,7 @@
     <script src=" {{ asset('public/admin/dist/js/adminlte.min.js') }} "></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('public/admin/dist/js/demo.js') }}"></script>
-   
+
 </body>
 
 </html>

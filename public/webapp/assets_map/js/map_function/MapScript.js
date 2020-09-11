@@ -48,19 +48,21 @@ var Basemaps_Control = [
     }),
 ]
 
-/*---- Đọc WMS Geosever
-var view_travinh_huyen = L.tileLayer.wms('http://10.151.46.88:8082/geoserver/quantrac_travinh/wms?', {
-    layers: 'DiaPhanHuyen',
+/*---- Đọc WMS Geosever ----*/
+var view_travinh_huyen = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac_travinh/wms?', {
+    layers: 'quantrac_travinh',
     tiled: true,
     format: 'image/png',
     transparent: true
-}); ----*/
+});
 
 /*---- Đem biến map ra ngoài cấu trúc nested của getJSON để không bị lỗi invalidateSize bên main.js ----*/
 var map = L.map('mymap', {
     center: [9.8095, 106.274],
     zoomSnap: 0.25,
     zoom: 10.5,
+    maxZoom: 15,
+    minZoom: 10,
     /*** Một số laptop hiển thị bản đồ khác nhau ==> zoom lên khi load ==> Thay đổi mức zoom
     zoom: 10.75, ***/
     zoomControl: false,
@@ -318,5 +320,5 @@ map.addControl(
 
 /*---- Add layer Geoserver ----*/
 /*** var ggm = new L.Google('ROADMAP');
- ggm.addTo(map);
-view_travinh_huyen.addTo(map); ***/
+ ggm.addTo(map); ***/
+view_travinh_huyen.addTo(map);

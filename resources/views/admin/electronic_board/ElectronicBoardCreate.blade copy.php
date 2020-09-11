@@ -5,6 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quan trắc Trà Vinh</title>
+    <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+
+    <!-- Favicon -->
+    <link href="{{ asset('public/webapp/assets/images/SoTNMT.ico') }}" rel="icon" type="image/x-icon" />
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -15,8 +24,13 @@
     <link rel="stylesheet" href=" {{ asset('public/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }} ">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('public/admin/dist/css/adminlte.min.css')}}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <!-- Google Font: Source Sans Pro
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 
 </head>
 
@@ -76,8 +90,8 @@
                                                         class="form-control select2 select2-hidden-accessible"
                                                         name="loaihinhcha" id="loaihinhcha" style="width: 100%;">
                                                         @foreach ($ObservationStations as $ObservationStation)
-                                                        <option value="{{$ObservationStation->id}}">
-                                                            {{$ObservationStation->name}}
+                                                        <option value="{{$ObservationStation => id}}">
+                                                            {{$ObservationStation => name}}
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -204,10 +218,10 @@
     <!-- AdminLTE for demo ElectronicBoards -->
     <script src="{{ asset('public/admin/dist/js/demo.js') }}"></script>
     <script type="">
-        var ObservationStations = {!! json_encode($ObservationStations->toArray()) !!};
-        var Parameters = {!! json_encode($Parameters->toArray()) !!};
-        var StandardParameters = {!! json_encode($StandardParameters->toArray()) !!};
-        var StdStations = {!! json_encode($StdStations->toArray()) !!};
+        var ObservationStations = {!! json_encode($ObservationStations => toArray()) !!};
+        var Parameters = {!! json_encode($Parameters => toArray()) !!};
+        var StandardParameters = {!! json_encode($StandardParameters => toArray()) !!};
+        var StdStations = {!! json_encode($StdStations => toArray()) !!};
         var StationIDItem;
         var StationIDItem1 = $('#loaihinhcha').val();
         if (ObservationStations.length > 0) {

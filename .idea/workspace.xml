@@ -2,18 +2,81 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="302f8f71-fec8-47b9-b25f-0b621b3b6405" name="Default Changelist" comment="travinhqt_laravel">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/travinhqt_laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/travinhqt_laravel.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/build/scss/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/build/scss/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/dist/css/adminlte.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/dist/css/adminlte.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/dist/css/adminlte.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/dist/css/adminlte.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/dist/css/alt/adminlte.core.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/admin/dist/css/alt/adminlte.core.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webapp/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webapp/assets/js/tables_customize/export_infoToFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/js/tables_customize/export_infoToFile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_infoStatistic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_infoStatistic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapFeatureInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapFeatureInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapScript.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/basin/CreateBasin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/basin/CreateBasin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/basin/EditBasin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/basin/EditBasin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/basin/ListBasin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/basin/ListBasin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/camera/Camera.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/camera/Camera.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/camera/CameraCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/camera/CameraCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/camera/CameraEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/camera/CameraEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category/Category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category/Category.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category/CategoryCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category/CategoryCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category/CategoryEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category/CategoryEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category_post/CategoryPostCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category_post/CategoryPostCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category_post/CategoryPostEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category_post/CategoryPostEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/category_post/ListCatePost.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/category_post/ListCatePost.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardCreate.blade copy.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardCreate.blade copy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardEdit1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardEdit1.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/enterprise/Enterprise.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/enterprise/Enterprise.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseEdit1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseEdit1.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/location/CreateLocation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/location/CreateLocation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/location/EditLocation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/location/EditLocation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/location/ListLocation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/location/ListLocation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/location_type/LocationType.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/location_type/LocationType.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/location_type/LocationTypeCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/location_type/LocationTypeCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/location_type/LocationTypeEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/location_type/LocationTypeEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_station/Observationstation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_station/Observationstation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationCreate.blade copy.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationCreate.blade copy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_type/ObservationType.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_type/ObservationType.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_type/ObservationTypeCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_type/ObservationTypeCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_type/ObservationTypeedit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_type/ObservationTypeedit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/organization/Organization.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/organization/Organization.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/organization/OrganizationCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/organization/OrganizationCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/organization/OrganizationEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/organization/OrganizationEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/parameter/Parameter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/parameter/Parameter.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/parameter/ParameterCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/parameter/ParameterCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/parameter/ParameterEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/parameter/ParameterEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/post/CreatePost.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/post/CreatePost.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/post/EditPost.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/post/EditPost.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/post/ListPost.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/post/ListPost.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/purpose/Purpose.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/purpose/Purpose.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/purpose/PurposeCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/purpose/PurposeCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/purpose/PurposeEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/purpose/PurposeEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/qualityindex/Qualityindex.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/qualityindex/Qualityindex.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/qualityindex/QualityindexCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/qualityindex/QualityindexCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/qualityindex/QualityindexEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/qualityindex/QualityindexEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameter.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameterCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameterCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameterEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameterEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameterEdit1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stand_param/StandardParameterEdit1.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/standard/StandardCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/standard/StandardCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/standard/StandardEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/standard/StandardEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/standard/Standards.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/standard/Standards.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/unit/Unit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/unit/Unit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/unit/UnitCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/unit/UnitCreate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/unit/UnitEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/unit/UnitEdit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/temp/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/temp/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/temp/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/temp/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/temp/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/temp/menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/webapp/webapp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/webapp/webapp.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,52 +156,98 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_categories_option.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_import_excel.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/README.md" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/routes/web.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/resources/views/webapp/webapp.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_purpose.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_districts_option.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_location_option.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_uploadFiles.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/css/main.css" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/login.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapSearch.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapVS_pre_data.js" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/config/app.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapFeatureInfo.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapScript.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets_map/css/MapStyle.css" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/config/database.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapCollisionLabels.js" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_obstyles_stat_option.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/main.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/StandardParameterController.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/public/webapp/Note_WebApp.md" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/parameter/ParameterCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/parameter/Parameter.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/parameter/ParameterEdit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/unit/UnitEdit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/temp/layout.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/temp/header.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/temp/menu.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/unit/UnitCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/unit/Unit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/temp/lib.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/basin/EditBasin.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/basin/CreateBasin.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/temp/footer.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/basin/ListBasin.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/temp/app.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/welcome.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_standard.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Import_Excel.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/routes/api.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_categories_option.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_import_excel.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/post/ListPost.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/routes/web.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/webapp/webapp.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/post/EditPost.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_purpose.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_districts_option.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_location_option.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/qualityindex/QualityindexCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/qualityindex/Qualityindex.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_uploadFiles.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/post/CreatePost.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/qualityindex/QualityindexEdit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/location_type/LocationType.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/organization/OrganizationEdit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/location_type/LocationTypeEdit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/location_type/LocationTypeCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseEdit1.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/config/app.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/organization/OrganizationCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/organization/Organization.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/config/database.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_obstyles_stat_option.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/enterprise/EnterpriseCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_standard_param.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/enterprise/Enterprise.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_infoWQIAQI.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_obstyles_option.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/location/ListLocation.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_onChange.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_elec_board.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/location/EditLocation.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_infoStatistic.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_threshold_station.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_infoThreshold.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_obser_station.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_WQIAQI.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_data_sampleBTD.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/category_post/CategoryPostEdit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_infoBTD.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_loctype_option.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/category_post/CategoryPostCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_searches.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/tables_customize/export_infoToFile.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/location/CreateLocation.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_stats.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_WQIAQI_result.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/category_post/ListCatePost.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/chart/Viewchart.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/obs_type/ObservationType.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/public/webapp/assets/js/option_customize/option_renderChart.js" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/public/webapp/Note_WebApp.md" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/category/CategoryEdit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/obs_type/ObservationTypeedit.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/obs_type/ObservationTypeCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/category/CategoryCreate.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/category/Category.blade.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/electronic_board/ElectronicBoardCreate.blade copy.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_stat_station.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Kernel.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/resources/views/welcome.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Call_standard.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Import_Excel.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/routes/api.php" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/master.blade.php" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" root2="SKIP_INSPECTION" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -265,9 +374,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Camera_Viewers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../App_Auto_TD_khanh" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.3.4\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -314,7 +424,12 @@
       <workItem from="1599442183888" duration="11490000" />
       <workItem from="1599527560691" duration="4196000" />
       <workItem from="1599534118866" duration="606000" />
-      <workItem from="1599554096993" duration="3843000" />
+      <workItem from="1599554096993" duration="5015000" />
+      <workItem from="1599618299959" duration="15329000" />
+      <workItem from="1599701978423" duration="8644000" />
+      <workItem from="1599724180278" duration="827000" />
+      <workItem from="1599787983691" duration="221000" />
+      <workItem from="1599789050727" duration="13305000" />
     </task>
     <task id="LOCAL-00001" summary="travinhqt_laravel">
       <created>1596074300287</created>
@@ -493,19 +608,19 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="123" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596024961673" />
-    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1599562432038">
+    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1599562843859">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599562432038" />
+    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599562843859" />
     <state x="1658" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075688211" />
     <state x="446" y="279" width="474" height="281" key="ComposerInitDialogKey" timestamp="1595995771713">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="446" y="279" width="474" height="281" key="ComposerInitDialogKey/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1595995771713" />
-    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1599529909655">
+    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1599722530527">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="463" y="123" key="FileChooserDialogImpl/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599529909655" />
+    <state x="463" y="123" key="FileChooserDialogImpl/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599722530527" />
     <state width="1323" height="161" key="GridCell.Tab.0.bottom" timestamp="1595993278909">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -530,23 +645,23 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="517" y="288" key="NewPhpFileDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596008687230" />
-    <state x="184" y="11" key="SettingsEditor" timestamp="1599554114597">
+    <state x="184" y="11" key="SettingsEditor" timestamp="1599821971995">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599554114597" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1599480277957">
+    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599821971995" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1599562901081">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599480277957" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599562901081" />
     <state x="1641" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075691920" />
-    <state x="359" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1599554099664">
+    <state x="359" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1599618300045">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="359" y="192" key="com.intellij.ide.util.TipDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599554099664" />
-    <state x="523" y="35" width="627" height="643" key="find.popup" timestamp="1596699223757">
+    <state x="359" y="192" key="com.intellij.ide.util.TipDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599618300045" />
+    <state x="523" y="35" width="627" height="643" key="find.popup" timestamp="1599789305170">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="523" y="35" width="627" height="643" key="find.popup/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596699223757" />
+    <state x="523" y="35" width="627" height="643" key="find.popup/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1599789305170" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1596601809712">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

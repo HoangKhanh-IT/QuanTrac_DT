@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quan trắc Trà Vinh</title>
+    <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+
+    <!-- Favicon -->
+    <link href="{{ asset('public/webapp/assets/images/SoTNMT.ico') }}" rel="icon" type="image/x-icon" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -14,8 +22,13 @@
     <link rel="stylesheet" href=" {{ asset('public/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }} ">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('public/admin/dist/css/adminlte.min.css')}}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <!-- Google Font: Source Sans Pro
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <!-- Site wrapper -->
@@ -32,13 +45,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                        <h1>Danh mục tiêu chuẩn</h1>
+                        <!-- <h1>GIỚI THIỆU HỆ THỐNG</h1> -->
                     </div>
                     <div class="col-sm-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-{{--                            <li class="breadcrumb-item"><a href="#">Layout</a></li>--}}
-{{--                            <li class="breadcrumb-item active">Fixed Layout</li>--}}
+                            <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
+                            {{--<li class="breadcrumb-item"><a href="#">Layout</a></li>--}}
+                            {{--<li class="breadcrumb-item active">Fixed Layout</li>--}}
                         </ol>
                     </div>
                 </div>
@@ -54,7 +67,7 @@
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Title</h3>
+                                <h3 class="card-title">Giới thiệu hệ thống</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -64,11 +77,22 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                Start creating your amazing application!
+                                Hệ thống truyền, nhận, quản lý và công bố dữ liệu các hệ thống quan trắc môi trường của tỉnh Trà Vinh tích hợp số liệu quan trắc các nguồn thải từ các khu công nghiệp,
+                                khu chế xuất và khu công nghệ cao nói riêng và quan trắc nguồn điểm nói chung nhằm mục đích bảo vệ nguồn tiếp nhận (sông, hồ),
+                                đảm bảo chất lượng nước thải của các khu công nghiệp, khu chế xuất, khu công nghệ cao trước khi thải vào nguồn tiếp nhận
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                Footer
+                                <h3 class="card-title">Thông tin liên hệ</h3>
+                                <br>
+                                <span>Trung tâm ứng dụng công nghệ thông tin phía Nam</span><br>
+                                <!-- <span>(Cục CNTT và dữ liệu Tài nguyên môi trường - Bộ TN & MT)</span><br> -->
+                                <span>
+                                    <i class="fas fa-location-arrow" style="font-size: 16px; margin-top: -2px; color: deepskyblue"></i>
+                                    <a href="http://tiny.cc/2btqmz" target="_blank">
+                                        Số 36, Lý Văn Phức, P. Tân Định, Q. 1, TP. HCM
+                                    </a>
+                                </span>
                             </div>
                             <!-- /.card-footer-->
                         </div>
