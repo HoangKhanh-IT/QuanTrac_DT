@@ -62,19 +62,17 @@ Route::get('jsonStandardWParam', 'StandardParameterController@jsonStandardWParam
 Route::get('jsonParameter', 'StandardParameterController@jsonParameter');
 Route::get('jsonPurpose', 'StandardParameterController@jsonPurpose');
 Auth::routes();
-//Route::get('/home', 'HomeController@index')->name('home');
+/* Route::get('/home', 'HomeController@index')->name('home'); */
 
 Route::get('/test1', function ($id) {
     return view('admin.master');
 });
 
-// Route::get('/master', function () {
-//     return view('admin.master');
-// })->middleware('auth')->name('master');
+/* Route::get('/master', function () {
+    return view('admin.master');
+})->middleware('auth')->name('master'); */
 
-
-
-//-----Login-----//
+/***-- Login --***/
 Route::get('login', 'Auth\LoginController@getAuthLogin')->name('login');
 Route::post('login', 'Auth\LoginController@postAuthLogin')->name('login');
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@getLogout'])->name('logout');
@@ -82,16 +80,14 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@getLogou
 Route::get('menu', 'HomeController@index');
 Route::get('/master', 'HomeController@show')->name('master');
 
-// Route::middleware(['auth'])->group(function () {
-
-// });
+/* Route::middleware(['auth'])->group(function () {}); */
 
 Route::group(['prefix' => 'danhmuc'], function () {
     Route::get('test', function () {
         return "Hàm test";
 	});
 
-    //-----ObservationType-----//
+    /***-- ObservationType --***/
     Route::get('ObservationType', 'ObservationTypeController@index')->name('ObservationType');
     Route::get('ObservationTypetk', 'ObservationTypeController@show')->name('ObservationTypetk');
     Route::get('ObservationType.create', 'ObservationTypeController@create')->name('ObservationType.create');
@@ -100,7 +96,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('ObservationType.edit/{id}', 'ObservationTypeController@update')->name('ObservationType.edit');
     Route::post('ObservationType.delete/{id}', 'ObservationTypeController@destroy')->name('ObservationType.delete');
 
-    //-----Parameter-----//
+    /***-- Parameter --***/
     Route::get('Parameter', 'ParameterController@index')->name('Parameter');
     Route::get('Parametertk', 'ParameterController@show')->name('Parametertk');
     Route::get('Parameter.create', 'ParameterController@create')->name('Parameter.create');
@@ -109,7 +105,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Parameter.edit/{id}', 'ParameterController@update')->name('Parameter.edit');
     Route::post('Parameter.delete/{id}', 'ParameterController@destroy')->name('Parameter.delete');
 
-    //-----Unit-----//
+    /***-- Unit --***/
     Route::get('Unit', 'UnitController@index')->name('Unit');
     Route::get('Unittk', 'UnitController@show')->name('Unittk');
     Route::get('Unit.create', 'UnitController@create')->name('Unit.create');
@@ -118,7 +114,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Unit.edit/{id}', 'UnitController@update')->name('Unit.edit');
     Route::post('Unit.delete/{id}', 'UnitController@destroy')->name('Unit.delete');
 
-    //-----Purpose-----//
+    /***-- Purpose --***/
     Route::get('Purpose', 'PurposeController@index')->name('Purpose');
     Route::get('Purposetk', 'PurposeController@show')->name('Purposetk');
     Route::get('Purpose.create', 'PurposeController@create')->name('Purpose.create');
@@ -127,7 +123,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Purpose.edit/{id}', 'PurposeController@update')->name('Purpose.edit');
     Route::post('Purpose.delete/{id}', 'PurposeController@destroy')->name('Purpose.delete');
 
-    //-----Qualityindex-----//
+    /***-- Qualityindex --***/
     Route::get('Qualityindex', 'QualityindexController@index')->name('Qualityindex');
     Route::get('Qualityindextk', 'QualityindexController@show')->name('Qualityindextk');
     Route::get('Qualityindex.create', 'QualityindexController@create')->name('Qualityindex.create');
@@ -136,7 +132,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Qualityindex.edit/{id}', 'QualityindexController@update')->name('Qualityindex.edit');
     Route::post('Qualityindex.delete/{id}', 'QualityindexController@destroy')->name('Qualityindex.delete');
 
-    //-----Category-----//
+    /***-- Category --***/
     Route::get('Category', 'CategoryController@index')->name('Category');
     Route::get('Categorytk', 'CategoryController@show')->name('Categorytk');
     Route::get('Category.create', 'CategoryController@create')->name('Category.create');
@@ -145,7 +141,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Category.edit/{id}', 'CategoryController@update')->name('Category.edit');
     Route::post('Category.delete/{id}', 'CategoryController@destroy')->name('Category.delete');
 
-    //-----LocationType-----//
+    /***-- LocationType --***/
     Route::get('LocationType', 'LocationTypeController@index')->name('LocationType');
     Route::get('LocationTypetk', 'LocationTypeController@show')->name('LocationTypetk');
     Route::get('LocationType.create', 'LocationTypeController@create')->name('LocationType.create');
@@ -154,7 +150,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('LocationType.edit/{id}', 'LocationTypeController@update')->name('LocationType.edit');
     Route::post('LocationType.delete/{id}', 'LocationTypeController@destroy')->name('LocationType.delete');
 
-    //-----Organization-----//
+    /***-- Organization --***/
     Route::get('Organization', 'OrganizationController@index')->name('Organization');
     Route::get('Organizationtk', 'OrganizationController@show')->name('Organizationtk');
     Route::get('Organization.create', 'OrganizationController@create')->name('Organization.create');
@@ -163,7 +159,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Organization.edit/{id}', 'OrganizationController@update')->name('Organization.edit');
     Route::post('Organization.delete/{id}', 'OrganizationController@destroy')->name('Organization.delete');
 
-    //-----Enterprise-----//
+    /***-- Enterprise --***/
     Route::get('Enterprise', 'EnterpriseController@index')->name('Enterprise');
     Route::get('Enterprisetk', 'EnterpriseController@show')->name('Enterprisetk');
     Route::get('Enterprise.create', 'EnterpriseController@create')->name('Enterprise.create');
@@ -172,7 +168,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Enterprise.edit/{id}', 'EnterpriseController@update')->name('Enterprise.edit');
     Route::post('Enterprise.delete/{id}', 'EnterpriseController@destroy')->name('Enterprise.delete');
 
-    //-----Standard-----//
+    /***-- Standard --***/
     Route::get('Standard', 'StandardController@index')->name('Standard');
     Route::get('Standardtk', 'StandardController@show')->name('Standardtk');
     Route::get('Standard.create', 'StandardController@create')->name('Standard.create');
@@ -181,7 +177,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Standard.edit/{id}', 'StandardController@update')->name('Standard.edit');
     Route::post('Standard.delete/{id}', 'StandardController@destroy')->name('Standard.delete');
 
-     //-----CategoryPost-----//
+     /***-- CategoryPost --***/
      Route::get('CatePost', 'CatePostController@index')->name('CatePost');
      Route::get('CatePosttk', 'CatePostController@show')->name('CatePosttk');
      Route::get('CatePost.create', 'CatePostController@create')->name('CatePost.create');
@@ -190,7 +186,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
      Route::post('CatePost.edit/{id}', 'CatePostController@update')->name('CatePost.edit');
      Route::post('CatePost.delete/{id}', 'CatePostController@destroy')->name('CatePost.delete');
 
-    //-----Location-----//
+    /***-- Location --***/
     Route::get('Place', 'PlaceController@index')->name('Place');
     Route::get('Placetk', 'PlaceController@show')->name('Placetk');
     Route::get('Place.create', 'PlaceController@create')->name('Place.create');
@@ -199,7 +195,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Place.edit/{id}', 'PlaceController@update')->name('Place.edit');
     Route::post('Place.delete/{id}', 'PlaceController@destroy')->name('Place.delete');
 
-     //-----Basin-----//
+     /***-- Basin --***/
     Route::get('Basin', 'BasinController@index')->name('Basin');
     Route::get('Basintk', 'BasinController@show')->name('Basintk');
     Route::get('Basin.create', 'BasinController@create')->name('Basin.create');
@@ -210,7 +206,7 @@ Route::group(['prefix' => 'danhmuc'], function () {
 });
 
 Route::group(['prefix' => 'quanly'], function () {
-    //-----Observationstation-----//
+    /***-- Observationstation --***/
     Route::get('Observationstation', 'ObservationstationController@index')->name('Observationstation');
     Route::get('Observationstationtk', 'ObservationstationController@show')->name('Observationstationtk');
     Route::get('Observationstation.create', 'ObservationstationController@create')->name('Observationstation.create');
@@ -219,7 +215,7 @@ Route::group(['prefix' => 'quanly'], function () {
     Route::post('Observationstation.edit/{id}', 'ObservationstationController@update')->name('Observationstation.edit');
     Route::post('Observationstation.delete/{id}', 'ObservationstationController@destroy')->name('Observationstation.delete');
 
-    //-----StandardParameter-----//
+    /***-- StandardParameter --***/
     Route::get('StandardParameter', 'StandardParameterController@index')->name('StandardParameter');
     Route::get('StandardParametertk', 'StandardParameterController@show')->name('StandardParametertk');
     Route::get('StandardParameter.create', 'StandardParameterController@create')->name('StandardParameter.create');
@@ -228,7 +224,7 @@ Route::group(['prefix' => 'quanly'], function () {
     Route::post('StandardParameter.edit/{id}', 'StandardParameterController@update')->name('StandardParameter.edit');
     Route::post('StandardParameter.delete/{id}', 'StandardParameterController@destroy')->name('StandardParameter.delete');
 
-    //-----Camera-----//
+    /***-- Camera --***/
     Route::get('Camera', 'CameraController@index')->name('Camera');
     Route::get('Cameratk', 'CameraController@show')->name('Cameratk');
     Route::get('Camera.create', 'CameraController@create')->name('Camera.create');
@@ -237,7 +233,7 @@ Route::group(['prefix' => 'quanly'], function () {
     Route::post('Camera.edit/{id}', 'CameraController@update')->name('Camera.edit');
     Route::post('Camera.delete/{id}', 'CameraController@destroy')->name('Camera.delete');
 
-    //-----ElectronicBoard-----//
+    /***-- ElectronicBoard --***/
     Route::get('ElectronicBoard', 'ElectronicBoardController@index')->name('ElectronicBoard');
     Route::get('ElectronicBoardtk', 'ElectronicBoardController@show')->name('ElectronicBoardtk');
     Route::get('ElectronicBoard.create', 'ElectronicBoardController@create')->name('ElectronicBoard.create');
@@ -246,8 +242,7 @@ Route::group(['prefix' => 'quanly'], function () {
     Route::post('ElectronicBoard.edit/{id}', 'ElectronicBoardController@update')->name('ElectronicBoard.edit');
     Route::post('ElectronicBoard.delete/{id}', 'ElectronicBoardController@destroy')->name('ElectronicBoard.delete');
 
-     //-----Posts-----//
-   
+    /***-- Posts --***/
     Route::get('Post', 'PostController@index')->name('Post');
     Route::get('Posttk', 'PostController@show')->name('Posttk');
     Route::get('Post.create', 'PostController@create')->name('Post.create');
@@ -258,11 +253,11 @@ Route::group(['prefix' => 'quanly'], function () {
 });
 
 Route::group(['prefix' => 'quantri'], function () {
-    // Route::get('test', function () {
-    //     return "Hàm test";
-    // })->middleware('auth');
+    /* Route::get('test', function () {
+        return "Hàm test";
+    }) -> middleware('auth'); */
 
-    //-----Menu-----//
+    /***-- Menu --***/
     Route::get('menu', 'MenuController@index')->name('menu');
     Route::get('menu.create', 'MenuController@create')->name('menu.create');
     Route::post('menu.create', 'MenuController@store')->name('menu.create');
@@ -270,12 +265,12 @@ Route::group(['prefix' => 'quantri'], function () {
     Route::post('menu.edit/{id}', 'MenuController@update')->name('menu.edit');
     Route::post('menu.delete/{id}', 'MenuController@destroy')->name('menu.delete');
 
-    //-----Permission-----//
-    // Route::get('/permission', [
-    //     'as' => 'permission',
-    //     'uses' => 'PermissionController@index',
-    //     'middleware' => 'checkmiddleware:permission',
-    // ])->name('permission');
+    /***-- Permission
+    Route::get('/permission', [
+        'as' => 'permission',
+        'uses' => 'PermissionController@index',
+        'middleware' => 'checkmiddleware:permission',
+    ])->name('permission'); --***/
     Route::get('permission', 'PermissionController@index')->name('permission');
     Route::get('permission.create', 'PermissionController@create')->name('permission.create');
     Route::post('permission.create', 'PermissionController@store')->name('permission.create');

@@ -56,7 +56,7 @@
         var standardsparameters = []; // tieu chuan va thong so
         var standardsparameterswparam = [];
         var lstParam;
-        var hostIP="http://10.151.46.88/";
+        var hostIP="http://localhost:2502/";
         var sApp = "travinhqt_laravel";
         var sURL = hostIP + sApp + "/";
 

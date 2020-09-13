@@ -58,6 +58,8 @@ https://askubuntu.com/questions/599921/adminer-none-of-the-supported-php-extensi
 + Xóa toàn bộ file trong folder `htdocs`
 
 ### Note kết nối Service Php PostgreSQL
++ Tạo Point theo hệ tọa độ địa lý từ hệ tọa độ mặt phẳng: https://postgis.net/docs/ST_Transform.html
++ Thêm SRID custom vào PostgreSQL: https://gis.stackexchange.com/questions/239807/create-custom-coordinate-system-in-postgis
 + Tạo file config Php (Thông tin kết nối database)
 + Tạo file Geojson từ truy vấn Php PostgreSQL 
 (link: https://stackoverflow.com/questions/31885031/formatting-json-to-geojson-via-php)

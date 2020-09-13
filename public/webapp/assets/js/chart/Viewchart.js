@@ -112,7 +112,6 @@ function render_linechart_quantrac(div_id, data_chart, name_title, key, data) {
 
 /*---- Group Chart của nhiều trạm quan trắc ----*/
 function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, key) {
-    am4core.options.onlyShowOnViewport = true;
     am4core.useTheme(am4themes_animated);
     am4core.ready(function () {
 
@@ -207,7 +206,6 @@ function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, 
 }
 
 function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, key) {
-    am4core.options.onlyShowOnViewport = true;
     am4core.useTheme(am4themes_animated);
     am4core.ready(function () {
 

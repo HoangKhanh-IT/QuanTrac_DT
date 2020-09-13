@@ -12,7 +12,7 @@ class Call_obstyles_stat_option extends Controller
     {
         $result = DB::table('ObservationType')
         ->select('id', 'name', 'parentid')
-        ->orderBy('name')
+        ->orderBy('id')
         ->get()
         ->toArray();
 
@@ -23,17 +23,56 @@ class Call_obstyles_stat_option extends Controller
             if ($value['parentid'] == null) {
                 $option[] = array(
                     'id' => $value['id'],
+                    'flag' => $value['id'],
                     'name' => $value['name'],
                 );
             } else {
                 $option[] = array(
                     'id' => $value['id'],
+                    'flag' => $value['parentid'],
                     'name' => "--- ".$value['name']." ---",
                 );
             }
         }
 
-        $final_data = json_encode($option);
+        /*** Hàm sort theo Object key bất kỳ ***/
+        function array_sort($array, $on, $order = SORT_ASC)
+        {
+            $new_array = array();
+            $sortable_array = array();
+
+            if (count($array) > 0) {
+                foreach ($array as $k => $v) {
+                    if (is_array($v)) {
+                        foreach ($v as $k2 => $v2) {
+                            if ($k2 == $on) {
+                                $sortable_array[$k] = $v2;
+                            }
+                        }
+                    } else {
+                        $sortable_array[$k] = $v;
+                    }
+                }
+
+                switch ($order) {
+                    case SORT_ASC:
+                        asort($sortable_array);
+                    break;
+                    case SORT_DESC:
+                        arsort($sortable_array);
+                    break;
+                }
+
+                foreach ($sortable_array as $k => $v) {
+                    $new_array[$k] = $array[$k];
+                }
+            }
+
+            return $new_array;
+        }
+
+        /*** Sau khi sort cần loại bỏ Object key của hàm để DOM đúng thứ tự ***/
+        $final_data = json_encode(array_values(array_sort($option, 'flag', SORT_DESC)));
         return $final_data;
     }
 }

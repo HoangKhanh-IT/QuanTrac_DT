@@ -68,6 +68,11 @@
                 <ul class="nav navbar-nav" style="margin-top: 1.25%">
                     <li>
                         <a data-target=".navbar-collapse.in" data-toggle="collapse" href="master" id="admin-btn">
+                            <i class="icon-newspaper blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Tin tức
+                        </a>
+                    </li>
+                    <li>
+                        <a data-target=".navbar-collapse.in" data-toggle="collapse" href="master" id="admin-btn">
                             <i class="icon-table2 blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Quản trị
                         </a>
                     </li>
@@ -255,23 +260,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- Hướng dẫn sử dụng -->
-                    <div class="panel-heading" data-toggle="collapse" href="#help_qt">
-                        <h3 class="panel-title blue">
-                            <i class="icon-help" style="font-size: 16px; margin-top: -2px;"></i>&nbsp;&nbsp;&nbsp;Hướng dẫn sử dụng
-                        </h3>
-                    </div>
-                    <div class="panel-body collapse" id="help_qt">
-                        <div class="col-xs-8 col-md-8">
-                            <i class="fa fa-file" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                            <a class="panel-help" href="assets/text/TaiLieuHuongDanSuDung.doc">Tài liệu hướng dẫn</a>
-                        </div>
-                        <div class="col-xs-8 col-md-8" style="margin-top: 10px">
-                            <i class="fa fa-barcode" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                            <span class="panel-version">Phiên bản&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <span class="badge bg-info panel-version-style">1.0</span>
-                        </div>
-                    </div>
                     <!-- Lớp dữ liệu -->
                     <div class="panel-heading panel-data-quantrac" data-toggle="collapse" href="#data_layer_tramqt" >
                         <h3 class="panel-title blue">
@@ -390,6 +378,23 @@
                             </div>
                             <label class="nav-titles nav-titles-default">Nhãn đơn vị hành chính</label>
                         </div> -->
+                    </div>
+                    <!-- Hướng dẫn sử dụng -->
+                    <div class="panel-heading" data-toggle="collapse" href="#help_qt">
+                        <h3 class="panel-title blue">
+                            <i class="icon-help" style="font-size: 16px; margin-top: -2px;"></i>&nbsp;&nbsp;&nbsp;Hướng dẫn sử dụng
+                        </h3>
+                    </div>
+                    <div class="panel-body collapse" id="help_qt">
+                        <div class="col-xs-8 col-md-8">
+                            <i class="fa fa-file" style="font-size: 16px; margin-top: -2px; color: #999"></i>
+                            <a class="panel-help" href="assets/text/TaiLieuHuongDanSuDung.doc">Tài liệu hướng dẫn</a>
+                        </div>
+                        <div class="col-xs-8 col-md-8" style="margin-top: 10px">
+                            <i class="fa fa-barcode" style="font-size: 16px; margin-top: -2px; color: #999"></i>
+                            <span class="panel-version">Phiên bản&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span class="badge bg-info panel-version-style">1.0</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -760,7 +765,9 @@
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
                                     <select class="form-control" id="loaihinh_WA">
-                                        <!-- DOM từ DB vào -->
+                                        <option selected value="2">Nước mặt</option>
+                                        <option value="1">Không khí</option>
+                                        option
                                     </select>
                                 </div>
                             </div>
@@ -831,19 +838,8 @@
                                 </div>
                                 <div class="form-group col-xs-7 col-md-7 modal-advanced">
                                     <select class="form-control" id="quality_WA">
-                                        <option value="WQI">Chỉ số chất lượng nước (WQI)</option>
+                                        <option selected value="WQI">Chỉ số chất lượng nước (WQI)</option>
                                         <option value="AQI">Chỉ số chất lượng không khí (AQI)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
-                                    <i class="icon-list-numbered brown" style="font-size: 16px; margin-top: -2px"></i>
-                                    <span for="" class="black" style="margin-left: 1px">&nbsp;Danh sách các trạm</span>
-                                </div>
-                                <div class="form-group col-xs-7 col-md-7 modal-advanced">
-                                    <select class="form-control" id="">
-                                        <!-- DOM từ DB vào -->
                                     </select>
                                 </div>
                             </div>

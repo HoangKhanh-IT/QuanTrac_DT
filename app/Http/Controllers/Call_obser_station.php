@@ -18,8 +18,12 @@ class Call_obser_station extends Controller
 
         $querry_tramqt_select = 'SELECT
                             "station"."id", "station"."code", "station"."name",
-                            "station"."coordx", "station"."coordy",
-                            "station"."establishdate", "station"."terminatedate",
+                            "station"."coordx", "station"."coordy",';
+
+        /*** Thêm hàm để chuyển đổi dữ liệu từ hệ quy chiếu 3 độ VN2000 sang hệ quy chiếu địa lý (kinh, vĩ độ) 4326 ***/
+        $querry_tramqt_select .= 'ST_AsText(ST_Transform(ST_GeomFromText(concat(\'POINT(\', "station"."coordx", \' \', "station"."coordy", \')\'), 9209), 4326)) AS LatLng, ';
+
+        $querry_tramqt_select .= '"station"."establishdate", "station"."terminatedate",
                             "station"."maintenance", "station"."active",
                             "category"."name" "categoryName",
                             "category"."id" "categoryID",
@@ -145,8 +149,9 @@ class Call_obser_station extends Controller
                 'geometry' => array(
                     'type' => 'Point',
                     'coordinates' => array(
-                        floatval($value['coordx']),
-                        floatval($value['coordy'])
+                        /*** Cắt chuỗi POINT để lấy tọa độ ***/
+                        floatval(explode("POINT(",explode(" ", $value['latlng'])[0])[1]),
+                        floatval(explode(" ", $value['latlng'])[1])
                     ),
                 ),
             );

@@ -48,13 +48,13 @@ var Basemaps_Control = [
     }),
 ]
 
-/*---- Đọc WMS Geosever ----*/
+/*---- Đọc WMS Geosever
 var view_travinh_huyen = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac_travinh/wms?', {
     layers: 'quantrac_travinh',
     tiled: true,
     format: 'image/png',
     transparent: true
-});
+}); ----*/
 
 /*---- Đem biến map ra ngoài cấu trúc nested của getJSON để không bị lỗi invalidateSize bên main.js ----*/
 var map = L.map('mymap', {
@@ -320,5 +320,5 @@ map.addControl(
 
 /*---- Add layer Geoserver ----*/
 /*** var ggm = new L.Google('ROADMAP');
- ggm.addTo(map); ***/
-view_travinh_huyen.addTo(map);
+ ggm.addTo(map);
+view_travinh_huyen.addTo(map); ***/
