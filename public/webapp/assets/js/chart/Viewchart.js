@@ -37,7 +37,8 @@ function render_columnchart_quantrac(div_id, data_chart, name_title, key, data) 
         series.fill = "#007bff";
         series.fillOpacity = 0.3;
         series.yAxis = valueAxis;
-        series.tooltipText = "Thời gian: {dateX}\n Giá trị: [bold font-size: 13]{valueY}[/]";
+        series.tooltipText = "Thời gian: {dateX.formatDate(\"dd/MM/yyyy\")}" +
+            "\n Giá trị: [bold font-size: 13]{valueY}[/]";
 
         var columnTemplate = series.columns.template;
         columnTemplate.strokeWidth = 2;
@@ -95,7 +96,8 @@ function render_linechart_quantrac(div_id, data_chart, name_title, key, data) {
         series.fill = "#007bff";
         series.fillOpacity = 0.3;
         series.yAxis = valueAxis;
-        series.tooltipText = "Thời gian: {dateX}\n Giá trị: [bold font-size: 13]{valueY}[/]";
+        series.tooltipText = "Thời gian: {dateX.formatDate(\"dd/MM/yyyy\")}" +
+            "\n Giá trị: [bold font-size: 13]{valueY}[/]";
 
         chart.cursor = new am4charts.XYCursor();
         chart.cursor.lineY.opacity = 0;
@@ -151,7 +153,7 @@ function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, 
             series.fill = color;
             series.fillOpacity = 0.3;
             series.tooltipText = "Trạm quan trắc: [bold font-size: 13]{name}\n" +
-                "Thời gian: [bold font-size: 13]{dateX}\n " +
+                "Thời gian: [bold font-size: 13]{dateX.formatDate(\"dd/MM/yyyy\")}\n" +
                 "Giá trị: [bold font-size: 13]{valueY} " + unit + "[/]";
         }
 
@@ -247,7 +249,7 @@ function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, ke
             series.fill = color;
             series.fillOpacity = 0.3;
             series.tooltipText = "Trạm quan trắc: [bold font-size: 13]{name}\n" +
-                "Thời gian: [bold font-size: 13]{dateX}\n " +
+                "Thời gian: [bold font-size: 13]{dateX.formatDate(\"dd/MM/yyyy\")}\n " +
                 "Giá trị: [bold font-size: 13]{valueY}[/] " + unit + "[/]";
 
             var interfaceColors = new am4core.InterfaceColorSet();

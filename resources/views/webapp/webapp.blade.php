@@ -388,7 +388,7 @@
                     <div class="panel-body collapse" id="help_qt">
                         <div class="col-xs-8 col-md-8">
                             <i class="fa fa-file" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                            <a class="panel-help" href="assets/text/TaiLieuHuongDanSuDung.doc">Tài liệu hướng dẫn</a>
+                            <a class="panel-help" href="{{ asset('public/webapp/assets/text/TaiLieuHuongDanSuDung.doc') }}">Tài liệu hướng dẫn</a>
                         </div>
                         <div class="col-xs-8 col-md-8" style="margin-top: 10px">
                             <i class="fa fa-barcode" style="font-size: 16px; margin-top: -2px; color: #999"></i>
@@ -865,9 +865,17 @@
                     </h4>
                 </div>
                 <div class="modal-body modal-body-re-WA" style="overflow: unset">
-                    <div class="form-group col-xs-12 col-md-12" style="padding: 0px">
+                    <div class="form-group col-xs-7 col-md-7" style="padding: 0px">
                         <a href="#" id="export_AQIWQI_Excel" class="btn btn-danger" role="button">EXCEL</a>
                         <a href="#" id="export_AQIWQI_PDF" class="btn btn-danger" role="button">PDF</a>
+                    </div>
+                    <div class="form-group col-xs-1 col-md-1" style="padding: 0px">
+                        <i class="fa fa-search brown" style="font-size: 20px;
+                        margin-left: 60%; margin-top: 6%;"></i>
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4" style="padding: 0px">
+                        <input class="form-control" type="text"
+                               placeholder="Tìm kiếm ..." id="search_WA">
                     </div>
                     <div class="form-group col-xs-12 col-md-12" id="tab_AQIWQI_stat">
                         <table class="table table-striped table-bordered table-condensed table-responsive" cellspacing="0" width="100%" id="table_re_WA">
@@ -985,8 +993,8 @@
                 <div class="modal-body modal-body-statistic">
                     <form class="statistic-form">
                         <fieldset>
-                            <div class="form-group">
-                                <!-- <div class="col-xs-5 col-md-5 modal-advanced-titles">
+                            <!-- <div class="form-group">
+                                <div class="col-xs-5 col-md-5 modal-advanced-titles">
                                     <i class="icon-file-stats2 green" style="font-size: 16px; margin-top: -2px"></i>
                                     <span for="loaihinh" class="black" style="margin-left: 1px">&nbsp;Tùy chọn hiển thị</span>
                                 </div>
@@ -1037,8 +1045,21 @@
                                             <label>AQI</label>
                                         </div>
                                     </div>
-                                </div>-->
+                                </div>
+                            </div> -->
+                            <div class="form-group" style="margin-top: 5px">
+                                <div class="col-xs-12 col-md-12">
+                                    <span id="statStatus_error"
+                                          style="font-weight: bold; text-align: center;
+                                          display: none; color: red"></span>
+                                </div>
                             </div>
+                            <!-- <div class="form-group">
+                                <div class="form-group col-xs-7 col-md-7">
+                                    <span id="statStatus_success"
+                                          style="font-weight: bold; display: none; color: green"></span>
+                                </div>
+                            </div> -->
                             <div class="form-group">
                                 <div class="col-xs-5 col-md-5 modal-advanced-titles">
                                     <i class="icon-lab green" style="font-size: 16px; margin-top: -2px"></i>

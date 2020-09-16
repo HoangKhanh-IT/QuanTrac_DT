@@ -985,10 +985,10 @@ div.dataTables_scrollBody table tbody tr:first-child td {
 }
 
 .modal-body-statistic {
-    padding-top: 5px;
-    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 15px;
     padding-right: 0px;
-    height: 510px;
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -1103,6 +1103,21 @@ span .paginate_button {
     }
 }
 
+/*** Màn hình độ phân giải 1920 - 1080 ***/
+@media (min-width: 992px) {
+    .table-scroll {
+        width: 96.5em;
+    }
+
+    #tab_stat tr:first-child th:first-child {
+        width: 10%;
+    }
+
+    .table-scroll table {
+        min-width: unset;
+    }
+}
+
 @media (max-width: 767px) {
     #sidebar {
         display: none;
@@ -1158,13 +1173,10 @@ span .paginate_button {
     .collapse_menu {
         margin-top: 24px;
     }
-
-    .table-scroll {
-        width: 96.5em;
-    }
 }
 
-@media (max-width: 1080px) {
+/*** Màn hình độ phân giải 1024 - 768 ***/
+@media (min-width: 1024px) {
     .table-scroll {
         width: 64.5em;
     }
@@ -1178,6 +1190,35 @@ span .paginate_button {
     }
 }
 
+/*** Màn hình độ phân giải 1280 - 800 ***/
+@media (min-width: 1280px) {
+    .table-scroll {
+        width: 81.5em;
+    }
+
+    #tab_stat tr:first-child th:first-child {
+        width: 10%;
+    }
+
+    .table-scroll table {
+        min-width: unset;
+    }
+}
+
+/*** Màn hình độ phân giải 1366 - 768 ***/
+@media (min-width: 1366px) {
+    .table-scroll {
+        width: 85.5em;
+    }
+
+    #tab_stat tr:first-child th:first-child {
+        width: 10%;
+    }
+
+    .table-scroll table {
+        min-width: unset;
+    }
+}
 
 @media (max-width: 600px) {
     #titlefont1 {

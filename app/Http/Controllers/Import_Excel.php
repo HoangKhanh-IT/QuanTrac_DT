@@ -3,6 +3,7 @@
 ?>
 
 <?php
+    $quychuan_note = $_POST['quychuan_option'];
     $exceljson = $_POST['importExcel'];
 
     foreach($exceljson as $row) {
@@ -45,14 +46,13 @@
             ',' . "'" . $time . "'" . ',' . "'" . $dateOfSampling . "'" .
             ',' . "'" . $dateOfAnalysis . "'" . ',' . "'" . $samplingLocations . "'" .
             ',' . "'" . $weather . "'" . ',' . "'" . $idExcel . "'" .')';
-        echo $querry_values_code;
 
         $querry_insert_code = 'INSERT INTO "SampleBanTuDong"(
                                 "symbol", "stationid", "time", "dateOfSampling",
                                 "dateOfAnalysis", "samplingLocations", "weather", "idExcel")
                                 VALUES' . $querry_values_code;
 
-        // pg_query($travinh_db, $querry_insert_code);
+        pg_query($travinh_db, $querry_insert_code);
 
         /*---- Insert vào bảng Observation ----*/
         /*** Luôn Restart để tìm ID lớn nhất ***/
@@ -64,14 +64,28 @@
         $max_count_obser = $max_arr_obser[0]['count'] + 1;
         pg_query($travinh_db, 'ALTER SEQUENCE observation_id_seq RESTART WITH ' . $max_count_obser);
 
+        /*** Tìm quy chuẩn Code ***/
+        $querry_select_Stdcode = 'SELECT "standard"."symbol"
+                                    FROM "Standard" "standard"' .
+            " WHERE" . '"standard"."id"' . "= '" . $quychuan_note . "'";
+        $result_Std = pg_query($travinh_db, $querry_select_Stdcode);
+        if (!$result_Std) {
+            echo "Không có dữ liệu.\n";
+            exit;
+        }
+        $data_rsStd = array();
+        while ($row = pg_fetch_assoc($result_Std)) {
+            $data_rsStd[] = $row;
+        }
+
         $querry_values_observation = '(' . "'" . $dateOfAnalysis . "'" . ','. "'" .$time . "'" .
-            ',' . "'" . $max_count . "'" . ',' . "'" . $data_rs[0]['id'] . "'" .
-            ',' . "'" . $detail . "'" .')';
+            ',' . "'" . $max_count . "'" . ',' . "'" .$data_rsStd[0]['symbol']. "'" .
+            ',' . "'" . $data_rs[0]['id'] . "'" .',' . "'" . $detail . "'" .')';
 
         $querry_insert_observation = 'INSERT INTO "Observation"(
-                                "day", "time", "sampleid", "stationid", "detail")
+                                "day", "time", "sampleid", "note", "stationid", "detail")
                                 VALUES' . $querry_values_observation;
 
-        // pg_query($travinh_db, stripslashes($querry_insert_observation));
+        pg_query($travinh_db, stripslashes($querry_insert_observation));
     }
 ?>

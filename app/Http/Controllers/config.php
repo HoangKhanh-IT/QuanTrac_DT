@@ -1,8 +1,8 @@
 <?php
-    $travinh_db = pg_connect("host=localhost 
+    $travinh_db = pg_connect("host=localhost
         port=5432
-        dbname=travinh_quantrac 
-        user=postgres 
+        dbname=travinh_quantrac_ad
+        user=postgres
         password=0888365051"
     );
     if (!$travinh_db) {

@@ -17,6 +17,14 @@ if (!("ontouchstart" in window)) {
     });
 }
 
+/*---- Tìm kiếm Đánh giá chất lượng môi trường ----*/
+$("#search_WA").on("keyup", function () {
+    var value = $(this).val().toLowerCase();
+    $("#tab_AQIWQI_stat tbody tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
+
 $(document).on("mouseout", ".feature-row", clearHighlight);
 
 /*---- Reset Input ----*/
@@ -106,7 +114,7 @@ function formatDatetime() {
         /*** Vị trí mở tìm ngày luôn nằm ở Top ***/
         widgetPositioning: {
             horizontal: 'auto',
-            vertical: 'auto'
+            vertical: 'top'
         },
         useCurrent: false
     });
@@ -115,7 +123,7 @@ function formatDatetime() {
         format: 'L',
         widgetPositioning: {
             horizontal: 'auto',
-            vertical: 'auto'
+            vertical: 'top'
         },
         useCurrent: false /* Important! See issue #1075 */
     });
@@ -197,34 +205,69 @@ var checkboxed_para_arr = [];
 var checkboxed_paraName_arr = [];
 
 $("#statistic-result-btn").click(function () {
-    $("#statisticModal").modal("hide");
-    /*** Xử lý JSON theo thông số ***/
-    data_quantrac_selected = process_detail_parameter(data_quantrac_selected,
-        checkboxed_para_arr)
+    /*** Kiểm tra các thông số đã có hay chưa ***/
+    var check_loaihinh_stat = $("#loaihinh_stat").val();
+    var check_loaitram_stat = $("#loaitram_stat").val();
+    var check_quanhuyen_stat = $("#district_stat").val();
+    var check_quantrac_stat = $('#search_quantrac').val();
+    var check_para_stat = $('#search_para').val();
+    var check_FDate_stat = $("#FromDate_stat input").val();
+    var check_TDate_stat = $("#ToDate_stat input").val();
 
-    /*** Dùng trigger() để load lại dữ liệu - tránh trường hợp thay đổi
-     thứ tự thông số được chọn ***/
-    $('#para_multiple').trigger("click");
-    /*** DOM result Chart Stat ***/
-    render_stat_chart($("#filter_stat_typechart").val(), data_quantrac_selected,
-        checkboxed_para_arr, checkboxed_paraName_arr);
+    /*** Kiểm tra thông số và trạm quan trắc đã nhập chưa ***/
+    if (check_quantrac_stat == '' || check_para_stat == '') {
+        $("#statStatus_error").css("display", "block");
+        $("#statStatus_error").text("Bạn chưa chọn trạm quan trắc hoặc chưa chọn thông số");
+        /*** Tắt thông báo sau 3s ***/
+        setTimeout(function() {
+            $("#statStatus_error").css("display", "none");
+        }, 3000)
 
-    /*** Onchange Type Chart ***/
-    var item_stat_type = $("#filter_stat_typechart").val();
-    $("#filter_stat_typechart").change(function () {
+    } else if (check_FDate_stat == '' || check_TDate_stat == '') {
+        $("#statStatus_error").css("display", "block");
+        $("#statStatus_error").text("Bạn chưa chọn thời gian thống kê");
+        setTimeout(function() {
+            $("#statStatus_error").css("display", "none");
+        }, 3000)
+
+    } else {
+        /*** Xử lý JSON theo thông số ***/
+        data_quantrac_selected = process_detail_parameter(data_quantrac_selected,
+            checkboxed_para_arr)
+
+        /*** Dùng trigger() để load lại dữ liệu - tránh trường hợp thay đổi
+         thứ tự thông số được chọn ***/
         $('#para_multiple').trigger("click");
-        /*** Cần gán lại biến item_stat_type ***/
-        item_stat_type = $("#filter_stat_typechart").val();
-        render_stat_chart(item_stat_type, data_quantrac_selected,
+        /*** DOM result Chart Stat ***/
+        var check_length = render_stat_chart($("#filter_stat_typechart").val(), data_quantrac_selected,
             checkboxed_para_arr, checkboxed_paraName_arr);
-    })
+        if (check_length != 0) {
+            $("#statisticModal").modal("hide");
+            /*** Onchange Type Chart ***/
+            var item_stat_type = $("#filter_stat_typechart").val();
+            $("#filter_stat_typechart").change(function () {
+                $('#para_multiple').trigger("click");
+                /*** Cần gán lại biến item_stat_type ***/
+                item_stat_type = $("#filter_stat_typechart").val();
+                var char_rs = render_stat_chart(item_stat_type, data_quantrac_selected,
+                    checkboxed_para_arr, checkboxed_paraName_arr);
+            })
 
-    /*** DOM result Datatable Stat ***/
-    var datatable_DOM = process_stat_datatable(data_quantrac_selected, checkboxed_para_arr)
-    var thead_table = render_stat_thead_datatable()
-    render_stat_datatable(datatable_DOM, thead_table)
+            /*** DOM result Datatable Stat ***/
+            var datatable_DOM = process_stat_datatable(data_quantrac_selected, checkboxed_para_arr)
+            var thead_table = render_stat_thead_datatable()
+            render_stat_datatable(datatable_DOM, thead_table)
 
-    $("#statistic_resultModal").modal("show");
+            /*** Show modal kết quả ***/
+            $("#statistic_resultModal").modal("show");
+        } else {
+            $("#statStatus_error").css("display", "block");
+            $("#statStatus_error").text("Không có dữ liệu thống kê");
+            setTimeout(function() {
+                $("#statStatus_error").css("display", "none");
+            }, 3000)
+        }
+    }
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
@@ -257,7 +300,11 @@ $("#search_stats_tramqt").click(function () {
     var item_quychuan_stat = $("#standardtype").val();
 
     if (item_loaihinh_stat == 'none') {
-        alert("Vui lòng chọn loại hình");
+        $("#statStatus_error").css("display", "block");
+        $("#statStatus_error").text("Vui lòng chọn loại hình hoặc quy chuẩn");
+        setTimeout(function() {
+            $("#statStatus_error").css("display", "none");
+        }, 3000)
     } else {
         if (item_quanhuyen_stat == 'none') {
             url_list_stations = 'statStation?' + '%20loaihinh_stat=' + item_loaihinh_stat +
@@ -269,283 +316,302 @@ $("#search_stats_tramqt").click(function () {
                 '&%20quychuan_stat=' + item_quychuan_stat;
         }
 
-        $(document).ready(function () {
-            if ($.fn.DataTable.isDataTable('#table_stat_stations')) {
-                $('#table_stat_stations').DataTable().ajax.url(url_list_stations).load();
+        var length_list_stations;
+        $.ajax({
+            url: url_list_stations,
+            async: false,
+            dataType: 'json',
+            success: function (list_stations) {
+                length_list_stations = list_stations.data.length;
             }
-            if (!$.fn.DataTable.isDataTable('#table_stat_stations')) {
-                /*** Hàm xử lý DOM các trạm quan trắc ***/
-                var table_stat_stations = $('#table_stat_stations').DataTable({
-                    ajax: url_list_stations,
-                    columns: [
-                        {"data": "code"},
-                        {"data": "name"}
-                    ],
-                    order: [
-                        [1, 'asc']
-                    ],
-                    dom: "<'row'<'col-sm-12'f>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-                    paging: false,
-                    autoWidth: false,
-                    "ordering": false,
-                    "language": {
-                        pagingType: "full_numbers",
-                        search: '<span>Tìm kiếm:</span> _INPUT_',
-                        searchPlaceholder: 'Gõ để tìm...',
-                        paginate: {
-                            'first': 'First',
-                            'last': 'Last',
-                            'next': $('html').attr('dir') == 'rtl' ? '<span style="font-size:13px;">Trước</span>' : '<span style="font-size:13px;">Sau</span>',
-                            'previous': $('html').attr('dir') == 'rtl' ? '<span style="font-size:13px;">Sau</span>' : '<span style="font-size:13px;">Trước</span>'
+        });
+
+        if (length_list_stations != 0) {
+            $(document).ready(function () {
+                if ($.fn.DataTable.isDataTable('#table_stat_stations')) {
+                    $('#table_stat_stations').DataTable().ajax.url(url_list_stations).load();
+                }
+                if (!$.fn.DataTable.isDataTable('#table_stat_stations')) {
+                    /*** Hàm xử lý DOM các trạm quan trắc ***/
+                    var table_stat_stations = $('#table_stat_stations').DataTable({
+                        ajax: url_list_stations,
+                        columns: [
+                            {"data": "code"},
+                            {"data": "name"}
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                        dom: "<'row'<'col-sm-12'f>>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                        paging: false,
+                        autoWidth: false,
+                        "ordering": false,
+                        "language": {
+                            pagingType: "full_numbers",
+                            search: '<span>Tìm kiếm:</span> _INPUT_',
+                            searchPlaceholder: 'Gõ để tìm...',
+                            paginate: {
+                                'first': 'First',
+                                'last': 'Last',
+                                'next': $('html').attr('dir') == 'rtl' ? '<span style="font-size:13px;">Trước</span>' : '<span style="font-size:13px;">Sau</span>',
+                                'previous': $('html').attr('dir') == 'rtl' ? '<span style="font-size:13px;">Sau</span>' : '<span style="font-size:13px;">Trước</span>'
+                            },
+                            sLengthMenu: "<span>Hiển thị&nbsp;</span> _MENU_<span> kết quả</span>",
+                            sZeroRecords: "Vui lòng chờ ...",
+                            sInfo: "Hiển thị _START_ đến _END_ trên _TOTAL_ dòng",
+                            sInfoFiltered: "(tất cả _MAX_ dòng)",
+                            sInfoEmpty: "Hiển thị 0 đến _END_ trên _TOTAL_ dòng",
                         },
-                        sLengthMenu: "<span>Hiển thị&nbsp;</span> _MENU_<span> kết quả</span>",
-                        sZeroRecords: " ",
-                        sInfo: "Hiển thị _START_ đến _END_ trên _TOTAL_ dòng",
-                        sInfoFiltered: "(tất cả _MAX_ dòng)",
-                        sInfoEmpty: "Hiển thị 0 đến _END_ trên _TOTAL_ dòng",
-                    },
-                });
+                    });
 
-                table_stat_stations.buttons().container()
-                    .appendTo('#table_stat_stations_wrapper .col-md-12:eq(0)');
+                    table_stat_stations.buttons().container()
+                        .appendTo('#table_stat_stations_wrapper .col-md-12:eq(0)');
 
-                $('#table_stat_stations tbody').on('click', 'tr', function () {
-                    $(this).toggleClass('selected');
-                    /*** Chặn chọn lớn hơn 3 trạm ***/
-                    if (table_stat_stations.rows('.selected').data().length > 3) {
-                        alert("Vui lòng chỉ chọn tối đa 3 trạm");
-                        $(this).removeClass('selected');
-                    }
-                });
-
-                /*** Xử lý trong modal (phần Tìm trạm)***/
-                $('#station_multiple').click(function () {
-                    /*** Kiểm tra có hàng dữ liệu nào được chọn không ***/
-                    if (table_stat_stations.rows('.selected').data().length == 0) {
-                        data_quantrac_selected = [];
-                        $('#search_quantrac').val('');
-                    } else {
-                        data_quantrac_selected = [];
-                        var station_selected = '';
-                        var data_selected = Object.keys(table_stat_stations.rows('.selected').data())
-                        if (table_stat_stations.rows('.selected').data().length == 0) {
-                            $('#search_quantrac').val("");
-                        } else {
-                            for (var i_data_selected = 0; i_data_selected < data_selected.length; i_data_selected++) {
-                                if (isNaN(Number(data_selected[i_data_selected])) == false) {
-                                    data_quantrac_selected.push(table_stat_stations.rows('.selected').data()[i_data_selected])
-                                    station_selected +=
-                                        table_stat_stations.rows('.selected').data()[i_data_selected].name + " ";
-                                    $('#search_quantrac').val(station_selected);
-                                }
-                            }
+                    $('#table_stat_stations tbody').on('click', 'tr', function () {
+                        $(this).toggleClass('selected');
+                        /*** Chặn chọn lớn hơn 3 trạm ***/
+                        if (table_stat_stations.rows('.selected').data().length > 3) {
+                            alert("Vui lòng chỉ chọn tối đa 3 trạm");
+                            $(this).removeClass('selected');
                         }
-                    }
+                    });
 
-                    /*** Hàm xử lý DOM các input Thông số ***/
-                    var dom_input_checkbox_para = '<ul id="para_list" style="list-style-type: none; ' +
-                        'padding:0">' +
-                        '<li>' +
-                        '<div class="pretty p-svg p-curve">' +
-                        '<input id="checked_all" type=checkbox>' +
-                        '<div class="state p-success">' +
-                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
-                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
-                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
-                        '</svg>' +
-                        '<label>Tất cả</label>' +
-                        '</div>' +
-                        '</div>' +
-                        '</li><br>';
-
-                    if (data_quantrac_selected.length != 0) {
-                        var spid_para_unit = []
-                        /*** Lấy danh sách checkbox cho Modal chọn thông số ***/
-                        for (var i_quantrac_select = 0; i_quantrac_select < data_quantrac_selected.length; i_quantrac_select++) {
-                            var total_detail = data_quantrac_selected[i_quantrac_select].total_detail;
-
-                            for (var j = total_detail.length - 1; j >= 0; j--) {
-                                var data = total_detail[j].data;
-                                for (var k = data.length - 1; k >= 0; k--) {
-                                    var spidID = Object.keys(data[k]);
-                                    var value = Object.values(data[k]);
-
-                                    for (var k_para_sample = 0; k_para_sample < total_std_param.length; k_para_sample++) {
-                                        if (parseInt(spidID) == total_std_param[k_para_sample].id) {
-                                            parameterName = total_std_param[k_para_sample].parameterName;
-                                            unitName = total_std_param[k_para_sample].unitName;
-                                            purposeName = total_std_param[k_para_sample].purposeName;
-                                            if (unitName == null) {
-                                                unitName = '';
-                                            }
-
-                                            if (purposeName == null) {
-                                                purposeName = '';
-                                            }
-
-                                            spid_para_unit.push({
-                                                "spidID": parseInt(spidID),
-                                                "parameterName": parameterName,
-                                                "unitName": unitName,
-                                                "purposeName": purposeName
-                                            });
-                                        }
+                    /*** Xử lý trong modal (phần Tìm trạm)***/
+                    $('#station_multiple').click(function () {
+                        /*** Kiểm tra có hàng dữ liệu nào được chọn không ***/
+                        if (table_stat_stations.rows('.selected').data().length == 0) {
+                            data_quantrac_selected = [];
+                            $('#search_quantrac').val('');
+                        } else {
+                            data_quantrac_selected = [];
+                            var station_selected = '';
+                            var data_selected = Object.keys(table_stat_stations.rows('.selected').data())
+                            if (table_stat_stations.rows('.selected').data().length == 0) {
+                                $('#search_quantrac').val("");
+                            } else {
+                                for (var i_data_selected = 0; i_data_selected < data_selected.length; i_data_selected++) {
+                                    if (isNaN(Number(data_selected[i_data_selected])) == false) {
+                                        data_quantrac_selected.push(table_stat_stations.rows('.selected').data()[i_data_selected])
+                                        station_selected +=
+                                            table_stat_stations.rows('.selected').data()[i_data_selected].name + " ";
+                                        $('#search_quantrac').val(station_selected);
                                     }
                                 }
                             }
                         }
-                        /*** Tìm hợp lớn nhất của các thông số ***/
-                        var spid_para_unit_unique = [];
-                        spid_para_unit.forEach(function (item) {
-                            var i = spid_para_unit_unique.findIndex(x => x.spidID == item.spidID);
-                            if (i <= -1) {
-                                spid_para_unit_unique.push({
-                                    "spidID": item.spidID,
-                                    "parameterName": item.parameterName,
-                                    "unitName": item.unitName,
-                                    "purposeName": item.purposeName
-                                });
+
+                        /*** Hàm xử lý DOM các input Thông số ***/
+                        var dom_input_checkbox_para = '<ul id="para_list" style="list-style-type: none; ' +
+                            'padding:0">' +
+                            '<li>' +
+                            '<div class="pretty p-svg p-curve">' +
+                            '<input id="checked_all" type=checkbox>' +
+                            '<div class="state p-success">' +
+                            '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                            '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                            '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                            '</svg>' +
+                            '<label>Tất cả</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '</li><br>';
+
+                        if (data_quantrac_selected.length != 0) {
+                            var spid_para_unit = []
+                            /*** Lấy danh sách checkbox cho Modal chọn thông số ***/
+                            for (var i_quantrac_select = 0; i_quantrac_select < data_quantrac_selected.length; i_quantrac_select++) {
+                                var total_detail = data_quantrac_selected[i_quantrac_select].total_detail;
+
+                                for (var j = total_detail.length - 1; j >= 0; j--) {
+                                    var data = total_detail[j].data;
+                                    for (var k = data.length - 1; k >= 0; k--) {
+                                        var spidID = Object.keys(data[k]);
+                                        var value = Object.values(data[k]);
+
+                                        for (var k_para_sample = 0; k_para_sample < total_std_param.length; k_para_sample++) {
+                                            if (parseInt(spidID) == total_std_param[k_para_sample].id) {
+                                                parameterName = total_std_param[k_para_sample].parameterName;
+                                                unitName = total_std_param[k_para_sample].unitName;
+                                                purposeName = total_std_param[k_para_sample].purposeName;
+                                                if (unitName == null) {
+                                                    unitName = '';
+                                                }
+
+                                                if (purposeName == null) {
+                                                    purposeName = '';
+                                                }
+
+                                                spid_para_unit.push({
+                                                    "spidID": parseInt(spidID),
+                                                    "parameterName": parameterName,
+                                                    "unitName": unitName,
+                                                    "purposeName": purposeName
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            /*** Tìm hợp lớn nhất của các thông số ***/
+                            var spid_para_unit_unique = [];
+                            spid_para_unit.forEach(function (item) {
+                                var i = spid_para_unit_unique.findIndex(x => x.spidID == item.spidID);
+                                if (i <= -1) {
+                                    spid_para_unit_unique.push({
+                                        "spidID": item.spidID,
+                                        "parameterName": item.parameterName,
+                                        "unitName": item.unitName,
+                                        "purposeName": item.purposeName
+                                    });
+                                }
+                            });
+                            sortResults(spid_para_unit_unique, "spidID", true)
+
+                            for (var i_param_unique = 0; i_param_unique < spid_para_unit_unique.length; i_param_unique++) {
+                                /*** DOM List checkbox Thông số ***/
+                                if (spid_para_unit_unique[i_param_unique].unitName != '') {
+                                    if (spid_para_unit_unique[i_param_unique].purposeName != '') {
+                                        dom_input_checkbox_para += '<li>' +
+                                            '<div class="pretty p-svg p-curve">' +
+                                            '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                            spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                            spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                            '<div class="state p-success">' +
+                                            '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                            '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                            '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                            '</svg>' +
+                                            '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                            ' (' + spid_para_unit_unique[i_param_unique].unitName + ')' +
+                                            '</label>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '<b>(Mục đích: ' + spid_para_unit_unique[i_param_unique].purposeName + ')</b>' +
+                                            '</li>' + '<br>';
+                                    } else {
+                                        dom_input_checkbox_para += '<li>' +
+                                            '<div class="pretty p-svg p-curve">' +
+                                            '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                            spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                            spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                            '<div class="state p-success">' +
+                                            '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                            '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                            '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                            '</svg>' +
+                                            '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                            ' (' + spid_para_unit_unique[i_param_unique].unitName + ')' +
+                                            '</label>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</li>' + '<br>';
+                                    }
+                                } else {
+                                    if (spid_para_unit_unique[i_param_unique].purposeName != '') {
+                                        dom_input_checkbox_para += '<li>' +
+                                            '<div class="pretty p-svg p-curve">' +
+                                            '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                            spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                            spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                            '<div class="state p-success">' +
+                                            '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                            '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                            '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                            '</svg>' +
+                                            '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                            '</label>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '<b>(Mục đích: ' + spid_para_unit_unique[i_param_unique].purposeName + ' )</b>' +
+                                            '</li>' + '<br>';
+                                    } else {
+                                        dom_input_checkbox_para += '<li>' +
+                                            '<div class="pretty p-svg p-curve">' +
+                                            '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
+                                            spid_para_unit_unique[i_param_unique].parameterName + "_" +
+                                            spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
+                                            '<div class="state p-success">' +
+                                            '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
+                                            '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
+                                            '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
+                                            '</svg>' +
+                                            '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
+                                            '</label>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</li>' + '<br>';
+                                    }
+                                }
+                            }
+                        }
+                        dom_input_checkbox_para += '</ul>';
+                        $('#para_tab').html(dom_input_checkbox_para);
+
+                        /*** Checkbox All ***/
+                        $(".pretty #checked_all").click(function () {
+                            $(".pretty input[type=checkbox]").prop("checked", $(this).prop("checked"));
+                        });
+
+                        $(".pretty input[type=checkbox]").click(function () {
+                            if (!$(this).prop("checked")) {
+                                $("#checked_all").prop("checked", false);
+                            }
+                        })
+                    });
+
+                    /*** Xử lý trong modal (phần Thông số) ***/
+                    $('#para_multiple').click(function () {
+                        var para_selected = '';
+                        var div_para = '';
+                        /* var div_para = '<div class="form-group col-xs-3 col-md-3 option_stat_typechart">' +
+                            '<select class="form-control" id="filter_stat_typechart">' +
+                            '<option value="filter_stat_column_chart">Biểu đồ cột</option>' +
+                            '<option value="filter_stat_line_chart">Biểu đồ đường</option>' +
+                            '</select>' +
+                            '</div>'; */
+
+                        checkboxed_para_arr = [];
+                        checkboxed_paraName_arr = [];
+                        $('#para_list input:checked').each(function () {
+                            if ($(this).attr('id') != 'checked_all') {
+                                checkboxed_para_arr.push($(this).attr('id'))
+                                checkboxed_paraName_arr.push($(this).attr('name'))
+                                /*** DOM ở phần Input Para ***/
+                                var para_name = $(this).attr('name').split('_');
+                                if (para_name[1] != '') {
+                                    para_selected += para_name[0] + ' (' + para_name[1] + ')' + " ";
+                                } else {
+                                    para_selected += para_name[0] + " ";
+                                }
+
+                                /*** Remove các thẻ div trước ***/
+                                $('#chart_qt').find('div.gender-chart_stats').remove();
+
+                                /*** Tạo các thẻ div ở Modal Result Stat ***/
+                                div_para += '<div class="gender-chart_stats" id="chart_para_' +
+                                    $(this).attr('id') + '">' + '</div>';
                             }
                         });
-                        sortResults(spid_para_unit_unique, "spidID", true)
-
-                        for (var i_param_unique = 0; i_param_unique < spid_para_unit_unique.length; i_param_unique++) {
-                            /*** DOM List checkbox Thông số ***/
-                            if (spid_para_unit_unique[i_param_unique].unitName != '') {
-                                if (spid_para_unit_unique[i_param_unique].purposeName != '') {
-                                    dom_input_checkbox_para += '<li>' +
-                                        '<div class="pretty p-svg p-curve">' +
-                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
-                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
-                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
-                                        '<div class="state p-success">' +
-                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
-                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
-                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
-                                        '</svg>' +
-                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                        ' (' + spid_para_unit_unique[i_param_unique].unitName + ')' +
-                                        '</label>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '<b>(Mục đích: ' + spid_para_unit_unique[i_param_unique].purposeName + ')</b>' +
-                                        '</li>' + '<br>';
-                                } else {
-                                    dom_input_checkbox_para += '<li>' +
-                                        '<div class="pretty p-svg p-curve">' +
-                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
-                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
-                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
-                                        '<div class="state p-success">' +
-                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
-                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
-                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
-                                        '</svg>' +
-                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                        ' (' + spid_para_unit_unique[i_param_unique].unitName + ')' +
-                                        '</label>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '</li>' + '<br>';
-                                }
-                            } else {
-                                if (spid_para_unit_unique[i_param_unique].purposeName != '') {
-                                    dom_input_checkbox_para += '<li>' +
-                                        '<div class="pretty p-svg p-curve">' +
-                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
-                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
-                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
-                                        '<div class="state p-success">' +
-                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
-                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
-                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
-                                        '</svg>' +
-                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                        '</label>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '<b>(Mục đích: ' + spid_para_unit_unique[i_param_unique].purposeName + ' )</b>' +
-                                        '</li>' + '<br>';
-                                } else {
-                                    dom_input_checkbox_para += '<li>' +
-                                        '<div class="pretty p-svg p-curve">' +
-                                        '<input id="' + spid_para_unit_unique[i_param_unique].spidID + '" name="' +
-                                        spid_para_unit_unique[i_param_unique].parameterName + "_" +
-                                        spid_para_unit_unique[i_param_unique].unitName + '" type=checkbox>' +
-                                        '<div class="state p-success">' +
-                                        '<svg class="svg svg-icon" viewBox="0 0 20 20">' +
-                                        '<path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,' +
-                                        '7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>' +
-                                        '</svg>' +
-                                        '<label>' + spid_para_unit_unique[i_param_unique].parameterName +
-                                        '</label>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '</li>' + '<br>';
-                                }
-                            }
-                        }
-                    }
-                    dom_input_checkbox_para += '</ul>';
-                    $('#para_tab').html(dom_input_checkbox_para);
-
-                    /*** Checkbox All ***/
-                    $(".pretty #checked_all").click(function () {
-                        $(".pretty input[type=checkbox]").prop("checked", $(this).prop("checked"));
-                    });
-
-                    $(".pretty input[type=checkbox]").click(function () {
-                        if (!$(this).prop("checked")) {
-                            $("#checked_all").prop("checked", false);
-                        }
+                        $('#search_para').val(para_selected);
+                        $('#chart_qt').append(div_para);
                     })
-                });
-
-                /*** Xử lý trong modal (phần Thông số) ***/
-                $('#para_multiple').click(function () {
-                    var para_selected = '';
-                    var div_para = '';
-                    /* var div_para = '<div class="form-group col-xs-3 col-md-3 option_stat_typechart">' +
-                        '<select class="form-control" id="filter_stat_typechart">' +
-                        '<option value="filter_stat_column_chart">Biểu đồ cột</option>' +
-                        '<option value="filter_stat_line_chart">Biểu đồ đường</option>' +
-                        '</select>' +
-                        '</div>'; */
-
-                    checkboxed_para_arr = [];
-                    checkboxed_paraName_arr = [];
-                    $('#para_list input:checked').each(function () {
-                        if ($(this).attr('id') != 'checked_all') {
-                            checkboxed_para_arr.push($(this).attr('id'))
-                            checkboxed_paraName_arr.push($(this).attr('name'))
-                            /*** DOM ở phần Input Para ***/
-                            var para_name = $(this).attr('name').split('_');
-                            if (para_name[1] != '') {
-                                para_selected += para_name[0] + ' (' + para_name[1] + ')' + " ";
-                            } else {
-                                para_selected += para_name[0] + " ";
-                            }
-
-                            /*** Remove các thẻ div trước ***/
-                            $('#chart_qt').find('div.gender-chart_stats').remove();
-
-                            /*** Tạo các thẻ div ở Modal Result Stat ***/
-                            div_para += '<div class="gender-chart_stats" id="chart_para_' +
-                                $(this).attr('id') + '">' + '</div>';
-                        }
-                    });
-                    $('#search_para').val(para_selected);
-                    $('#chart_qt').append(div_para);
-                })
+                }
+            })
+            /*** Hiển thị Modal thống kê***/
+            if (url_list_stations != '') {
+                $("#search_stats_tramqtModal").modal("show");
             }
-        })
+        } else {
+            $("#statStatus_error").css("display", "block");
+            $("#statStatus_error").text("Không có trạm quan trắc");
+            setTimeout(function() {
+                $("#statStatus_error").css("display", "none");
+            }, 3000)
+        }
     }
 
-    if (url_list_stations != '') {
-        $("#search_stats_tramqtModal").modal("show");
-    }
     $(".navbar-collapse.in").collapse("hide");
     return false;
 });
@@ -661,12 +727,14 @@ function ProcessExcel() {
                         raw: false,
                         range: 4,
                         defval: "",
-                        dateNF: "YYYY-MM-DD"
+                        dateNF: "HH:mm:ss YYYY-MM-DD"
                     });
 
                     $.post("app/Http/Controllers/Import_Excel.php", {
+                        /*** Thêm phần quy chuẩn ***/
+                        quychuan_option: $("#standardUpload").val(),
                         importExcel: ProcessJSON(exceljson)
-                    }, function(){
+                    }, function () {
                         console.log("Import Excel Success");
                         $(".upload-success").css("display", "block");
                         $(".upload-error").css("display", "none");
@@ -677,11 +745,13 @@ function ProcessExcel() {
             /* If excel file is .xlsx extension than creates a Array Buffer from excel */
             reader.readAsArrayBuffer($("#excelfile")[0].files[0]);
         } else {
+            /*** Thông báo không hỗ trợ trình xuất Excel ***/
             $(".upload-error").css("display", "block");
             $(".upload-success").css("display", "none");
-            $("#error_upload").text("Trình duyệt không hỗ trợ HTML5");
+            $("#error_upload").text("Trình duyệt không hỗ trợ xuất Excel");
         }
     } else {
+        /*** Thông báo định dạng file Excel ***/
         $(".upload-error").css("display", "block");
         $(".upload-success").css("display", "none");
         $("#error_upload").text("Định dạng lỗi! Vui lòng chọn định dạng xlsx để upload");
@@ -707,7 +777,7 @@ function ProcessJSON(exceljson) {
 
                     /*** Tạo Object Detail cho từng Para ***/
                     object_para[total_std_param[j].id] = {};
-                    /*** Kiểm tra có value với thông số đó hay không, nếu không có thì để Null ***/
+                    /*** Kiểm tra có value với thông số đó có hay không, nếu không có thì để Null ***/
                     if (isNaN(parseFloat(exceljson[k][object_keys[i]])) == false) {
                         object_para[total_std_param[j].id].v = parseFloat(exceljson[k][object_keys[i]]);
                         /*** Kiểm tra vượt ngưỡng ***/
@@ -718,27 +788,28 @@ function ProcessJSON(exceljson) {
                             object_para[total_std_param[j].id].inlimit = "Y"
                         }
                     } else {
-                        object_para[total_std_param[j].id].v = null;
-                        object_para[total_std_param[j].id].inlimit = "N"
+                        continue;
+                        /* object_para[total_std_param[j].id].v = null;
+                        object_para[total_std_param[j].id].inlimit = "N" */
                     }
-
-                    data_para.push(JSON.stringify(object_para))
+                    data_para.push(object_para)
                 }
             }
         }
 
         /*** Xử lý Time and Date ***/
-        var time = exceljson[k]['Time (Sample_BTD)'];
+        var time = exceljson[k]['Time (Sample_BTD)'].split(" ")[0];
         if (time == '') {
             time = "00:00:00";
         }
 
-        var date_sampling = exceljson[k]['dateOfSampling (Sample_BTD)'];
+        var date_sampling = exceljson[k]['dateOfSampling (Sample_BTD)'].split(" ")[1];
+        console.log(date_sampling);
         var string_date_sampling = date_sampling.split("-");
         var date_sampling_format = string_date_sampling[2] + "/" +
             string_date_sampling[1] + "/" + string_date_sampling[0]
 
-        var date_analysis = exceljson[k]['dateOfAnalysis (Sample_BTD)'];
+        var date_analysis = exceljson[k]['dateOfAnalysis (Sample_BTD)'].split(" ")[1];
         var string_date_analysis = date_sampling.split("-");
         var date_analysis_format = string_date_analysis[2] + "/" +
             string_date_analysis[1] + "/" + string_date_analysis[0]
@@ -756,9 +827,8 @@ function ProcessJSON(exceljson) {
             "code_station": exceljson[k]['Trạm quan trắc'],
             "symbol": exceljson[k]['Trạm quan trắc'],
             "time": time,
-            "dateOfSampling": exceljson[k]['dateOfSampling (Sample_BTD)'],
-            "dateOfAnalysis": exceljson[k]['dateOfAnalysis (Sample_BTD)'] == ""
-                ? exceljson[k]['dateOfSampling (Sample_BTD)'] : exceljson[k]['dateOfAnalysis (Sample_BTD)'],
+            "dateOfSampling": date_sampling,
+            "dateOfAnalysis": date_analysis == "" ? date_sampling : date_analysis,
             "samplingLocations": exceljson[k]['samplingLocations (Sample_BTD)'],
             "weather": exceljson[k]['Weather (Sample_BTD)'],
             "idExcel": exceljson[k]['IdSTT'],
@@ -776,6 +846,7 @@ function format(d, ID_modal) {
     var parameterName, parameterID, unitName;
     var spidID, value;
 
+    /*---- Bảng mẫu quan trắc cho từng trạm ----*/
     if (ID_modal == "sampleModal") {
         DOM_child_table = '<div class="table-wrapper">' +
             '<table class="table table-bordered table-striped table-hover">';
@@ -812,19 +883,32 @@ function format(d, ID_modal) {
             /*** DOM dữ liệu, nếu null thì trả về không có kết quả***/
             if (value[0].v != null) {
                 if (unitName != null) {
-                    DOM_child_table += '<td style="text-align: center"><b class="green">' +
-                        value[0].v + ' ' + unitName + '</b></td>';
+                    /*** Kiểm tra vượt ngưỡng bán tự động ***/
+                    if (value[0].inlimit == "N") {
+                        DOM_child_table += '<td style="text-align: center"><b class="green">' +
+                            value[0].v + ' ' + unitName + '</b></td>';
+                    } else {
+                        DOM_child_table += '<td style="text-align: center"><b class="red">' +
+                            value[0].v + ' ' + unitName + '</b></td>';
+                    }
                 } else {
-                    DOM_child_table += '<td style="text-align: center"><b class="green">' +
-                        value[0].v + '</b></td>';
+                    if (value[0].inlimit == "N") {
+                        DOM_child_table += '<td style="text-align: center"><b class="green">' +
+                            value[0].v + '</b></td>';
+                    } else {
+                        DOM_child_table += '<td style="text-align: center"><b class="red">' +
+                            value[0].v + '</b></td>';
+                    }
                 }
             } else {
-                DOM_child_table += '<td style="text-align: center"><b class="red">Không có</b></td>';
+                DOM_child_table += '<td style="text-align: center">' +
+                    '<b class="red">Không có dữ liệu</b></td>';
             }
         }
     }
     DOM_child_table += '</tr></tbody></table></div>';
 
+    /*---- Danh sách vượt ngưỡng ----*/
     if (ID_modal == "thresholdModal") {
         var total_detail = d.total_detail;
 

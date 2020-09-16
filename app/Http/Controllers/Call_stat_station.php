@@ -45,14 +45,24 @@ class Call_stat_station extends Controller
         $querry_statistic_select .= 'FROM (
                                         SELECT distinct "std_para"."standardid",
                                         "standard"."symbol" "standardSymbol", "standard"."name" "standardName",
-                                        "obs"."stationid", "obs"."detail" "detailChild"
+                                        "obs"."stationid", "obs"."detail" "detailChild", "obs"."note"
                                         FROM "StandardParameter" "std_para"
                                         LEFT JOIN "Standard" "standard" ON "standard"."id" = "std_para"."standardid"
-                                        LEFT JOIN "Observation" "obs" ON "obs"."standardparameterid" = "std_para"."id"';
+                                        FULL JOIN "Observation" "obs" ON "obs"."standardparameterid" = "std_para"."id"
+                                        OR "obs"."note" = "standard"."symbol"';
 
         /*** Where Condition Data Quy chuẩn và Lọc các trạm null ***/
-        $querry_statistic_select .= 'WHERE "standardid" = ' .$quychuan.
-            ' AND "obs"."stationid" is not null) as "standard_view"';
+        /*** Tìm quy chuẩn Code ***/
+        $querry_select_Stdcode = 'SELECT "standard"."symbol"
+                                    FROM "Standard" "standard"' .
+            " WHERE" . '"standard"."id"' . "= '" . $quychuan . "'";
+        $result_Std = DB::select($querry_select_Stdcode);
+        $data_rsStd = json_encode($result_Std);
+        $original_data_rsStd = json_decode($data_rsStd, true);
+
+        $querry_statistic_select .= ' WHERE ("standardid" = ' .$quychuan.
+            ' OR "obs"."note" = '."'".$original_data_rsStd[0]['symbol']."'".
+            ') AND "obs"."stationid" IS NOT NULL) AS "standard_view"';
 
         $querry_statistic_select .= '
                                     LEFT JOIN "Observationstation" "station" ON "standard_view"."stationid" = "station"."id"
@@ -79,7 +89,7 @@ class Call_stat_station extends Controller
                 'and "category"."id" =' . $loaitram;
         }
 
-        $querry_statistic_group = 'GROUP BY
+        $querry_statistic_group = ' GROUP BY
                                         "station"."id",
                                         "obs_type"."name", "obs_type"."id",
                                         "category"."name", "category"."id",
