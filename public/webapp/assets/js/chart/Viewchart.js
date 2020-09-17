@@ -113,7 +113,7 @@ function render_linechart_quantrac(div_id, data_chart, name_title, key, data) {
 };
 
 /*---- Group Chart của nhiều trạm quan trắc ----*/
-function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, key) {
+function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, key, min, max) {
     am4core.useTheme(am4themes_animated);
     am4core.ready(function () {
 
@@ -143,6 +143,8 @@ function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, 
         if (unit != "") {
             valueAxis.title.text = "(" + unit + ")";
         }
+        valueAxis.min = 0;
+        // valueAxis.max = max;
 
         function createSeries(field, name, color) {
             var series = chart.series.push(new am4charts.ColumnSeries());
@@ -202,12 +204,52 @@ function render_groupColumnchart_quantrac(div_id, data_chart, name_title, unit, 
             ]
         }];
 
+        /*** Min Max Range ***/
+        if (min != null) {
+            var min_range = valueAxis.axisRanges.create();
+            min_range.value = min;
+            min_range.grid.stroke = am4core.color("#ff0000");
+            min_range.grid.strokeWidth = 2;
+            min_range.grid.strokeOpacity = 1;
+            min_range.label.inside = true;
+            if (unit == "") {
+                min_range.label.text = "[font-style: italic] Giá trị nhỏ nhất: [font-style: italic]" + min;
+            } else {
+                min_range.label.text = "[font-style: italic] Giá trị nhỏ nhất: " +
+                    "[font-style: italic]" + min + " [font-style: italic]" + unit;
+            }
+            min_range.label.fill = min_range.grid.stroke;
+            min_range.label.align = "right";
+            min_range.label.verticalCenter = "bottom";
+            /* min_range.label.dx = 10; */
+            min_range.label.dy = 10;
+        }
+
+        if (max != null) {
+            var max_range = valueAxis.axisRanges.create();
+            max_range.value = max;
+            max_range.grid.stroke = am4core.color("#ff0000");
+            max_range.grid.strokeWidth = 2;
+            max_range.grid.strokeOpacity = 1;
+            max_range.label.inside = true;
+            if (unit == "") {
+                max_range.label.text = "[font-style: italic] Giá trị lớn nhất: [font-style: italic]" + max;
+            } else {
+                max_range.label.text = "[font-style: italic] Giá trị lớn nhất: " +
+                    "[font-style: italic]" + max + " [font-style: italic]" + unit;
+            }
+            max_range.label.fill = max_range.grid.stroke;
+            max_range.label.align = "right";
+            max_range.label.verticalCenter = "bottom";
+            max_range.label.dy = 10;
+        }
+
         chart.scrollbarX = new am4core.Scrollbar();
         chart.scrollbarX.parent = chart.bottomAxesContainer;
     });
 }
 
-function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, key) {
+function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, key, min, max) {
     am4core.useTheme(am4themes_animated);
     am4core.ready(function () {
 
@@ -237,6 +279,7 @@ function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, ke
         if (unit != "") {
             valueAxis.title.text = "(" + unit + ")";
         }
+        valueAxis.min = 0;
 
         function createSeries(field, name, color, bullet) {
             var series = chart.series.push(new am4charts.LineSeries());
@@ -378,6 +421,46 @@ function render_groupLinechart_quantrac(div_id, data_chart, name_title, unit, ke
                 {"type": "pdf", "label": "PDF"}
             ]
         }];
+
+        /*** Min Max Range ***/
+        if (min != null) {
+            var min_range = valueAxis.axisRanges.create();
+            min_range.value = min;
+            min_range.grid.stroke = am4core.color("#ff0000");
+            min_range.grid.strokeWidth = 2;
+            min_range.grid.strokeOpacity = 1;
+            min_range.label.inside = true;
+            if (unit == "") {
+                min_range.label.text = "[font-style: italic] Giá trị nhỏ nhất: [font-style: italic]" + min;
+            } else {
+                min_range.label.text = "[font-style: italic] Giá trị nhỏ nhất: " +
+                    "[font-style: italic]" + min + " [font-style: italic]" + unit;
+            }
+            min_range.label.fill = min_range.grid.stroke;
+            min_range.label.align = "right";
+            min_range.label.verticalCenter = "bottom";
+            /* min_range.label.dx = 10; */
+            min_range.label.dy = 10;
+        }
+
+        if (max != null) {
+            var max_range = valueAxis.axisRanges.create();
+            max_range.value = max;
+            max_range.grid.stroke = am4core.color("#ff0000");
+            max_range.grid.strokeWidth = 2;
+            max_range.grid.strokeOpacity = 1;
+            max_range.label.inside = true;
+            if (unit == "") {
+                max_range.label.text = "[font-style: italic] Giá trị lớn nhất: [font-style: italic]" + max;
+            } else {
+                max_range.label.text = "[font-style: italic] Giá trị lớn nhất: " +
+                    "[font-style: italic]" + max + " [font-style: italic]" + unit;
+            }
+            max_range.label.fill = max_range.grid.stroke;
+            max_range.label.align = "right";
+            max_range.label.verticalCenter = "bottom";
+            max_range.label.dy = 10;
+        }
 
         chart.scrollbarX = new am4core.Scrollbar();
         chart.scrollbarX.parent = chart.bottomAxesContainer;

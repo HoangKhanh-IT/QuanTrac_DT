@@ -435,6 +435,9 @@ $("#search_stats_tramqt").click(function () {
                                                 parameterName = total_std_param[k_para_sample].parameterName;
                                                 unitName = total_std_param[k_para_sample].unitName;
                                                 purposeName = total_std_param[k_para_sample].purposeName;
+                                                /* min_para = total_std_param[k_para_sample].min_value;
+                                                max_para = total_std_param[k_para_sample].max_value; */
+
                                                 if (unitName == null) {
                                                     unitName = '';
                                                 }
@@ -447,7 +450,9 @@ $("#search_stats_tramqt").click(function () {
                                                     "spidID": parseInt(spidID),
                                                     "parameterName": parameterName,
                                                     "unitName": unitName,
-                                                    "purposeName": purposeName
+                                                    "purposeName": purposeName,
+                                                    /* "minRange": min_para,
+                                                    "maxRange": max_para */
                                                 });
                                             }
                                         }
@@ -463,7 +468,9 @@ $("#search_stats_tramqt").click(function () {
                                         "spidID": item.spidID,
                                         "parameterName": item.parameterName,
                                         "unitName": item.unitName,
-                                        "purposeName": item.purposeName
+                                        "purposeName": item.purposeName,
+                                        /* "minRange": item.minRange,
+                                        "maxRange": item.maxRange */
                                     });
                                 }
                             });
@@ -734,11 +741,23 @@ function ProcessExcel() {
                         /*** Thêm phần quy chuẩn ***/
                         quychuan_option: $("#standardUpload").val(),
                         importExcel: ProcessJSON(exceljson)
-                    }, function () {
-                        console.log("Import Excel Success");
-                        $(".upload-success").css("display", "block");
-                        $(".upload-error").css("display", "none");
-                        $("#success_upload").text("Chuyển dữ liệu thành công");
+                    }, function (data) {
+                        /*** Thông báo chuyển dữ liệu thành công hay thất bại ***/
+                        if (data.trim() != "error") {
+                            $(".upload-success").css("display", "block");
+                            $(".upload-error").css("display", "none");
+                            $("#success_upload").text("Chuyển dữ liệu thành công");
+                            setTimeout(function() {
+                                $(".upload-success").css("display", "none");
+                            }, 3000)
+                        } else {
+                            $(".upload-error").css("display", "block");
+                            $(".upload-success").css("display", "none");
+                            $("#error_upload").text("Chuyển dữ liệu thất bại");
+                            setTimeout(function() {
+                                $(".upload-error").css("display", "none");
+                            }, 3000)
+                        }
                     });
                 });
             }
@@ -749,12 +768,18 @@ function ProcessExcel() {
             $(".upload-error").css("display", "block");
             $(".upload-success").css("display", "none");
             $("#error_upload").text("Trình duyệt không hỗ trợ xuất Excel");
+            setTimeout(function() {
+                $(".upload-error").css("display", "none");
+            }, 3000)
         }
     } else {
         /*** Thông báo định dạng file Excel ***/
         $(".upload-error").css("display", "block");
         $(".upload-success").css("display", "none");
         $("#error_upload").text("Định dạng lỗi! Vui lòng chọn định dạng xlsx để upload");
+        setTimeout(function() {
+            $(".upload-error").css("display", "none");
+        }, 3000)
     }
 }
 
@@ -804,7 +829,6 @@ function ProcessJSON(exceljson) {
         }
 
         var date_sampling = exceljson[k]['dateOfSampling (Sample_BTD)'].split(" ")[1];
-        console.log(date_sampling);
         var string_date_sampling = date_sampling.split("-");
         var date_sampling_format = string_date_sampling[2] + "/" +
             string_date_sampling[1] + "/" + string_date_sampling[0]
@@ -814,26 +838,32 @@ function ProcessJSON(exceljson) {
         var date_analysis_format = string_date_analysis[2] + "/" +
             string_date_analysis[1] + "/" + string_date_analysis[0]
 
-        if (date_analysis == "") {
+        /*** Kiểm tra Undefined do có thực hiện qua 1 function ***/
+        if (typeof date_analysis == 'undefined') {
             detail.time = time + ", " + date_sampling_format;
         } else {
             detail.time = time + ", " + date_analysis_format;
         }
 
         detail.data = data_para;
-
-        /*** Đẩy các Items ***/
-        result.push({
-            "code_station": exceljson[k]['Trạm quan trắc'],
-            "symbol": exceljson[k]['Trạm quan trắc'],
-            "time": time,
-            "dateOfSampling": date_sampling,
-            "dateOfAnalysis": date_analysis == "" ? date_sampling : date_analysis,
-            "samplingLocations": exceljson[k]['samplingLocations (Sample_BTD)'],
-            "weather": exceljson[k]['Weather (Sample_BTD)'],
-            "idExcel": exceljson[k]['IdSTT'],
-            "detail_data": detail
-        })
+        if (data_para.length != 0) {
+            /*** Đẩy các Items ***/
+            result.push({
+                "code_station": exceljson[k]['Trạm quan trắc'],
+                "symbol": exceljson[k]['Trạm quan trắc'],
+                "time": time,
+                "dateOfSampling": date_sampling,
+                "dateOfAnalysis": typeof date_analysis == 'undefined' ? date_sampling : date_analysis,
+                "samplingLocations": exceljson[k]['samplingLocations (Sample_BTD)'],
+                "weather": exceljson[k]['Weather (Sample_BTD)'],
+                "idExcel": exceljson[k]['IdSTT'],
+                "detail_data": detail
+            })
+        } else {
+            result.push({
+                "status": 'error'
+            })
+        }
     }
 
     return result

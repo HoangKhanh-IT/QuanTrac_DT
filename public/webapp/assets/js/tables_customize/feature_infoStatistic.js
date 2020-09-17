@@ -482,9 +482,16 @@ function render_stat_thead_datatable() {
         '<th scope="col" rowspan="2" class="bg-info fixed_header">Thời gian</th>';
     var length_param_checked = checkboxed_para_arr.length;
     for (var i_station = 0; i_station < data_quantrac_selected.length; i_station++) {
-        thead += '<th scope="col" colspan="' + length_param_checked +
-            '" class="bg-info fixed_header">' +
-            data_quantrac_selected[i_station].name + '</th>'
+        /*** Phân biệt giữa các trạm thông qua màu sắc ***/
+        if (i_station % 2 == 0) {
+            thead += '<th scope="col" colspan="' + length_param_checked +
+                '" class="bg-info fixed_header">' +
+                data_quantrac_selected[i_station].name + '</th>'
+        } else {
+            thead += '<th scope="col" colspan="' + length_param_checked +
+                '" class="bg-table fixed_header">' +
+                data_quantrac_selected[i_station].name + '</th>'
+        }
     }
     thead += '</tr><tr role="row">';
     /*** Sort mảng Thông số checked để DOM dữ liệu ***/
@@ -503,10 +510,17 @@ function render_stat_thead_datatable() {
                             'class="bg-info fixed_header">' +
                             parameterName + ' (' + unitName + ')</th>'
                     } else {  ***/
-                    thead += '<th id="k1_' + data_quantrac_selected[i_param].id + "_" +
-                        checkboxed_para_arr[j_param] + '" scope="col" ' +
-                        'class="bg-info fixed_header">' +
-                        parameterName + '</th>'
+                    if (i_param % 2 == 0) {
+                        thead += '<th id="k1_' + data_quantrac_selected[i_param].id + "_" +
+                            checkboxed_para_arr[j_param] + '" scope="col" ' +
+                            'class="bg-info fixed_header">' +
+                            parameterName + '</th>'
+                    } else {
+                        thead += '<th id="k1_' + data_quantrac_selected[i_param].id + "_" +
+                            checkboxed_para_arr[j_param] + '" scope="col" ' +
+                            'class="bg-table fixed_header">' +
+                            parameterName + '</th>'
+                    }
                     /* } */
 
                     theadarr.push('k1_' + data_quantrac_selected[i_param].id + "_" +
@@ -592,14 +606,23 @@ function render_stat_chart(typechart, data_quantrac_selected,
 
         for (var i = 0; i < checkboxed_para_arr.length; i++) {
             data_stat_chart = result_chart_stats_stations(quantrac_selected, checkboxed_para_arr[i]);
+            var minRange, maxRange;
+            /*** Tìm minRange, maxRange ***/
+            for (var k_para_sample = 0; k_para_sample < total_std_param.length; k_para_sample++) {
+                if (parseInt(checkboxed_para_arr[i]) == total_std_param[k_para_sample].id) {
+                    minRange = total_std_param[k_para_sample].min_value;
+                    maxRange = total_std_param[k_para_sample].max_value;
+                }
+            }
+            /*** Render Chart ***/
             if (typechart == "filter_stat_column_chart") {
                 unit_chart = checkboxed_paraName_arr[i].split('_');
                 render_groupColumnchart_quantrac('chart_para_' + checkboxed_para_arr[i],
-                    data_stat_chart, unit_chart[0], unit_chart[1], "time_js");
+                    data_stat_chart, unit_chart[0], unit_chart[1], "time_js", minRange, maxRange);
             } else {
                 unit_chart = checkboxed_paraName_arr[i].split('_');
                 render_groupLinechart_quantrac('chart_para_' + checkboxed_para_arr[i],
-                    data_stat_chart, unit_chart[0], unit_chart[1], "time_js");
+                    data_stat_chart, unit_chart[0], unit_chart[1], "time_js", minRange, maxRange);
             }
         }
     } else {

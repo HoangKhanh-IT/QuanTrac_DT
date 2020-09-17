@@ -198,6 +198,9 @@ https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-
 + DOM onchange typechart ==> Lỗi khi thay đổi bằng 1 sự kiện khác (onchange select hoặc cancel rồi nhấn nút Thống kê lại) ==> DOM sai vị trí các thông số ==> thêm hàm `trigger()` gọi lại hàm xử lý cắt chuỗi JSON theo thông số và theo thời gian (done)
 + Convert HTML table to Excel file with JS: https://redstapler.co/convert-html-table-excel-file-javascript/
 + Convert HTML table to PDF file with JS: https://www.encodedna.com/javascript/convert-html-table-to-pdf-using-javascript-without-a-plugin.htm
++ Thêm range cho các chart:
+    + Thêm start 0: `valueAxis.min = 0`
+    + Range max min cho từng thông số: https://www.amcharts.com/docs/v4/concepts/axes/axis-ranges/
 
 ### Xử lý DOM dữ liệu thống kê (tìm Trung bình, Min, Max)
 + Luồng xử lý: Dựng hàm tính trung bình theo dạng gộp Object Key, tạo mảng Array Range time_end => Đối thời gian trong từng record

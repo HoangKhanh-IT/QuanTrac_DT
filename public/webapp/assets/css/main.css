@@ -84,6 +84,10 @@ label {
     background-color: #ff001e;
 }
 
+.bg-table {
+    background-color: #ffdba7;
+}
+
 /*** Custom class `btn` Boostrap ***/
 .btn-cus {
     margin-top: -2px;
@@ -869,6 +873,7 @@ với table_result_stat (Các chỗ đóng * áp dụng cho Datatable) ***/
 
 #table_result_stat tr th,
 #table_result_stat tr td {
+    vertical-align: middle !important;
     text-align: center;
     white-space: nowrap;
     border-bottom: none;
@@ -879,8 +884,8 @@ với table_result_stat (Các chỗ đóng * áp dụng cho Datatable) ***/
     background-color: #fff;
 }
 
-#table_result_stat tr th {
-    background-color: #d9edf7;
+#table_result_stat thead tr:first-child th:nth-child(3) {
+    background-color: #ffdba7;
 }
 
 #table_result_stat td {
@@ -897,11 +902,16 @@ với table_result_stat (Các chỗ đóng * áp dụng cho Datatable) ***/
     margin-left: 15px;
     margin-right: 15px;
     padding: 0;
-    width: 85.5em;
+    /* width: 85.5em; */
+    width: 96.5em;
     /* height: 300px; */
     height: 350px;
     z-index: 1;
     overflow: auto;
+}
+
+#tab_stat tr:first-child th:first-child {
+    width: 10%;
 }
 
 .modal-body-re-WA {
@@ -918,7 +928,8 @@ với table_result_stat (Các chỗ đóng * áp dụng cho Datatable) ***/
 
 .table-scroll table {
     width: 100%;
-    min-width: 1280px;
+    /* min-width: 1280px; */
+    min-width: unset;
     margin: auto;
     border-collapse: separate;
     border-spacing: 0;
@@ -1103,21 +1114,6 @@ span .paginate_button {
     }
 }
 
-/*** Màn hình độ phân giải 1920 - 1080 ***/
-@media (min-width: 992px) {
-    .table-scroll {
-        width: 96.5em;
-    }
-
-    #tab_stat tr:first-child th:first-child {
-        width: 10%;
-    }
-
-    .table-scroll table {
-        min-width: unset;
-    }
-}
-
 @media (max-width: 767px) {
     #sidebar {
         display: none;
@@ -1209,6 +1205,21 @@ span .paginate_button {
 @media (min-width: 1366px) {
     .table-scroll {
         width: 85.5em;
+    }
+
+    #tab_stat tr:first-child th:first-child {
+        width: 10%;
+    }
+
+    .table-scroll table {
+        min-width: unset;
+    }
+}
+
+/*** Màn hình độ phân giải 1920 - 1080 ***/
+@media (min-width: 1400px) and (max-width: 1920px) {
+    .table-scroll {
+        width: 96.5em;
     }
 
     #tab_stat tr:first-child th:first-child {
