@@ -215,6 +215,10 @@ từ "giờ" ra "phút" sau đó chia cho khoảng thời gian mà người dùn
 + Thêm `type="button"` để không refresh trang
 + Thay đổi định dạng từ Object JSON thành chuỗi để đưa vào DB không bị thay đổi nội dung
 
+### Xử lý gửi mail khi có trạm vượt ngưỡng
++ Dùng hàm `mail()` gửi services bằng PHP
++ Config trong Xampp tại: https://stackoverflow.com/questions/21836282/php-function-mail-isnt-working/21836788
+
 ### Tối ưu hóa đợt 1
 + Tìm các thư viện nặng nhưng không sử dụng đến để loại bỏ
 + Tối ưu hóa thuật toán fitbounds (xem ở phần "Note xử lý onChange in map using Select Option/Checkbox Input")

@@ -20,4 +20,12 @@ class Basin extends Model
         return $this->hasMany(Basin::class)->with('Basin');
     }
 
+    public function Observationstations(){
+        return $this->hasMany(Observationstation::class, 'basinid','id');
+    }
+
+    public function DischargePoints(){
+        return $this->hasMany(DischargePoint::class, 'basinid','id');
+    }
+
 }

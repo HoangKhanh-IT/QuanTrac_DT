@@ -63,6 +63,20 @@
                             @endif
                         </div>
                         <div class="col-sm-12">
+                            @if(session()->get('alert'))
+                            <div class="alert alert-warning">
+                                {{ session()->get('alert') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
+                            @if(session()->get('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -88,7 +102,7 @@
                                             <form method="get" action="{{ route('Qualityindextk') }}">
                                                 @csrf
                                                 <div class="input-group input-group-prepend" style="width: 250px;">
-                                                    <input type="text" name="search" class="form-control float-right" placeholder="Tên, Mô tả">
+                                                    <input type="text" name="search" class="form-control float-right" placeholder="Tên, Mục đích">
 
                                                     <div class="input-group-append">
                                                         <button type="submit" class="btn  btn-default"><i class="fas fa-search"></i></button>
@@ -110,7 +124,7 @@
                                                             <th scope="col" class="">Cận dưới</th>
                                                             <th scope="col" class="">Cận trên</th>
                                                             <th scope="col" class="">Mã màu</th>
-                                                            <th scope="col" class="">Mục đích</th>
+                                                            <th scope="col" class="">Mục đích sử dụng</th>
                                                             <th scope="col" class="">Thao tác</th>
                                                         </tr>
                                                     </thead>
@@ -155,7 +169,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$Qualityindexs->links()}}
+                                            <div class="d-flex justify-content-center">{{$Qualityindexs->links('vendor.pagination.paginator')}}
                                             </div>
                                         </div>
                                     </div>
@@ -193,6 +207,9 @@
         $(document).on('click','.open_modal',function(){
             //alert($(this).val());
             //$('#myModal').modal('show');
+        });
+        $(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
         });
     </script>
 </body>

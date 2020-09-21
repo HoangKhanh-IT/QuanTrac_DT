@@ -15,4 +15,8 @@ class Location extends Model
     public function LocationType(){
         return $this->belongsTo(LocationType::class,'locationtypeid','id');
     }
+
+    public function Observationstations(){
+        return $this->hasMany(Observationstation::class, 'locationid','id');
+    }
 }

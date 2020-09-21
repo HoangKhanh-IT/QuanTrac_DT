@@ -159,16 +159,30 @@ function Modal_Feature_Basic(feat, layer) {
 
 /*---- Hiển thị ký hiệu trạm quan trắc theo loại hình ----*/
 function Modal_Feature_Style(feat, latlng) {
-    /*** Trạm quan trắc đất ***/
+    var check_threshold, html_style, className_style;
+        /*** Trạm quan trắc đất ***/
     if (feat.properties.obstype_namefirst == "Đất") {
         /*** Tạo Label cho các trạm quan trắc ***/
         var label_tram_dat = '<p class="tram_dat_label"><b>Trạm ' + feat.properties.name + '</b></p>';
+        check_threshold = process_detail_thresholdPoint(feat);
+        html_style;
+        className_style;
+
+        /*** Nhấp nháy khi trạm có thông số vượt ngưỡng ***/
+        if (check_threshold == 0) {
+            html_style = "<i class='icon-checkbox-unchecked2 tram_dat_symbol'></i>";
+            className_style = 'mouse_pointer tram_dat_divIcon';
+        } else {
+            html_style = "<i class='icon-checkbox-unchecked2 tram_dat_symbol animate-flicker'></i>";
+            className_style = 'mouse_pointer tram_dat_divIcon animate-flicker';
+        }
+
         return L.marker(latlng, {
             icon: L.divIcon({
-                html: "<i class='icon-checkbox-unchecked2 tram_dat_symbol'></i>",
+                html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [8, 8],
-                className: 'mouse_pointer tram_dat_divIcon'
+                iconAnchor: [12, 12],
+                className: className_style
             }),
             /*** Hover điểm quan trắc ***/
             title: feat.properties.name,
@@ -183,12 +197,25 @@ function Modal_Feature_Style(feat, latlng) {
         /*** Trạm quan trắc Nước mặt ***/
     } else if (feat.properties.obstype_namefirst == "Nước mặt") {
         var label_tram_nuocmat = '<p class="tram_nuocmat_label"><b>Trạm ' + feat.properties.name + '</b></p>';
+        check_threshold = process_detail_thresholdPoint(feat);
+        html_style;
+        className_style;
+
+        /*** Nhấp nháy khi trạm có thông số vượt ngưỡng ***/
+        if (check_threshold == 0) {
+            html_style = "<i class='icon-wave2 tram_nuocmat_symbol'></i>";
+            className_style = 'mouse_pointer tram_nuocmat_divIcon';
+        } else {
+            html_style = "<i class='icon-wave2 tram_nuocmat_symbol animate-flicker'></i>";
+            className_style = 'mouse_pointer tram_nuocmat_divIcon animate-flicker';
+        }
+
         return L.marker(latlng, {
             icon: L.divIcon({
-                html: "<i class='icon-wave2 tram_nuocmat_symbol'></i>",
+                html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [8, 8],
-                className: 'mouse_pointer tram_nuocmat_divIcon'
+                iconAnchor: [12, 12],
+                className: className_style
             }),
             title: feat.properties.name,
             riseOnHover: true
@@ -201,12 +228,25 @@ function Modal_Feature_Style(feat, latlng) {
         /*** Trạm quan trắc Nước ngầm ***/
     } else if (feat.properties.obstype_namefirst == "Nước ngầm") {
         var label_tram_nuocngam = '<p class="tram_nuocngam_label"><b>Trạm ' + feat.properties.name + '</b></p>';
+        check_threshold = process_detail_thresholdPoint(feat);
+        html_style;
+        className_style;
+
+        /*** Nhấp nháy khi trạm có thông số vượt ngưỡng ***/
+        if (check_threshold == 0) {
+            html_style = "<i class='icon-graph tram_nuocngam_symbol'></i>";
+            className_style = 'mouse_pointer tram_nuocngam_divIcon';
+        } else {
+            html_style = "<i class='icon-graph tram_nuocngam_symbol animate-flicker'></i>";
+            className_style = 'mouse_pointer tram_nuocngam_divIcon animate-flicker';
+        }
+
         return L.marker(latlng, {
             icon: L.divIcon({
-                html: "<i class='icon-graph tram_nuocngam_symbol'></i>",
+                html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [8, 8],
-                className: 'mouse_pointer tram_nuocngam_divIcon'
+                iconAnchor: [12, 12],
+                className: className_style
             }),
             title: feat.properties.name,
             riseOnHover: true
@@ -222,12 +262,25 @@ function Modal_Feature_Style(feat, latlng) {
         feat.properties.obstype_namefirst == "Nước thải y tế" ||
         feat.properties.obstype_namefirst == "Nước thải công nghiệp, làng nghề") {
         var label_tram_nuocthai = '<p class="tram_nuocthai_label"><b>Trạm ' + feat.properties.name + '</b></p>';
+        check_threshold = process_detail_thresholdPoint(feat);
+        html_style;
+        className_style;
+
+        /*** Nhấp nháy khi trạm có thông số vượt ngưỡng ***/
+        if (check_threshold == 0) {
+            html_style = "<i class='icon-alert tram_nuocthai_symbol'></i>";
+            className_style = 'mouse_pointer tram_nuocthai_divIcon';
+        } else {
+            html_style = "<i class='icon-alert tram_nuocthai_symbol animate-flicker'></i>";
+            className_style = 'mouse_pointer tram_nuocthai_divIcon animate-flicker';
+        }
+
         return L.marker(latlng, {
             icon: L.divIcon({
-                html: "<i class='icon-alert tram_nuocthai_symbol'></i>",
+                html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [8, 8],
-                className: 'mouse_pointer tram_nuocthai_divIcon'
+                iconAnchor: [12, 12],
+                className: className_style
             }),
             title: feat.properties.name,
             riseOnHover: true
@@ -243,12 +296,25 @@ function Modal_Feature_Style(feat, latlng) {
         feat.properties.obstype_namefirst == "Không khí thải khu công nghiệp, cụm công nghiệp" ||
         feat.properties.obstype_namefirst == "Không khí xung quanh") {
         var label_tram_khongkhi = '<p class="tram_khongkhi_label"><b>Trạm ' + feat.properties.name + '</b></p>';
+        check_threshold = process_detail_thresholdPoint(feat);
+        html_style;
+        className_style;
+
+        /*** Nhấp nháy khi trạm có thông số vượt ngưỡng ***/
+        if (check_threshold == 0) {
+            html_style = "<i class='glyphicon glyphicon-cloud tram_khongkhi_symbol'></i>";
+            className_style = 'mouse_pointer tram_khongkhi_divIcon';
+        } else {
+            html_style = "<i class='glyphicon glyphicon-cloud tram_khongkhi_symbol animate-flicker'></i>";
+            className_style = 'mouse_pointer tram_khongkhi_divIcon animate-flicker';
+        }
+
         return L.marker(latlng, {
             icon: L.divIcon({
-                html: "<i class='glyphicon glyphicon-cloud tram_khongkhi_symbol'></i>",
+                html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [8, 8],
-                className: 'mouse_pointer tram_khongkhi_divIcon'
+                iconAnchor: [12, 12],
+                className: className_style
             }),
             title: feat.properties.name,
             riseOnHover: true
@@ -260,12 +326,25 @@ function Modal_Feature_Style(feat, latlng) {
 
     } else if (feat.properties.obstype_namefirst == "Nước biển ven bờ") {
         var label_tram_nuocbien = '<p class="tram_nuocbien_label"><b>Trạm ' + feat.properties.name + '</b></p>';
+        check_threshold = process_detail_thresholdPoint(feat);
+        html_style;
+        className_style;
+
+        /*** Nhấp nháy khi trạm có thông số vượt ngưỡng ***/
+        if (check_threshold == 0) {
+            html_style = "<i class='icon-air tram_nuocbien_symbol'></i>";
+            className_style = 'mouse_pointer tram_nuocbien_divIcon';
+        } else {
+            html_style = "<i class='icon-air tram_nuocbien_symbol animate-flicker'></i>";
+            className_style = 'mouse_pointer tram_nuocbien_divIcon animate-flicker';
+        }
+
         return L.marker(latlng, {
             icon: L.divIcon({
-                html: "<i class='icon-air tram_nuocbien_symbol'></i>",
+                html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [8, 8],
-                className: 'mouse_pointer tram_nuocbien_divIcon'
+                iconAnchor: [12, 12],
+                className: className_style
             }),
             title: feat.properties.name,
             riseOnHover: true
@@ -303,6 +382,7 @@ function Refresh_Option() {
     count_click++;
     if (count_click > 0) {
         view_data_quantrac.refresh(url_search_basic);
+        map.setView([9.8095, 106.274], 10.5)
     }
 }
 

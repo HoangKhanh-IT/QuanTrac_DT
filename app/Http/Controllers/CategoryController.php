@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $Categorys = Category::paginate(10);
+        $Categorys = Category::paginate(8);
         return view( 'admin.category.Category',['Categorys' => $Categorys])->with('no', 1);
     }
 
@@ -68,13 +68,13 @@ class CategoryController extends Controller
         $search = $request->search;
         if ($search == null) {
             # code...
-            $Categorys = Category::paginate(10);
+            $Categorys = Category::paginate(8);
            return view( 'admin.category.Category',['Categorys' => $Categorys])->with('no', 1);
         } 
         else 
         {
              $search = trim(mb_strtoupper($search,'UTF-8'));
-            $Categorys = Category::where(DB::raw('UPPER(name)'), 'like', '%' . $search . '%')->paginate(10);
+            $Categorys = Category::where(DB::raw('UPPER(name)'), 'like', '%' . $search . '%')->paginate(8);
            return view( 'admin.category.Category',['Categorys' => $Categorys])->with('no', 1);
         }
     }
@@ -127,9 +127,17 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        $Observationstations = Category::find($id)->Observationstations()->get();
+        if ($Observationstations->isNotEmpty()) {
+            return redirect('danhmuc/Category')->with('alert', 'Xóa không thành công do dữ liệu còn tồn tại ở bảng Trạm quan trắc!');
+            //dd('Khong Rong');
+            //dd($standardParameters->id);
+        } else {
         $Category = Category::find($id);
         $Category->delete();
 
         return redirect('danhmuc/Category')->with('success', 'Xóa thành công!');
+            //dd('Rong');
+        }
     }
 }

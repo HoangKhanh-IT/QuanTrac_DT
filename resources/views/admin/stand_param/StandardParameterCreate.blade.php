@@ -51,7 +51,7 @@
                 <div class="container-fluid">
                     <div class="row mb-12">
                         <div class="col-sm-12">
-                            <h2>Quản lý Quy chuẩn - Chi tiêu</h2>
+                            <h2>Quản lý Chi tiêu</h2>
                         </div>
                     </div>
                     <div class="row mb-12">
@@ -67,7 +67,7 @@
                             @endif
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Thêm mới Quy chuẩn - Chi tiêu</h3>
+                                    <h3 class="card-title">Thêm mới Chi tiêu</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->

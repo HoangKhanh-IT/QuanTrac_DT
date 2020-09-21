@@ -16,7 +16,7 @@ class OrganizationController extends Controller
     public function index()
     {
         //
-        $Organizations = Organization::paginate(10);
+        $Organizations = Organization::paginate(8);
         return view('admin.organization.Organization',['Organizations' => $Organizations])->with('no', 1);
     }
 
@@ -72,12 +72,12 @@ class OrganizationController extends Controller
         if ($search == null
         ) {
             # code...
-            $Organizations = Organization::paginate(10);
+            $Organizations = Organization::paginate(8);
             return view('admin.organization.Organization',['Organizations' => $Organizations])->with('no', 1);
         } else {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             $Organizations = Organization::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')
-                            ->orwhere(DB::raw('UPPER(description)'), 'like', '%' . $search . '%')->paginate(10);
+                            ->orwhere(DB::raw('UPPER(description)'), 'like', '%' . $search . '%')->paginate(8);
              return view('admin.organization.Organization',['Organizations' => $Organizations])->with('no', 1);
         }
     }
@@ -130,10 +130,21 @@ class OrganizationController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $Organization = Organization::find($id);
-        $Organization->delete();
+        try
+        {
+            $Observationstations = Organization::findOrFail($id)->Observationstations()->get();
+            if ($Observationstations->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Organization')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Trạm quan trắc!');
+            } 
 
-        return redirect('danhmuc/Organization')->with('success', 'Xóa thành công!');
+            $Organization = Organization::find($id);
+            $Organization->delete();
+            return redirect('danhmuc/Organization')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

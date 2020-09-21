@@ -242,7 +242,18 @@ Route::group(['prefix' => 'quanly'], function () {
     Route::post('ElectronicBoard.edit/{id}', 'ElectronicBoardController@update')->name('ElectronicBoard.edit');
     Route::post('ElectronicBoard.delete/{id}', 'ElectronicBoardController@destroy')->name('ElectronicBoard.delete');
 
-    /***-- Posts --***/
+     /***-- DischargePoint --***/
+   
+    Route::get('DischargePoint', 'DischargePointController@index')->name('DischargePoint');
+    Route::get('DischargePointtk', 'DischargePointController@show')->name('DischargePointtk');
+    Route::get('DischargePoint.create', 'DischargePointController@create')->name('DischargePoint.create');
+    Route::post('DischargePoint.create', 'DischargePointController@store')->name('DischargePoint.create');
+    Route::get('DischargePoint.edit/{id}', 'DischargePointController@edit')->name('DischargePoint.edit');
+    Route::post('DischargePoint.edit/{id}', 'DischargePointController@update')->name('DischargePoint.edit');
+    Route::post('DischargePoint.delete/{id}', 'DischargePointController@destroy')->name('DischargePoint.delete');
+
+     /***-- Posts --***/
+   
     Route::get('Post', 'PostController@index')->name('Post');
     Route::get('Posttk', 'PostController@show')->name('Posttk');
     Route::get('Post.create', 'PostController@create')->name('Post.create');

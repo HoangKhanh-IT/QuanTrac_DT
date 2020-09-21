@@ -49,6 +49,7 @@
     <link rel="stylesheet" href="{{ asset('public/admin/jqueryui/jquery-ui-1.12.1/jquery-ui.css') }}">
     <!-- AdminLTE for demo Organizations -->
     <script src="{{ asset('public/admin/dist/js/demo.js') }}"></script>
+    <script src="{{ asset('public/webapp/assets/js/config.js') }}"></script>
     <script type="text/javascript">
         var standards = []; //cac qua chuan
         var parameters = []; //cac thong so
@@ -56,9 +57,9 @@
         var standardsparameters = []; // tieu chuan va thong so
         var standardsparameterswparam = [];
         var lstParam;
-        var hostIP="http://localhost:2502/";
-        var sApp = "travinhqt_laravel";
-        var sURL = hostIP + sApp + "/";
+        // var hostIP="http://210.245.96.138/";
+        // var sApp = "travinhqt_laravel1";
+        var sURL = protocol + hostIP + "/"+ sApp + "/";
 
         // ----- Lấy danh mục standard ----- //
         function getstandardsData(callback) {
@@ -328,9 +329,10 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label>Doanh nghiệp (<span style="color: red;">*</span>)</label>
+                                                    <label>Doanh nghiệp</label>
                                                     <select class="js-example-basic-single form-control"
                                                         name="enterprise">
+                                                        <option value="">--Lựa chọn Doanh nghiệp--</option>
                                                         @foreach ($Enterprises as $Enterprise)
                                                         <option  {{ $Observationstation->enterpriseid == $Enterprise->id ? "selected":"" }}
                                                             value="{{ $Enterprise->id }}">{{ $Enterprise->name }}
@@ -341,9 +343,10 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label>Tổ chức (<span style="color: red;">*</span>)</label>
+                                                    <label>Tổ chức</label>
                                                     <select class="js-example-basic-single form-control"
                                                         name="organization">
+                                                        <option value="">--Lựa chọn Tổ chức--</option>
                                                         @foreach ($Organizations as $Organization)
                                                         <option
                                                             {{ $Observationstation->organizationid == $Organization->id ? "selected":"" }}
@@ -356,7 +359,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label>Lưu vực sông (<span style="color: red;">*</span>)</label>
+                                                    <label>Lưu vực sông</label>
                                                     <select class="js-example-basic-single form-control" name="basin">
                                                         <option value="">--Chọn lưu vực sông--</option>
                                                         @foreach($Basins as $Basinparent)
@@ -510,6 +513,7 @@
                                                     <label>Quy chuẩn</label>
                                                     <select class="js-example-basic-single form-control"
                                                         name="standards" id="standards">
+                                                        <option value="">--Lựa chọn Quy chuẩn--</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -518,6 +522,7 @@
                                                     <label>Mục đích sử dụng</label>
                                                     <select class="js-example-basic-single form-control"
                                                         name="purposes" id="purposes">
+                                                        <option value="">--Lựa chọn Mục đích sử dụng--</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -527,16 +532,17 @@
                                                     <div class="custom-control custom-checkbox">
                                                         <label class="checkbox">
                                                             <input type="checkbox" name="Check" id="Check1" value="WQI"
-                                                                onclick="selectOnlyThis(this.id)" /> WQI(Min:
-                                                            {{ $WQI->minvalue != null? $WQI->minvalue : "N/A" }} - Max:
-                                                            {{ $WQI->maxvalue != null? $WQI->maxvalue : "N/A"}})
+                                                                onclick="selectOnlyThis(this.id)" />WQI
+                                                            {{ $WQI->minvalue != null? "(Min: ". $WQI->minvalue : "" }}
+
+                                                            {{ $WQI->maxvalue != null? "- Max: ".$WQI->maxvalue.")" : ""}}
                                                         </label>
                                                         <label class="checkbox">
                                                             <input type="checkbox" id="Check2" name="Check" value="AQI"
                                                                 onclick="selectOnlyThis(this.id)" />
-                                                            AQI(Min:
-                                                            {{ $AQI->minvalue != null? $AQI->minvalue : "N/A" }} - Max:
-                                                            {{ $AQI->maxvalue != null? $AQI->maxvalue : "N/A"  }})
+                                                                AQI
+                                                            {{ $AQI->minvalue != null? "(Min: ".$AQI->minvalue : "" }}
+                                                            {{ $AQI->maxvalue != null? "-Max: ".$AQI->maxvalue.")" : ""  }}
                                                         </label>
 
                                                     </div>
@@ -671,8 +677,27 @@
             for (let i = 0; i < standardsparameterswparam.length; i++) {
                 if (standardsparameterswparam[i].sp_standardid == id_standard && standardsparameterswparam[i]
                     .sp_purposeid == id_purpose) {
+                        var str_minmax = "";
+                    if (standardsparameterswparam[i].sp_minvalue == null && standardsparameterswparam[i].sp_maxvalue
+                    !=null) {
+                        str_minmax = '(Max: '+ standardsparameterswparam[i].sp_maxvalue +')';
+                        console.log(str_minmax);
+                    } else if(standardsparameterswparam[i].sp_minvalue != null &&
+                    standardsparameterswparam[i].sp_maxvalue
+                    ==null){
+                         str_minmax = '(Min: '+ standardsparameterswparam[i].sp_minvalue +')';
+                         console.log(str_minmax);
+                    }else if(standardsparameterswparam[i].sp_minvalue != null &&
+                    standardsparameterswparam[i].sp_maxvalue
+                    !=null){
+                        str_minmax = '(Min: '+ standardsparameterswparam[i].sp_minvalue +' - Max:'+
+                        standardsparameterswparam[i].sp_maxvalue +')';
+                    } else{
+                        str_minmax = "";
+                    }
                     str_parameter += '<option value="' + standardsparameterswparam[i].parameter_id +'_'+ standardsparameterswparam[i].spid + '">';
-                    str_parameter += standardsparameterswparam[i].parameter_name + "( Min: " + standardsparameterswparam[i].sp_minvalue + " - Max: " + standardsparameterswparam[i].sp_maxvalue + " )";
+                    //str_parameter += standardsparameterswparam[i].parameter_name + "( Min: " + standardsparameterswparam[i].sp_minvalue + " - Max: " + standardsparameterswparam[i].sp_maxvalue + " )";
+                    str_parameter += standardsparameterswparam[i].parameter_name + str_minmax;
                     str_parameter += '</option>';
                 }
             }

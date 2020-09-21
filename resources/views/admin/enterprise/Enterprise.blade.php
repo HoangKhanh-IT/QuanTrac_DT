@@ -62,6 +62,20 @@
                             </div>
                             @endif
                         </div>
+<div class="col-sm-12">
+                            @if(session()->get('alert'))
+                            <div class="alert alert-warning">
+                                {{ session()->get('alert') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
+                            @if(session()->get('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                            @endif
+                        </div>
                         <div class="col-sm-12">
                             @if ($errors->any())
                             <div class="alert alert-danger">
@@ -90,7 +104,7 @@
                                             @csrf
                                             <div class="input-group input-group-prepend" style="width: 250px;">
                                                 <input type="text" name="search" class="form-control float-right"
-                                                    placeholder="Tên, mã số thuế, địa chỉ, ngành nghề">
+                                                    placeholder="Tên, địa chỉ, SĐT, Mã số thuế, Loại hình doanh nghiệp">
 
                                                 <div class="input-group-append">
                                                     <button type="submit" class="btn  btn-default"><i
@@ -115,7 +129,7 @@
                                                             <th scope="col" class="">Loại doanh nghiệp</th>
                                                             <th scope="col" class="">Mã số thuế</th>
                                                             <th scope="col" class="">Tình trạng</th>
-                                                            <th scope="col" class="">Ngành nghề</th>
+                                                            <!-- <th scope="col" class="">Ngành nghề</th> -->
                                                             <th scope="col" class="">Thao tác</th>
                                                         </tr>
                                                     </thead>
@@ -144,9 +158,9 @@
                                                                 <span class="badge bg-danger">Dừng hoạt đông</span>
                                                                 @endif
                                                             </td>
-                                                             <td>
+                                                             <!-- <td>
                                                                  {{$Enterprise->profession}}
-                                                             </td>
+                                                             </td> -->
                                                             <td>
                                                                 <div class="btn-group btn-group-sm">
                                                                     <a href="{{route('Enterprise.edit',$Enterprise->id)}}"
@@ -170,7 +184,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$Enterprises->links()}}
+                                            <div class="d-flex justify-content-center">{{$Enterprises->links('vendor.pagination.paginator')}}
                                             </div>
                                         </div>
                                     </div>
@@ -208,6 +222,9 @@
         $(document).on('click','.open_modal',function(){
             //alert($(this).val());
             //$('#myModal').modal('show');
+        });
+$(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
         });
     </script>
 </body>

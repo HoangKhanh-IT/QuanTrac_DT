@@ -47,7 +47,7 @@
                 <div class="container-fluid">
                     <div class="row mb-12">
                         <div class="col-sm-12">
-                            <h2>Quản lý Tiêu chuẩn - Chỉ tiêu</h2>
+                            <h2>Quản lý Chỉ tiêu</h2>
                         </div>
                     </div>
                     <div class="row">
@@ -55,6 +55,20 @@
                             @if(session()->get('success'))
                             <div class="alert alert-success">
                                 {{ session()->get('success') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
+                            @if(session()->get('alert'))
+                            <div class="alert alert-warning">
+                                {{ session()->get('alert') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
+                            @if(session()->get('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
                             </div>
                             @endif
                         </div>
@@ -84,11 +98,10 @@
                                              @csrf
                                              <div class="input-group input-group-addon" style="width: 250px;">
                                                  <input type="text" name="search" class="form-control float-right"
-                                                     placeholder="Tên, ký hiệu, cơ quan ban hành quy chuẩn; phương pháp phân tích; Mục đích sử dụng; Tên, mã thông số; Tên, mã đơn vị đo" >
+                                                     placeholder="Tên quy chuẩn; Mục đích sử dụng; Tên, mã thông số" >
 
                                                  <div class="input-group-append">
-                                                     <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Tìm theo: Tên, ký hiệu, cơ quan ban hành quy chuẩn; phương pháp phân tích; Mục đích sử dụng; Tên, mã thông số; Tên, mã đơn vị đo"><i
-                                                             class="fas fa-search"></i></button>
+                                                     <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Tìm theo: Tên quy chuẩn; Mục đích sử dụng; Tên, mã thông số"><i class="fas fa-search"></i></button>
                                                  </div>
                                              </div>
                                          </form>
@@ -111,7 +124,7 @@
                                                             <th scope="col" class="">Đơn vị</th>
                                                             <th scope="col" class="">Giá trị nhỏ nhất</th>
                                                             <th scope="col" class="">Giá trị lớn nhất</th>
-                                                            <th scope="col" class="">Phương pháp phân tích</th>
+                                                            <!-- <th scope="col" class="">Phương pháp phân tích</th> -->
                                                             <th scope="col" class="">Thao tác</th>
                                                         </tr>
                                                     </thead>
@@ -147,20 +160,20 @@
                                                             <td>
                                                                 {{ $StandardParameter->maxvalue }}
                                                             </td>
-                                                            <td>
+                                                           <!--  <td>
                                                                  {{ $StandardParameter->analysismethod}}
-                                                            </td>
+                                                            </td> -->
                                                             <td>
                                                                 <div class="btn-group btn-group-sm">
                                                                     <a href="{{route('StandardParameter.edit',$StandardParameter->id)}}"
                                                                         class="btn btn-sm btn-warning">Sửa</a>
-
+                                                                 
                                                                     <form
                                                                         action="{{route('StandardParameter.delete',$StandardParameter->id)}}"
                                                                         method="post">
                                                                         <input type="hidden" name="_token"
                                                                             value="{{csrf_token()}}">
-
+                                                                      
                                                                         <button class="btn btn-sm btn-danger rounded-0">
                                                                             Xóa
                                                                         </button>
@@ -175,7 +188,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$StandardParameters->links()}}
+                                            <div class="d-flex justify-content-center">{{$StandardParameters->links('vendor.pagination.paginator')}}
                                             </div>
                                         </div>
                                     </div>
@@ -213,6 +226,9 @@
         $(document).on('click','.open_modal',function(){
             //alert($(this).val());
             //$('#myModal').modal('show');
+        });
+        $(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
         });
     </script>
 </body>

@@ -16,7 +16,7 @@ class QualityindexController extends Controller
     public function index()
     {
         //
-        $Qualityindexs = Qualityindex::paginate(10);
+        $Qualityindexs = Qualityindex::paginate(8);
         return view('admin.qualityindex.Qualityindex', ['Qualityindexs' => $Qualityindexs])->with('no', 1);
     }
 
@@ -43,8 +43,8 @@ class QualityindexController extends Controller
         $request->validate(
             [
                 'name' => 'bail|required|max:255|unique:Qualityindex,name',
-                //'belowvalue' => 'numeric',
-                //'abovevalue' => 'numeric',
+                'belowvalue' => 'bail|nullable|numeric',
+                'abovevalue' => 'bail|nullable|numeric',
                 'colorcode' => 'required',
                 'purpose' => 'bail|required|max:255',
             ],
@@ -52,8 +52,8 @@ class QualityindexController extends Controller
                 'name.required' => 'Nhập tên chỉ số.',
                 'name.max' => 'Tên không dài quá 255 ký tự!',
                 'name.unique' => 'Tên đã tồn tại!',
-                //'belowvalue.numeric' => 'Giá trị cận dưới là số.',
-                //'abovevalue.numeric' => 'Giá trị cận trên là số.',
+                'belowvalue.numeric' => 'Giá trị cận dưới là số.',
+                'abovevalue.numeric' => 'Giá trị cận trên là số.',
                 'colorcode.required' => 'Nhập mã màu.',
                 'purpose.required' => 'Nhập mục đích.',
                 'purpose.max' => 'Nhập mục đích không dài quá 255 ký tự!',
@@ -84,14 +84,14 @@ class QualityindexController extends Controller
         if ($search == null
         ) {
             # code...
-            $Qualityindexs = Qualityindex::paginate(10);
+            $Qualityindexs = Qualityindex::paginate(8);
             return view('admin.qualityindex.Qualityindex', ['Qualityindexs' => $Qualityindexs])->with('no', 1);
         } 
         else 
         {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             $Qualityindexs = Qualityindex::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')
-                            ->orwhere(DB::raw('UPPER(purpose)'), 'like', '%' . $search . '%')->paginate(10);
+                            ->orwhere(DB::raw('UPPER(purpose)'), 'like', '%' . $search . '%')->paginate(8);
              return view('admin.qualityindex.Qualityindex', ['Qualityindexs' => $Qualityindexs])->with('no', 1);
         }
     }
@@ -122,8 +122,8 @@ class QualityindexController extends Controller
         $request->validate(
             [
                 'name' => 'bail|required|max:255|unique:Qualityindex,name,'.$id,
-                //'belowvalue' => 'numeric',
-                //'abovevalue' => 'numeric',
+                 'belowvalue' => 'bail|nullable|numeric',
+                'abovevalue' => 'bail|nullable|numeric',
                 'colorcode' => 'required',
                 'purpose' => 'bail|required|max:255',
             ],
@@ -131,8 +131,8 @@ class QualityindexController extends Controller
                 'name.required' => 'Nhập tên chỉ số.',
                 'name.max' => 'Tên không dài quá 255 ký tự!',
                 'name.unique' => 'Tên đã tồn tại!',
-                //'belowvalue.numeric' => 'Giá trị cận dưới là số.',
-                //'abovevalue.numeric' => 'Giá trị cận trên là số.',
+                'belowvalue.numeric' => 'Giá trị cận dưới là số.',
+                'abovevalue.numeric' => 'Giá trị cận trên là số.',
                 'colorcode.required' => 'Nhập mã màu.',
                 'purpose.required' => 'Nhập mục đích.',
                 'purpose.max' => 'Nhập mục đích không dài quá 255 ký tự!',
@@ -156,10 +156,20 @@ class QualityindexController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $Qualityindex = Qualityindex::find($id);
-        $Qualityindex->delete();
-
-        return redirect('danhmuc/Qualityindex')->with('success', 'Xóa thành công!');
+        try
+        {
+            $Observations = Qualityindex::findOrFail($id)->Observations()->get();
+            if ($Observations->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Qualityindex')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Kết quả quan trắc!');
+            } 
+            $Qualityindex = Qualityindex::find($id);
+            $Qualityindex->delete();
+            return redirect('danhmuc/Qualityindex')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

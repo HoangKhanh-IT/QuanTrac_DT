@@ -14,4 +14,8 @@ class LocationType extends Model
     ];
 
     public $timestamps = false;
+
+    public function Locations(){
+        return $this->hasMany(Location::class,'locationtypeid','id');
+    }
 }

@@ -16,7 +16,7 @@ class LocationTypeController extends Controller
     public function index()
     {
         //
-        $LocationTypes = LocationType::paginate(10);
+        $LocationTypes = LocationType::paginate(8);
         return view('admin.location_type.LocationType', ['LocationTypes' => $LocationTypes])->with('no', 1);
     }
 
@@ -70,13 +70,13 @@ class LocationTypeController extends Controller
         if ($search == null
         ) {
             # code...
-            $LocationTypes = LocationType::paginate(10);
+            $LocationTypes = LocationType::paginate(8);
             return view('admin.location_type.LocationType', ['LocationTypes' => $LocationTypes])->with('no', 1);
         } 
         else 
         {
              $search = trim(mb_strtoupper($search,'UTF-8'));
-            $LocationTypes = LocationType::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')->paginate(10);
+            $LocationTypes = LocationType::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')->paginate(8);
             return view('admin.location_type.LocationType', ['LocationTypes' => $LocationTypes])->with('no', 1);
         }
     }
@@ -128,10 +128,20 @@ class LocationTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $LocationType = LocationType::find($id);
-        $LocationType->delete();
-
-        return redirect('danhmuc/LocationType')->with('success', 'Xóa thành công!');
+        try
+        {
+            $Locations = LocationType::findOrFail($id)->Locations()->get();
+            if ($Locations->isNotEmpty()) 
+            {
+                return redirect('danhmuc/LocationType')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Địa danh!');
+            } 
+            $LocationType = LocationType::find($id);
+            $LocationType->delete();
+            return redirect('danhmuc/LocationType')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

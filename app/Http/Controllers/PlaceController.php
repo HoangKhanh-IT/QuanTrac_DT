@@ -17,7 +17,7 @@ class PlaceController extends Controller
     public function index()
     {
         //
-        $Locations = Location::paginate(10);
+        $Locations = Location::paginate(8);
         return view('admin.location.ListLocation',['Locations' => $Locations])->with('no', 1);
     }
 
@@ -74,7 +74,7 @@ class PlaceController extends Controller
         $search = $request->search;
         if ($search == null) 
         {
-            $Locations = Location::paginate(10);
+            $Locations = Location::paginate(8);
             return view('admin.location.ListLocation',['Locations' => $Locations])->with('no', 1);
         } 
         else 
@@ -84,7 +84,7 @@ class PlaceController extends Controller
                         ->where(DB::raw('UPPER("Location"."name")'), 'like', '%' .$search. '%')
                         ->orwhere(DB::raw('UPPER("Location"."note")'), 'like', '%' . $search . '%')
                         ->join('LocationType', 'LocationType.id', '=', 'Location.locationtypeid')
-                        ->orWhere(DB::raw('UPPER("LocationType"."name")'), 'like', '%' . $search . '%')->paginate(10);
+                        ->orWhere(DB::raw('UPPER("LocationType"."name")'), 'like', '%' . $search . '%')->paginate(8);
             return view('admin.location.ListLocation',['Locations' => $Locations])->with('no', 1);
         }
     }
@@ -139,10 +139,20 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $Location = Location::find($id);
-        $Location->delete();
-
-        return redirect('danhmuc/Place')->with('success', 'Xóa thành công!');
+        try
+        {
+            $Observationstations = Location::findOrFail($id)->Observationstations()->get();
+            if ($Observationstations->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Place')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Trạm quan trắc!');
+            } 
+            $Location = Location::find($id);
+            $Location->delete();
+            return redirect('danhmuc/Place')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

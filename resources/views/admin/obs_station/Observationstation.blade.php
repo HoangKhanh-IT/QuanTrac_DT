@@ -51,6 +51,20 @@
                             <h2>Quản lý trạm quan trắc</h2>
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                            @if(session()->get('alert'))
+                            <div class="alert alert-warning">
+                                {{ session()->get('alert') }}
+                            </div>
+                            @endif
+                    </div>
+                    <div class="col-sm-12">
+                            @if(session()->get('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                            @endif
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             @if(session()->get('success'))
@@ -107,11 +121,13 @@
                                                             <th scope="col" class="">Mã trạm</th>
                                                             <th scope="col" class="">Tên trạm</th>
                                                             <!-- <th scope="col" class="">Thời gian quan trắc</th> -->
+                                                            <th scope="col" class="">Quận/Huyện</th>
                                                             <th scope="col" class="">Loại hình quan trắc</th>
-                                                            <th scope="col" class="">Thông số</th>
+                                                            <th scope="col" class="">Quy chuẩn</th>
+                                                           <!--  <th scope="col" class="">Thông số</th> -->
                                                             {{-- <th scope="col" class="">Mục đích sử dụng</th> --}}
-                                                            <th scope="col" class="">Vị trí</th>
-                                                            <th scope="col" class="">Trạng thái hoạt động</th>
+                                                            <!-- <th scope="col" class="">Vị trí</th> -->
+                                                            <!-- <th scope="col" class="">Trạng thái hoạt động</th> -->
                                                             <th scope="col" class="">Thao tác</th>
                                                         </tr>
                                                     </thead>
@@ -130,6 +146,7 @@
                                                             </td>
                                                             <td>{{ $Observationstation->code }}</td>
                                                             <td>{{ $Observationstation->name }}</td>
+                                                            <td>{{ $Observationstation->District->name }}</td>
                                                           <!--   <td>
                                                                 {{Carbon\Carbon::parse($Observationstation->establishdate)->format('d/m/Y')}}
                                                             </td> -->
@@ -143,6 +160,15 @@
                                                                 @if ($Observationstation->StandardParameters)
                                                                 @foreach($Observationstation->StandardParameters as
                                                                 $key=> $StandardParameter)
+                                                                        {{$StandardParameter->standard->symbol}}
+                                                                        @break
+                                                                    @endforeach
+                                                                @endif
+                                                            </td>
+                                                           <!--  <td>
+                                                                @if ($Observationstation->StandardParameters)
+                                                                @foreach($Observationstation->StandardParameters as
+                                                                $key=> $StandardParameter)
                                                                 <small class="badge bg-warning">
                                                                     {{ $StandardParameter->parameter->name }}
                                                                     {{--({{ $StandardParameter->unit->name }})
@@ -150,7 +176,7 @@
                                                                     </small>
                                                                 @endforeach
                                                                 @endif
-                                                            </td>
+                                                            </td> -->
                                                             {{-- <td>
                                                                 @if ($Observationstation->StandardParameters)
                                                                 @foreach($Observationstation->StandardParameters as
@@ -163,15 +189,15 @@
                                                                 @endforeach
                                                                 @endif
                                                             </td> --}}
-                                                            <td>{{ $Observationstation->Location->name }}</td>
-                                                            <td>
+                                                            <!-- <td>{{ $Observationstation->Location->name }}</td> -->
+                                                           <!--  <td>
                                                                 @if ($Observationstation->active == "Y")
                                                                 <small class="badge bg-primary">Đang hoạt động</small>
                                                                 @else
                                                                 <small class="badge bg-gradient-red">Dừng hoạt
                                                                     động</small>
                                                                 @endif
-                                                            </td>
+                                                            </td> -->
                                                             <td>
                                                                 <div class="btn-group btn-group-sm">
                                                                     <a href="{{route('Observationstation.edit',$Observationstation->id)}}"
@@ -197,7 +223,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$Observationstations->links()}}
+                                            <div class="d-flex justify-content-center">{{$Observationstations->links('vendor.pagination.paginator')}}
                                             </div>
                                         </div>
                                     </div>
@@ -232,6 +258,9 @@
         $(document).on('click','.open_modal',function(){
             //alert($(this).val());
             //$('#myModal').modal('show');
+        });
+        $(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
         });
     </script>
 </body>

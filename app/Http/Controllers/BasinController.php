@@ -17,7 +17,7 @@ class BasinController extends Controller
     public function index()
     {
         //
-         $Basins = Basin::paginate(10);
+         $Basins = Basin::paginate(8);
         return view('admin.basin.ListBasin',['Basins' => $Basins])->with('no', 1);
     }
 
@@ -44,17 +44,19 @@ class BasinController extends Controller
         //
          $request->validate(
             [
-                'riverid' => 'bail|unique:Basin,riverid|max:50',
+                'riverid' => 'bail|nullable|unique:Basin,riverid|max:50',
                 'name' => 'bail|required|unique:Basin,name|max:255',
-                // 'riverbasinarea' =>'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 
-                // 'normalwaterlevel' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/'
+                'riverbasinarea' =>'nullable|numeric',
+                'normalwaterlevel' =>'nullable|numeric',
             ],
             [
                 'riverid.unique' => 'Mã lưu vực đã tồn tại!',
                 'riverid.max' => 'Mã lưu vực không dài quá 50 ký tự!',
                 'name.required' => 'Nhập tên lưu vực!',
                 'name.unique' => 'Tên lưu vực đã tồn tại!',
-                'name.max' => 'Tên lưu vực không dài quá 255 ký tự!'
+                'name.max' => 'Tên lưu vực không dài quá 255 ký tự!',
+                'riverbasinarea.numeric' => 'Diện tích lưu vực sông phải là số.',
+                'normalwaterlevel.numeric' => 'Mực nước dâng bình thường phải là số.',
             ]
         );
 
@@ -94,7 +96,7 @@ class BasinController extends Controller
         //
          $search = $request->search;
         if ($search == null) {
-            $Basins = Basin::paginate(10);
+            $Basins = Basin::paginate(8);
             return view('admin.basin.ListBasin', ['Basins' => $Basins])->with('no', 1);
         } 
         else 
@@ -104,7 +106,7 @@ class BasinController extends Controller
             $Basins = Basin::where(DB::raw('UPPER(name)'), 'LIKE' , '%'.$search.'%')
             ->orwhere(DB::raw('UPPER(description)'), 'LIKE', '%'.$search.'%')
             ->orwhere(DB::raw('UPPER(master)'), 'LIKE', '%'.$search.'%')
-            ->orwhere(DB::raw('UPPER(purpose)'), 'LIKE', '%'.$search.'%')->paginate(10);
+            ->orwhere(DB::raw('UPPER(purpose)'), 'LIKE', '%'.$search.'%')->paginate(8);
             return view('admin.basin.ListBasin', ['Basins' => $Basins])->with('no', 1);
         }
     }
@@ -135,17 +137,19 @@ class BasinController extends Controller
         //
           $request->validate(
             [
-                'riverid' => 'bail|max:50|unique:Basin,riverid,'.$id,
-                'name' => 'bail|required|max:255|unique:Basin,name,'.$id,
-                // 'riverbasinarea' =>'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 
-                // 'normalwaterlevel' => 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/'
+                 'riverid' => 'bail|nullable|unique:Basin,riverid|max:50',
+                'name' => 'bail|required|unique:Basin,name|max:255',
+                'riverbasinarea' =>'nullable|numeric',
+                'normalwaterlevel' =>'nullable|numeric',
             ],
             [
-                'riverid.unique' => 'Mã lưu vực sông đã tồn tại!',
+                'riverid.unique' => 'Mã lưu vực đã tồn tại!',
                 'riverid.max' => 'Mã lưu vực không dài quá 50 ký tự!',
-                'name.required' => 'Nhập tên lưu vực sông!',
-                'name.unique' => 'Tên lưu vực sông đã tồn tại!',
-                'name.max' => 'Tên lưu vực không dài quá 255 ký tự!'
+                'name.required' => 'Nhập tên lưu vực!',
+                'name.unique' => 'Tên lưu vực đã tồn tại!',
+                'name.max' => 'Tên lưu vực không dài quá 255 ký tự!',
+                'riverbasinarea.numeric' => 'Diện tích lưu vực sông phải là số.',
+                'normalwaterlevel.numeric' => 'Mực nước dâng bình thường phải là số.',
             ]
         );
 
@@ -181,10 +185,26 @@ class BasinController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $Basin = Basin::find($id);
-        $Basin->delete();
+        try
+        {
+            $Observationstations = Basin::findOrFail($id)->Observationstations()->get();
+            if ($Observationstations->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Basin')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Trạm quan trắc!');
+            } 
+            $DischargePoints = Basin::findOrFail($id)->DischargePoints()->get();
+            if ($DischargePoints->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Basin')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Điểm xả nước thải!');
+            } 
 
-        return redirect('danhmuc/Basin')->with('success', 'Xóa thành công!');
+            $Basin = Basin::findOrFail($id);
+            $Basin->delete();
+            return redirect('danhmuc/Basin')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

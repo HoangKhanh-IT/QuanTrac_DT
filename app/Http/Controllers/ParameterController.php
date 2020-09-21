@@ -16,7 +16,7 @@ class ParameterController extends Controller
     public function index()
     {
         //
-        $parameters =  Parameter::paginate(10);
+        $parameters =  Parameter::paginate(8);
         return view('admin.parameter.Parameter', ['parameters' => $parameters])->with('no', 1);
     }
 
@@ -75,14 +75,14 @@ class ParameterController extends Controller
         $search = $request->search;
         if ($search ==null) {
             # code...
-            $parameters = Parameter::paginate(10);
+            $parameters = Parameter::paginate(8);
             return view('admin.parameter.Parameter', ['parameters' => $parameters])->with('no', 1);
         }
         else
         {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             $parameters = Parameter::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')
-                            ->orwhere(DB::raw('UPPER(code)'), 'like', '%' . $search . '%')->paginate(10);
+                            ->orwhere(DB::raw('UPPER(code)'), 'like', '%' . $search . '%')->paginate(8);
            return view('admin.parameter.Parameter', ['parameters' => $parameters])->with('no', 1);
         }
 
@@ -141,10 +141,14 @@ class ParameterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $standardParameters = Parameter::find($id)->standardParameters()->get();
+        if ($standardParameters->isNotEmpty()) {
+            return redirect('danhmuc/Parameter')->with('alert', 'Xóa không thành công do dữ liệu còn tồn tại ở bảng Chỉ tiêu !');
+        }
+        
         $Parameter = Parameter::find($id);
         $Parameter->delete();
+        return redirect('danhmuc/Parameter')->with('success', 'Xóa thành công!');
 
-        return redirect('quantri/Parameter')->with('success', 'Xóa thành công!');
     }
 }

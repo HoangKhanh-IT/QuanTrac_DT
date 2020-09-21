@@ -9,7 +9,7 @@
     </ul> -->
     <ul class="navbar-nav ml-auto">
         <li class="dropdown" style="padding-right: 20px">
-            <a href="http://localhost:2502/travinhqt_laravel/webapp" class="" data-toggle="" aria-expanded="false">
+            <a href="{{ url('/') }}/webapp" class="" data-toggle="" aria-expanded="false">
                 <i class="fas fa-map fa-1x" style="color: white"></i>
                 <span style="color: white;" class="hidden-xs">
                     <span class="mdi-format-float-center"> &nbsp;&nbsp;Bản đồ</span>

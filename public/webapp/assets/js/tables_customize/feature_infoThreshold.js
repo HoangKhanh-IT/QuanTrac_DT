@@ -1,6 +1,6 @@
 /*** Hàm này được thực hiện sau khi tạo được bảng con hoàn chỉnh ***/
 function DOM_data_child_Threshold(row_detail, time) {
-    var total_threshold_station = onChangeTime_feature(time);
+    var total_threshold_station = onChangeTime_feature(time, "hour");
     var total_detail = total_threshold_station.data[row_detail].total_detail;
 
     for (var i_dom_threshold = 0; i_dom_threshold < total_detail.length; i_dom_threshold++) {
@@ -44,7 +44,7 @@ function DOM_data_child_Threshold(row_detail, time) {
 var row_detail;
 function getData_threshold_station() {
     /*---- Datables danh sách vượt ngưỡng ----*/
-    var data_onchange = onChangeTime_feature(1);
+    var data_onchange = onChangeTime_feature(1, "hour");
 
     if ($.fn.DataTable.isDataTable('#table_threshold')) {
         /*** Trigger nút button 1 giờ để reload dữ liệu 1 giờ khi người dùng tắt, bật lại ***/
@@ -150,7 +150,7 @@ function getData_threshold_station() {
                 /*** Remove dữ liệu cũ ***/
                 $('#table_threshold').DataTable().clear().draw();
                 /*** Thêm dữ liệu mới ***/
-                data_onchange = onChangeTime_feature(1);
+                data_onchange = onChangeTime_feature(1, "hour");
                 table_threshold = $('#table_threshold').DataTable();
                 table_threshold.rows.add(data_onchange.data);
                 table_threshold.columns.adjust().draw();
@@ -164,7 +164,7 @@ function getData_threshold_station() {
                 /*** Remove dữ liệu cũ ***/
                 $('#table_threshold').DataTable().clear().draw();
                 /*** Thêm dữ liệu mới ***/
-                data_onchange = onChangeTime_feature(8);
+                data_onchange = onChangeTime_feature(8, "hour");
                 table_threshold = $('#table_threshold').DataTable();
                 table_threshold.rows.add(data_onchange.data);
                 table_threshold.columns.adjust().draw();
@@ -178,7 +178,7 @@ function getData_threshold_station() {
                 /*** Remove dữ liệu cũ ***/
                 $('#table_threshold').DataTable().clear().draw();
                 /*** Thêm dữ liệu mới ***/
-                data_onchange = onChangeTime_feature(24);
+                data_onchange = onChangeTime_feature(24, "hour");
                 table_threshold = $('#table_threshold').DataTable();
                 table_threshold.rows.add(data_onchange.data);
                 table_threshold.columns.adjust().draw();

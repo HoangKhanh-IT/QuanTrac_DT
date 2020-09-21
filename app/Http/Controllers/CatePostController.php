@@ -17,7 +17,7 @@ class CatePostController extends Controller
      */
     public function index()
     {
-        $CategoryPosts = CategoryPost::orderBy('order','ASC')->paginate(10);
+        $CategoryPosts = CategoryPost::orderBy('order','ASC')->paginate(8);
         return view('admin.category_post.ListCatePost',['CategoryPosts' => $CategoryPosts])->with('no', 1);
     }
 
@@ -79,7 +79,7 @@ class CatePostController extends Controller
           $search = $request->search;
         if ($search == null) 
         {
-            $CategoryPosts = CategoryPost::orderBy('order','ASC')->paginate(10);
+            $CategoryPosts = CategoryPost::orderBy('order','ASC')->paginate(8);
             return view('admin.category_post.ListCatePost', ['CategoryPosts' => $CategoryPosts])->with('no', 1);
         } 
         else 
@@ -88,7 +88,7 @@ class CatePostController extends Controller
             $CategoryPosts = CategoryPost::where(DB::raw('UPPER(name)'), 'like', '%' . $search . '%')
                                         ///->orwhere(DB::raw('UPPER(desc)'), 'like', '%' . $search . '%') --trùng từ khóa DESC
                                         ->orwhere(DB::raw('UPPER(slug)'), 'like', '%' . $search . '%')
-                                        ->orwhere(DB::raw('UPPER(keywords)'), 'like', '%' . $search . '%')->paginate(10);
+                                        ->orwhere(DB::raw('UPPER(keywords)'), 'like', '%' . $search . '%')->paginate(8);
             return view('admin.category_post.ListCatePost',['CategoryPosts' => $CategoryPosts])->with('no', 1);
         }
     }
@@ -150,9 +150,21 @@ class CatePostController extends Controller
     public function destroy($id)
     {
         //
-         $CategoryPost = CategoryPost::find($id);
-         $CategoryPost->delete();
+        try
+        {
+            $Posts = CategoryPost::findOrFail($id)->Posts()->get();
+            if ($Posts->isNotEmpty()) 
+            {
+                return redirect('danhmuc/CatePost')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Tin bài!');
+            } 
 
+          $CategoryPost = CategoryPost::findOrFail($id);
+          $CategoryPost->delete();
          return redirect('danhmuc/CatePost')->with('success', 'Xóa thành công!');
+    }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

@@ -18,7 +18,7 @@ class StandardController extends Controller
     public function index()
     {
         //
-        $Standards = Standard::paginate(10);
+        $Standards = Standard::paginate(8);
         return view( 'admin.standard.Standards',['Standards' => $Standards])->with('no', 1);
     
     }
@@ -101,7 +101,7 @@ class StandardController extends Controller
         $search = $request->search;
         if ($search == null) {
             # code...
-            $Standards = Standard::paginate(10);
+            $Standards = Standard::paginate(8);
             return view( 'admin.standard.Standards',['Standards' => $Standards])->with('no', 1);
         }
         else 
@@ -112,7 +112,7 @@ class StandardController extends Controller
             ->orwhere(DB::raw('UPPER("Standard"."symbol")'), 'like', '%' . $search . '%')
             ->orwhere(DB::raw('UPPER("Standard"."organization")'), 'like', '%' . $search . '%')
             ->join('ObservationType', 'ObservationType.id', '=', 'Standard.obstypeid')
-            ->orwhere(DB::raw('UPPER("ObservationType"."name")'), 'like', '%' . $search . '%')->paginate(10);
+            ->orwhere(DB::raw('UPPER("ObservationType"."name")'), 'like', '%' . $search . '%')->paginate(8);
             return view( 'admin.standard.Standards',['Standards' => $Standards])->with('no', 1);
         }
     }
@@ -192,15 +192,30 @@ class StandardController extends Controller
     public function destroy($id)
     {
         //
-        $Standard = Standard::find($id);
-        $standard_attachment = $Standard->attachment;
-        $path = 'public/uploads/standards/'.$standard_attachment;
-        if($path)
+        try
         {
-           unlink($path);
-        }
-        $Standard->delete();
+            $StandardParameter = Standard::findOrFail($id)->standardParameters()->get();
+            if ($StandardParameter->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Standard')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Chỉ tiêu!');
+            } 
+            else 
+            {
+                $Standard = Standard::findOrFail($id);
+                $standard_attachment = $Standard->attachment;
+                $path = 'public/uploads/standards/'.$standard_attachment;
+                if(is_file($path))
+                {
+                   unlink($path);
+                }
+                $Standard->delete();
 
-        return redirect('danhmuc/Standard')->with('success', 'Xóa thành công!');
+                return redirect('danhmuc/Standard')->with('success', 'Xóa thành công!');
+            } 
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

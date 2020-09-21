@@ -34,6 +34,10 @@ class Observationstation extends Model
         return $this->belongsTo(Location::class,'locationid','id');
     }
 
+    public function District(){
+        return $this->belongsTo(District::class,'districtid','id');
+    }
+
     public function Enterprise()
     {
         return $this->belongsTo(Enterprise::class, 'enterpriseid', 'id');
@@ -54,6 +58,17 @@ class Observationstation extends Model
         return $this->belongsToMany(StandardParameter::class, 'StdStation', 'stationid', 'standardParameterid');
     }
 
+    public function Observations(){
+        return $this->hasMany(Observation::class, 'stationid','id');
+    }
+
+    public function Cameras(){
+        return $this->hasMany(Camera::class, 'stationid','id');
+    }
+
+    public function ElesctronicBoards(){
+        return $this->hasMany(ElectronicBoard::class, 'stationid','id');
+    }
 
 
 }

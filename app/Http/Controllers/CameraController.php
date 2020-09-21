@@ -16,7 +16,7 @@ class CameraController extends Controller
     public function index()
     {
         //
-        $cameras = Camera::paginate(10);
+        $cameras = Camera::paginate(8);
         $ObservationStations = ObservationStation::all();
         return view('admin.camera.Camera', ['cameras' => $cameras, 'ObservationStations' => $ObservationStations] )->with('no', 1);
     }
@@ -86,7 +86,7 @@ class CameraController extends Controller
         $search = $request->search;
         if ($search ==null) {
             # code...
-            $cameras = Camera::paginate(10);
+            $cameras = Camera::paginate(8);
             return view('admin.camera.Camera', ['cameras' => $cameras])->with('no', 1);
         }
         else
@@ -98,7 +98,7 @@ class CameraController extends Controller
                             ->orwhere(DB::raw('UPPER("Camera"."ipaddress")'), 'like', '%' . $search . '%')
                             ->orwhere(DB::raw('UPPER("Camera"."description")'), 'like', '%' . $search . '%')
                              ->join('Observationstation', 'Observationstation.id', '=', 'Camera.stationid')
-                            ->orWhere(DB::raw('UPPER("Observationstation"."name")'), 'like', '%' . $search . '%')->paginate(10);
+                            ->orWhere(DB::raw('UPPER("Observationstation"."name")'), 'like', '%' . $search . '%')->paginate(8);
            return view('admin.camera.Camera', ['cameras' => $cameras])->with('no', 1);
         }
 

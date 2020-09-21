@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $Posts = Post::orderBy('id','DESC')->paginate(10);
+        $Posts = Post::orderBy('id','DESC')->paginate(8);
         return view('admin.post.ListPost',['Posts' => $Posts])->with('no', 1);
     }
 
@@ -49,7 +49,7 @@ class PostController extends Controller
                 'title' => 'bail|required|unique:Post,title|max:255',
                 'contents' => 'required',
                 //'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'image' => 'bail|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'bail|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'authors' =>  'bail|required|max:255',
                 'sources' =>  'bail|required|max:255',
             ],
@@ -113,7 +113,7 @@ class PostController extends Controller
           $search = $request->search;
         if ($search == null) 
         {
-            $Posts = Post::orderBy('id','DESC')->paginate(10);
+            $Posts = Post::orderBy('id','DESC')->paginate(8);
             return view('admin.post.ListPost', ['Posts' => $Posts])->with('no', 1);
         } 
         else 
@@ -126,7 +126,7 @@ class PostController extends Controller
                 ->orwhere(DB::raw('UPPER("Post"."metakeywords")'), 'like', '%' .$search. '%')
                 ->orwhere(DB::raw('UPPER("Post"."authors")'), 'like', '%' .$search. '%')
                 ->join('CategoryPost', 'CategoryPost.id', '=', 'Post.catepostid')
-                ->orWhere(DB::raw('UPPER("CategoryPost"."name")'), 'like', '%' . $search . '%')->paginate(10);
+                ->orWhere(DB::raw('UPPER("CategoryPost"."name")'), 'like', '%' . $search . '%')->paginate(8);
             return view('admin.post.ListPost',['Posts' => $Posts])->with('no', 1);
         }
     }
@@ -159,7 +159,7 @@ class PostController extends Controller
                 'title' => 'bail|required|max:255|unique:Post,title,'.$id,
                 'contents' => 'required',
                 //'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'image' => 'bail|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'bail|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'authors' =>  'bail|required|max:255',
                 'sources' =>  'bail|required|max:255',
             ],
@@ -227,14 +227,21 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-         $Post = Post::find($id);
-         $post_image = $Post->image;
-         $path = 'public/uploads/post/'.$post_image;
-         if($path)
-         {
-             unlink($path);
-         }
-         $Post->delete();
-         return redirect('quanly/Post')->with('success', 'Xóa thành công!');
+        try
+        {
+             $Post = Post::findOrFail($id);
+             $post_image = $Post->image;
+             $path = 'public/uploads/post/'.$post_image;
+             if(is_file($path))
+             {
+                 unlink($path);
+             }
+             $Post->delete();
+             return redirect('quanly/Post')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

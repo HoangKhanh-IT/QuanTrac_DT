@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="http://localhost:2502/travinhqt_laravel/quanly/Observationstation" class="brand-link">
+    <a href="master" class="brand-link">
         <!-- <i class="fas fa-globe-americas fa-1x"></i>
         <span class="brand-text font-weight-light">Quan trắc Trà Vinh</span> -->
         <div class="title">
@@ -45,7 +45,7 @@
         </nav>
         <!-- Sidebar user (optional) -->
         <!-- Sidebar Menu -->
-    {{-- <nav class="mt-2">
+    <!-- {{-- <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
             <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link active">
@@ -183,7 +183,7 @@
         </ul>
     </li>
     </ul>
-    </nav> --}}
+    </nav> --}} -->
     <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

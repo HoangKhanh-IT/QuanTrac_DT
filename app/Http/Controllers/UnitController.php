@@ -16,7 +16,7 @@ class UnitController extends Controller
     public function index()
     {
         //
-        $Units =  Unit::paginate(10);
+        $Units =  Unit::paginate(8);
         return view('admin.unit.Unit', ['Units' => $Units])->with('no', 1);
     }
 
@@ -76,14 +76,14 @@ class UnitController extends Controller
         $search = $request->search;
         if ($search == null) {
             # code...
-            $Units = Unit::paginate(10);
+            $Units = Unit::paginate(8);
             return view('admin.unit.Unit', ['Units' => $Units])->with('no', 1);
         } 
         else 
         {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             $Units = Unit::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')
-                        ->orwhere(DB::raw('UPPER(code)'), 'like', '%' . $search . '%')->paginate(10);
+                        ->orwhere(DB::raw('UPPER(code)'), 'like', '%' . $search . '%')->paginate(8);
              return view('admin.unit.Unit', ['Units' => $Units])->with('no', 1);
         }
     }
@@ -141,9 +141,16 @@ class UnitController extends Controller
     public function destroy($id)
     {
         //
-        $Unit = Unit::find($id);
-        $Unit->delete();
-
-        return redirect('danhmuc/Unit')->with('success', 'Xóa thành công!');
+        $standardParameters = Unit::findOrFail($id)->standardParameters()->get();
+        if ($standardParameters->isNotEmpty()) 
+        {
+            return redirect('danhmuc/Unit')->with('alert', 'Xóa không thành công do dữ liệu còn tồn tại ở bảng Chỉ tiêu !');
+        } 
+        else 
+        {
+            $Unit = Unit::find($id);
+            $Unit->delete();
+            return redirect('danhmuc/Unit')->with('success', 'Xóa thành công!');
+        }
     }
 }

@@ -114,7 +114,7 @@ function formatDatetime() {
         /*** Vị trí mở tìm ngày luôn nằm ở Top ***/
         widgetPositioning: {
             horizontal: 'auto',
-            vertical: 'top'
+            vertical: 'auto'
         },
         useCurrent: false
     });
@@ -168,6 +168,16 @@ $('#statisticby').change(function () {
         $('.AQI_WQI_toggle').removeClass('in')
     }
 }) ***/
+
+/*** Khi lựa chọn loại hình là Tự động thì không xuất hiện Quy chuẩn ***/
+$('#loaitram_stat').change(function () {
+    var item_loaitram_stat = $("#loaitram_stat").val();
+    if (item_loaitram_stat == 1 || item_loaitram_stat == 3) {
+        $('.none_QC').removeClass('in')
+    } else {
+        $('.none_QC').addClass('in')
+    }
+})
 
 $("#statistic-btn").click(function () {
     /*** Reset các button ***/
@@ -306,11 +316,20 @@ $("#search_stats_tramqt").click(function () {
             $("#statStatus_error").css("display", "none");
         }, 3000)
     } else {
-        if (item_quanhuyen_stat == 'none') {
+            /*** Trạm tự động không thống kê theo quy chuẩn ***/
+        if (item_quanhuyen_stat == 'none' && (item_loaitram_stat == 1 || item_loaitram_stat == 3)) {
+            url_list_stations = 'statStation_noneQC?' + '%20loaihinh_stat=' + item_loaihinh_stat +
+                '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=1=1'
+        } else if (item_quanhuyen_stat != 'none' && (item_loaitram_stat == 1 || item_loaitram_stat == 3)) {
+            url_list_stations = 'statStation_noneQC?' + '%20loaihinh_stat=' + item_loaihinh_stat +
+                '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=' + item_quanhuyen_stat
+
+            /*** Trạm bán tự động thống kê theo quy chuẩn ***/
+        } else if (item_quanhuyen_stat == 'none' && (item_loaitram_stat == 2 || item_loaitram_stat == 4)) {
             url_list_stations = 'statStation?' + '%20loaihinh_stat=' + item_loaihinh_stat +
                 '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=1=1' +
                 '&%20quychuan_stat=' + item_quychuan_stat;
-        } else {
+        } else if (item_quanhuyen_stat != 'none' && (item_loaitram_stat == 2 || item_loaitram_stat == 4)) {
             url_list_stations = 'statStation?' + '%20loaihinh_stat=' + item_loaihinh_stat +
                 '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=' + item_quanhuyen_stat +
                 '&%20quychuan_stat=' + item_quychuan_stat;

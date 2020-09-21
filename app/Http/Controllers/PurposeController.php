@@ -16,7 +16,7 @@ class PurposeController extends Controller
     public function index()
     {
         //
-        $Purposes = Purpose::paginate(10);
+        $Purposes = Purpose::paginate(8);
         return view('admin.purpose.Purpose', ['Purposes' => $Purposes])->with('no', 1);
     }
 
@@ -73,14 +73,14 @@ class PurposeController extends Controller
         if ($search == null
         ) {
             # code...
-            $Purposes = Purpose::paginate(10);
+            $Purposes = Purpose::paginate(8);
              return view('admin.purpose.Purpose', ['Purposes' => $Purposes])->with('no', 1);
         } 
         else
         {
              $search = trim(mb_strtoupper($search,'UTF-8'));
             $Purposes = Purpose::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')
-                            ->orwhere(DB::raw('UPPER(description)'), 'like', '%' . $search . '%')->paginate(10);
+                            ->orwhere(DB::raw('UPPER(description)'), 'like', '%' . $search . '%')->paginate(8);
             return view('admin.purpose.Purpose', ['Purposes' => $Purposes])->with('no', 1);
         }
     }
@@ -134,9 +134,17 @@ class PurposeController extends Controller
     public function destroy($id)
     {
         //
-        $Purpose = Purpose::find($id);
-        $Purpose->delete();
+        $standardParameters = Purpose::find($id)->standardParameters()->get();
+        if ($standardParameters->isNotEmpty()) {
+            return redirect('danhmuc/Purpose')->with('alert', 'Xóa không thành công do dữ liệu còn tồn tại ở bảng Chỉ tiêu!');
+        } else {
+            $Purpose = Purpose::find($id);
+            $Purpose->delete();
+            return redirect('danhmuc/Purpose')->with('success', 'Xóa thành công!');
+        }
+        //$Purpose = Purpose::find($id);
+        //$Purpose->delete();
 
-        return redirect('danhmuc/Purpose')->with('success', 'Xóa thành công!');
+        //return redirect('danhmuc/Purpose')->with('success', 'Xóa thành công!');
     }
 }

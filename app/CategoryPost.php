@@ -25,4 +25,8 @@ class CategoryPost extends Model
         return $this->hasMany(CategoryPost::class)->with('CategoryPost');
     }
 
+    public function Posts(){
+        return $this->hasMany(Post::class, 'catepostid','id');
+    }
+
 }

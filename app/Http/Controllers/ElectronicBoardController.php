@@ -20,7 +20,7 @@ class ElectronicBoardController extends Controller
     public function index()
     {
         //
-        $ElectronicBoards = ElectronicBoard::paginate(10);
+        $ElectronicBoards = ElectronicBoard::paginate(8);
         $ObservationStations = ObservationStation::all();
         return view( 'admin.electronic_board.ElectronicBoard',
             ['ElectronicBoards' => $ElectronicBoards, 'ObservationStations' => $ObservationStations])->with('no', 1);
@@ -102,7 +102,7 @@ class ElectronicBoardController extends Controller
         $ObservationStations = ObservationStation::all();
         if ($search == null) {
             # code...
-            $ElectronicBoards = ElectronicBoard::paginate(10);
+            $ElectronicBoards = ElectronicBoard::paginate(8);
             return view( 'admin.electronic_board.ElectronicBoard',
             ['ElectronicBoards' => $ElectronicBoards, 'ObservationStations' => $ObservationStations])->with('no', 1);
         } 
@@ -113,7 +113,7 @@ class ElectronicBoardController extends Controller
                         ->where(DB::raw('UPPER("ElectronicBoard"."name")'), 'like', '%' .$search. '%')
                         ->orwhere(DB::raw('UPPER("ElectronicBoard"."note")'), 'like', '%' . $search . '%')
                         ->join('Observationstation', 'Observationstation.id', '=', 'ElectronicBoard.stationid')
-                        ->orWhere(DB::raw('UPPER("Observationstation"."name")'), 'like', '%' . $search . '%')->paginate(10);
+                        ->orWhere(DB::raw('UPPER("Observationstation"."name")'), 'like', '%' . $search . '%')->paginate(8);
             return view( 'admin.electronic_board.ElectronicBoard',
             ['ElectronicBoards' => $ElectronicBoards, 'ObservationStations' => $ObservationStations])->with('no', 1);
         }

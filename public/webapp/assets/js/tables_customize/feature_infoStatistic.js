@@ -100,17 +100,26 @@ function getAverages(array, groupKeys, averageKeys) {
         if (!group) {
             groups[key] = {count: 0, payload: {}};
             group = groups[key];
-            averageKeys.forEach(k => group[k] = '');
+            averageKeys.forEach(k => group[k] = 0);
             groupKeys.forEach(k => group.payload[k] = o[k]);
             result.push(group.payload);
         }
         groups[key].count++;
-        averageKeys.forEach(k => group.payload[k] = (group[k] += o[k]) / group.count);
-        averageKeys.forEach(checkNaN);
-        function checkNaN(item, index) {
-           if (isNaN(group.payload[item]) == true) {
-               group.payload[item] = '';
-           }
+        /*** Tính trung bình (kiểm tra giá trị có null hay không) ***/
+        averageKeys.forEach(average);
+        function average(item) {
+            var dem = group.count;
+            if (o[item] != null) {
+                group[item] += o[item]
+            } else {
+                dem = dem - 1;
+            }
+
+            if (dem == 0) {
+                group.payload[item] = "";
+            } else {
+                group.payload[item] = Math.round((group[item] / dem) * 100) / 100;
+            }
         }
     })
     return result;

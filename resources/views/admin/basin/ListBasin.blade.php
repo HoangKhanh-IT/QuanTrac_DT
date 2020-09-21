@@ -62,6 +62,20 @@
                             </div>
                             @endif
                         </div>
+<div class="col-sm-12">
+                            @if(session()->get('alert'))
+                            <div class="alert alert-warning">
+                                {{ session()->get('alert') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
+                            @if(session()->get('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                            @endif
+                        </div>
                         <div class="col-sm-12">
                             @if ($errors->any())
                             <div class="alert alert-danger">
@@ -107,7 +121,7 @@
                                                         <tr class="text-center">
                                                             <th scope="col" class="">STT</th>
                                                             <th scope="col" class="">Tên</th>
-                                                            <th scope="col" class="">Mục đích</th>
+                                                            <th scope="col" class="">Mã</th>
                                                             <th scope="col" class="">Chiều dài (km)</th>
                                                             <th scope="col" class="">Lưu vực sông cha</th>
                                                             <th scope="col" class="">Thao tác</th>
@@ -121,7 +135,7 @@
                                                                 {{$Basin->name}}
                                                             </td>
                                                             <td>
-                                                                {{$Basin->purpose}}
+                                                                {{$Basin->riverid}}
                                                             </td>
                                                              <td>
                                                                 {{$Basin->length}}
@@ -155,7 +169,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$Basins->links()}}
+                                            <div class="d-flex justify-content-center">{{$Basins->links('vendor.pagination.paginator')}}
                                             </div>
                                         </div>
                                     </div>
@@ -193,6 +207,9 @@
         $(document).on('click','.open_modal',function(){
             //alert($(this).val());
             //$('#myModal').modal('show');
+        });
+$(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
         });
     </script>
 </body>

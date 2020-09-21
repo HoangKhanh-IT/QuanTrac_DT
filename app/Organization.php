@@ -11,4 +11,8 @@ class Organization extends Model
     protected $fillable = ['name', 'description'];
 
     public $timestamps = false;
+
+    public function Observationstations(){
+        return $this->hasMany(Observationstation::class, 'organizationid','id');
+    }
 }

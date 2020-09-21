@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Menus;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {

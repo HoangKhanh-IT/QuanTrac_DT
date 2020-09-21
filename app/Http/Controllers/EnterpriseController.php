@@ -16,7 +16,7 @@ class EnterpriseController extends Controller
     public function index()
     {
         //
-        $Enterprises = Enterprise::paginate(10);
+        $Enterprises = Enterprise::paginate(8);
         return view('admin.enterprise.Enterprise', ['Enterprises' => $Enterprises])->with('no', 1);
     }
 
@@ -45,8 +45,10 @@ class EnterpriseController extends Controller
                 'name' => 'bail|required|max:255|unique:Enterprise,name',
                 'address' => 'bail|required|max:2000',
                 'phone' => 'bail|required|max:255',
-                'tin' => 'bail|required|numeric',
+                //'tin' => 'bail|required|numeric',
+                'tin' => 'bail|nullable|unique:Enterprise,tin|numeric',
                 'active' => 'required',
+                'employees' => 'bail|nullable|numeric',
             ],
             [
                 'name.required' => 'Nhập tên doanh nghiệp.',
@@ -56,9 +58,11 @@ class EnterpriseController extends Controller
                 'address.max' => 'Nhập địa chỉ không dài quá 2000 ký tự!',
                 'phone.required' => 'Nhập số điện thoại',
                 'phone.max' => 'Số điện thoại không dài quá 255 ký tự!',
-                'tin.required' => 'Nhập mã số thuế',
+                //'tin.required' => 'Nhập mã số thuế',
+                'tin.unique' => 'Mã số thuế đã tồn tại!',
                 'tin.numeric' => 'Mã số thuế phải là số',
                 'active.required' => 'Nhập tình trạng',
+                'employees.numeric' => 'Tổng số lao động phải là số',
             ]
         );
         $Enterprise = new Enterprise([
@@ -93,7 +97,7 @@ class EnterpriseController extends Controller
         $search = $request->search;
         if ($search ==null) {
             # code...
-             $Enterprises = Enterprise::paginate(10);
+             $Enterprises = Enterprise::paginate(8);
             return view('admin.enterprise.Enterprise', ['Enterprises' => $Enterprises])->with('no', 1);
         }
         else
@@ -101,8 +105,9 @@ class EnterpriseController extends Controller
             $search = trim(mb_strtoupper($search,'UTF-8'));
              $Enterprises = Enterprise::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')
              ->orwhere(DB::raw('UPPER(address)'), 'like', '%' . $search . '%')
+             ->orwhere(DB::raw('UPPER(phone)'), 'like', '%' . $search . '%')
              ->orwhere('tin', 'like', '%' . $search . '%')
-             ->orwhere(DB::raw('UPPER(profession)'), 'like', '%' . $search . '%')->paginate(10);
+             ->orwhere(DB::raw('UPPER(type)'), 'like', '%' . $search . '%')->paginate(8);
             return view('admin.enterprise.Enterprise', ['Enterprises' => $Enterprises])->with('no', 1);
         }
 
@@ -134,11 +139,13 @@ class EnterpriseController extends Controller
         //
         $request->validate(
             [
-               'name' => 'bail|required|max:255|unique:Enterprise,name,'.$id,
+                'name' => 'bail|required|max:255|unique:Enterprise,name,'.$id,
                 'address' => 'bail|required|max:2000',
                 'phone' => 'bail|required|max:255',
-                'tin' => 'bail|required|numeric',
+                //'tin' => 'bail|required|numeric',
+                'tin' => 'bail|nullable|numeric|unique:Enterprise,tin,'.$id,
                 'active' => 'required',
+                'employees' => 'bail|nullable|numeric',
             ],
             [
                 'name.required' => 'Nhập tên doanh nghiệp.',
@@ -148,9 +155,11 @@ class EnterpriseController extends Controller
                 'address.max' => 'Nhập địa chỉ không dài quá 2000 ký tự!',
                 'phone.required' => 'Nhập số điện thoại',
                 'phone.max' => 'Số điện thoại không dài quá 255 ký tự!',
-                'tin.required' => 'Nhập mã số thuế',
+                //'tin.required' => 'Nhập mã số thuế',
                 'tin.numeric' => 'Mã số thuế phải là số',
+                'tin.unique' => 'Mã số thuế đã tồn tại!',
                 'active.required' => 'Nhập tình trạng',
+                'employees.numeric' => 'Tổng số lao động phải là số',
             ]
         );
         $Enterprise = Enterprise::find($id);
@@ -181,9 +190,27 @@ class EnterpriseController extends Controller
     public function destroy($id)
     {
         //
-        $Enterprise = Enterprise::find($id);
-        $Enterprise->delete();
-        return redirect('danhmuc/Enterprise')->with('success', 'Xóa thành công!');
+        try
+        {
+            $Observationstations = Enterprise::findOrFail($id)->Observationstations()->get();
+            if ($Observationstations->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Enterprise')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Trạm quan trắc!');
+            } 
+            $DischargePoints = Enterprise::findOrFail($id)->DischargePoints()->get();
+            if ($DischargePoints->isNotEmpty()) 
+            {
+                return redirect('danhmuc/Enterprise')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Điểm xả nước thải!');
+            } 
+
+            $Enterprise = Enterprise::find($id);
+            $Enterprise->delete();
+            return redirect('danhmuc/Enterprise')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 
 }

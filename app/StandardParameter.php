@@ -33,5 +33,9 @@ class StandardParameter extends Model
         return $this->belongsTo(Unit::class, 'unitid', 'id');
     }
 
+    public function Observations(){
+        return $this->hasMany(Observation::class, 'standardparameterid','id');
+    }
+
 
 }

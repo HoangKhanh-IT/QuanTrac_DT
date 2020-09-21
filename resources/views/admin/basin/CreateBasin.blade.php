@@ -269,7 +269,15 @@
     <script src=" {{ asset('public/admin/dist/js/adminlte.min.js') }} "></script>
     <!-- AdminLTE for demo Basins -->
     <script src="{{ asset('public/admin/dist/js/demo.js') }}"></script>
-
+<script type="">
+        $(document).on('click','.open_modal',function(){
+            //alert($(this).val());
+            //$('#myModal').modal('show');
+        });
+        $(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
+        });
+    </script>
 </body>
 
 </html>

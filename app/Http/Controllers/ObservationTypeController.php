@@ -18,8 +18,13 @@ class ObservationTypeController extends Controller
      */
     public function index()
     {
-        $ObservationTypes = ObservationType::paginate(10);
-        return view( 'admin.obs_type.ObservationType', ['ObservationTypes' => $ObservationTypes])->with('no', 1);
+        $ObservationTypes = ObservationType::paginate(8);
+        $ObservationTypeItems = ObservationType::all();
+        //dd($ObservationTypes);
+        return view(
+            'admin.obs_type.ObservationType',
+            ['ObservationTypes' => $ObservationTypes, 'ObservationTypeItems'=> $ObservationTypeItems]
+        )->with('no', 1);
     }
 
     /**
@@ -77,14 +82,14 @@ class ObservationTypeController extends Controller
         //
         $search = $request->search;
         if ($search == null) {
-            $ObservationTypes = ObservationType::paginate(10);
+            $ObservationTypes = ObservationType::paginate(8);
          return view( 'admin.obs_type.ObservationType', ['ObservationTypes' => $ObservationTypes])->with('no', 1);
         } 
         else 
         {
              $search = trim(mb_strtoupper($search,'UTF-8'));
             $ObservationTypes = ObservationType::where(DB::raw('UPPER(name)'), 'like', '%' . $search . '%')
-             ->orwhere(DB::raw('UPPER(code)'), 'LIKE', '%'.$search.'%')->paginate(10);
+             ->orwhere(DB::raw('UPPER(code)'), 'LIKE', '%'.$search.'%')->paginate(8);
            return view( 'admin.obs_type.ObservationType', ['ObservationTypes' => $ObservationTypes])->with('no', 1);
         }
     }
@@ -146,9 +151,23 @@ class ObservationTypeController extends Controller
     public function destroy($id)
     {
         //
-         $ObservationType = ObservationType::find($id);
-         $ObservationType->delete();
+        try
+        {
+            $standards = ObservationType::findOrFail($id)->standards()->get();
+            //$ObstypeStations = ObservationType::find($id)->ObstypeStations()->get();
+            if ($standards->isNotEmpty()) 
+            {
+                return redirect('danhmuc/ObservationType')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Quy chuẩn!');
+            } 
 
-         return redirect('danhmuc/ObservationType')->with('success', 'Xóa thành công!');
+            ObstypeStation::where("obstypesid", $id)->delete();
+            $ObservationType = ObservationType::findOrFail($id);
+            $ObservationType->delete();
+            return redirect('danhmuc/ObservationType')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

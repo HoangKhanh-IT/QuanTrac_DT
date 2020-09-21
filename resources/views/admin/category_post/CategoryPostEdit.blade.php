@@ -78,7 +78,7 @@
                                             <label>Danh mục cha</label>
                                             <select class="form-control select2 select2-hidden-accessible"
                                                 name="parentcateid" id="parentcateid" style="width: 100%;">
-                                                <option value="">Chọn danh mục tin bài</option>
+                                                <option value="">--Chọn danh mục tin bài--</option>
                                                 @foreach($CategoryPosts as $CategoryPost)
                                                     @if ($CategoryPost->parentcateid == null)
                                                         <option

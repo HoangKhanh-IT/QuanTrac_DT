@@ -16,7 +16,7 @@ class PermissionController extends Controller
     public function index()
     {
         //
-        $chucnangs = Menus::paginate(10);
+        $chucnangs = Menus::paginate(8);
         return view(
             'admin.permission.Permission',
             ['chucnangs' => $chucnangs]

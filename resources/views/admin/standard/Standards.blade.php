@@ -63,6 +63,20 @@
                             @endif
                         </div>
                         <div class="col-sm-12">
+                            @if(session()->get('alert'))
+                            <div class="alert alert-warning">
+                                {{ session()->get('alert') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-sm-12">
+                             @if(session()->get('error'))
+                             <div class="alert alert-danger">
+                                 {{ session()->get('error') }}
+                             </div>
+                             @endif
+                        </div>
+                        <div class="col-sm-12">
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -130,24 +144,24 @@
                                                                  {{ Carbon\Carbon::parse($Standard->dateoflssue)->format('d/m/Y') }}
                                                             </td>
                                                            <!--  <td>
-                                                                {{$Standard->organization}}
+                                                                {{$Standard->organization}}<i class="fas fa-download"></i>
                                                             </td> -->
                                                             <td>
                                                                 @if($Standard->attachment)
-                                                                    <a href="{{asset('public/uploads/standards/'.$Standard->attachment)}}" target="blank" title="Xem tệp tin">{{$Standard->attachment}}<i class="fas fa-download"></i></a>
+                                                                    <a href="{{asset('public/uploads/standards/'.$Standard->attachment)}}" target="blank" title="Xem tệp tin">{{$Standard->attachment}}</a>
                                                                 @endif
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group btn-group-sm">
                                                                 <a href="{{route('Standard.edit',$Standard->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-
+                                                               
                                                                 <form
                                                                     action="{{route('Standard.delete',$Standard->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-
+                                                                  
                                                                     <button class="btn btn-sm btn-danger rounded-0">
                                                                         Xóa
                                                                     </button>
@@ -161,7 +175,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$Standards->links()}}
+                                            <div class="d-flex justify-content-center">{{$Standards->links('vendor.pagination.paginator')}}
                                             </div>
                                         </div>
                                     </div>
@@ -200,6 +214,9 @@
             //alert($(this).val());
             //$('#myModal').modal('show');
         });
+        $(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
+          });
     </script>
 </body>
 

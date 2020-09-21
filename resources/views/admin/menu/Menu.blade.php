@@ -44,6 +44,13 @@
                             </div>
                             @endif
                         </div>
+<div class="col-sm-12">
+                            @if(session()->get('alert'))
+                            <div class="alert alert-warning">
+                                {{ session()->get('alert') }}
+                            </div>
+                            @endif
+                        </div>
                         <div class="col-sm-12">
                             @if ($errors->any())
                             <div class="alert alert-danger">
@@ -124,7 +131,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$chucnangs->links()}}
+                                            <div class="d-flex justify-content-center">{{$chucnangs->links('vendor.pagination.paginator')}}
                                             </div>
                                         </div>
                                     </div>
@@ -162,6 +169,9 @@
         $(document).on('click','.open_modal',function(){
             //alert($(this).val());
             //$('#myModal').modal('show');
+        });
+$(document).ready(function(){
+          $(".alert").delay(5000).slideUp(100);
         });
     </script>
 </body>

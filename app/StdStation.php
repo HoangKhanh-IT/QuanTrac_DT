@@ -10,4 +10,6 @@ class StdStation extends Model
     protected $table = "StdStation";
     protected $fillable = ['id','stationid', 'standardParameterid'];
     public $timestamps = false;
+
+    
 }

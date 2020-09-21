@@ -58,8 +58,13 @@ function process_detail_DOMchart(feature, time) {
                     }
 
                     /*** delete total_detail[j].data; ***/
-                    total_detail[j][parameterName] = value[0].v.toString() + " " +
+                    if (value[0].inlimit == "N") {
+                        total_detail[j][parameterName] = "'>" + value[0].v.toString() + " " +
                         total_std_param[k_para_sample].unitName;
+                    } else {
+                        total_detail[j][parameterName] = " color: red'>" + value[0].v.toString() + " " + 
+                        total_std_param[k_para_sample].unitName;
+                    }
                 }
             }
         }
@@ -71,4 +76,45 @@ function process_detail_DOMchart(feature, time) {
     }
     sortResults(new_total_detail, 'time_js', true);
     return new_total_detail;
+}
+
+/*** Hàm tạo điểm nhấp nháy ***/
+function process_detail_thresholdPoint(feature) {
+    /*** Kiểm tra trạm có thông số nào vượt ngưỡng thì sẽ nhấp nháy theo thời gian ***/
+    var dem = 0;
+    var d_curent = new Date();
+
+    if (feature.properties.categoryID != 2 && feature.properties.categoryID != 4) {
+        total_detail = feature.properties.total_detail;
+        for (var j = total_detail.length - 1; j >= 0; j--) {
+            data = total_detail[j].data;
+            var detail_daytime = total_detail[j].time.split(", ");
+            var detail_day = detail_daytime[1];
+            var detail_time = detail_daytime[0];
+
+            /*** Chuyển detail time sang time mặc định trong JS ***/
+            var string_day = detail_day.split("/");
+
+            /*** Gộp thành chuỗi rồi chuyển sang dạng thời gian mặc định ***/
+            var data_day_time = new Date(string_day[2] + "/" + string_day[1] + "/" + string_day[0] +
+                " " + detail_time);
+
+            /*** Kiểm tra thời điểm hiện tại và dữ liệu có bằng nhau không
+            if (data_day_time.getTime() == d_curent.getTime()) { ***/
+            if (data_day_time.getTime() >= d_curent.getTime()) {
+                for (var k = data.length - 1; k >= 0; k--) {
+                    var spidID = Object.keys(data[k]);
+                    var value = Object.values(data[k]);
+
+                    for (var k_para_sample = 0; k_para_sample < total_std_param.length; k_para_sample++) {
+                        /*** Kiểm tra có thông số nào vượt ngưỡng không ***/
+                        if (parseInt(spidID) == total_std_param[k_para_sample].id && value[0].inlimit == "Y") {
+                            dem = dem + 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return dem;
 }

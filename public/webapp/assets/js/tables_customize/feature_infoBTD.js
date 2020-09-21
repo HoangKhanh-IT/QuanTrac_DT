@@ -1,6 +1,6 @@
 var fromDate_data, toDate_data;
 /*** Linked Date Picker ***/
-$(function() {
+$(function () {
     $('#FromDate_data').datetimepicker({
         locale: 'vi',
         format: 'L',
@@ -19,10 +19,10 @@ $(function() {
         },
         useCurrent: false /* Important! See issue #1075 */
     });
-    $("#FromDate_data").on("dp.change", function(e) {
+    $("#FromDate_data").on("dp.change", function (e) {
         $('#ToDate_data').data("DateTimePicker").minDate(e.date);
     });
-    $("#ToDate_data").on("dp.change", function(e) {
+    $("#ToDate_data").on("dp.change", function (e) {
         $('#FromDate_data').data("DateTimePicker").maxDate(e.date);
     });
 });
@@ -30,7 +30,7 @@ $(function() {
 var table_sample;
 
 function getData_sample_Bantudong() {
-    $(document).ready(function() {
+    $(document).ready(function () {
         /*** Đối với 1 số VPS không hỗ trợ xuất Date có dấu nháy thì cần phải sinh ra các
          * trường hợp để tạo truy vấn khi người dùng không nhập input date ***/
 
@@ -99,16 +99,16 @@ function getData_sample_Bantudong() {
             table_sample = $('#table_sample').DataTable({
                 ajax: url_datatable_sample,
                 columns: [{
-                        "className": 'details-control',
-                        "orderable": false,
-                        "data": null,
-                        "defaultContent": ''
-                    },
-                    { "data": "symbol" },
-                    { "data": "time_dateOfSamping" },
-                    { "data": "dateOfAnalysis" },
-                    { "data": "samplingLocations" },
-                    { "data": "weather" }
+                    "className": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                    {"data": "symbol"},
+                    {"data": "time_dateOfSamping"},
+                    {"data": "dateOfAnalysis"},
+                    {"data": "samplingLocations"},
+                    {"data": "weather"}
                 ],
                 order: [
                     [1, 'asc']
@@ -117,8 +117,8 @@ function getData_sample_Bantudong() {
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                 buttons: [
-                    { extend: 'pdf', className: 'btn btn-success btn-sm' },
-                    { extend: 'excel', className: 'btn btn-success btn-sm' }
+                    {extend: 'pdf', className: 'btn btn-success btn-sm'},
+                    {extend: 'excel', className: 'btn btn-success btn-sm'}
                 ],
                 paging: false,
                 autoWidth: false,
@@ -143,7 +143,7 @@ function getData_sample_Bantudong() {
             table_sample.buttons().container()
                 .appendTo('#table_sample_wrapper .col-md-12:eq(0)');
 
-            $('#table_sample tbody').on('click', 'td.details-control', function() {
+            $('#table_sample tbody').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var row = table_sample.row(tr);
 

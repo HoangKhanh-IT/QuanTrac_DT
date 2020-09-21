@@ -11,4 +11,8 @@ class Qualityindex extends Model
     protected $fillable = ['name', 'belowvalue', 'abovevalue', 'colorcode', 'purpose'];
 
     public $timestamps = false;
+
+    public function Observations(){
+        return $this->hasMany(Observation::class, 'qualityindexid','id');
+    }
 }

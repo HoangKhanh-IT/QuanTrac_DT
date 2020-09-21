@@ -8,6 +8,7 @@ use App\Purpose;
 use App\Parameter;
 use App\StandardParameter;
 use App\Unit;
+use App\StdStation;
 use Illuminate\Support\Facades\DB;
 
 class StandardParameterController extends Controller
@@ -113,7 +114,7 @@ class StandardParameterController extends Controller
     public function index()
     {
         //
-        $StandardParameters = StandardParameter::paginate(10);
+        $StandardParameters = StandardParameter::paginate(8);
         return view('admin.stand_param.StandardParameter', ['StandardParameters' => $StandardParameters])->with('no', 1);
     }
 
@@ -145,14 +146,14 @@ class StandardParameterController extends Controller
             [
                 'standard' => 'required',
                 'paramerter' => 'required',
-                //'minvalue' => 'numeric',
-                //'maxvalue' => 'numeric',
+                'minvalue' => 'bail|nullable|numeric',
+                'maxvalue' => 'bail|nullable|numeric',
             ],
             [
                 'standard.required' => 'Nhập tiêu chuẩn.',
                 'paramerter.required' => 'Nhập thông số quan trắc.',
-                //'minvalue.numeric' => 'Giá trị nhỏ nhất là dạng số.',
-                //'maxvalue.numeric' => 'Giá trị lớn nhất là dạng số.'
+                'minvalue.numeric' => 'Giá trị nhỏ nhất là dạng số.',
+                'maxvalue.numeric' => 'Giá trị lớn nhất là dạng số.'
             ]
         );
         $StandardParameter = new StandardParameter([
@@ -180,26 +181,26 @@ class StandardParameterController extends Controller
           $search = $request->search;
         if ($search == null) 
         {
-            $StandardParameters = StandardParameter::orderBy('id','DESC')->paginate(10);
+            $StandardParameters = StandardParameter::orderBy('id','DESC')->paginate(8);
             return view('admin.stand_param.StandardParameter', ['StandardParameters' => $StandardParameters])->with('no', 1);
         } 
         else 
         {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             $StandardParameters = StandardParameter::select('StandardParameter.*')
-                ->where(DB::raw('UPPER("StandardParameter"."analysismethod")'), 'like', '%' .$search. '%')
+                //->where(DB::raw('UPPER("StandardParameter"."analysismethod")'), 'like', '%' .$search. '%')
                 ->join('Standard', 'Standard.id', '=', 'StandardParameter.standardid')
                 ->orWhere(DB::raw('UPPER("Standard"."name")'), 'like', '%' . $search . '%')
-                ->orWhere(DB::raw('UPPER("Standard"."symbol")'), 'like', '%' . $search . '%')
-                ->orWhere(DB::raw('UPPER("Standard"."organization")'), 'like', '%' . $search . '%')
-                 ->join('Unit', 'Unit.id', '=', 'StandardParameter.unitid')
-                ->orWhere(DB::raw('UPPER("Unit"."code")'), 'like', '%' . $search . '%')
-                ->orWhere(DB::raw('UPPER("Unit"."name")'), 'like', '%' . $search . '%')
+                //->orWhere(DB::raw('UPPER("Standard"."symbol")'), 'like', '%' . $search . '%')
+                //->orWhere(DB::raw('UPPER("Standard"."organization")'), 'like', '%' . $search . '%')
+                // ->join('Unit', 'Unit.id', '=', 'StandardParameter.unitid')
+                //->orWhere(DB::raw('UPPER("Unit"."code")'), 'like', '%' . $search . '%')
+                //->orWhere(DB::raw('UPPER("Unit"."name")'), 'like', '%' . $search . '%')
                  ->join('Purpose', 'Purpose.id', '=', 'StandardParameter.purposeid')
                 ->orWhere(DB::raw('UPPER("Purpose"."name")'), 'like', '%' . $search . '%')
-                 ->join('Parameter', 'Parameter.id', '=', 'StandardParameter.parameterid')
+                ->join('Parameter', 'Parameter.id', '=', 'StandardParameter.parameterid')
                 ->orWhere(DB::raw('UPPER("Parameter"."code")'), 'like', '%' . $search . '%')
-                ->orWhere(DB::raw('UPPER("Parameter"."name")'), 'like', '%' . $search . '%')->paginate(10);
+                ->orWhere(DB::raw('UPPER("Parameter"."name")'), 'like', '%' . $search . '%')->paginate(8);
             return view('admin.stand_param.StandardParameter', ['StandardParameters' => $StandardParameters])->with('no', 1);
         }
     }
@@ -238,14 +239,14 @@ class StandardParameterController extends Controller
             [
                 'standard' => 'required',
                 'paramerter' => 'required',
-                //'minvalue' => 'numeric',
-                //'maxvalue' => 'numeric',
+                'minvalue' => 'bail|nullable|numeric',
+                'maxvalue' => 'bail|nullable|numeric',
             ],
             [
                 'standard.required' => 'Nhập tiêu chuẩn.',
                 'paramerter.required' => 'Nhập thông số quan trắc.',
-                //'minvalue.numeric' => 'Giá trị nhỏ nhất là dạng số.',
-                //'maxvalue.numeric' => 'Giá trị lớn nhất là dạng số.'
+                'minvalue.numeric' => 'Giá trị nhỏ nhất là dạng số.',
+                'maxvalue.numeric' => 'Giá trị lớn nhất là dạng số.'
             ]
         );
 
@@ -269,10 +270,22 @@ class StandardParameterController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $StandardParameter = StandardParameter::find($id);
-        $StandardParameter->delete();
+        try
+        {
+            $Observations = StandardParameter::findOrFail($id)->Observations()->get();
+            if ($Observations->isNotEmpty()) 
+            {
+                return redirect('quanly/StandardParameter')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Kết quả quan trắc!');
+            } 
 
-        return redirect('quanly/StandardParameter')->with('success', 'Xóa thành công!');
+            StdStation::where("standardParameterid", $id)->delete();
+            $StandardParameter = StandardParameter::findOrFail($id);
+            $StandardParameter->delete();
+            return redirect('quanly/StandardParameter')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }

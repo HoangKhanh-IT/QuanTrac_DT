@@ -38,13 +38,15 @@ function Feature_info_modal(feat, layer) {
 
     /*** Thông tin trạm quan trắc ***/
     var content_info = "<table class='table table-striped table-bordered table-condensed table-responsive'>" +
-        "<tr><th class='blue'><i class='icon-home4' style='font-size: 14px; white-space: nowrap" +
+        "<tr><th class='blue' style='white-space: nowrap'>" +
+        "<i class='icon-home4' style='font-size: 14px;" +
         "margin-top: -2px; margin-left: 1px;'></i>" +
         "&nbsp;Tên trạm</th><td colspan='3' style='font-weight: bold; " +
         "text-align: center'>Trạm " + feat.properties.name + "</td></tr>";
 
     if (feat.properties.categoryID != 2 && feat.properties.categoryID != 4) {
-        content_info += "<tr><th class='brown'><i class='fa fa-building' style='font-size: 14px; white-space: nowrap" +
+        content_info += "<tr><th class='brown' style='white-space: nowrap'>" +
+            "<i class='fa fa-building' style='font-size: 14px; " +
             "margin-top: -2px; margin-left: 1px;'></i>" +
             "&nbsp;Doanh nghiệp</th><td colspan='3' style='text-align: center'>" +
             enterpriseName_qt + "</td></tr>"
@@ -110,7 +112,7 @@ function Feature_info_modal(feat, layer) {
                             var name = Object.keys(detail_chart_24h[length - 1])[i];
                             var value = Object.values(detail_chart_24h[length - 1])[i];
                             content_data_qt += "<tr><th class='blue' style='text-align: center'>" + name +
-                                "</th><td style='text-align: center'>" + value + "</td></tr>";
+                                "</th><td style='text-align: center; font-weight: bold; " + value + "</td></tr>";
                         }
                     }
                     content_data_qt += "</table>";

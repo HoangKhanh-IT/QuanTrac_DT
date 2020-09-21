@@ -36,14 +36,14 @@ class ObservationstationController extends Controller
         $Categorys = Category::all();
 
         $Observationstations =
-        Observationstation::orderBy('categoryid', 'ASC')->paginate(10);
+        Observationstation::orderBy('categoryid', 'ASC')->paginate(8);
         // $Observationstations =  DB::table('Observationstation')
         // // ->select('chapters.id', 'chapters.chapter_description', 'questions.id', 'questions.question_description', 'answers.id', 'answers.answer_description')
         // ->leftJoin('Category', 'Observationstation.categoryid', '=', 'Category.id')
         // ->select(['Observationstation.id', 'Observationstation.categoryid', 'Observationstation.code', 'Observationstation.name', 'Category.name'])
         // ->whereNotNull('Observationstation.id')
         // ->orderBy('Observationstation.categoryid', 'ASC')
-        // ->paginate(10);
+        // ->paginate(8);
         //dd($Observationstations);
 
         // return $test =  $query->join('chapters', 'chapters.id', '=', 'question_chapter_rel.chapter_id')
@@ -233,7 +233,7 @@ class ObservationstationController extends Controller
         $Categorys = Category::all();
         if ($search == null) 
         {
-            $Observationstations = Observationstation::orderBy('categoryid', 'ASC')->paginate(10);
+            $Observationstations = Observationstation::orderBy('categoryid', 'ASC')->paginate(8);
             return view('admin.obs_station.Observationstation', ['Observationstations' => $Observationstations, 'Categorys' => $Categorys, 'ObservationTypes' => $ObservationTypes])->with('no', 1);
         }
         else 
@@ -254,7 +254,7 @@ class ObservationstationController extends Controller
                 ->join('Organization', 'Organization.id', '=', 'Observationstation.organizationid')
                 ->orwhere(DB::raw('UPPER("Organization"."name")'), 'like', '%' .$search. '%')
                 ->join('Category', 'Category.id', '=', 'Observationstation.categoryid')
-                ->orWhere(DB::raw('UPPER("Category"."name")'), 'like', '%' . $search . '%')->paginate(10);
+                ->orWhere(DB::raw('UPPER("Category"."name")'), 'like', '%' . $search . '%')->paginate(8);
             return view('admin.obs_station.Observationstation', ['Observationstations' => $Observationstations, 'Categorys' => $Categorys, 'ObservationTypes' => $ObservationTypes])->with('no', 1);
         }
     }
@@ -395,12 +395,33 @@ class ObservationstationController extends Controller
      */
     public function destroy($id)
     {
-        //
-        ObstypeStation::where("stationid", $id)->delete();
-        StdStation::where("stationid", $id)->delete();
-        $Observationstation = Observationstation::find($id);
-        $Observationstation->delete();
+        try
+        {
+            $Observations = Observationstation::findOrFail($id)->Observations()->get();
+            if ($Observations->isNotEmpty()) 
+            {
+                return redirect('quanly/Observationstation')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Kết quả quan trắc!');
+            } 
+            $Cameras = Observationstation::findOrFail($id)->Cameras()->get();
+            if ($Cameras->isNotEmpty()) 
+            {
+                return redirect('quanly/Observationstation')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Camera!');
+            } 
+            $ElesctronicBoards = Observationstation::findOrFail($id)->ElesctronicBoards()->get();
+            if ($ElesctronicBoards->isNotEmpty()) 
+            {
+                return redirect('quanly/Observationstation')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Bảng điện tử!');
+            } 
+            ObstypeStation::where("stationid", $id)->delete();
+            StdStation::where("stationid", $id)->delete();
+            $Observationstation = Observationstation::find($id);
+            $Observationstation->delete();
 
-        return redirect('quanly/Observationstation')->with('success', 'Xóa thành công!');
+            return redirect('quanly/Observationstation')->with('success', 'Xóa thành công!');
+        }
+        catch (\Exception $exception) 
+        {
+            return back()->withError($exception->getMessage());
+        }
     }
 }
