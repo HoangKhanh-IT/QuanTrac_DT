@@ -349,11 +349,10 @@ function Modal_Feature_Style(feat, latlng) {
             }),
             title: feat.properties.name,
             riseOnHover: true,
-            opacity: 0
         }).bindTooltip(label_tram_nuocbien, {
             permanent: true,
             direction: "center",
-            // opacity: 0
+            opacity: 0
         }).openTooltip().on('click', markerOnClick)
     }
 }

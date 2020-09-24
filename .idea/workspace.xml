@@ -1,45 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="302f8f71-fec8-47b9-b25f-0b621b3b6405" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DischargePoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DischargePoint.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BasinController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BasinController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Call_elec_board.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Call_elec_board.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DischargePointController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DischargePointController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EnterpriseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EnterpriseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StandardParameterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StandardParameterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Observationstation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Observationstation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/StdStation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/StdStation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/post/ChanDung83.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/post/EntityDesignerDiagram35.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/post/Sendo-XacthucSDT72.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/post/bc70c7de25029b4edc28013950eed29c44.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/post/no-image43.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets/js/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/js/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_onChange.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/js/tables_customize/feature_onChange.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/css/MapStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/css/MapStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapFeatureInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapFeatureInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapScript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapVS_pre_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapVS_pre_data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/discharge_point/CreateDischargePoint.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/discharge_point/CreateDischargePoint.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/discharge_point/EditDischargePoint.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/discharge_point/EditDischargePoint.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/discharge_point/ListDischargePoint.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/discharge_point/ListDischargePoint.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/menu/Menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/menu/Menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/menu/MenuCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/menu/MenuCreate.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/menu/Menuedit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/menu/Menuedit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/obs_station/ObservationstationEdit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/permission/Permission.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/permission/Permission.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/permission/PermissionCreate.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/permission/PermissionCreate.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/permission/PermissionEdit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/permission/PermissionEdit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/temp/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/temp/menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/webapp/webapp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/webapp/webapp.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="302f8f71-fec8-47b9-b25f-0b621b3b6405" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -418,7 +380,7 @@
       <workItem from="1600652716643" duration="579000" />
       <workItem from="1600653418110" duration="2801000" />
       <workItem from="1600660558670" duration="9595000" />
-      <workItem from="1600930118988" duration="18815000" />
+      <workItem from="1600930118988" duration="19506000" />
     </task>
     <task id="LOCAL-00001" summary="travinhqt_laravel">
       <created>1596074300287</created>
@@ -616,7 +578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600660637207</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="travinhqt_laravel">
+      <created>1600949990175</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1600949990175</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -639,11 +608,11 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="123" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596024961673" />
-    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1600949953416">
+    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1600949986005">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="328" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1600019913504" />
-    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600949953416" />
+    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600949986005" />
     <state x="1658" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075688211" />
     <state x="446" y="279" width="474" height="281" key="ComposerInitDialogKey" timestamp="1595995771713">
       <screen x="0" y="0" width="1366" height="738" />
@@ -677,16 +646,16 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="517" y="288" key="NewPhpFileDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600936996273" />
-    <state x="184" y="11" key="SettingsEditor" timestamp="1600941502718">
+    <state x="184" y="11" key="SettingsEditor" timestamp="1600950018578">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="207" y="12" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1599896600159" />
-    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600941502718" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600660641441">
+    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600950018578" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600949994140">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="309" y="110" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1600019926999" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600660641441" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600949994140" />
     <state x="1641" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075691920" />
     <state x="359" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1600930119320">
       <screen x="0" y="0" width="1366" height="738" />
