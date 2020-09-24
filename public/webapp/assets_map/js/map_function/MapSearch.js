@@ -103,6 +103,17 @@ $(document).one("ajaxStop", function() {
         limit: 10
     });
 
+    /*** Search giấy phép ***/
+    var electric_nameBH = new Bloodhound({
+        name: "electric_search_basic",
+        datumTokenizer: function(d) {
+            return Bloodhound.tokenizers.whitespace(d.name);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: electric_search_basic,
+        limit: 10
+    });
+
     /*** Trạm quan trắc ***/
     quantrac_nameBH.initialize();
     quantrac_loaitramBH.initialize();
@@ -115,6 +126,9 @@ $(document).one("ajaxStop", function() {
     discharge_establishmentnameBH.initialize();
     discharge_enterpriseNameBH.initialize();
     discharge_licensetypeBH.initialize();
+
+    /*** Bảng điện tử ***/
+    electric_nameBH.initialize();
 
     $("#searchbox").typeahead({
         minLength: 1,
@@ -327,6 +341,21 @@ $(document).one("ajaxStop", function() {
             "&nbsp;<small>Tên Doanh nghiệp:&nbsp;" + "{{enterpriseName}}</small>"
             ].join(""))
         }
+    },{
+        /*** Bảng điện tử ***/
+        name: "electric_search_basic",
+        displayKey: "bangdientu",
+        source: electric_nameBH.ttAdapter(),
+        templates: {
+            header: "<h4 class='typeahead-header'>" +
+                "<i class='icon-table2' style='font-size: 16px; margin-top: -2px'></i>" +
+                "<span class='brown'>&nbsp;Bảng điện tử</span>" +
+                "</h4>",
+            suggestion: Handlebars.compile(["" +
+            "<i class='icon-table2' style='font-size: 16px; margin-top: -2px'></i>&nbsp;" +
+            "<span style='font-weight: bolder'>Bảng điện tử:&nbsp;" + "{{name}}</span>"
+            ].join(""))
+        }
     }).on("typeahead:selected", function(obj, datum) {
         if (datum.source === "quantrac_search_basic") {
             map.setView([datum.lat, datum.lng], 15);
@@ -336,6 +365,13 @@ $(document).one("ajaxStop", function() {
                 map._layers[datum.id].fire("click");
             }
         } else if (datum.source === "discharge_search_basic") {
+            map.setView([datum.lat, datum.lng], 15);
+
+            /*** Tự động mở Modal sau khi Zoom ***/
+            if (map._layers[datum.id]) {
+                map._layers[datum.id].fire("click");
+            }
+        } else if (datum.source === "electric_search_basic") {
             map.setView([datum.lat, datum.lng], 15);
 
             /*** Tự động mở Modal sau khi Zoom ***/

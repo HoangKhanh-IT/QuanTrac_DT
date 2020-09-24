@@ -214,7 +214,7 @@ function Feature_info_Electric(feat, layer) {
         "<tr style='background-color: #000'><th style='white-space: nowrap; color: yellow; text-align: center'>" +
         "<i class='icon-home4' style='font-size: 14px;" +
         "margin-top: -2px; margin-left: 1px;'></i>" +
-        "&nbsp;Tên trạm</th><td colspan='3' style='font-weight: bold; color: #66df66; " +
+        "&nbsp;Tên bảng điện tử</th><td style='font-weight: bold; color: #66df66; " +
         "text-align: center'>Bảng điện tử " + feat.properties.name + "</td></tr>";
 
     content_info += "<tr style='background-color: #000'><th style='white-space: nowrap; color: yellow; text-align: center'>" +

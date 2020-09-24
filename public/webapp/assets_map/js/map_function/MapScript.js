@@ -92,10 +92,11 @@ L.control.fullscreen({
 var zoomHome = L.Control.zoomHome();
 zoomHome.addTo(map);
 
-/*---- Biến tìm kiếm quan trắc cơ bản ----*/
+/*---- Biến tìm kiếm trạm quan trắc, điểm xả thải và bảng điện tử cơ bản ----*/
 var quantrac_search_advanced = [];
 var quantrac_search_basic = [];
 var discharge_search_basic = [];
+var electric_search_basic = [];
 
 /*---- Tạo Pulse Marker ----*/
 var pulse_marker;
@@ -388,6 +389,15 @@ $.getJSON(url_search_basic, function(search_basic) {
 /*** Load dữ liệu bảng điện tử ***/
 function Modal_Feature_ElectricBoard(feat, layer) {
     Feature_info_Electric(feat, layer)
+
+    /*** Tạo mảng electric_search_basic ***/
+    electric_search_basic.push({
+        name: feat.properties.name,
+        source: 'electric_search_basic',
+        id: L.stamp(layer),
+        lat: feat.geometry.coordinates[1],
+        lng: feat.geometry.coordinates[0]
+    })
 }
 var view_electric_board;
 $.getJSON("electricBoard", function(electric_board) {
