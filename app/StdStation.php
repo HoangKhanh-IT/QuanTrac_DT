@@ -8,8 +8,8 @@ class StdStation extends Model
 {
     //
     protected $table = "StdStation";
-    protected $fillable = ['id','stationid', 'standardParameterid'];
+    protected $fillable = ['id','stationid', 'standardparameterid'];
     public $timestamps = false;
 
-    
+
 }

@@ -1,12 +1,11 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-dark navbar-primary"
-     style="padding: 1.35rem 1.35rem">
-    <!-- Left navbar links
+<nav class="main-header navbar navbar-expand navbar-dark navbar-primary" style="padding: 1.15rem 1.15rem">
+    <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-    </ul> -->
+    </ul>
     <ul class="navbar-nav ml-auto">
         <li class="dropdown" style="padding-right: 20px">
             <a href="{{ url('/') }}/webapp" class="" data-toggle="" aria-expanded="false">

@@ -58,6 +58,30 @@
     text-transform: uppercase;
 }
 
+.bangdientu_label {
+    position: relative;
+    top: -10px;
+    left: 7px;
+    display: inline-block;
+    font-family: "Arial";
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    color: black;
+}
+
+.diemxathai_label {
+    position: relative;
+    top: -10px;
+    left: 7px;
+    display: inline-block;
+    font-family: "Arial";
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #2522ff;
+}
+
 .tram_dat_label {
     color: #cf540f;
 }
@@ -94,6 +118,26 @@
     text-align: center;
 }
 
+.bangdientu_divIcon, .diemxathai_divIcon {
+      border-radius: 25%;
+      border-color: #ffffff;
+      border-width: 1px;
+      border-style: solid;
+      text-shadow: 1 1 2px #181818e3;
+      width: 25px !important;
+      height: 25px !important;
+      text-align: center;
+
+}
+
+.bangdientu_divIcon {
+    background-color: black;
+}
+
+.diemxathai_divIcon {
+    background-color: #2522ff;
+}
+
 .tram_dat_divIcon {
     background-color: #cf540f;
 }
@@ -123,6 +167,13 @@
     margin-top: 6px;
     margin-left: 0px;
     font-size: 12px;
+    color: #ffffff;
+}
+
+.bangdientu_symbol, .diemxathai_symbol {
+    margin-top: 6px;
+    margin-left: 0px;
+    font-size: 14px;
     color: #ffffff;
 }
 

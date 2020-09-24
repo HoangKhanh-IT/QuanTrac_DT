@@ -103,7 +103,8 @@ function sendMail_threshold() {
                         if (value[0].inlimit == "N") {
                             html += '<tr>' +
                                 '<td>' + total_std_param[k_value_threshold].parameterName +
-                                '</td><td>Không vượt ngưỡng</td>' +
+                                '</td><td style="color: green; ' +
+                                'font-weight: bold">' + valueinlimit.toString() + " " + unitName + '</td>' +
                                 '</tr>';
                         } else {
                             html += '<tr>' +

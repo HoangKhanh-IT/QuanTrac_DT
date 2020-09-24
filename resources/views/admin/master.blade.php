@@ -90,7 +90,7 @@
                                 <span>
                                     <i class="fas fa-location-arrow" style="font-size: 16px; margin-top: -2px; color: deepskyblue"></i>
                                     <a href="http://tiny.cc/2btqmz" target="_blank">
-                                        Số 36, Lý Văn Phức, P. Tân Định, Q. 1, TP. HCM
+                                        Số 36, Lý Văn Phức, P.Tân Định, Q.1, TP.HCM
                                     </a>
                                 </span>
                             </div>

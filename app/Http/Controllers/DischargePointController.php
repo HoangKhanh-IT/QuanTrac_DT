@@ -32,10 +32,10 @@ class DischargePointController extends Controller
     public function create()
     {
         //
-        $Basins =Basin::get();
-        $Standards =Standard::get();
-        $Enterprises =Enterprise::get();
-        return view('admin.discharge_point.CreateDischargePoint', compact('Basins','Standards','Enterprises'));
+        $Basins =Basin::all();
+        $Standards =Standard::all();
+        $Enterprises =Enterprise::all();
+        return view('admin.discharge_point.CreateDischargePoint', ['Basins' => $Basins,'Standards' => $Standards,'Enterprises' => $Enterprises]);
     }
 
     /**
@@ -63,7 +63,7 @@ class DischargePointController extends Controller
                 'operatingtime.numeric' => 'Thời gian vận hành phải là số.',
                 'flowrate.numeric' => 'Lưu lượng xả thải phải là số.',
                 'licenseterm.numeric' => 'Hạn giấy phép phải là số.',
-               
+
             ]
         );
         $date = null;
@@ -76,7 +76,7 @@ class DischargePointController extends Controller
         }
         $DischargePoint = new DischargePoint([
             'enterpriseid'  => $request->get('enterpriseid'),
-            'decisionnumber'  => $request->get('decisionnumber'), 
+            'decisionnumber'  => $request->get('decisionnumber'),
             'licensedate'  =>  $date,
             'period'  => $request->get('period'),
             'establishmentname'  => $request->get('establishmentname'),
@@ -92,7 +92,7 @@ class DischargePointController extends Controller
             'licensetype'  => $request->get('licensetype'),
             'licenseterm'  => $request->get('licenseterm'),
             'note'  => $request->get('note'),
-           
+
         ]);
         $DischargePoint->save();
         return redirect('quanly/DischargePoint')->with('success', 'Thêm mới thành công!');
@@ -112,8 +112,8 @@ class DischargePointController extends Controller
          {
             $DischargePoints = DischargePoint::paginate(8);
             return view( 'admin.discharge_point.ListDischargePoint',['DischargePoints' => $DischargePoints])->with('no', 1);
-        } 
-        else 
+        }
+        else
         {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             $DischargePoints = DischargePoint::select('DischargePoint.*')
@@ -174,7 +174,7 @@ class DischargePointController extends Controller
                 'operatingtime.numeric' => 'Thời gian vận hành phải là số.',
                 'flowrate.numeric' => 'Lưu lượng xả thải phải là số.',
                 'licenseterm.numeric' => 'Hạn giấy phép phải là số.',
-               
+
             ]
         );
         $date = null;

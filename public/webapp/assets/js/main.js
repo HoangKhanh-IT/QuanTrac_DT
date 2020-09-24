@@ -316,20 +316,11 @@ $("#search_stats_tramqt").click(function () {
             $("#statStatus_error").css("display", "none");
         }, 3000)
     } else {
-            /*** Trạm tự động không thống kê theo quy chuẩn ***/
-        if (item_quanhuyen_stat == 'none' && (item_loaitram_stat == 1 || item_loaitram_stat == 3)) {
-            url_list_stations = 'statStation_noneQC?' + '%20loaihinh_stat=' + item_loaihinh_stat +
-                '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=1=1'
-        } else if (item_quanhuyen_stat != 'none' && (item_loaitram_stat == 1 || item_loaitram_stat == 3)) {
-            url_list_stations = 'statStation_noneQC?' + '%20loaihinh_stat=' + item_loaihinh_stat +
-                '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=' + item_quanhuyen_stat
-
-            /*** Trạm bán tự động thống kê theo quy chuẩn ***/
-        } else if (item_quanhuyen_stat == 'none' && (item_loaitram_stat == 2 || item_loaitram_stat == 4)) {
+        if (item_quanhuyen_stat == 'none') {
             url_list_stations = 'statStation?' + '%20loaihinh_stat=' + item_loaihinh_stat +
                 '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=1=1' +
                 '&%20quychuan_stat=' + item_quychuan_stat;
-        } else if (item_quanhuyen_stat != 'none' && (item_loaitram_stat == 2 || item_loaitram_stat == 4)) {
+        } else {
             url_list_stations = 'statStation?' + '%20loaihinh_stat=' + item_loaihinh_stat +
                 '&%20loaitram_stat=' + item_loaitram_stat + '&%20quanhuyen_stat=' + item_quanhuyen_stat +
                 '&%20quychuan_stat=' + item_quychuan_stat;
@@ -361,7 +352,21 @@ $("#search_stats_tramqt").click(function () {
                         order: [
                             [1, 'asc']
                         ],
-                        dom: "<'row'<'col-sm-12'f>>" +
+                        /* buttons: [
+                            {
+                                text: 'Tất cả',
+                                action: function () {
+                                    table_stat_stations.rows().select();
+                                }
+                            } ,
+                            {
+                                text: 'Select none',
+                                action: function () {
+                                    table.rows().deselect();
+                                }
+                            }
+                        ], */
+                        dom: "<'row'" + /* "<'col-sm-5'B>" + */ "<'col-sm-12'f>>" +
                             "<'row'<'col-sm-12'tr>>" +
                             "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                         paging: false,
@@ -620,6 +625,18 @@ $("#search_stats_tramqt").click(function () {
                                     $(this).attr('id') + '">' + '</div>';
                             }
                         });
+
+                        console.log(checkboxed_para_arr.length);
+                        if (checkboxed_para_arr.length > 3) {
+                            $("#statStatus_error").css("display", "block");
+                            $("#statStatus_error").css("color", "brown");
+                            $("#statStatus_error").text("Kết quả tính toán có thể chấm hơn dự kiến, Vui lòng chờ ...");
+                            /*** Tắt thông báo sau 3s ***/
+                            setTimeout(function() {
+                                $("#statStatus_error").css("display", "none");
+                            }, 3000)
+                        }
+
                         $('#search_para').val(para_selected);
                         $('#chart_qt').append(div_para);
                     })
@@ -951,7 +968,7 @@ function format(d, ID_modal) {
                 }
             } else {
                 DOM_child_table += '<td style="text-align: center">' +
-                    '<b class="red">Không có dữ liệu</b></td>';
+                    '<b class="red">---</b></td>';
             }
         }
     }

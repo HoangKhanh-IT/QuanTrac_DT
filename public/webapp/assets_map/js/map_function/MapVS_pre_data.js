@@ -59,11 +59,19 @@ function process_detail_DOMchart(feature, time) {
 
                     /*** delete total_detail[j].data; ***/
                     if (value[0].inlimit == "N") {
-                        total_detail[j][parameterName] = "'>" + value[0].v.toString() + " " +
-                        total_std_param[k_para_sample].unitName;
+                        if (total_std_param[k_para_sample].unitName != null) {
+                            total_detail[j][parameterName] = "'>" + value[0].v.toString() + " " + 
+                            total_std_param[k_para_sample].unitName;
+                        } else {
+                            total_detail[j][parameterName] = "'>" + value[0].v.toString()
+                        }
                     } else {
-                        total_detail[j][parameterName] = " color: red'>" + value[0].v.toString() + " " + 
-                        total_std_param[k_para_sample].unitName;
+                        if (total_std_param[k_para_sample].unitName != null) {
+                            total_detail[j][parameterName] = " color: red'>" + value[0].v.toString() + " " + 
+                            total_std_param[k_para_sample].unitName;
+                        } else {
+                            total_detail[j][parameterName] = " color: red'>" + value[0].v.toString()
+                        }
                     }
                 }
             }

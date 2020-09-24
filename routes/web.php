@@ -30,6 +30,9 @@ Route::get('standardParam', 'Call_standard_param@index');
 /***-- Nhóm Route phần DOM bảng điện tử --***/
 Route::get('electricBoard', 'Call_elec_board@index');
 
+/***-- Nhóm Route phần DOM Điểm xả thải --***/
+Route::get('dischargePoint', 'Call_discharge_point@index');
+
 /***-- Nhóm Route phần DOM trạm quan trắc, tìm kiếm và các option trong tìm kiếm --***/
 Route::get('obserStation', 'Call_obser_station@index');
 Route::get('obstyles', 'Call_obstyles_option@index');
@@ -177,14 +180,14 @@ Route::group(['prefix' => 'danhmuc'], function () {
     Route::post('Standard.edit/{id}', 'StandardController@update')->name('Standard.edit');
     Route::post('Standard.delete/{id}', 'StandardController@destroy')->name('Standard.delete');
 
-     /***-- CategoryPost --***/
-     Route::get('CatePost', 'CatePostController@index')->name('CatePost');
-     Route::get('CatePosttk', 'CatePostController@show')->name('CatePosttk');
-     Route::get('CatePost.create', 'CatePostController@create')->name('CatePost.create');
-     Route::post('CatePost.create', 'CatePostController@store')->name('CatePost.create');
-     Route::get('CatePost.edit/{id}', 'CatePostController@edit')->name('CatePost.edit');
-     Route::post('CatePost.edit/{id}', 'CatePostController@update')->name('CatePost.edit');
-     Route::post('CatePost.delete/{id}', 'CatePostController@destroy')->name('CatePost.delete');
+    /***-- CategoryPost --***/
+    Route::get('CatePost', 'CatePostController@index')->name('CatePost');
+    Route::get('CatePosttk', 'CatePostController@show')->name('CatePosttk');
+    Route::get('CatePost.create', 'CatePostController@create')->name('CatePost.create');
+    Route::post('CatePost.create', 'CatePostController@store')->name('CatePost.create');
+    Route::get('CatePost.edit/{id}', 'CatePostController@edit')->name('CatePost.edit');
+    Route::post('CatePost.edit/{id}', 'CatePostController@update')->name('CatePost.edit');
+    Route::post('CatePost.delete/{id}', 'CatePostController@destroy')->name('CatePost.delete');
 
     /***-- Location --***/
     Route::get('Place', 'PlaceController@index')->name('Place');
@@ -243,7 +246,7 @@ Route::group(['prefix' => 'quanly'], function () {
     Route::post('ElectronicBoard.delete/{id}', 'ElectronicBoardController@destroy')->name('ElectronicBoard.delete');
 
      /***-- DischargePoint --***/
-   
+
     Route::get('DischargePoint', 'DischargePointController@index')->name('DischargePoint');
     Route::get('DischargePointtk', 'DischargePointController@show')->name('DischargePointtk');
     Route::get('DischargePoint.create', 'DischargePointController@create')->name('DischargePoint.create');
@@ -253,7 +256,7 @@ Route::group(['prefix' => 'quanly'], function () {
     Route::post('DischargePoint.delete/{id}', 'DischargePointController@destroy')->name('DischargePoint.delete');
 
      /***-- Posts --***/
-   
+
     Route::get('Post', 'PostController@index')->name('Post');
     Route::get('Posttk', 'PostController@show')->name('Posttk');
     Route::get('Post.create', 'PostController@create')->name('Post.create');

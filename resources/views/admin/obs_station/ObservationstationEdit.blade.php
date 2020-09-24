@@ -532,7 +532,8 @@
                                                     <div class="custom-control custom-checkbox">
                                                         <label class="checkbox">
                                                             <input type="checkbox" name="Check" id="Check1" value="WQI"
-                                                                onclick="selectOnlyThis(this.id)" />WQI
+                                                                onclick="selectOnlyThis(this.id)" />
+                                                                WQI
                                                             {{ $WQI->minvalue != null? "(Min: ". $WQI->minvalue : "" }}
 
                                                             {{ $WQI->maxvalue != null? "- Max: ".$WQI->maxvalue.")" : ""}}

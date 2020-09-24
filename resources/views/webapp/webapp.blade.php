@@ -35,6 +35,7 @@
     <!-- Datatables CSS -->
     <link href="{{ asset('public/webapp/vendor/jquery/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/webapp/vendor/bootstrap/css/dataTables.bootstrap3.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/webapp/vendor/bootstrap/css/select.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/webapp/vendor/bootstrap/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/webapp/vendor/bootstrap/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
     <!-- Tree CSS -->
@@ -341,6 +342,26 @@
                             </div>
                             <label class="nav-titles tramqt_nuocbien_label">Trạm quan trắc nước biển ven bờ</label>
                         </div>
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_nuocthai_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon bangdientu_icon" style="border-radius: 25%">
+                                <i class="icon-table2 legend-icon"></i>
+                            </div>
+                            <label class="nav-titles electric_label">Bảng điện tử</label>
+                        </div>
+                        <div class="row toggle_cus">
+                            <!-- <div class="col-xs-6 col-md-6">
+                                <input checked data-off="Tắt" data-on="Bật" data-size="small"
+                                       data-style="ios" data-toggle="toggle" id="qt_nuocthai_data" type="checkbox">
+                            </div> -->
+                            <div class="nav-titles-icon diemxathai_icon" style="border-radius: 25%">
+                                <i class="icon-circle-code legend-icon"></i>
+                            </div>
+                            <label class="nav-titles discharge_label">Điểm xả thải</label>
+                        </div>
                         <!-- Đơn vị hành chính
                         <div class="row panel-map">
                             <div class="col-xs-10 col-md-10">
@@ -547,7 +568,7 @@
 
     <!-- Modal thuộc tính điểm Quan trắc (cho trạm tự động) -->
     <div class="modal fade" id="featureModal" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" style="margin-top: 1.25%; margin-left: 15%">
+        <div class="modal-dialog" style="margin-top: 0%; margin-left: 15%">
             <div class="modal-content modal-feature">
                 <div class="modal-header">
                     <button aria-hidden="true" class="close closemodal" data-dismiss="modal" type="button">&times;</button>
@@ -566,49 +587,49 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div class="tab-content" id="feature-result-TabsContent">
-                    <div class="tab-pane fade active in" id="info_data_qt">
-                        <i class="icon-info3" style="font-size: 16px; margin-top: -2px; padding-left: 15px"></i> &nbsp;Thông tin trạm
-                        <div class="info_qt"></div>
-                        <i class="icon-table" style="font-size: 16px; margin-top: -2px; padding-left: 15px"></i> &nbsp;Số liệu mới nhất
-                        <div id="data_qt" style="padding-right: 10px; margin-top: 5px; padding-top: 5px;"></div>
-                    </div>
-                    <!-- <div class="tab-pane fade" id="data_qt"></div> -->
-                    <div class="tab-pane fade" id="chart_data_qt">
-                        <!-- DOM chart lựa chọn theo thời gian -->
-                        <div class="form-group col-xs-4 col-md-4">
-                            <i class="icon-database-time2 blue" style="font-size: 16px; margin-top: -1px; padding-left: 15px"></i> &nbsp;
-                            <span for="" class="blue" style="margin-left: 1px">&nbsp;Thời gian</span>
-                            <select class="form-control" id="filter_time">
-                                <option value="filter_1h_chart">1 giờ</option>
-                                <option value="filter_8h_chart">8 giờ</option>
-                                <option value="filter_24h_chart">24 giờ</option>
-                            </select>
+                    <div class="tab-content" id="feature-result-TabsContent">
+                        <div class="tab-pane fade active in" id="info_data_qt">
+                            <i class="icon-info3" style="font-size: 16px; margin-top: -2px; padding-left: 15px"></i> &nbsp;Thông tin trạm
+                            <div class="info_qt"></div>
+                            <i class="icon-table" style="font-size: 16px; margin-top: -2px; padding-left: 15px"></i> &nbsp;Số liệu mới nhất
+                            <div id="data_qt" style="padding-right: 10px; margin-top: 5px; padding-top: 5px;"></div>
                         </div>
+                        <!-- <div class="tab-pane fade" id="data_qt"></div> -->
+                        <div class="tab-pane fade" id="chart_data_qt">
+                            <!-- DOM chart lựa chọn theo thời gian -->
+                            <div class="form-group col-xs-4 col-md-4">
+                                <i class="icon-database-time2 blue" style="font-size: 16px; margin-top: -1px; padding-left: 15px"></i> &nbsp;
+                                <span for="" class="blue" style="margin-left: 1px">&nbsp;Thời gian</span>
+                                <select class="form-control" id="filter_time">
+                                    <option value="filter_1h_chart">1 giờ</option>
+                                    <option value="filter_8h_chart">8 giờ</option>
+                                    <option value="filter_24h_chart">24 giờ</option>
+                                </select>
+                            </div>
 
-                        <!-- DOM chart lựa chọn theo thông số -->
-                        <div class="form-group col-xs-4 col-md-4">
-                            <i class="icon-list-numbered blue" style="font-size: 16px; margin-top: -1px; padding-left: 15px"></i> &nbsp;
-                            <span for="" class="blue" style="margin-left: 1px">&nbsp;Thông số</span>
-                            <select class="form-control" id="filter_parameters">
-                                <!-- DOM from JSON -->
-                            </select>
+                            <!-- DOM chart lựa chọn theo thông số -->
+                            <div class="form-group col-xs-4 col-md-4">
+                                <i class="icon-list-numbered blue" style="font-size: 16px; margin-top: -1px; padding-left: 15px"></i> &nbsp;
+                                <span for="" class="blue" style="margin-left: 1px">&nbsp;Thông số</span>
+                                <select class="form-control" id="filter_parameters">
+                                    <!-- DOM from JSON -->
+                                </select>
+                            </div>
+
+                            <!-- DOM chart lựa chọn theo kiểu chart -->
+                            <div class="form-group col-xs-4 col-md-4">
+                                <i class="icon-chart blue" style="font-size: 16px; margin-top: -1px; padding-left: 15px"></i> &nbsp;
+                                <span for="" class="blue" style="margin-left: 1px">&nbsp;Biểu đồ</span>
+                                <select class="form-control" id="filter_typechart">
+                                    <option value="filter_column_chart">Biểu đồ cột</option>
+                                    <option value="filter_line_chart">Biểu đồ đường</option>
+                                </select>
+                            </div>
+
+                            <!-- DOM thông báo khi không có dữ liệu hiển thị chart -->
+                            <p id="info_dom_chart"></p>
+                            <div id="chart_para" class="gender-chart"></div>
                         </div>
-
-                        <!-- DOM chart lựa chọn theo kiểu chart -->
-                        <div class="form-group col-xs-4 col-md-4">
-                            <i class="icon-chart blue" style="font-size: 16px; margin-top: -1px; padding-left: 15px"></i> &nbsp;
-                            <span for="" class="blue" style="margin-left: 1px">&nbsp;Biểu đồ</span>
-                            <select class="form-control" id="filter_typechart">
-                                <option value="filter_column_chart">Biểu đồ cột</option>
-                                <option value="filter_line_chart">Biểu đồ đường</option>
-                            </select>
-                        </div>
-
-                        <!-- DOM thông báo khi không có dữ liệu hiển thị chart -->
-                        <p id="info_dom_chart"></p>
-                        <div id="chart_para" class="gender-chart"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -668,6 +689,54 @@
                 <div class="modal-footer">
                     <button class="btn btn-success" data-dismiss="modal" type="submit" id="sample-btn">Xem dữ liệu</button>
                     <button class="btn btn-default closemodal reset_input" data-dismiss="modal" type="button">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal bảng điện tử -->
+    <div class="modal fade" id="featureModal-eletric" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" style="margin-top: 2%; margin-left: 16%">
+            <div class="modal-content modal-feature">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close closemodal" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title text-primary feature-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <!-- <i class="icon-info3" style="font-size: 16px; margin-top: -2px; padding-left: 0px"></i> &nbsp;Thông tin trạm -->
+                        <div class="info_eletric" style="padding: 10px 0 10px 0"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default closemodal_electric reset_input" data-dismiss="modal" type="button">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal điểm xả thải -->
+    <div class="modal fade" id="featureModal-discharge" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" style="margin-top: 8%; margin-left: 16%">
+            <div class="modal-content modal-feature">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close closemodal" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title text-primary feature-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <!-- <i class="icon-info3" style="font-size: 16px; margin-top: -2px; padding-left: 0px"></i> &nbsp;Thông tin trạm -->
+                        <div class="info_discharge" style="padding: 10px 0 10px 0"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default closemodal_discharge reset_input" data-dismiss="modal" type="button">Close</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -1397,21 +1466,23 @@
     <script src="{{ asset('public/webapp/assets/js/tables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/forms/selects/select2.min.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('public/webapp/assets/js/tables/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables/jszip.min.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables/pdfmake.min.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables/vfs_fonts.js') }}"></script>
     <script src="{{ asset('public/webapp/assets/js/tables/buttons.html5.min.js') }}"></script>
 
-    <!-- Map JS -->
+    <!-- Map JS-->
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/leaflet.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/leaflet.ajax.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/leaflet.zoomhome.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/leaflet-gps.js') }}"></script>
+    <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/rbush.js') }}"></script>
+    <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/labelgun.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/Control.FullScreen.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/L.Icon.Pulse.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/L.Control.Basemaps.js') }}"></script>
-    <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/rbush.js') }}"></script>
-    <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/labelgun.js') }}"></script>
+
     <script src="{{ asset('public/webapp/assets_map/js/leaflet_plugin/geojson-bbox.js') }}"></script>
 
     <!-- Map Data Chart -->
@@ -1440,9 +1511,9 @@
     <script src="{{ asset('public/webapp/assets/js/tables_customize/feature_infoWQIAQI.js') }}"></script>
 
     <!-- Map JS Custom -->
+    <script src="{{ asset('public/webapp/assets_map/js/map_function/MapCollisionLabels.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/map_function/MapScript.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/map_function/MapFeatureInfo.js') }}"></script>
-    <script src="{{ asset('public/webapp/assets_map/js/map_function/MapCollisionLabels.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/map_function/MapSearch.js') }}"></script>
     <script src="{{ asset('public/webapp/assets_map/js/map_function/MapVS_pre_data.js') }}"></script>
 

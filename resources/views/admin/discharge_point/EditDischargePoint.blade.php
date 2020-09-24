@@ -5,6 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quan trắc Trà Vinh</title>
+    <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+
+    <!-- Favicon -->
+    <link href="{{ asset('public/webapp/assets/images/SoTNMT.ico') }}" rel="icon" type="image/x-icon" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -19,8 +27,13 @@
         href="{{ asset('public/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('public/admin/dist/css/adminlte.min.css')}}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <!-- Google Font: Source Sans Pro
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 
     <!-- jQuery -->
     <script src=" {{ asset('public/admin/plugins/jquery/jquery.min.js') }} "></script>
@@ -191,7 +204,7 @@
                                                         placeholder="Nguồn nước tiếp nhận nước thải ..." value="{{ $DischargePointItem->sourcereception }}">
                                                 </div>
                                             </div>
-                                         
+
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Lưu vực sông (<span style="color: red;">*</span>)</label>
@@ -212,8 +225,8 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                          
-                                           
+
+
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Loại giấy phép</label>
@@ -235,7 +248,7 @@
                                                         placeholder="Ghi chú ..." value="{{ $DischargePointItem->note }}">
                                                 </div>
                                             </div>
-                                         
+
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -274,7 +287,7 @@
 </html>
 
 <script type="text/javascript">
-    $(document).ready(function () 
+    $(document).ready(function ()
     {
          $( "#licensedate" ).datepicker({
             changeMonth: true,
@@ -284,7 +297,7 @@
         queryDate = "{{ $DischargePointItem->licensedate }}";
         var parsedDate = $.datepicker.parseDate('yy-mm-dd', queryDate);
         $('#licensedate').datepicker('setDate', parsedDate);
-      
+
     });
 
 

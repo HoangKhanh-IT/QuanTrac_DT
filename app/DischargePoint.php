@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DischargePoint extends Model
 {
-    // 
-    protected $table = "DischargePoint";
+    //
+    protected $table = "Dischargepoint";
     protected $fillable = ['id', 'basinid',  'enterpriseid', 'decisionnumber', 'licensedate', 'period', 'establishmentname', 'location', 'operatingtime', 'dischargemethod', 'flowrate', 'coordx', 'coordy', 'sourcereception', 'licensetype', 'licenseterm', 'note', 'standardid'];
     public $timestamps = false;
 

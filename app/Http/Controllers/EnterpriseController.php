@@ -193,21 +193,21 @@ class EnterpriseController extends Controller
         try
         {
             $Observationstations = Enterprise::findOrFail($id)->Observationstations()->get();
-            if ($Observationstations->isNotEmpty()) 
+            if ($Observationstations->isNotEmpty())
             {
                 return redirect('danhmuc/Enterprise')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Trạm quan trắc!');
-            } 
+            }
             $DischargePoints = Enterprise::findOrFail($id)->DischargePoints()->get();
-            if ($DischargePoints->isNotEmpty()) 
+            if ($DischargePoints->isNotEmpty())
             {
                 return redirect('danhmuc/Enterprise')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Điểm xả nước thải!');
-            } 
+            }
 
             $Enterprise = Enterprise::find($id);
             $Enterprise->delete();
             return redirect('danhmuc/Enterprise')->with('success', 'Xóa thành công!');
         }
-        catch (\Exception $exception) 
+        catch (\Exception $exception)
         {
             return back()->withError($exception->getMessage());
         }

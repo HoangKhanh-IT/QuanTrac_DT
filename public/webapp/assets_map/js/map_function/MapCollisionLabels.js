@@ -6,28 +6,17 @@ var hideLabel = function (label) {
 var showLabel = function (label) {
     label.labelObject.style.opacity = 1;
 };
-labelEngine = new labelgun.default(hideLabel, showLabel);
+labelEngine = new labelgun.default(hideLabel, showLabel, 10);
 
-view_data_quantrac.eachLayer(function (label) {
-    label.added = true;
-    addLabel(label, i);
-    i++;
-});
-view_data_quantrac.addTo(map);
-map.on("zoomend", function () {
-    resetLabels(view_data_quantrac);
-});
-resetLabels(view_data_quantrac);
-
-function resetLabels(markers) {
+function resetLabels(map, markers) {
     var i = 0;
     markers.eachLayer(function (label) {
-        addLabel(label, ++i);
+        addLabel(map, label, ++i);
     });
     labelEngine.update();
 }
 
-function addLabel(layer, id) {
+function addLabel(map, layer, id) {
     var label = layer.getTooltip()._source._tooltip._container;
     if (label) {
         var rect = label.getBoundingClientRect();
@@ -38,7 +27,11 @@ function addLabel(layer, id) {
             topRight: [topRight.lng, topRight.lat]
         };
         labelEngine.ingestLabel(
-            boundingBox, id, parseInt(Math.random() * (5 - 1) + 1), label, false
+            boundingBox,
+            id,
+            parseInt(Math.random() * (5 - 1) + 1000),
+            label,
+            false
         );
         if (!layer.added) {
             layer.addTo(map);

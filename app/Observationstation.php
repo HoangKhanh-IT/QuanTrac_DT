@@ -55,7 +55,7 @@ class Observationstation extends Model
 
     public function StandardParameters()
     {
-        return $this->belongsToMany(StandardParameter::class, 'StdStation', 'stationid', 'standardParameterid');
+        return $this->belongsToMany(StandardParameter::class, 'StdStation', 'stationid', 'standardparameterid');
     }
 
     public function Observations(){

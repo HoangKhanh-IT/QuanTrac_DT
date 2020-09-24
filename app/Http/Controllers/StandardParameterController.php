@@ -179,12 +179,12 @@ class StandardParameterController extends Controller
     public function show(Request $request)
     {
           $search = $request->search;
-        if ($search == null) 
+        if ($search == null)
         {
             $StandardParameters = StandardParameter::orderBy('id','DESC')->paginate(8);
             return view('admin.stand_param.StandardParameter', ['StandardParameters' => $StandardParameters])->with('no', 1);
-        } 
-        else 
+        }
+        else
         {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             $StandardParameters = StandardParameter::select('StandardParameter.*')
@@ -273,17 +273,17 @@ class StandardParameterController extends Controller
         try
         {
             $Observations = StandardParameter::findOrFail($id)->Observations()->get();
-            if ($Observations->isNotEmpty()) 
+            if ($Observations->isNotEmpty())
             {
                 return redirect('quanly/StandardParameter')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu đến bảng Kết quả quan trắc!');
-            } 
+            }
 
-            StdStation::where("standardParameterid", $id)->delete();
+            StdStation::where("standardparameterid", $id)->delete();
             $StandardParameter = StandardParameter::findOrFail($id);
             $StandardParameter->delete();
             return redirect('quanly/StandardParameter')->with('success', 'Xóa thành công!');
         }
-        catch (\Exception $exception) 
+        catch (\Exception $exception)
         {
             return back()->withError($exception->getMessage());
         }

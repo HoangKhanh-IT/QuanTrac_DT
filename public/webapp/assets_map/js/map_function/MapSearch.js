@@ -70,12 +70,51 @@ $(document).one("ajaxStop", function() {
         limit: 10
     });
 
+    /*** Search nguồn thải ***/
+    var discharge_establishmentnameBH = new Bloodhound({
+        name: "discharge_search_basic",
+        datumTokenizer: function(d) {
+            return Bloodhound.tokenizers.whitespace(d.establishmentname);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: discharge_search_basic,
+        limit: 10
+    });
+
+    /*** Search doanh nghiệp nguồn thải ***/
+    var discharge_enterpriseNameBH = new Bloodhound({
+        name: "discharge_search_basic",
+        datumTokenizer: function(d) {
+            return Bloodhound.tokenizers.whitespace(d.enterpriseName);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: discharge_search_basic,
+        limit: 10
+    });
+
+    /*** Search giấy phép ***/
+    var discharge_licensetypeBH = new Bloodhound({
+        name: "discharge_search_basic",
+        datumTokenizer: function(d) {
+            return Bloodhound.tokenizers.whitespace(d.licensetype);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: discharge_search_basic,
+        limit: 10
+    });
+
+    /*** Trạm quan trắc ***/
     quantrac_nameBH.initialize();
     quantrac_loaitramBH.initialize();
     quantrac_loaihinhBH.initialize();
     quantrac_districtBH.initialize();
     quantrac_loaidiadanhtBH.initialize();
     quantrac_diadanhBH.initialize();
+
+    /*** Điểm xả thải ***/
+    discharge_establishmentnameBH.initialize();
+    discharge_enterpriseNameBH.initialize();
+    discharge_licensetypeBH.initialize();
 
     $("#searchbox").typeahead({
         minLength: 1,
@@ -231,8 +270,72 @@ $(document).one("ajaxStop", function() {
                 "&nbsp;<small>Loại địa danh:&nbsp;" + "{{loaidiadanh}}</small>"
             ].join(""))
         }
+    },{
+        /*** Nguồn thải ***/
+        name: "discharge_search_basic",
+        displayKey: "nguonthai",
+        source: discharge_establishmentnameBH.ttAdapter(),
+        templates: {
+            header: "<h4 class='typeahead-header'>" +
+                "<i class='mdi mdi-map-legend brown' style='font-size: 16px; margin-top: -2px'></i>" +
+                "<span class='brown'>&nbsp;Nguồn Thải</span>" +
+                "</h4>",
+            suggestion: Handlebars.compile(["" +
+            "<i class='icon-home7' style='font-size: 16px; margin-top: -2px'></i>&nbsp;" +
+            "<span style='font-weight: bolder'>Nguồn Thải:&nbsp;" + "{{establishmentname}}</span>" +
+            "<br><i class='icon-home4' style='font-size: 13px; margin-top: -2px'></i>" +
+            "&nbsp;<small>Tên Doanh nghiệp:&nbsp;" + "{{enterpriseName}}</small>" +
+            "<br><i class='mdi mdi-account-group' style='font-size: 16px; margin-top: -2px'></i>" +
+            "&nbsp;<small>Loại giấy phép:&nbsp;" + "{{licensetype}}</small>"
+            ].join(""))
+        }
+    },{
+        /*** Doan nghiệp xả thải ***/
+        name: "discharge_search_basic",
+        displayKey: "doanhnghiepxathai",
+        source: discharge_enterpriseNameBH.ttAdapter(),
+        templates: {
+            header: "<h4 class='typeahead-header'>" +
+                "<i class='icon-home7' style='font-size: 16px; margin-top: -2px'></i>" +
+                "<span class='brown'>&nbsp;Doanh nghiệp xả thải</span>" +
+                "</h4>",
+            suggestion: Handlebars.compile(["" +
+            "<i class='icon-home7' style='font-size: 16px; margin-top: -2px'></i>&nbsp;" +
+            "<span style='font-weight: bolder'>Tên Doanh nghiệp:&nbsp;" + "{{enterpriseName}}</span>" +
+            "<br><i class='icon-home4' style='font-size: 13px; margin-top: -2px'></i>" +
+            "&nbsp;<small>Nguồn Thải:&nbsp;" + "{{establishmentname}}</small>" +
+            "<br><i class='mdi mdi-account-group' style='font-size: 16px; margin-top: -2px'></i>" +
+            "&nbsp;<small>Loại giấy phép:&nbsp;" + "{{licensetype}}</small>"
+            ].join(""))
+        }
+    },{
+        /*** Giấy phép xả thải ***/
+        name: "discharge_search_basic",
+        displayKey: "giayphepxathai",
+        source: discharge_licensetypeBH.ttAdapter(),
+        templates: {
+            header: "<h4 class='typeahead-header'>" +
+                "<i class='mdi mdi-account-group' style='font-size: 16px; margin-top: -2px'></i>" +
+                "<span class='brown'>&nbsp;Giấy phép xả thải</span>" +
+                "</h4>",
+            suggestion: Handlebars.compile(["" +
+            "<i class='mdi mdi-account-group' style='font-size: 16px; margin-top: -2px'></i>&nbsp;" +
+            "<span style='font-weight: bolder'>Loại giấy phép:&nbsp;" + "{{licensetype}}</span>" +
+            "<br><i class='icon-home4' style='font-size: 13px; margin-top: -2px'></i>" +
+            "&nbsp;<small>Nguồn Thải:&nbsp;" + "{{establishmentname}}</small>" +
+            "<br><i class='icon-home7' style='font-size: 16px; margin-top: -2px'></i>" +
+            "&nbsp;<small>Tên Doanh nghiệp:&nbsp;" + "{{enterpriseName}}</small>"
+            ].join(""))
+        }
     }).on("typeahead:selected", function(obj, datum) {
         if (datum.source === "quantrac_search_basic") {
+            map.setView([datum.lat, datum.lng], 15);
+
+            /*** Tự động mở Modal sau khi Zoom ***/
+            if (map._layers[datum.id]) {
+                map._layers[datum.id].fire("click");
+            }
+        } else if (datum.source === "discharge_search_basic") {
             map.setView([datum.lat, datum.lng], 15);
 
             /*** Tự động mở Modal sau khi Zoom ***/

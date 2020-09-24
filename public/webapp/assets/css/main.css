@@ -182,8 +182,16 @@ div[class="toggle-group"] label:first-child {
     color: #606060;
 }
 
-.hanhchinh-label {
-    color: #fa0086;
+.tramqt_khongkhi_label {
+    color: #606060;
+}
+
+.electric_label {
+    color: black;
+}
+
+.discharge_label {
+    color: #2522ff;
 }
 
 /*** Switch Toggle Label ***/
@@ -248,6 +256,14 @@ div[class="toggle-group"] label:first-child {
 
 .tramqt_khongkhi_icon {
     background-color: #606060;
+}
+
+.bangdientu_icon {
+    background-color: black;
+}
+
+.diemxathai_icon {
+    background-color: #2522ff;
 }
 
 /*** Search Advanced ***/
@@ -671,7 +687,7 @@ input[type="checkbox"] {
 }
 
 #data_qt {
-    height: 125px;
+    height: 100px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -1216,7 +1232,7 @@ span .paginate_button {
     }
 
     #feature-result-TabsContent {
-        height: 400px;
+        height: 415px;
     }
 }
 

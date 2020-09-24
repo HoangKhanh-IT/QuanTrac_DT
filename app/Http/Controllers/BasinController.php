@@ -98,8 +98,8 @@ class BasinController extends Controller
         if ($search == null) {
             $Basins = Basin::paginate(8);
             return view('admin.basin.ListBasin', ['Basins' => $Basins])->with('no', 1);
-        } 
-        else 
+        }
+        else
         {
             $search = trim(mb_strtoupper($search,'UTF-8'));
             //$Basins = Basin::whereRaw('UPPER(name) LIKE (?)', ["%{$search1}%"])
@@ -188,21 +188,21 @@ class BasinController extends Controller
         try
         {
             $Observationstations = Basin::findOrFail($id)->Observationstations()->get();
-            if ($Observationstations->isNotEmpty()) 
+            if ($Observationstations->isNotEmpty())
             {
                 return redirect('danhmuc/Basin')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Trạm quan trắc!');
-            } 
+            }
             $DischargePoints = Basin::findOrFail($id)->DischargePoints()->get();
-            if ($DischargePoints->isNotEmpty()) 
+            if ($DischargePoints->isNotEmpty())
             {
                 return redirect('danhmuc/Basin')->with('alert', 'Xóa không thành công do dữ liệu đã được tham chiếu bảng Điểm xả nước thải!');
-            } 
+            }
 
             $Basin = Basin::findOrFail($id);
             $Basin->delete();
             return redirect('danhmuc/Basin')->with('success', 'Xóa thành công!');
         }
-        catch (\Exception $exception) 
+        catch (\Exception $exception)
         {
             return back()->withError($exception->getMessage());
         }
