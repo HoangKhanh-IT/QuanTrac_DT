@@ -55,6 +55,24 @@ var view_travinh_huyen = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac
     transparent: true
 });
 
+var view_travinh_giaothong = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac_travinh/wms?', {
+    layers: 'giaothong_duong_4326',
+    tiled: true,
+    format: 'image/png',
+    transparent: true
+});
+
+var view_travinh_thuyhe = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac_travinh/wms?', {
+    layers: 'quantrac_travinh_thuyhe',
+    tiled: true,
+    format: 'image/png',
+    transparent: true
+});
+
+/*---- Đọc WMTS Geosever ----*/
+var view_travinh_diagioi = new L.tileLayer(protocol + hostGeoserver + wmts +
+    layer_workspace + 'diagioi_4326' + services);
+
 /*---- Đem biến map ra ngoài cấu trúc nested của getJSON để không bị lỗi invalidateSize bên main.js ----*/
 var map = L.map('mymap', {
     center: [9.8095, 106.274],
@@ -525,9 +543,13 @@ map.addControl(
 /*** var ggm = new L.Google('ROADMAP');
  ggm.addTo(map); ***/
 view_travinh_huyen.addTo(map);
+view_travinh_giaothong.addTo(map);
 
 var overlayMaps = {
-    "Huyện/Thị xã": view_travinh_huyen
+    "Huyện/Thị xã": view_travinh_huyen,
+    "Thủy hệ": view_travinh_thuyhe,
+    "Giao thông": view_travinh_giaothong,
+    "Địa giới": view_travinh_diagioi
 }
 var baselayers = '';
 L.control.layers(baselayers, overlayMaps, {

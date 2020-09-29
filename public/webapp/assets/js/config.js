@@ -3,9 +3,15 @@ var protocol = "http://";
 var hostIP = "10.151.46.88";
 var sApp = "travinhqt_laravel";
 
-/* var host = "210.245.96.138/TraVinh_QuanTrac/";
-var geoserver = "geoserver/quantracdt/ows?service=WFS&version=1.0.0&request=GetFeature&";
-var format_geoJSON = "&maxFeatures=500000&outputFormat=application/json&srsName=EPSG:4326";
-var format_JSON = "&maxFeatures=500000&outputFormat=application/json"
-var sortBy = "&sortBy=name";
-var initId = 87; */
+var hostGeoserver = "gisportal.vn/";
+var wmts = "geoserver/gwc/service/wmts?";
+var layer_workspace = "layer=quantrac_travinh:";
+var services = "&style=" +
+    "&tilematrixset=EPSG:900913" +
+    "&Service=WMTS" +
+    "&Request=GetTile" +
+    "&Version=1.0.0" +
+    "&Format=image/png" +
+    "&TileMatrix=EPSG:900913:{z}&TileCol={x}&TileRow={y}";
+
+
