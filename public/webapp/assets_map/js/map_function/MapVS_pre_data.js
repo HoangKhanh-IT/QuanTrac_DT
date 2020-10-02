@@ -60,14 +60,14 @@ function process_detail_DOMchart(feature, time) {
                     /*** delete total_detail[j].data; ***/
                     if (value[0].inlimit == "N") {
                         if (total_std_param[k_para_sample].unitName != null) {
-                            total_detail[j][parameterName] = "'>" + value[0].v.toString() + " " + 
+                            total_detail[j][parameterName] = "'>" + value[0].v.toString() + " " +
                             total_std_param[k_para_sample].unitName;
                         } else {
                             total_detail[j][parameterName] = "'>" + value[0].v.toString()
                         }
                     } else {
                         if (total_std_param[k_para_sample].unitName != null) {
-                            total_detail[j][parameterName] = " color: red'>" + value[0].v.toString() + " " + 
+                            total_detail[j][parameterName] = " color: red'>" + value[0].v.toString() + " " +
                             total_std_param[k_para_sample].unitName;
                         } else {
                             total_detail[j][parameterName] = " color: red'>" + value[0].v.toString()
@@ -94,6 +94,10 @@ function process_detail_thresholdPoint(feature) {
 
     if (feature.properties.categoryID != 2 && feature.properties.categoryID != 4) {
         total_detail = feature.properties.total_detail;
+        /*** Giờ mới nhất của DB ***/
+        daytime_earliest = feature.properties.daytime_earliest;
+        dnewest_day_time = moment(daytime_earliest, 'YYYY-MM-dd HH:mm:ss').toDate()
+
         for (var j = total_detail.length - 1; j >= 0; j--) {
             data = total_detail[j].data;
             var detail_daytime = total_detail[j].time.split(", ");
@@ -109,7 +113,7 @@ function process_detail_thresholdPoint(feature) {
 
             /*** Kiểm tra thời điểm hiện tại và dữ liệu có bằng nhau không
             if (data_day_time.getTime() == d_curent.getTime()) { ***/
-            if (data_day_time.getTime() >= d_curent.getTime()) {
+            if (data_day_time.getTime() >= dnewest_day_time.getTime()) {
                 for (var k = data.length - 1; k >= 0; k--) {
                     var spidID = Object.keys(data[k]);
                     var value = Object.values(data[k]);

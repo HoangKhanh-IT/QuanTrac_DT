@@ -243,49 +243,51 @@ function Feature_info_Electric(feat, layer) {
 
     var new_detail = detail;
     sortResults(new_detail, 'time_js', true);
-
-    content_info += "<tr style='background-color: #000'><th style='white-space: nowrap; color: yellow; text-align: center'>" +
+	
+	if (new_detail.length != 0) {
+		content_info += "<tr style='background-color: #000'><th style='white-space: nowrap; color: yellow; text-align: center'>" +
         "<i class='icon-watch2' style='font-size: 14px; " +
         "margin-top: -2px; margin-left: 1px;'></i>" +
         "&nbsp;Thời gian</th><td style='color: #66df66; text-align: center'>" + new_detail[new_detail.length - 1].time + "</td></tr>";
 
-    for (var i = 0; i < new_detail[new_detail.length - 1].data.length - 1; i++) {
-        var spidID = Object.keys(new_detail[new_detail.length - 1].data[i]);
-        var value = Object.values(new_detail[new_detail.length - 1].data[i]);
+		for (var i = 0; i < new_detail[new_detail.length - 1].data.length - 1; i++) {
+			var spidID = Object.keys(new_detail[new_detail.length - 1].data[i]);
+			var value = Object.values(new_detail[new_detail.length - 1].data[i]);
 
-        for (var k_para_sample = 0; k_para_sample < total_std_param.length; k_para_sample++) {
-            if (parseInt(spidID) == total_std_param[k_para_sample].id) {
-                if (total_std_param[k_para_sample].unitName != null) {
-                    result_standard = value[0].v.toString() + " " + total_std_param[k_para_sample].unitName;
-                } else {
-                    result_standard = value[0].v.toString();
-                }
+			for (var k_para_sample = 0; k_para_sample < total_std_param.length; k_para_sample++) {
+				if (parseInt(spidID) == total_std_param[k_para_sample].id) {
+					if (total_std_param[k_para_sample].unitName != null) {
+						result_standard = value[0].v.toString() + " " + total_std_param[k_para_sample].unitName;
+					} else {
+						result_standard = value[0].v.toString();
+					}
 
-                if (value[0].inlimit == "N") {
-                    content_info += "<tr style='background-color: #000'>" +
-                                    "<th style='white-space: nowrap; color: yellow; text-align: center'>" +
-                                    total_std_param[k_para_sample].parameterName +
-                                    "</th><td style='color: #66df66; text-align: center; font-weight: bold'>" + result_standard + "</td></tr>"
-                } else {
-                    content_info += "<tr style='background-color: #000'>" +
-                                    "<th style='white-space: nowrap; color: yellow; text-align: center'>" +
-                                    total_std_param[k_para_sample].parameterName +
-                                    "</th><td style='color: red; text-align: center; font-weight: bold'>" + result_standard + "</td></tr>"
-                }
-            }
-        }
-    }
+					if (value[0].inlimit == "N") {
+						content_info += "<tr style='background-color: #000'>" +
+										"<th style='white-space: nowrap; color: yellow; text-align: center'>" +
+										total_std_param[k_para_sample].parameterName +
+										"</th><td style='color: #66df66; text-align: center; font-weight: bold'>" + result_standard + "</td></tr>"
+					} else {
+						content_info += "<tr style='background-color: #000'>" +
+										"<th style='white-space: nowrap; color: yellow; text-align: center'>" +
+										total_std_param[k_para_sample].parameterName +
+										"</th><td style='color: red; text-align: center; font-weight: bold'>" + result_standard + "</td></tr>"
+					}
+				}
+			}
+		}
 
-    content_info += "</table>";
-
+		content_info += "</table>";
+	}
+	
     /*** Get Electric Board ID ***/
-    layer.on({
-        click: function (e) {
-            $(".feature-title").html("Bảng điện tử " + feat.properties.name);
-            $(".info_eletric").html(content_info);
-            $("#featureModal-eletric").modal("show");
-        }
-    })
+	layer.on({
+		click: function (e) {
+			$(".feature-title").html("Bảng điện tử " + feat.properties.name);
+			$(".info_eletric").html(content_info);
+			$("#featureModal-eletric").modal("show");
+		}
+	})
 
     /*** Modal off function
     $('.closemodal').click(function () {
@@ -293,9 +295,9 @@ function Feature_info_Electric(feat, layer) {
     }); ***/
 }
 
-/*---- Hiển thị thông tin bảng điện tử ----*/
+/*---- Hiển thị thông tin điểm xả thải ----*/
 function Feature_info_Discharge(feat, layer) {
-    /*** Kiểm tra trạm quan trắc có năm thành lập hay không ***/
+    /*** Kiểm tra thông tin điểm xả thải ***/
     var standardSymbol = "";
     if (feat.properties.standardSymbol != null) {
         standardSymbol = feat.properties.standardSymbol;

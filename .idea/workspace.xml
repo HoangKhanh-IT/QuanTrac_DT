@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="302f8f71-fec8-47b9-b25f-0b621b3b6405" name="Default Changelist" comment="travinhqt_laravel">
+    <list default="true" id="302f8f71-fec8-47b9-b25f-0b621b3b6405" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets/js/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets/js/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapScript.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapFeatureInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/webapp/assets_map/js/map_function/MapFeatureInfo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,7 +386,9 @@
       <workItem from="1600930118988" duration="20598000" />
       <workItem from="1600997333241" duration="31000" />
       <workItem from="1601257708227" duration="6588000" />
-      <workItem from="1601363388609" duration="978000" />
+      <workItem from="1601363388609" duration="1709000" />
+      <workItem from="1601429492059" duration="371000" />
+      <workItem from="1601620835625" duration="2365000" />
     </task>
     <task id="LOCAL-00001" summary="travinhqt_laravel">
       <created>1596074300287</created>
@@ -606,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600951564659</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="travinhqt_laravel">
+      <created>1601364420496</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1601364420496</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,11 +637,11 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="413" y="123" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1596024961673" />
-    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1601364362531">
+    <state x="292" y="0" key="CommitChangelistDialog2" timestamp="1601364418932">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="328" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1600019913504" />
-    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1601364362531" />
+    <state x="292" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1601364418932" />
     <state x="1658" y="0" key="CommitChangelistDialog2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075688211" />
     <state x="446" y="279" width="474" height="281" key="ComposerInitDialogKey" timestamp="1595995771713">
       <screen x="0" y="0" width="1366" height="738" />
@@ -667,22 +675,22 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="517" y="288" key="NewPhpFileDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600936996273" />
-    <state x="184" y="11" key="SettingsEditor" timestamp="1601364406279">
+    <state x="184" y="11" key="SettingsEditor" timestamp="1601620927001">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="207" y="12" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1599896600159" />
-    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1601364406279" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600951566713">
+    <state x="184" y="11" key="SettingsEditor/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1601620927001" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601364434076">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="309" y="110" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1600019926999" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1600951566713" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1601364434076" />
     <state x="1641" y="97" key="Vcs.Push.Dialog.v2/1366.0.1366.738/0.0.1366.738@1366.0.1366.738" timestamp="1596075691920" />
-    <state x="359" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1601363389585">
+    <state x="359" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1601620837049">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="404" y="217" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1600019741519" />
-    <state x="359" y="192" key="com.intellij.ide.util.TipDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1601363389585" />
+    <state x="359" y="192" key="com.intellij.ide.util.TipDialog/1366.0.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1601620837049" />
     <state x="625" y="98" width="1016" height="721" key="dock-window-1" timestamp="1600941316902">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
