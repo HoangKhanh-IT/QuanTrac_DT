@@ -151,12 +151,12 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                 <a href="{{route('Basin.edit',$Basin->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-                                                                <form
+                                                                <form id="delete-form-{{ $Basin->id }}"
                                                                     action="{{route('Basin.delete',$Basin->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-                                                                    <button class="btn btn-sm btn-danger rounded-0">
+                                                                    <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $Basin->id }},'{{$Basin->name}}')">
                                                                         Xóa
                                                                     </button>
                                                                 </form>

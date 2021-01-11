@@ -73,3 +73,5 @@ không cần chuyển sang dạng Array
 + Backup code mới, sửa 1 số tên bảng và các biến dữ liệu (done)
 
 ## ---- ADMIN ----
+
+### Đã sửa view bản đồ, kết nối localhost

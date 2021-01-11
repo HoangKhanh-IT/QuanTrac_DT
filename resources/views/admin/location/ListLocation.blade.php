@@ -111,7 +111,7 @@
                                             </form>
                                         </div>
                                     </div>
-
+                             
                                 <div class="card-body">
                                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                         <div class="row">
@@ -143,12 +143,12 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                 <a href="{{route('Place.edit',$Location->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-                                                                <form
+                                                                <form id="delete-form-{{ $Location->id }}"
                                                                     action="{{route('Place.delete',$Location->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-                                                                    <button class="btn btn-sm btn-danger rounded-0">
+                                                                    <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $Location->id }},'{{$Location->name}}')">
                                                                         Xóa
                                                                     </button>
                                                                 </form>

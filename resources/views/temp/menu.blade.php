@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="http://10.151.46.88/travinhqt_laravel/master" class="brand-link">
+    <a href="http://localhost:882/travinhqt_laravel/master" class="brand-link">
         <!-- <i class="fas fa-globe-americas fa-1x"></i>
         <span class="brand-text font-weight-light">Quan trắc Trà Vinh</span> -->
         <div class="title">

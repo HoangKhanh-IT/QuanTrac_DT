@@ -153,12 +153,12 @@
                                                                 <a href="{{route('CatePost.edit',$CategoryPost->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
 
-                                                                <form
+                                                                <form id="delete-form-{{ $CategoryPost->id }}"
                                                                     action="{{route('CatePost.delete',$CategoryPost->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-                                                                    <button class="btn btn-sm btn-danger rounded-0">
+                                                                    <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $CategoryPost->id }},'{{$CategoryPost->name}}')">
                                                                         Xóa
                                                                     </button>
                                                                 </form>

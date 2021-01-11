@@ -8,6 +8,7 @@ use App\Http\Controllers\View;
 use Session;
 use App\ObservationType;
 use App\Category;
+use App\ObstypeStation;
 
 class ObservationTypeController extends Controller
 {
@@ -20,11 +21,7 @@ class ObservationTypeController extends Controller
     {
         $ObservationTypes = ObservationType::paginate(8);
         $ObservationTypeItems = ObservationType::all();
-        //dd($ObservationTypes);
-        return view(
-            'admin.obs_type.ObservationType',
-            ['ObservationTypes' => $ObservationTypes, 'ObservationTypeItems'=> $ObservationTypeItems]
-        )->with('no', 1);
+        return view('admin.obs_type.ObservationType',compact('ObservationTypes', 'ObservationTypeItems'))->with('no', 1);
     }
 
     /**
@@ -80,17 +77,18 @@ class ObservationTypeController extends Controller
     public function show(Request $request)
     {
         //
+        $ObservationTypeItems = ObservationType::all();
         $search = $request->search;
         if ($search == null) {
             $ObservationTypes = ObservationType::paginate(8);
-         return view( 'admin.obs_type.ObservationType', ['ObservationTypes' => $ObservationTypes])->with('no', 1);
+            return view('admin.obs_type.ObservationType',compact('ObservationTypes', 'ObservationTypeItems'))->with('no', 1);
         } 
         else 
         {
              $search = trim(mb_strtoupper($search,'UTF-8'));
             $ObservationTypes = ObservationType::where(DB::raw('UPPER(name)'), 'like', '%' . $search . '%')
              ->orwhere(DB::raw('UPPER(code)'), 'LIKE', '%'.$search.'%')->paginate(8);
-           return view( 'admin.obs_type.ObservationType', ['ObservationTypes' => $ObservationTypes])->with('no', 1);
+             return view('admin.obs_type.ObservationType',compact('ObservationTypes', 'ObservationTypeItems'))->with('no', 1);
         }
     }
 

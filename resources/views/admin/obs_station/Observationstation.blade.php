@@ -100,10 +100,10 @@
                                             @csrf
                                             <div class="input-group input-group-prepend" style="width: 250px;">
                                                 <input type="text" name="search" class="form-control float-right"
-                                                    placeholder="Tên, mã, loại trạm, mô tả, Tên địa danh, Tên quận/huyện, Tên tổ chức, Tên doanh nghiệp, Tên lưu vực sông">
+                                                    placeholder="Tên, mã, loại trạm, Tên địa danh, Tên quận/huyện">
 
                                                 <div class="input-group-append">
-                                                    <button type="submit" class="btn  btn-default" data-toggle="tooltip" title="Tìm theo: Tên, mã, loại trạm, mô tả, Tên địa danh, Tên quận/huyện, Tên tổ chức, Tên doanh nghiệp, Tên lưu vực sông"><i
+                                                    <button type="submit" class="btn  btn-default" data-toggle="tooltip" title="Tìm theo: Tên, mã, loại trạm, Tên địa danh, Tên quận/huyện"><i
                                                             class="fas fa-search"></i></button>
                                                 </div>
                                             </div>
@@ -202,13 +202,12 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                     <a href="{{route('Observationstation.edit',$Observationstation->id)}}"
                                                                         class="btn btn-sm btn-warning">Sửa</a>
-                                                                    <form
+                                                                    <form id="delete-form-{{ $Observationstation->id }}"
                                                                         action="{{route('Observationstation.delete',$Observationstation->id)}}"
                                                                         method="post">
                                                                         <input type="hidden" name="_token"
                                                                             value="{{csrf_token()}}">
-                                                                        {{-- <input type="hidden" name="_method" value="destroy"> --}}
-                                                                        <button class="btn btn-sm btn-danger rounded-0">
+                                                                        <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $Observationstation->id }},'{{$Observationstation->name}}')">
                                                                             Xóa
                                                                         </button>
                                                                     </form>

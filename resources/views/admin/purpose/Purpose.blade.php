@@ -137,13 +137,12 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                 <a href="{{route('Purpose.edit',$Purpose->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-                                                                <form
+                                                                <form id="delete-form-{{ $Purpose->id }}"
                                                                     action="{{route('Purpose.delete',$Purpose->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-                                                                    {{-- <input type="hidden" name="_method" value="destroy"> --}}
-                                                                    <button class="btn btn-sm btn-danger rounded-0">
+                                                                    <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $Purpose->id }},'{{$Purpose->name}}')">
                                                                         Xóa
                                                                     </button>
                                                                 </form>

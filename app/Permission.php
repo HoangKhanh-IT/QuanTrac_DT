@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Role;
+use App\Menus;
 
 class Permission extends Model
 {
@@ -13,6 +14,11 @@ class Permission extends Model
     public function Roles()
     {
         return $this->belongsToMany(Role::class, 'role_permission', 'permission_id', 'role_id');
+    }
+
+    public function Menu()
+    {
+        return $this->belongsTo(Menus::class, 'menus_id','id');
     }
 
 }

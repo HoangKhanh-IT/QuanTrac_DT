@@ -104,7 +104,7 @@
                                             <input name="title" id="slug" type="text" class="form-control"
                                                 value="{{ $PostItem->title }}" onkeyup="ChangeToSlug();">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" style="display:none" >
                                             <label>Slug</label>
                                             <input name="slug" id="convert_slug" type="text" class="form-control" value="{{ $PostItem->slug }}">
                                         </div>

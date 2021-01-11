@@ -99,7 +99,7 @@
                                             <input name="name" id="slug" type="text" class="form-control"
                                                 placeholder="Tên ..." onkeyup="ChangeToSlug();">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" style="display:none" >
                                             <label>Slug</label>
                                             <input name="slug" id="convert_slug" type="text" class="form-control"
                                                 placeholder="Slug ...">

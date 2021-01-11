@@ -89,6 +89,7 @@
                         <div class="col-12">
                             <!-- Default box -->
                             <div class="card">
+                                <!-- /.card-header -->
                                 <div class="card-header">
                                         <div class="col-sm-12 col-md-1 card-title">
                                             <a href="{{ route('Post.create') }}"
@@ -154,12 +155,12 @@
                                                                 <a href="{{route('Post.edit',$Post->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
                                                                
-                                                                <form
+                                                                <form id="delete-form-{{ $Post->id }}"
                                                                     action="{{route('Post.delete',$Post->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-                                                                    <button class="btn btn-sm btn-danger rounded-0">
+                                                                    <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $Post->id }},'{{$Post->title}}')">
                                                                         Xóa
                                                                     </button>
                                                                 </form>
@@ -193,7 +194,7 @@
 
     @include('temp.footer')
     <!-- /.control-sidebar -->
-    </div>
+    
     <!-- ./wrapper -->
 
     <!-- jQuery -->

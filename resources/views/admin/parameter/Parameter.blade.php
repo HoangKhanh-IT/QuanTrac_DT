@@ -137,12 +137,12 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                 <a href="{{route('Parameter.edit',$parameter->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-                                                                <form
+                                                                <form id="delete-form-{{ $parameter->id }}"
                                                                     action="{{route('Parameter.delete',$parameter->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-                                                                    <button class="btn btn-sm btn-danger rounded-0">
+                                                                    <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $parameter->id }},'{{$parameter->name}}')">
                                                                         Xóa
                                                                     </button>
                                                                 </form>

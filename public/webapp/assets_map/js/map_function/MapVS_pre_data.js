@@ -98,8 +98,9 @@ function process_detail_thresholdPoint(feature) {
         daytime_earliest = feature.properties.daytime_earliest;
         dnewest_day_time = moment(daytime_earliest, 'YYYY-MM-dd HH:mm:ss').toDate()
 
-        for (var j = total_detail.length - 1; j >= 0; j--) {
-            data = total_detail[j].data;
+        // for (var j = total_detail.length - 1; j >= 0; j--) {
+            j = total_detail.length - 1
+			data = total_detail[j].data;
             var detail_daytime = total_detail[j].time.split(", ");
             var detail_day = detail_daytime[1];
             var detail_time = detail_daytime[0];
@@ -113,20 +114,21 @@ function process_detail_thresholdPoint(feature) {
 
             /*** Kiểm tra thời điểm hiện tại và dữ liệu có bằng nhau không
             if (data_day_time.getTime() == d_curent.getTime()) { ***/
-            if (data_day_time.getTime() >= dnewest_day_time.getTime()) {
+            if (data_day_time.getTime() <= dnewest_day_time.getTime()) {
                 for (var k = data.length - 1; k >= 0; k--) {
-                    var spidID = Object.keys(data[k]);
-                    var value = Object.values(data[k]);
+                    var spidID = Object.keys(data[0]);
+                    var value = Object.values(data[0]);
 
                     for (var k_para_sample = 0; k_para_sample < total_std_param.length; k_para_sample++) {
                         /*** Kiểm tra có thông số nào vượt ngưỡng không ***/
                         if (parseInt(spidID) == total_std_param[k_para_sample].id && value[0].inlimit == "Y") {
-                            dem = dem + 1;
+                            console.log(total_std_param[k_para_sample]);
+							dem = dem + 1;
                         }
                     }
                 }
             }
-        }
+        // }
     }
     return dem;
 }

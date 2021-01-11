@@ -48,34 +48,41 @@ var Basemaps_Control = [
 ]
 
 /*---- Đọc WMS Geosever ----*/
-var view_travinh_huyen = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac_travinh/wms?', {
+var view_travinh_huyen = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
     layers: 'quantrac_travinh',
     tiled: true,
     format: 'image/png',
     transparent: true
 });
 
-var view_travinh_giaothong = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac_travinh/wms?', {
+var view_travinh_giaothong = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
     layers: 'giaothong_duong_4326',
     tiled: true,
     format: 'image/png',
     transparent: true
 });
 
-var view_travinh_thuyhe = L.tileLayer.wms('http://gisportal.vn/geoserver/quantrac_travinh/wms?', {
+var view_travinh_thuyhe = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
     layers: 'quantrac_travinh_thuyhe',
     tiled: true,
     format: 'image/png',
     transparent: true
 });
 
-/*---- Đọc WMTS Geosever ----*/
+var view_travinh_diagioi = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
+    layers: 'diagioi_4326',
+    tiled: true,
+    format: 'image/png',
+    transparent: true
+});
+
+/*---- Đọc WMTS Geosever
 var view_travinh_diagioi = new L.tileLayer(protocol + hostGeoserver + wmts +
-    layer_workspace + 'diagioi_4326' + services);
+    layer_workspace + 'diagioi_4326' + services); ----*/
 
 /*---- Đem biến map ra ngoài cấu trúc nested của getJSON để không bị lỗi invalidateSize bên main.js ----*/
 var map = L.map('mymap', {
-    center: [9.8095, 106.274],
+    center: [10.55583572387695, 105.5649452209475],
     zoomSnap: 0.25,
     zoom: 10.5,
     maxZoom: 17,
@@ -201,7 +208,7 @@ function Modal_Feature_Style(feat, latlng) {
             icon: L.divIcon({
                 html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [6, 8],
+                iconAnchor: [12, 12],
                 className: className_style
             }),
             /*** Hover điểm quan trắc ***/
@@ -234,7 +241,7 @@ function Modal_Feature_Style(feat, latlng) {
             icon: L.divIcon({
                 html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [6, 8],
+                iconAnchor: [12, 12],
                 className: className_style
             }),
             title: feat.properties.name,
@@ -265,7 +272,7 @@ function Modal_Feature_Style(feat, latlng) {
             icon: L.divIcon({
                 html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [6, 8],
+                iconAnchor: [12, 12],
                 className: className_style
             }),
             title: feat.properties.name,
@@ -299,7 +306,7 @@ function Modal_Feature_Style(feat, latlng) {
             icon: L.divIcon({
                 html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [6, 8],
+                iconAnchor: [12, 12],
                 className: className_style
             }),
             title: feat.properties.name,
@@ -333,7 +340,7 @@ function Modal_Feature_Style(feat, latlng) {
             icon: L.divIcon({
                 html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [6, 8],
+                iconAnchor: [12, 12],
                 className: className_style
             }),
             title: feat.properties.name,
@@ -363,7 +370,7 @@ function Modal_Feature_Style(feat, latlng) {
             icon: L.divIcon({
                 html: html_style,
                 popupAnchor: [0, 0],
-                iconAnchor: [6, 8],
+                iconAnchor: [12, 12],
                 className: className_style
             }),
             title: feat.properties.name,
@@ -477,6 +484,7 @@ function Modal_Feature_DischargePoint(feat, layer) {
         lng: feat.geometry.coordinates[0]
     })
 }
+
 var view_dischagre_point;
 $.getJSON("dischargePoint", function(discharge_points) {
     view_dischagre_point = L.geoJSON(discharge_points, {

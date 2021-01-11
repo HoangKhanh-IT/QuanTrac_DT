@@ -34,7 +34,9 @@ class CheckPermission
         if ($listRoleUser->contains($checkPermission)) {
             return $next($request);
         }
-        return abort(401);
+        return redirect()
+        ->back()->with('auth', 'Bạn không có quyền vào chức năng này');
+        //return abort(401);
         //dd($checkPermission);
 
     }

@@ -12,7 +12,7 @@ class ObservationType extends Model
     protected $table = "ObservationType";
 
     protected $fillable = [
-        'id', 'name', 'code', 'parentid', 'categoryid'
+        'id', 'name', 'code', 'parentid'
     ];
 
     public $timestamps = false;

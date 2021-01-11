@@ -164,6 +164,7 @@ class Call_obser_station extends Controller
             'features' => $features,
         );
 
+		ob_start('ob_gzhandler');
         $final_data = json_encode($new_data);
         return $final_data;
     }

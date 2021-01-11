@@ -51,7 +51,7 @@
                 <div class="container-fluid">
                     <div class="row mb-12">
                         <div class="col-sm-12">
-                            <h2>Quản lý đơn vị đo</h2>
+                            <h4>Quản lý nhóm người dùng</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -80,15 +80,15 @@
                                 <!-- /.card-header -->
                                 <div class="card-header">
                                    <div class="col-sm-12 col-md-1 card-title">
-                                    <a href="{{ route('Unit.create') }}" class="btn btn-block bg-gradient-primary">
+                                    <a href="{{ route('role.create') }}" class="btn btn-block bg-gradient-primary">
                                         Thêm
                                     </a>
                                     </div>
                                         <div class="card-tools">
-                                            <form method="get" action="{{ route('Unittk') }}">
+                                            <form method="get" action="{{ route('roletk') }}">
                                                 @csrf
                                                 <div class="input-group input-group-prepend" style="width: 250px;">
-                                                    <input type="text" name="search" class="form-control float-right" placeholder="Mã, tên">
+                                                    <input type="text" name="search" class="form-control float-right" placeholder="Tìm kiếm">
 
                                                     <div class="input-group-append">
                                                         <button type="submit" class="btn  btn-default"><i class="fas fa-search"></i></button>
@@ -106,32 +106,44 @@
                                                     <thead>
                                                         <tr class="text-center">
                                                             <th scope="col" class="">STT</th>
-                                                            <th scope="col" class="">Mã đơn vị đo</th>
-                                                            <th scope="col" class="">Tên đơn vị đo</th>
+                                                            <th scope="col" class="">Tên nhóm</th>
+                                                            <th scope="col" class="">Mô tả</th>
+                                                            <th scope="col" class="">Chức năng</th>
+                                                            <th scope="col" class="">Quyền</th>
                                                             <th scope="col" class="">Thao tác</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach($Units  as $key =>  $parameter)
+                                                        @foreach($roles  as $key =>  $role)
                                                         <tr class="text-center">
-                                                            <td scope="row">{{ $Units->firstItem() + $key }}</td>
-                                                            <td>{{$parameter->code}}</td>
+                                                            <td scope="row">{{ $roles->firstItem() + $key }}</td>
+                                                            <td>{{$role->name}}</td>
                                                             <td>
-                                                                {{$parameter->name}}
+                                                                {{$role->display_name}}
+                                                            </td>
+                                                            <td>
+                                                                @foreach($role->permissions as $key => $permission)
+                                                                    {{ $permission->menus_id }}
+                                                                      @foreach($chucnangs as $key =>
+                                                                      $chucnang)
+                                                                        @if ($permission->menus_id === $chucnang->id)
+                                                                            {{ $chucnang->name  }}
+                                                                        @endif
+                                                                      @endforeach
+                                                                @endforeach
+                                                            </td>
+                                                            <td>
+                                                                {{ $role->permissions->count() }}
+                                                                @foreach($role->permissions as $key => $permission)
+                                                                    {{ $permission->display_name }} {{ $permission->Menu->name }}
+                                                                 @endforeach
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group btn-group-sm">
-                                                                <a href="{{route('Unit.edit',$parameter->id)}}"
+                                                                <a href="{{route('role.edit',$role->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-                                                                {{-- <form
-                                                                    action="{{route('ObservationType.edit',$ObservationType->id)}}"
-                                                                method="get">
-                                                                <button class="btn btn-sm btn-warning rounded-0">
-                                                                    Sửa
-                                                                </button>
-                                                                </form> --}}
                                                                 <form
-                                                                    action="{{route('Unit.delete',$parameter->id)}}"
+                                                                    action="{{route('role.delete',$role->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
@@ -149,7 +161,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$Units->links()}}
+                                            <div class="d-flex justify-content-center">{{$roles->links()}}
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +193,7 @@
     <script src="{{ asset('public/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src=" {{ asset('public/admin/dist/js/adminlte.min.js') }} "></script>
-    <!-- AdminLTE for demo purposes -->
+    <!-- AdminLTE for demo roles -->
     <script src="{{ asset('public/admin/dist/js/demo.js') }}"></script>
     <script type="">
         $(document).on('click','.open_modal',function(){

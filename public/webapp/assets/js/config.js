@@ -1,9 +1,9 @@
 var protocol = "http://";
 /*----- Host Server -----*/
-var hostIP = "10.151.46.88";
+var hostIP = "localhost:882";
 var sApp = "travinhqt_laravel";
 
-var hostGeoserver = "gisportal.vn/";
+var hostGeoserver = "localhost:8080/";
 var wmts = "geoserver/gwc/service/wmts?";
 var layer_workspace = "layer=quantrac_travinh:";
 var services = "&style=" +

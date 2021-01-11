@@ -243,7 +243,7 @@ function Feature_info_Electric(feat, layer) {
 
     var new_detail = detail;
     sortResults(new_detail, 'time_js', true);
-	
+
 	if (new_detail.length != 0) {
 		content_info += "<tr style='background-color: #000'><th style='white-space: nowrap; color: yellow; text-align: center'>" +
         "<i class='icon-watch2' style='font-size: 14px; " +
@@ -279,7 +279,7 @@ function Feature_info_Electric(feat, layer) {
 
 		content_info += "</table>";
 	}
-	
+
     /*** Get Electric Board ID ***/
 	layer.on({
 		click: function (e) {

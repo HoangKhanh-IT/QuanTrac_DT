@@ -36,7 +36,7 @@ class Call_discharge_point extends Controller
                     'period' => $value['period'],
                     'establishmentname' => $value['establishmentname'],
                     'location' => $value['location'],
-                    'operatingtime	' => $value['operatingtime'],
+                    'operatingtime' => $value['operatingtime'],
                     'dischargemethod' => $value['dischargemethod'],
                     'flowrate' => $value['flowrate'],
                     'standardid' => $value['standardid'],

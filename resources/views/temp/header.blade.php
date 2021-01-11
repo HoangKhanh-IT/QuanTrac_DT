@@ -70,8 +70,42 @@
 
 </nav>
 <!-- /.navbar -->
-
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+<style>
+.swal2-popup {
+font-size: 1rem !important;
+height: fit-content;
+width:365px !important;
+}
+</style>
+<script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 <script type="text/javascript">
+        function delConfirm(id, objName)
+        {
+            event.preventDefault();
+                const url =  window.location.href;
+
+                swal({
+                    title: 'Xác nhận xóa dữ liệu?',
+                    text: "Chắc chắn xóa bản ghi: "+ objName,
+                    //type: 'warning',
+                    customClass: 'swal2-popup',
+                    showCancelButton: true,
+                    cancelButtonText: 'Bỏ qua',
+                    confirmButtonText: 'Đồng ý',
+                    buttonsStyling: true,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        event.preventDefault();
+                        document.getElementById('delete-form-'+id).submit();
+                    } 
+                    else if (result.dismiss === swal.DismissReason.cancel) 
+                    {
+                        return false;
+                    }
+                })
+        }
 
     function ChangeToSlug()
         {
@@ -106,3 +140,39 @@
         }
 
 </script>
+@if(session()->get('auth'))
+<script>
+    @if(Session::has('auth'))
+    swal({
+        title: 'Thông báo.',
+        text: "Bạn không có quyền vào chức năng này!",
+        //type: 'warning',
+        customClass: 'swal2-popup',
+        showCancelButton: false,
+        buttonsStyling: true,
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            event.preventDefault();
+        } else if (result.dismiss === swal.DismissReason.cancel) {
+            return false;
+        }
+    })
+    @endif
+
+
+    @if(Session::has('info'))
+    toastr.info("{{ Session::get('info') }}");
+    @endif
+
+
+    @if(Session::has('warning'))
+    toastr.warning("{{ Session::get('warning') }}");
+    @endif
+
+
+    @if(Session::has('error'))
+    toastr.error("{{ Session::get('error') }}");
+    @endif
+</script>
+@endif

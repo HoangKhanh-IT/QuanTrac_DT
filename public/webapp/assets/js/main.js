@@ -17,6 +17,25 @@ if (!("ontouchstart" in window)) {
     });
 }
 
+/*---- Send Mail ----*/
+$("#sendmail").click(function () {
+    var firstName = $("#firstname").val();
+    var lastName = $("#lastemail").val();
+    var email = $("#email").val();
+    var message = $("#message").val();
+
+    console.log(email);
+
+    $.post("app/Http/Controllers/Call_sendMail_aboutus.php", {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        content: message
+    }).done(function () {
+        alert("Gửi phản hồi thành công");
+    });
+})
+
 /*---- Tìm kiếm Đánh giá chất lượng môi trường ----*/
 $("#search_WA").on("keyup", function () {
     var value = $(this).val().toLowerCase();

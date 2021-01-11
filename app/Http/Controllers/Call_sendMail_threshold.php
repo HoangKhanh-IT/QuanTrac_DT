@@ -1,6 +1,6 @@
 <?php
 	/* Multiple recipients */
-	$to = 'nguyenduclam0605@gmail.com';
+	$to = 'gisk37ussh@gmail.com';
 
 	/* Subject */
 	$subject = 'Báo cáo vượt ngưỡng trạm tự động';
@@ -13,7 +13,7 @@
 	$headers[] = 'Content-type: text/html; charset=UTF-8';
 
 	/* Additional headers */
-	$headers[] = 'To: nguyenduclam0605@gmail.com';
+	$headers[] = 'To: gisk37ussh@gmail.com';
 	$headers[] = 'From: Hệ thống quan trắc tự động Trà Vinh <gisk37ussh@gmail.com>';
 
 	/* Mail it */

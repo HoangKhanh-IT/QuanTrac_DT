@@ -142,13 +142,12 @@
                                                                     Sửa
                                                                 </button>
                                                                 </form> --}}
-                                                                <form
+                                                                <form id="delete-form-{{ $LocationType->id }}"
                                                                     action="{{route('LocationType.delete',$LocationType->id)}}"
                                                                     method="post">
                                                                     <input type="hidden" name="_token"
                                                                         value="{{csrf_token()}}">
-                                                                    {{-- <input type="hidden" name="_method" value="destroy"> --}}
-                                                                    <button class="btn btn-sm btn-danger rounded-0">
+                                                                    <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $LocationType->id }},'{{$LocationType->name}}')">
                                                                         Xóa
                                                                     </button>
                                                                 </form>

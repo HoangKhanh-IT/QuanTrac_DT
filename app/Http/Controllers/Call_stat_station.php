@@ -142,6 +142,7 @@ class Call_stat_station extends Controller
             'data' => $option
         );
 
+		ob_start('ob_gzhandler');
         $final_data = json_encode($option_final);
         return $final_data;
     }

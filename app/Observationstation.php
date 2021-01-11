@@ -16,12 +16,13 @@ class Observationstation extends Model
     //
     protected $table = "Observationstation";
     protected $primaryKey = 'id';
-    protected $fillable = ['id','code','name', 'organizationid', 'categoryid', 'coordx', 'coordy', 'basinid', 'enterpriseid', 'districtid', 'locationid', 'establishdate', 'terminatedate', 'maintenance', 'note', 'active', 'ftpusername', 'ftppassword'];
+    protected $fillable = ['id','code','name', 'organizationid', 'categoryid', 'coordx', 'coordy', 'basinid', 'enterpriseid',
+     'districtid', 'locationid', 'establishdate', 'terminatedate', 'maintenance', 'note', 'active', 'ftpusername', 'ftppassword'];
 
     public $timestamps = false;
 
-    public function ObservationTypes(){
-        //return $this->hasMany(ObstypeStation::class, 'stationid','id');
+    public function ObservationTypes()
+    {
         return $this->belongsToMany(ObservationType::class, 'ObstypeStation', 'stationid', 'obstypesid');
     }
 
@@ -30,11 +31,13 @@ class Observationstation extends Model
         return $this->belongsTo(Category::class, 'categoryid', 'id');
     }
 
-    public function Location(){
+    public function Location()
+    {
         return $this->belongsTo(Location::class,'locationid','id');
     }
 
-    public function District(){
+    public function District()
+    {
         return $this->belongsTo(District::class,'districtid','id');
     }
 
@@ -58,15 +61,18 @@ class Observationstation extends Model
         return $this->belongsToMany(StandardParameter::class, 'StdStation', 'stationid', 'standardparameterid');
     }
 
-    public function Observations(){
+    public function Observations()
+    {
         return $this->hasMany(Observation::class, 'stationid','id');
     }
 
-    public function Cameras(){
+    public function Cameras()
+    {
         return $this->hasMany(Camera::class, 'stationid','id');
     }
 
-    public function ElesctronicBoards(){
+    public function ElesctronicBoards()
+    {
         return $this->hasMany(ElectronicBoard::class, 'stationid','id');
     }
 

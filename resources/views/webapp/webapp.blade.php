@@ -82,11 +82,11 @@
                             <i class="icon-accessibility blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Về chúng tôi
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a data-target=".navbar-collapse.in" data-toggle="collapse" href="#" id="login-btn">
                             <i class="fa fa-user blue" style="font-size: 16px; margin-top: -2px;"></i> &nbsp;&nbsp;Admin
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!--/.navbar-collapse -->
@@ -409,12 +409,12 @@
                     <div class="panel-body collapse" id="help_qt">
                         <div class="col-xs-8 col-md-8">
                             <i class="fa fa-file" style="font-size: 16px; margin-top: -2px; color: #999"></i>
-                            <a class="panel-help" href="{{ asset('public/webapp/assets/text/TaiLieuHuongDanSuDung.doc') }}">Tài liệu hướng dẫn</a>
+                            <a class="panel-help" href="{{ asset('public/webapp/assets/text/HDSD_QuanTracTraVinh.docx') }}">Tài liệu hướng dẫn</a>
                         </div>
                         <div class="col-xs-8 col-md-8" style="margin-top: 10px">
                             <i class="fa fa-barcode" style="font-size: 16px; margin-top: -2px; color: #999"></i>
                             <span class="panel-version">Phiên bản&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <span class="badge bg-info panel-version-style">1.0</span>
+                            <span class="badge bg-info panel-version-style">1.0.1</span>
                         </div>
                     </div>
                 </div>
@@ -489,11 +489,11 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first-name">Họ:</label>
-                                                <input class="form-control" id="first-name" type="text">
+                                                <input class="form-control" id="firstname" type="text">
                                             </div>
                                             <div class="form-group">
                                                 <label for="last-name">Tên:</label>
-                                                <input class="form-control" id="last-email" type="text">
+                                                <input class="form-control" id="lastemail" type="text">
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">Email:</label>
@@ -506,7 +506,8 @@
                                         </div>
                                         <div class="col-md-12">
                                             <p>
-                                                <button class="btn btn-primary pull-right" data-dismiss="modal" type="submit">Gửi đến chúng tôi
+                                                <button class="btn btn-primary pull-right" id="sendmail" 
+												data-dismiss="modal" type="submit">Gửi đến chúng tôi
                                                 </button>
                                             </p>
                                         </div>

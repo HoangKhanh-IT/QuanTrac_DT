@@ -51,7 +51,7 @@
                <div class="container-fluid">
                    <div class="row mb-12">
                        <div class="col-sm-12">
-                           <h2>Quản lý Chi tiêu</h2>
+                           <h2>Quản lý Chỉ tiêu</h2>
                        </div>
                    </div>
                    <div class="row mb-12">

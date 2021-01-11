@@ -85,7 +85,7 @@ class ObservationstationController extends Controller
 	    //         public."Observationstation".id IS NOT NULL
         // ');
         //dd($Observationstations);
-        return view('admin.obs_station.Observationstation', ['Observationstations' => $Observationstations, 'Categorys' => $Categorys, 'ObservationTypes' => $ObservationTypes])->with('no', 1);
+        return view('admin.obs_station.Observationstation', compact('Observationstations','Categorys','ObservationTypes'))->with('no', 1);
     }
 
     /**
@@ -234,7 +234,7 @@ class ObservationstationController extends Controller
         if ($search == null) 
         {
             $Observationstations = Observationstation::orderBy('categoryid', 'ASC')->paginate(8);
-            return view('admin.obs_station.Observationstation', ['Observationstations' => $Observationstations, 'Categorys' => $Categorys, 'ObservationTypes' => $ObservationTypes])->with('no', 1);
+            return view('admin.obs_station.Observationstation', compact('Observationstations','Categorys','ObservationTypes'))->with('no', 1);
         }
         else 
         {
@@ -242,7 +242,7 @@ class ObservationstationController extends Controller
             $Observationstations = Observationstation::select('Observationstation.*')
                 ->where(DB::raw('UPPER("Observationstation"."code")'), 'like', '%' .$search. '%')
                 ->orwhere(DB::raw('UPPER("Observationstation"."name")'), 'like', '%' .$search. '%')
-                ->orwhere(DB::raw('UPPER("Observationstation"."note")'), 'like', '%' .$search. '%')
+                //->orwhere(DB::raw('UPPER("Observationstation"."note")'), 'like', '%' .$search. '%')
                 ->join('District', 'District.id', '=', 'Observationstation.districtid')
                 ->orwhere(DB::raw('UPPER("District"."name")'), 'like', '%' .$search. '%')
                 ->join('Location', 'Location.id', '=', 'Observationstation.locationid')
@@ -254,8 +254,15 @@ class ObservationstationController extends Controller
                 ->join('Organization', 'Organization.id', '=', 'Observationstation.organizationid')
                 ->orwhere(DB::raw('UPPER("Organization"."name")'), 'like', '%' .$search. '%')
                 ->join('Category', 'Category.id', '=', 'Observationstation.categoryid')
-                ->orWhere(DB::raw('UPPER("Category"."name")'), 'like', '%' . $search . '%')->paginate(8);
-            return view('admin.obs_station.Observationstation', ['Observationstations' => $Observationstations, 'Categorys' => $Categorys, 'ObservationTypes' => $ObservationTypes])->with('no', 1);
+                ->orWhere(DB::raw('UPPER("Category"."name")'), 'like', '%' . $search . '%')
+                // ->leftJoin('Basin', 'Observationstation.basinid', '=', 'Basin.id' )
+                // ->orwhere(DB::raw('UPPER("Basin"."name")'), 'like', '%' .$search. '%')
+                // ->leftJoin('Enterprise', 'Observationstation.enterpriseid', '=', 'Enterprise.id' )
+                // ->orwhere(DB::raw('UPPER("Enterprise"."name")'), 'like', '%' .$search. '%')
+                // ->leftJoin('Organization', 'Observationstation.organizationid', '=', 'Organization.id')
+                // ->orwhere(DB::raw('UPPER("Organization"."name")'), 'like', '%' .$search. '%')
+                ->paginate(8);
+                return view('admin.obs_station.Observationstation', compact('Observationstations','Categorys','ObservationTypes'))->with('no', 1);
         }
     }
 

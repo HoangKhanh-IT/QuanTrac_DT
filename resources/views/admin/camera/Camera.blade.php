@@ -149,12 +149,12 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                     <a href="{{route('Camera.edit',$Camera->id)}}"
                                                                         class="btn btn-sm btn-warning">Sửa</a>
-                                                                    <form
+                                                                    <form id="delete-form-{{ $Camera->id }}"
                                                                         action="{{route('Camera.delete',$Camera->id)}}"
                                                                         method="post">
                                                                         <input type="hidden" name="_token"
                                                                             value="{{csrf_token()}}">
-                                                                        <button class="btn btn-sm btn-danger rounded-0">
+                                                                        <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $Camera->id }},'{{$Camera->name}}')">
                                                                             Xóa
                                                                         </button>
                                                                     </form>

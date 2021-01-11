@@ -168,13 +168,12 @@
                                                                     <a href="{{route('StandardParameter.edit',$StandardParameter->id)}}"
                                                                         class="btn btn-sm btn-warning">Sửa</a>
                                                                  
-                                                                    <form
+                                                                    <form id="delete-form-{{ $StandardParameter->id }}"
                                                                         action="{{route('StandardParameter.delete',$StandardParameter->id)}}"
                                                                         method="post">
                                                                         <input type="hidden" name="_token"
                                                                             value="{{csrf_token()}}">
-                                                                      
-                                                                        <button class="btn btn-sm btn-danger rounded-0">
+                                                                        <button class="btn btn-sm btn-danger rounded-0" onclick="delConfirm({{ $StandardParameter->id }},'{{$StandardParameter->standard->name}}')">
                                                                             Xóa
                                                                         </button>
                                                                     </form>

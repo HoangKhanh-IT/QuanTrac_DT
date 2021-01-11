@@ -46,7 +46,7 @@
                 <div class="container-fluid">
                     <div class="row mb-12">
                         <div class="col-sm-12">
-                            <h2>Quản lý chức năng</h2>
+                            <h2>Quản lý quyền chức năng</h2>
                         </div>
                     </div>
                     <div class="row">
@@ -81,7 +81,7 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-1">
-                                        <a href="{{ route('menu.create') }}"
+                                        <a href="{{ route('permission.create') }}"
                                                 class="btn btn-block bg-gradient-primary">
                                                 Thêm
                                             </a>
@@ -93,15 +93,14 @@
                                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <table class="table table-hover table-bordered text-sm">
+                                                <table class="table table-hover table-bordered">
                                                     <thead>
-                                                        <tr class="text-center ">
+                                                        <tr class="text-center text-sm">
                                                             <th scope="col" class="">STT</th>
                                                             <th scope="col" class="">Tên chức năng</th>
                                                             <th scope="col" class="">Link menu</th>
-                                                            <th scope="col" class="">Title</th>
                                                             <th scope="col" class="">Mô tả</th>
-                                                            <th scope="col" class="">Thứ tự hiển thị</th>
+                                                            <th scope="col" class="">Danh sách Action</th>
                                                             <th scope="col" class="">Thao tác</th>
                                                         </tr>
                                                     </thead>
@@ -109,22 +108,27 @@
                                                         @foreach($chucnangs as $chucnang)
                                                             @if ($chucnang ->parent_id == null)
                                                             <tr class="text-center">
-                                                                <td class="text-left text-bold" colspan="7">Nhóm chức năng: {{ $chucnang->name }}</td>
+                                                                <td class="text-left text-bold text-sm" colspan="6">Nhóm chức năng: {{ $chucnang->name }}</td>
                                                             </tr>
                                                             @php $i = 1; @endphp
                                                             @foreach($chucnangs as  $item)
                                                                 @if ($item->parent_id == $chucnang -> id)
-                                                                <tr>
+                                                                        @if ($test = $item->menus)
+                                                                        {{-- {{ $test->count()  }} --}}
+                                                                            @foreach ($item->menus as $itemaction)
+                                                                            <tr class="text-sm">
                                                                     <td>{{ $i }}</td>
                                                                     <td>{{ $item->name }}</td>
                                                                     <td>{{ $item->Link }}</td>
                                                                     <td>{{ $item->title }}</td>
                                                                     <td>{{ $item->description }}</td>
-                                                                    <td class="text-center ">{{ $item->oder }}</td>
+                                                                                <td class="align-items-center">
+                                                                                    <span class="badge bg-primary">{{ $itemaction->display_name.'('. $itemaction->name.')' }}</span>
+                                                                                </td>
                                                                     <td>
                                                                         <div class="btn-group btn-group-sm">
-                                                                        <a href="{{route('menu.edit',$item->id)}}" class="btn btn-sm btn-warning">Sửa</a>
-                                                                       <form action="{{route('menu.delete',$item->id)}}" method="post">
+                                                                                    <a href="{{route('permission.edit',$itemaction->id)}}" class="btn btn-sm btn-warning">Sửa</a>
+                                                                                    <form action="{{route('permission.delete',$itemaction->id)}}" method="post">
                                                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                                         {{-- <input type="hidden" name="_method" value="destroy"> --}}
                                                                         <button class="btn btn-sm btn-danger rounded-0">
@@ -135,6 +139,13 @@
                                                                     </td>
                                                                 </tr>
                                                                 @php $i += 1; @endphp
+                                                                            @endforeach
+                                                                        @else
+
+                                                                        @endif
+
+
+
                                                                 @endif
                                                             @endforeach
                                                             @endif
@@ -144,7 +155,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex justify-content-center">{{$chucnangs->links('vendor.pagination.paginator')}}
+                                            <div class="d-flex justify-content-center">{{$chucnangs->links()}}
                                             </div>
                                         </div>
                                     </div>

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Permission;
 use App\Menus;
-
+use DB;
 class MenuController extends Controller
 {
     /**
@@ -15,8 +16,9 @@ class MenuController extends Controller
     public function index()
     {
         //
-        $chucnangs = Menus::paginate(8);
-        return view('admin.menu.Menu',['chucnangs' => $chucnangs] )->with('no', 1);
+        $chucnangs1 = Menus::paginate(5);
+        $chucnangs = Menus::all();
+        return view('admin.menu.menus',['chucnangs' => $chucnangs, 'chucnangs1' => $chucnangs1])->with('no', 1);
     }
 
     /**
@@ -29,7 +31,7 @@ class MenuController extends Controller
         //
         $chucnangs = Menus::all();
         $nhomCNS = Menus::whereNull('parent_id')->get();
-        return view('admin.menu.MenuCreate', ['chucnangs' => $chucnangs, 'nhomCNS' => $nhomCNS]);
+        return view('admin.menu.MenusCreate', ['chucnangs' => $chucnangs, 'nhomCNS' => $nhomCNS]);
     }
 
     /**
@@ -45,7 +47,9 @@ class MenuController extends Controller
             [
                 'name' => 'bail|required|unique:menus,name',
                 'Link' => 'bail|required|unique:menus,Link',
-                'oder' => 'bail|required|numeric'
+                'oder' => 'bail|required|numeric',
+                'addmore.*.name' => 'bail|required|unique:permissions,name',
+                'addmore.*.display_name' => 'bail|required'
             ],
             [
                 'name.required' => 'Nhập tên chức năng.',
@@ -53,9 +57,14 @@ class MenuController extends Controller
                 'oder.required' => 'Nhập thứ tự hiển thị.',
                 'oder.numeric' => 'Thứ tự là dạng số.',
                 'name.unique' => 'Tên chức năng đã tồn tại.',
-                'Link.unique' => 'Đường dẫn mặc định đã tồn tại.'
+                'Link.unique' => 'Đường dẫn mặc định đã tồn tại.',
+                'addmore.*.display_name.required' => 'Nhập mô tả action.',
+                'addmore.*.name.required' => 'Nhập tên action.',
+                'addmore.*.name.unique' => 'Tên action là duy nhất.'
             ]
         );
+        \DB::beginTransaction();
+        try {
         $loaihinhchas = explode("_", $request->get('loaihinhcha'));
         $menu = new Menus([
             'name' => $request->get('name'),
@@ -66,8 +75,29 @@ class MenuController extends Controller
             'oder' => $request->get('oder'),
             'code' => $loaihinhchas[1]
         ]);
-        $menu->save();
+            $actions = $request->addmore;
+            //dd($menu, $actions);
+            $saveMenu = $menu->save();
+            $idMenu = $menu->id;
+            if ($saveMenu) {
+                for ($i = 0; $i < count($actions); $i++) {
+                    $permission = new Permission([
+                        'name' => $actions[$i]['name'],
+                        'display_name' => $actions[$i]['display_name'],
+                        'menus_id' => $idMenu
+                    ]);
+                    $permission->save();
+                }
+            }
+            \DB::commit();
         return redirect('quantri/menu')->with('success', 'Thêm mới thành công!');
+        } catch (PDOException  $e) {
+            // echo $e->getMessage();
+            \DB::rollBack();
+        }
+        //dd($request);
+
+        //return redirect('quantri/menu')->with('success', 'Thêm mới thành công!');
         //dd($menu);
     }
 
@@ -77,9 +107,23 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         //
+        $chucnangs = Menus::all();
+        $search = $request->search;
+        if ($search == null) {
+            $chucnangs1 = Menus::paginate(5);
+            return view('admin.menu.menus',['chucnangs' => $chucnangs, 'chucnangs1' => $chucnangs1])->with('no', 1);
+        } 
+        else 
+        {
+            $search = trim(mb_strtoupper($search,'UTF-8'));
+            $chucnangs1 = Menus::where(DB::raw('UPPER(name)'), 'like', '%' .$search. '%')
+                        ->orwhere(DB::raw('UPPER(title)'), 'like', '%' . $search . '%')
+                        ->orwhere(DB::raw('UPPER(description)'), 'like', '%' . $search . '%')->paginate(5);
+            return view('admin.menu.menus',['chucnangs' => $chucnangs, 'chucnangs1' => $chucnangs1])->with('no', 1);
+        }
     }
 
     /**
@@ -93,7 +137,9 @@ class MenuController extends Controller
         //
         $MenuItem = Menus::findOrFail($id);
         $nhomCNS = Menus::whereNull('parent_id')->get();
-        return view('admin.menu.Menuedit', ['MenuItem' => $MenuItem, 'nhomCNS' => $nhomCNS]);
+        $permissions = Permission::where('menus_id',$id)->get();
+        //dd($MenuItem, $permissions);
+        return view('admin.menu.MenusEdit', ['MenuItem' => $MenuItem, 'nhomCNS' => $nhomCNS, 'permissions' => $permissions]);
     }
 
     /**
@@ -106,22 +152,51 @@ class MenuController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $permissions = $request->addmore;
+        // for ($i = 0; $i < count($permissions); $i++) {
+        //     if ($permissions[$i]['name'] == "moi") {
+        //         # code...
+        //     }
+        //     $permission = new Permission([
+        //         'name' => $permissions[$i]['name'],
+        //         'display_name' => $permissions[$i]['display_name'],
+        //         'menus_id' => 0
+        //     ]);
+        //     $permission->save();
+        // }
+        // dd($request);
         $request->validate(
             [
-                'name' => 'bail|required|unique:menus,name,'.$id,
-                'Link' => 'bail|required|unique:menus,Link,'.$id,
-                'oder' => 'bail|required|numeric'
+                'name' => 'bail|required|unique:menus,name,'. $id,
+                'Link' => 'bail|required|unique:menus,Link,'. $id,
+                'oder' => 'bail|required|numeric',
+                'addmore.*.name' => 'required',
+                'addmore.*.display_name' => 'required'
             ],
             [
                 'name.required' => 'Nhập tên chức năng.',
-                'name.unique' => 'Tên chức năng đã tồn tại.',
                 'Link.required' => 'Nhập đường dẫn mặc định.',
-                'Link.unique' => 'Đường dẫn mặc định đã tồn tại.',
                 'oder.required' => 'Nhập thứ tự hiển thị.',
                 'oder.numeric' => 'Thứ tự là dạng số.',
-                
+                'name.unique' => 'Tên chức năng đã tồn tại.',
+                'Link.unique' => 'Đường dẫn mặc định đã tồn tại.',
+                'addmore.*.display_name.required' => 'Nhập mô tả Action.',
+                'addmore.*.name.required' => 'Nhập tên action.'
             ]
         );
+        if (!empty($request->addmore)) {
+            //$actions = $request->addmore;
+            //dd($actions);
+            // $actions = $request->addmore;
+            // $str = "";
+            // foreach ($actions as $key => $action) {
+            //     # code...
+            //     $str =$str."_". $action['name'];
+
+            // }
+            // dd($str);
+            \DB::beginTransaction();
+            try {
         $loaihinhchas = explode("_", $request->get('loaihinhcha'));
         $Chucnang = Menus::find($id);
         $Chucnang->name = $request->get('name');
@@ -131,8 +206,34 @@ class MenuController extends Controller
         $Chucnang->description = $request->get('description');
         $Chucnang->oder = $request->get('oder');
         $Chucnang->code = $loaihinhchas[1];
-        $Chucnang->save();
-        return redirect('quantri/menu')->with('success', 'Cập nhật thành công!');
+                //dd($Chucnang);
+                $savemenu = $Chucnang->save();
+                if ($savemenu) {
+                    $actions = $request->addmore;
+                    $res = Permission::where('menus_id', $id)->delete();
+                    if ($res) {
+                        foreach ($actions as $key => $action) {
+                            $permission = new Permission([
+                                'name' => $action['name'],
+                                'display_name' => $action['display_name'],
+                                'menus_id' => $id
+                            ]);
+                            $permission->save();
+                        }
+                    }
+                }
+                \DB::commit();
+                return redirect('quantri/menu')->with('success', 'Sửa thành công!');
+            } catch (PDOException  $e) {
+                // echo $e->getMessage();
+                \DB::rollBack();
+            }
+        }else{
+            return redirect('quantri/menu.edit/'.$id)->with('success', 'Khởi tạo Action cho chức năng!');
+        }
+
+        //dd($request);
+
     }
 
     /**
@@ -143,10 +244,19 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \DB::beginTransaction();
+        try {
+            $res = Permission::where('menus_id', $id)->delete();
+            if ($res) {
         $Chucnang = Menus::find($id);
         $Chucnang->delete();
-
+            }
+            //dd($Chucnang);
+            \DB::commit();
         return redirect('quantri/menu')->with('success', 'Xóa thành công!');
+        } catch (PDOException  $e) {
+            // echo $e->getMessage();
+            \DB::rollBack();
+        }
     }
 }

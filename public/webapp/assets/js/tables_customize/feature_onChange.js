@@ -23,7 +23,6 @@ function onChangeTime_feature(time, type) {
         d_hour_minus = new Date(d_curent.setMinutes(d_curent.getMinutes() - time));
     }
 
-
     for (var i = 0; i < length_station_threshold; i++) {
         var total_detail = data_threshold_station[i].total_detail;
         /*** Vòng lặp phải chạy ngược từ length - 1 về 0 ==> Hàm splice mới thực hiện chính xác ***/
@@ -128,6 +127,6 @@ function sendMail_threshold() {
     });
 }
 
-/*** 30 phút sẽ gọi hàm gửi Mail 1 lần
+/*** 30 phút sẽ gọi hàm gửi Mail 1 lần ***/
  let timerId = setInterval(() => sendMail_threshold(), 1800000);
-let timerId = setInterval(() => sendMail_threshold(), 10000); ***/
+/*** let timerId = setInterval(() => sendMail_threshold(), 10000); ***/

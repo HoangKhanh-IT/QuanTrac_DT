@@ -23,4 +23,9 @@ class Menus extends Model
     public function Menus(){
         return $this->hasMany('App\permission','menus_id','id');
     }
+
+    public function Permissions()
+    {
+        return $this->hasMany('App\permission', 'menus_id', 'id');
+    }
 }
