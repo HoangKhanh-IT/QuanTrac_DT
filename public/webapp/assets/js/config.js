@@ -5,7 +5,7 @@ var sApp = "travinhqt_laravel";
 
 var hostGeoserver = "localhost:8080/";
 var wmts = "geoserver/gwc/service/wmts?";
-var layer_workspace = "layer=quantrac_travinh:";
+var layer_workspace = "layer=quantrac_dongthap:";
 var services = "&style=" +
     "&tilematrixset=EPSG:900913" +
     "&Service=WMTS" +

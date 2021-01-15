@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="http://localhost:882/travinhqt_laravel/master" class="brand-link">
         <!-- <i class="fas fa-globe-americas fa-1x"></i>
-        <span class="brand-text font-weight-light">Quan trắc Trà Vinh</span> -->
+        <span class="brand-text font-weight-light">Quan trắc Đồng Tháp</span> -->
         <div class="title">
             <img id="logo" src="{{ asset('public/webapp/assets/images/SoTNMT.png') }}" style="margin-left: 10px; width: 50px;"/>
             <span id="titlefont1"

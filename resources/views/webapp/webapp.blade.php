@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Quan trắc Trà Vinh</title>
+    <title>Quan trắc Đồng Tháp</title>
     <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
@@ -61,8 +61,8 @@
                 </div>
                 <img id="logo" src="{{ asset('public/webapp/assets/images/SoTNMT.png') }}" />
                 <div class="title">
-                    <div id="titlefont1">SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG TỈNH TRÀ VINH</div>
-                    <div id="titlefont2">CHẤT LƯỢNG MÔI TRƯỜNG TỈNH TRÀ VINH</div>
+                    <div id="titlefont1">SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG TỈNH ĐỒNG THÁP</div>
+                    <div id="titlefont2">CHẤT LƯỢNG MÔI TRƯỜNG TỈNH ĐỒNG THÁP</div>
                 </div>
             </div>
             <div class="navbar-collapse collapse">
@@ -438,7 +438,7 @@
                 <div class="modal-header">
                     <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
                     <h4 class="modal-title" style="text-transform: uppercase">
-                        <i class="icon-profile" style="font-size: 16px; margin-top: -2px"></i> Giới thiệu về hệ thống quan trắc Trà Vinh
+                        <i class="icon-profile" style="font-size: 16px; margin-top: -2px"></i> Giới thiệu về hệ thống quan trắc Đồng Tháp
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -461,7 +461,7 @@
                     </ul>
                     <div class="tab-content" id="aboutTabsContent">
                         <div class="tab-pane fade active in" id="about">
-                            <p>Hệ thống truyền, nhận, quản lý và công bố dữ liệu các hệ thống quan trắc môi trường của tỉnh Trà Vinh tích hợp số liệu quan trắc các nguồn thải từ các khu công nghiệp, khu chế xuất và khu công nghệ cao nói riêng và quan trắc
+                            <p>Hệ thống truyền, nhận, quản lý và công bố dữ liệu các hệ thống quan trắc môi trường của tỉnh Đồng Tháp tích hợp số liệu quan trắc các nguồn thải từ các khu công nghiệp, khu chế xuất và khu công nghệ cao nói riêng và quan trắc
                                 nguồn điểm nói chung nhằm mục đích bảo vệ nguồn tiếp nhận (sông, hồ), đảm bảo chất lượng nước thải của các khu công nghiệp, khu chế xuất, khu công nghệ cao trước khi thải vào nguồn tiếp nhận;</p>
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Các nguồn tiếp nhận</div>
@@ -506,7 +506,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <p>
-                                                <button class="btn btn-primary pull-right" id="sendmail" 
+                                                <button class="btn btn-primary pull-right" id="sendmail"
 												data-dismiss="modal" type="submit">Gửi đến chúng tôi
                                                 </button>
                                             </p>

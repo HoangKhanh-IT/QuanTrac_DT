@@ -1,4 +1,4 @@
-# PHP Laravel Quan Trắc Trà Vinh
+# PHP Laravel Quan Trắc Đồng Tháp
 ## ---- WEBAPP ----
 + Viết 1 Services đơn giản có trả về dữ liệu dạng JSON: https://www.youtube.com/watch?v=31DQQAWsAxE&list=RDCMUCvHX2bCZG2m9ddUhwxudKYA&start_radio=1&t=120
 + Dùng lệnh `php artisan make:controller 'tên file php cần tạo'` để tạo 1 file php
@@ -75,3 +75,5 @@ không cần chuyển sang dạng Array
 ## ---- ADMIN ----
 
 ### Đã sửa view bản đồ, kết nối localhost
+
+##V.2 Đồng tháp đã hoàn thành test B1 15/01/2021

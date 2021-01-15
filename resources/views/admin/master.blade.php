@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Quan trắc Trà Vinh</title>
+    <title>Quan trắc Đồng Tháp</title>
     <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                Hệ thống truyền, nhận, quản lý và công bố dữ liệu các hệ thống quan trắc môi trường của tỉnh Trà Vinh tích hợp số liệu quan trắc các nguồn thải từ các khu công nghiệp,
+                                Hệ thống truyền, nhận, quản lý và công bố dữ liệu các hệ thống quan trắc môi trường của tỉnh Đồng Tháp tích hợp số liệu quan trắc các nguồn thải từ các khu công nghiệp,
                                 khu chế xuất và khu công nghệ cao nói riêng và quan trắc nguồn điểm nói chung nhằm mục đích bảo vệ nguồn tiếp nhận (sông, hồ),
                                 đảm bảo chất lượng nước thải của các khu công nghiệp, khu chế xuất, khu công nghệ cao trước khi thải vào nguồn tiếp nhận
                             </div>

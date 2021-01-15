@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Quan trắc Trà Vinh</title>
+    <title>Quan trắc Đồng Tháp</title>
     <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
@@ -143,7 +143,7 @@
                                                                     Hiển thị
                                                                 @else
                                                                      Ẩn
-                                                                @endif     
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 @if(isset($Post->CategoryPost->name))
@@ -154,7 +154,7 @@
                                                                 <div class="btn-group btn-group-sm">
                                                                 <a href="{{route('Post.edit',$Post->id)}}"
                                                                     class="btn btn-sm btn-warning">Sửa</a>
-                                                               
+
                                                                 <form id="delete-form-{{ $Post->id }}"
                                                                     action="{{route('Post.delete',$Post->id)}}"
                                                                     method="post">
@@ -194,7 +194,7 @@
 
     @include('temp.footer')
     <!-- /.control-sidebar -->
-    
+
     <!-- ./wrapper -->
 
     <!-- jQuery -->

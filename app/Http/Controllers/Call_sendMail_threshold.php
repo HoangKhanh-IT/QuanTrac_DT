@@ -14,7 +14,7 @@
 
 	/* Additional headers */
 	$headers[] = 'To: gisk37ussh@gmail.com';
-	$headers[] = 'From: Hệ thống quan trắc tự động Trà Vinh <gisk37ussh@gmail.com>';
+	$headers[] = 'From: Hệ thống quan trắc tự động Đồng Tháp <gisk37ussh@gmail.com>';
 
 	/* Mail it */
 	mail($to, $subject, $message, implode("\r\n", $headers));

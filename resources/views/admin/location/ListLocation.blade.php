@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Quan trắc Trà Vinh</title>
+    <title>Quan trắc Đồng Tháp</title>
     <meta content="width=device-width, maximum-scale = 1, minimum-scale=1" name="viewport" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
@@ -111,7 +111,7 @@
                                             </form>
                                         </div>
                                     </div>
-                             
+
                                 <div class="card-body">
                                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                         <div class="row">

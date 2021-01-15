@@ -48,29 +48,29 @@ var Basemaps_Control = [
 ]
 
 /*---- Đọc WMS Geosever ----*/
-var view_travinh_huyen = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
-    layers: 'quantrac_travinh',
+var view_travinh_huyen = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_dongthap/wms?', {
+    layers: 'quantrac_dongthap',
     tiled: true,
     format: 'image/png',
     transparent: true
 });
 
-var view_travinh_giaothong = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
-    layers: 'giaothong_duong_4326',
+var view_travinh_giaothong = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_dongthap/wms?', {
+    layers: 'nen_duongdiagioi_4326',
     tiled: true,
     format: 'image/png',
     transparent: true
 });
 
-var view_travinh_thuyhe = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
-    layers: 'quantrac_travinh_thuyhe',
+var view_travinh_thuyhe = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_dongthap/wms?', {
+    layers: 'district_dongthap_4326',
     tiled: true,
     format: 'image/png',
     transparent: true
 });
 
-var view_travinh_diagioi = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_travinh/wms?', {
-    layers: 'diagioi_4326',
+var view_travinh_diagioi = L.tileLayer.wms('http://localhost:8080/geoserver/quantrac_dongthap/wms?', {
+    layers: 'nen_duongdiagioi_4326',
     tiled: true,
     format: 'image/png',
     transparent: true
@@ -293,6 +293,8 @@ function Modal_Feature_Style(feat, latlng) {
         html_style;
         className_style;
 
+        html_style = "<i class='icon-alert tram_nuocthai_symbol'></i>";
+        className_style = 'mouse_pointer tram_nuocthai_divIcon';
         /*** Nhấp nháy khi trạm có thông số vượt ngưỡng ***/
         if (check_threshold == 0) {
             html_style = "<i class='icon-alert tram_nuocthai_symbol'></i>";
@@ -532,7 +534,7 @@ function Refresh_Option() {
     count_click++;
     if (count_click > 0) {
         view_data_quantrac.refresh(url_search_basic);
-        map.setView([9.8095, 106.274], 10.5)
+        map.setView([10.55583572387695, 105.5649452209475], 10.5)
     }
 }
 
@@ -551,13 +553,13 @@ map.addControl(
 /*** var ggm = new L.Google('ROADMAP');
  ggm.addTo(map); ***/
 view_travinh_huyen.addTo(map);
-view_travinh_giaothong.addTo(map);
+/*----view_travinh_giaothong.addTo(map);----*/
 
 var overlayMaps = {
-    "Huyện/Thị xã": view_travinh_huyen,
-    "Thủy hệ": view_travinh_thuyhe,
+    "Huyện/Thị xã": view_travinh_huyen
+    /* "Thủy hệ": view_travinh_thuyhe,
     "Giao thông": view_travinh_giaothong,
-    "Địa giới": view_travinh_diagioi
+    "Địa giới": view_travinh_diagioi*/
 }
 var baselayers = '';
 L.control.layers(baselayers, overlayMaps, {
